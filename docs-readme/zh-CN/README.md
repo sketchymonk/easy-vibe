@@ -127,8 +127,7 @@
 - [如何学习](#️-如何学习)
 - [本地启动本课件](#-本地启动本课件)
 - [其他课程 / Other Courses](#-其他课程--other-courses)
-- [参与贡献](#-参与贡献)
-- [感谢每位贡献者](#-感谢每位贡献者)
+- [参与贡献与致谢](#-参与贡献与致谢)
 - [LICENSE](#-license)
 
 ## 为什么需要 Easy-Vibe
@@ -454,13 +453,13 @@ Our team has also created other courses! Check them out:
 
 **Learn Harness Engineering**: A comprehensive guide to harness engineering.
 
-## 🤝 参与贡献
+## 🤝 参与贡献与致谢
 
 - 如果你发现了一些问题，或者觉得任何可以改进本项目的地方，可以提 Issue 进行反馈。如果提完没有人回复你可以联系[保姆团队](https://github.com/datawhalechina/DOPMC/blob/main/OP.md)的同学进行反馈跟进~
 - 如果你想参与贡献本项目，可以提 Pull Request，如果提完没有人回复你可以联系[保姆团队](https://github.com/datawhalechina/DOPMC/blob/main/OP.md)的同学进行反馈跟进~
 - 如果你对 Datawhale 很感兴趣并想要发起一个新的项目，请按照[Datawhale 开源项目指南](https://github.com/datawhalechina/DOPMC/blob/main/GUIDE.md)进行操作即可~
 
-## 🙏 感谢每位贡献者
+### 🙏 感谢每位贡献者
 
 - [散步-项目负责人](https://github.com/sanbuphy) (Datawhale成员)
 - 方可-指导老师（Datawhale成员, 清华大学）

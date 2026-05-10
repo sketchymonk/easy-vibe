@@ -127,8 +127,7 @@
 - [How To Learn](#️-how-to-learn)
 - [Run Locally](#-run-locally)
 - [Other Courses](#other-courses)
-- [Contributing](#-contributing)
-- [Contributors](#-contributors)
+- [Contributing & Contributors](#-contributing--contributors)
 - [LICENSE](#-license)
 
 ## Why Easy-Vibe
@@ -383,13 +382,13 @@ Our team has also created other courses! Check them out:
 
 **Learn Harness Engineering**: A comprehensive guide to harness engineering.
 
-## 🤝 Contributing
+## 🤝 Contributing & Contributors
 
 - If you find an issue or see something that can be improved, feel free to open an issue. If nobody replies, you can also contact the [Datawhale support team](https://github.com/datawhalechina/DOPMC/blob/main/OP.md).
 - If you want to contribute, open a pull request. If nobody replies, you can also contact the [Datawhale support team](https://github.com/datawhalechina/DOPMC/blob/main/OP.md).
 - If you want to start a new Datawhale open-source project, please follow the [Datawhale Open Source Project Guide](https://github.com/datawhalechina/DOPMC/blob/main/GUIDE.md).
 
-## 🙏 Contributors
+### 🙏 Contributors
 
 - [Sanbu - Project Lead](https://github.com/sanbuphy) (Datawhale member)
 - Fang Ke - Mentor (Datawhale member, Tsinghua University)
