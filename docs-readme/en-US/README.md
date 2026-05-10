@@ -3,6 +3,8 @@
 
 <img src="../../assets/easy-vibe-logo-hd.svg" alt="Easy-Vibe Logo" width="300">
 
+<img src="../../assets/banner.png" alt="Easy-Vibe Banner" width="100%">
+
 <p align="center" style="font-size: 1.2em; color: #666; margin: 20px 0;">
   Jump right in and vibe together — if you can talk, you can build apps.<br>
   <span style="font-size: 0.9em; color: #888;">直接上手，一起 vibe！会说话就会做应用。</span>
@@ -110,6 +112,24 @@
     Submit it here and inspire others!
   </p>
 </div>
+
+## Table of Contents
+
+- [Why Easy-Vibe](#why-easy-vibe)
+- [News](#-news)
+- [Who This Is For](#who-this-is-for)
+- [Your Learning Paths](#your-learning-paths)
+- [Study Suggestions](#study-suggestions)
+  - [I. Beginner Entry](#i-beginner-entry)
+  - [II. Junior and Mid-Level Developers](#ii-junior-and-mid-level-developers)
+  - [III. Advanced Developers](#iii-advanced-developers)
+  - [Appendix Knowledge Base](#-appendix-knowledge-base)
+- [How To Learn](#️-how-to-learn)
+- [Run Locally](#-run-locally)
+- [Other Courses](#other-courses)
+- [Contributing](#-contributing)
+- [Contributors](#-contributors)
+- [LICENSE](#-license)
 
 ## Why Easy-Vibe
 
@@ -309,6 +329,11 @@ Easy-Vibe teaches you how to turn that into a real product.
 >
 > 👉 [View the full appendix](https://datawhalechina.github.io/easy-vibe/en/appendix/)
 
+### 🎓 Other Courses
+
+- [Hands-on Modern RL](#other-courses)
+- [Learn Harness Engineering](#other-courses)
+
 ## 🛠️ How To Learn
 
 - Read and practice the sections that match your current level. If you get stuck, feel free to open an issue.
@@ -328,6 +353,18 @@ Please help me run this project locally.
 1. `npm install`
 2. `npm run dev`
 3. Open `http://localhost:3000` in your browser.
+
+## Other Courses 
+ 
+Our team has also created other courses! Check them out: 
+ 
+[![Hands-on Modern RL](https://img.shields.io/badge/HANDS--ON_MODERN_RL-0052cc?style=for-the-badge)](https://github.com/walkinglabs/hands-on-modern-rl)
+ 
+**Hands-on Modern RL**: An open-source, hands-on curriculum bridging the gap from basic RL concepts to LLM alignment, RLVR, and advanced Agentic systems. 
+
+[![Learn Harness Engineering](https://img.shields.io/badge/LEARN_HARNESS_ENGINEERING-0052cc?style=for-the-badge)](https://github.com/walkinglabs/learn-harness-engineering/tree/main)
+
+**Learn Harness Engineering**: A comprehensive guide to harness engineering.
 
 ## 🤝 Contributing
 

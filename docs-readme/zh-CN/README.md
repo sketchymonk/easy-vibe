@@ -3,6 +3,8 @@
 
 <img src="../../assets/easy-vibe-logo-hd.svg" alt="Easy-Vibe Logo" width="300">
 
+<img src="../../assets/banner.png" alt="Easy-Vibe Banner" width="100%">
+
 <p align="center" style="font-size: 1.2em; color: #666; margin: 20px 0;">
   直接上手，一起 vibe！会说话就会做应用。<br>
   <span style="font-size: 0.9em; color: #888;">Jump right in and vibe together — if you can talk, you can build apps.</span>
@@ -110,6 +112,24 @@
     在这里提交，激励更多人！
   </p>
 </div>
+
+## 目录 / Table of Contents
+
+- [为什么需要 Easy-Vibe](#为什么需要-easy-vibe)
+- [News](#-news)
+- [适合谁](#适合谁)
+- [你的学习路径](#你的学习路径)
+- [学习建议](#学习建议)
+  - [一、零基础入门](#一零基础入门)
+  - [二、初中级开发工程师](#二初中级开发工程师)
+  - [三、高级开发工程师](#三高级开发工程师)
+  - [附录知识库](#-附录知识库)
+- [如何学习](#️-如何学习)
+- [本地启动本课件](#-本地启动本课件)
+- [其他课程 / Other Courses](#-其他课程--other-courses)
+- [参与贡献](#-参与贡献)
+- [感谢每位贡献者](#-感谢每位贡献者)
+- [LICENSE](#-license)
 
 ## 为什么需要 Easy-Vibe
 
@@ -309,6 +329,11 @@ Easy-Vibe 教你的，就是怎样把它一步步做成真正的产品。
 >
 > 👉 [查看完整附录](https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/) · [AI 能力词典](https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/ai-capability-dictionary)
 
+### 🎓 其他课程 / Other Courses
+
+- [Hands-on Modern RL](#other-courses)
+- [Learn Harness Engineering](#other-courses)
+
 <table>
   <tr>
     <td valign="top" width="33%">
@@ -416,6 +441,18 @@ Easy-Vibe 教你的，就是怎样把它一步步做成真正的产品。
 1. npm install
 2. npm run dev
 3. 打开浏览器访问 `http://localhost:3000` 即可查看。
+
+## Other Courses 
+ 
+Our team has also created other courses! Check them out: 
+ 
+[![Hands-on Modern RL](https://img.shields.io/badge/HANDS--ON_MODERN_RL-0052cc?style=for-the-badge)](https://github.com/walkinglabs/hands-on-modern-rl)
+ 
+**Hands-on Modern RL**: An open-source, hands-on curriculum bridging the gap from basic RL concepts to LLM alignment, RLVR, and advanced Agentic systems. 
+
+[![Learn Harness Engineering](https://img.shields.io/badge/LEARN_HARNESS_ENGINEERING-0052cc?style=for-the-badge)](https://github.com/walkinglabs/learn-harness-engineering/tree/main)
+
+**Learn Harness Engineering**: A comprehensive guide to harness engineering.
 
 ## 🤝 参与贡献
 
