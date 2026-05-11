@@ -12,7 +12,7 @@
 
 <p align="center">
   🚀 <a href="https://datawhalechina.github.io/easy-vibe/welcome.html">開始體驗</a> · ✨ <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/">互動式教程</a> · 🦞 <a href="https://github.com/datawhalechina/hello-claw">學習 OpenClaw</a><br>
-  <span style="font-size: 0.85em; color: #888;">🚀 <a href="https://datawhalechina.github.io/easy-vibe/welcome.html">开始体验</a> · ✨ <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/">交互式教程</a> · 🦞 <a href="https://github.com/datawhalechina/hello-claw">学习 OpenClaw</a></span>
+  <span style="font-size: 0.85em; color: #888;">🚀 <a href="https://datawhalechina.github.io/easy-vibe/welcome.html">开始体验</a> · ✨ <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/">交互式教程</a> · 🦞 <a href="https://github.com/datawhalechina/hello-claw">学习 OpenClaw</a> · 📖 <a href="#table-of-contents">查看目录</a></span>
 </p>
 
 <p align="center">
