@@ -425,6 +425,104 @@ const productManagerSidebarEn = [
   }
 ]
 
+const productManagerSidebarKo = [
+  {
+    text: '시작하기',
+    collapsed: false,
+    items: [
+      { text: '학습 지도', link: '/ko-kr/stage-1/learning-map/' },
+      {
+        text: 'AI 시대, 말할 수 있으면 코딩할 수 있다',
+        link: '/ko-kr/stage-1/ai-capabilities-through-games/'
+      }
+    ]
+  },
+  {
+    text: '제품 프로토타입 역량',
+    collapsed: false,
+    items: [
+      {
+        text: 'AI IDE 도구 익히기',
+        link: '/ko-kr/stage-1/introduction-to-ai-ide/'
+      },
+      {
+        text: '좋은 아이디어 찾기',
+        link: '/ko-kr/stage-1/finding-great-idea/'
+      },
+      {
+        text: '프로토타입 만들기',
+        link: '/ko-kr/stage-1/building-prototype/'
+      },
+      {
+        text: 'AI 기능 통합하기',
+        link: '/ko-kr/stage-1/integrating-ai-capabilities/'
+      },
+      {
+        text: '완성 프로젝트 실습',
+        link: '/ko-kr/stage-1/complete-project-practice/'
+      }
+    ]
+  },
+  {
+    text: '부록: 비즈니스 사고',
+    collapsed: false,
+    items: [
+      {
+        text: '제품 사고와 솔루션 설계',
+        link: '/ko-kr/stage-1/appendix-a-product-thinking/'
+      },
+      {
+        text: 'AI 산업 적용 시나리오',
+        link: '/ko-kr/stage-1/appendix-industry-scenarios/'
+      },
+      {
+        text: '소비자용 AI 제품 시나리오',
+        link: '/ko-kr/stage-1/appendix-c-consumer-scenarios/'
+      }
+    ]
+  },
+  {
+    text: '부록: 사용자 조사와 검증',
+    collapsed: false,
+    items: [
+      {
+        text: '아이디어는 어디서 찾을까',
+        link: '/ko-kr/stage-1/appendix-idea-sources/'
+      },
+      {
+        text: 'Double Diamond',
+        link: '/ko-kr/stage-1/appendix-double-diamond/'
+      },
+      {
+        text: 'Jobs to Be Done',
+        link: '/ko-kr/stage-1/appendix-jobs-to-be-done/'
+      },
+      {
+        text: 'The Mom Test',
+        link: '/ko-kr/stage-1/appendix-mom-test/'
+      }
+    ]
+  },
+  {
+    text: '부록: 기술 문제 해결',
+    collapsed: false,
+    items: [
+      {
+        text: '오류가 났을 때 대처법',
+        link: '/ko-kr/stage-1/appendix-b-common-errors/'
+      },
+      {
+        text: 'AI 코딩 도구로 스네이크 게임 만들기',
+        link: '/ko-kr/stage-1/appendix-articles/example0-1/vibe-coding-tools-snake-game-tutorial'
+      },
+      {
+        text: '디자인 Agent와 코딩 Agent로 웹사이트 만들기',
+        link: '/ko-kr/stage-1/appendix-articles/example0-2/vibe-coding-tools-build-website-with-ai-coding-and-design-agents'
+      }
+    ]
+  }
+]
+
 const stage2SidebarEn = [
   {
     text: 'Frontend Development',
@@ -2430,26 +2528,28 @@ Sitemap: ${siteUrl}/sitemap.xml
           { text: '홈', link: '/ko-kr/' },
           {
             text: '초보자 & PM',
-            link: '/zh-cn/stage-1/learning-map/',
-            activeMatch: '/zh-cn/stage-1/'
+            link: '/ko-kr/stage-1/learning-map/',
+            activeMatch: '/ko-kr/stage-1/'
           },
           {
             text: '풀스택 개발',
-            link: '/zh-cn/stage-2/frontend/lovart-assets/',
-            activeMatch: '/zh-cn/stage-2/'
+            link: '/ko-kr/stage-2/',
+            activeMatch: '/ko-kr/stage-2/'
           },
           {
             text: '고급 개발',
-            link: '/zh-cn/stage-3/core-skills/basics/',
-            activeMatch: '/zh-cn/stage-3/'
+            link: '/ko-kr/stage-3/',
+            activeMatch: '/ko-kr/stage-3/'
           },
           {
             text: '부록',
-            link: '/zh-cn/appendix/',
-            activeMatch: '/zh-cn/appendix/'
+            link: '/ko-kr/appendix/',
+            activeMatch: '/ko-kr/appendix/'
           }
         ],
-        sidebar: {}
+        sidebar: {
+          '/ko-kr/stage-1/': productManagerSidebarKo
+        }
       }
     },
     'es-es': {
