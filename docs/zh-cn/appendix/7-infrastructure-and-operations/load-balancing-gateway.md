@@ -379,22 +379,22 @@
 
 ## 9. 名词速查表
 
-| 名词             | 英文                  | 解释                                     |
-| ---------------- | --------------------- | ---------------------------------------- | ------------------------------ |
-| **负载均衡器**   | Load Balancer         | 将流量分发到多个后端服务器的设备或软件   |
-| **四层负载均衡** | L4 Load Balancing     | 基于传输层(TCP/UDP)的负载均衡            |
-| **七层负载均衡** | L7 Load Balancing     | 基于应用层(HTTP/HTTPS)的负载均衡         |
-| **健康检查**     | Health Check          | 定期检查后端服务器的健康状态的机制       |
-| **会话保持**     | Session Persistence   | 确保同一用户的请求始终路由到同一台服务器 |
-| **粘性会话**     | Sticky Session        | 另一种称呼,同Session Persistence         |
-| **蓝绿部署**     | Blue-Green Deployment | 两套环境切换的零停机发布策略             |
-| **金丝雀发布**   | Canary Release        | 小流量先行验证的灰度发布策略             |
-| **自动扩缩容**   | Auto Scaling          | 根据负载自动增加或减少服务器数量         |
-| **水平扩展**     | Horizontal Scaling    | 增加服务器数量来提升处理能力             |
-| **垂直扩展**     | Vertical Scaling      | 提升单机配置(CPU、内存)来提升处理能力    |
-| **多区域**       | Multi-Region          | 在多个地理区域部署服务                   |
-| **多活**         | Active-Active         | 多个区域同时对外提供服务                 |
-| **主备**         | Active-Standby        | 只有一个区域提供服务,其他待命            |
-| **数据同步**     | Data Replication      | 跨区域的数据复制机制                     |
-| **RTO**          | RTO                   | 恢复时间目标                             | 系统故障后需要在多长时间内恢复 |
-| **RPO**          | RPO                   | 恢复点目标                               | 系统故障后可以接受的数据丢失量 |
+| 名词             | 英文                                      | 解释                                                                 |
+| ---------------- | ----------------------------------------- | -------------------------------------------------------------------- |
+| **负载均衡器**   | Load Balancer                             | 将流量分发到多个后端服务器的设备或软件                               |
+| **四层负载均衡** | L4 Load Balancing                         | 基于传输层(TCP/UDP)的负载均衡                                        |
+| **七层负载均衡** | L7 Load Balancing                         | 基于应用层(HTTP/HTTPS)的负载均衡                                     |
+| **健康检查**     | Health Check                              | 定期检查后端服务器的健康状态的机制                                   |
+| **会话保持**     | Session Persistence                       | 确保同一用户的请求始终路由到同一台服务器                             |
+| **粘性会话**     | Sticky Session                            | 另一种称呼，同Session Persistence                                    |
+| **蓝绿部署**     | Blue-Green Deployment                     | 两套环境切换的零停机发布策略                                         |
+| **金丝雀发布**   | Canary Release                            | 小流量先行验证的灰度发布策略                                         |
+| **自动扩缩容**   | Auto Scaling                              | 根据负载自动增加或减少服务器数量                                     |
+| **水平扩展**     | Horizontal Scaling                        | 增加服务器数量来提升处理能力                                         |
+| **垂直扩展**     | Vertical Scaling                          | 提升单机配置(CPU、内存)来提升处理能力                                |
+| **多区域**       | Multi-Region                              | 在多个地理区域部署服务                                               |
+| **多活**         | Active-Active                             | 多个区域同时对外提供服务                                             |
+| **主备**         | Active-Standby                            | 只有一个区域提供服务，其他待命                                       |
+| **数据同步**     | Data Replication                          | 跨区域的数据复制机制                                                 |
+| **RTO**          | Recovery Time Objective (RTO)             | 恢复时间目标，系统故障后需要在多长时间内恢复                         |
+| **RPO**          | Recovery Point Objective (RPO)            | 恢复点目标，系统故障后可以接受的数据丢失量                           |
