@@ -23,6 +23,23 @@ const createStorage = () => {
 }
 
 describe('reading bookmarks', () => {
+  it('uses root path defaults for missing path values', () => {
+    const storage = createStorage()
+    const bookmark = createReadingBookmark({
+      title: '  Root page  ',
+      section: '  Intro  '
+    })
+
+    assert.equal(bookmark.path, '/')
+    assert.equal(bookmark.title, 'Root page')
+    assert.equal(bookmark.section, 'Intro')
+    assert.equal(Number.isFinite(bookmark.updatedAt), true)
+    assert.equal(getReadingBookmarkKey(), 'ev-reading-bookmark:/')
+
+    assert.equal(writeReadingBookmark(storage, bookmark), true)
+    assert.equal(readReadingBookmark(storage, undefined).path, '/')
+  })
+
   it('stores bookmarks by full path so each locale is independent', () => {
     const storage = createStorage()
     const zhBookmark = createReadingBookmark({
@@ -119,6 +136,26 @@ describe('reading bookmarks', () => {
         updatedAt: 1
       }
     )
+
+    assert.deepEqual(
+      createReadingBookmark({
+        path: '/easy-vibe/ja-jp/page/',
+        title: null,
+        section: null,
+        scrollY: Number.NaN,
+        progress: Number.NaN,
+        now: () => 2
+      }),
+      {
+        version: 1,
+        path: '/easy-vibe/ja-jp/page/',
+        title: '',
+        section: '',
+        scrollY: 0,
+        progress: 0,
+        updatedAt: 2
+      }
+    )
   })
 
   it('ignores malformed or mismatched stored values', () => {
@@ -143,6 +180,33 @@ describe('reading bookmarks', () => {
       readReadingBookmark(storage, '/easy-vibe/ko-kr/page/', 1000),
       null
     )
+
+    storage.setItem(
+      getReadingBookmarkKey('/easy-vibe/ko-kr/page/'),
+      JSON.stringify(null)
+    )
+    assert.equal(
+      readReadingBookmark(storage, '/easy-vibe/ko-kr/page/', 1000),
+      null
+    )
+
+    storage.setItem(getReadingBookmarkKey('/easy-vibe/ko-kr/page/'), '42')
+    assert.equal(
+      readReadingBookmark(storage, '/easy-vibe/ko-kr/page/', 1000),
+      null
+    )
+
+    storage.setItem(
+      getReadingBookmarkKey('/easy-vibe/ko-kr/page/'),
+      JSON.stringify({
+        version: 2,
+        path: '/easy-vibe/ko-kr/page/'
+      })
+    )
+    assert.equal(
+      readReadingBookmark(storage, '/easy-vibe/ko-kr/page/', 1000),
+      null
+    )
   })
 
   it('clamps restored scroll position to current document height', () => {
@@ -160,5 +224,63 @@ describe('reading bookmarks', () => {
     )
 
     assert.equal(readReadingBookmark(storage, path, 640).scrollY, 640)
+  })
+
+  it('normalizes sparse stored bookmark values', () => {
+    const storage = createStorage()
+    const path = '/easy-vibe/es-es/page/'
+
+    storage.setItem(
+      getReadingBookmarkKey(path),
+      JSON.stringify({
+        version: 1,
+        path,
+        scrollY: 20,
+        progress: -50
+      })
+    )
+
+    assert.deepEqual(readReadingBookmark(storage, path, -1), {
+      version: 1,
+      path,
+      title: '',
+      section: '',
+      scrollY: 0,
+      progress: 0,
+      updatedAt: 0
+    })
+  })
+
+  it('returns null when storage is missing, empty, or throws', () => {
+    assert.equal(readReadingBookmark(null, '/missing/'), null)
+    assert.equal(readReadingBookmark(createStorage(), '/missing/'), null)
+    assert.equal(
+      readReadingBookmark(
+        {
+          getItem() {
+            throw new Error('storage read failed')
+          }
+        },
+        '/missing/'
+      ),
+      null
+    )
+  })
+
+  it('returns false when bookmark cannot be written', () => {
+    assert.equal(writeReadingBookmark(null, { path: '/x/' }), false)
+    assert.equal(writeReadingBookmark(createStorage(), null), false)
+    assert.equal(writeReadingBookmark(createStorage(), { path: '' }), false)
+    assert.equal(
+      writeReadingBookmark(
+        {
+          setItem() {
+            throw new Error('storage write failed')
+          }
+        },
+        createReadingBookmark({ path: '/x/' })
+      ),
+      false
+    )
   })
 })

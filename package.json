@@ -8,6 +8,8 @@
     "build": "npm run sitemap && vitepress build docs",
     "build:force": "npm run sitemap && vitepress build docs --force",
     "preview": "vitepress preview docs",
+    "test": "node --test $(find docs scripts -name '*.test.js' -print)",
+    "test:coverage": "node --test --experimental-test-coverage --test-coverage-lines=100 --test-coverage-branches=100 --test-coverage-functions=100 $(find docs scripts -name '*.test.js' -print)",
     "format": "prettier --write .",
     "verify": "bash scripts/verify.sh",
     "lint": "eslint docs/.vitepress/theme",
