@@ -43,7 +43,7 @@
 import { computed, nextTick, ref, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vitepress'
 import {
-  createReadingBookmark,
+  createReadingBookmarkSnapshot,
   readReadingBookmark,
   writeReadingBookmark
 } from '../utils/readingBookmark.js'
@@ -125,24 +125,40 @@ const progressTitle = computed(() =>
     : `${bookmarkTitle.value} · 阅读进度 ${progress.value}%`
 )
 
-const saveBookmark = () => {
+const clearBookmarkSaveTimer = () => {
+  if (saveTimer) {
+    window.clearTimeout(saveTimer)
+    saveTimer = null
+  }
+}
+
+const clearClickSaveTimer = () => {
+  if (clickSaveTimer) {
+    window.clearTimeout(clickSaveTimer)
+    clickSaveTimer = null
+  }
+}
+
+const saveBookmark = (path = currentPath()) => {
   writeReadingBookmark(
     getClientStorage(),
-    createReadingBookmark({
-      path: currentPath(),
-      title: articleTitle.value,
-      section: activeSection.value,
-      scrollY: window.scrollY,
-      progress: progress.value
+    createReadingBookmarkSnapshot({
+      path,
+      getTitle: () => articleTitle.value,
+      getSection: () => activeSection.value,
+      getScrollY: () => window.scrollY,
+      getProgress: () => progress.value
     })
   )
 }
 
 const scheduleBookmarkSave = () => {
-  if (saveTimer) {
-    window.clearTimeout(saveTimer)
-  }
-  saveTimer = window.setTimeout(saveBookmark, 180)
+  const path = currentPath()
+  clearBookmarkSaveTimer()
+  saveTimer = window.setTimeout(() => {
+    saveTimer = null
+    saveBookmark(path)
+  }, 180)
 }
 
 const updateProgress = () => {
@@ -325,12 +341,12 @@ const handleClick = () => {
     behavior: 'smooth'
   })
 
-  if (clickSaveTimer) {
-    window.clearTimeout(clickSaveTimer)
-  }
+  const path = currentPath()
+  clearClickSaveTimer()
   clickSaveTimer = window.setTimeout(() => {
+    clickSaveTimer = null
     updateProgress()
-    saveBookmark()
+    saveBookmark(path)
   }, 400)
 }
 
@@ -344,15 +360,11 @@ onUnmounted(() => {
   if (scrollTimer) {
     clearTimeout(scrollTimer)
   }
-  if (saveTimer) {
-    clearTimeout(saveTimer)
-  }
+  clearBookmarkSaveTimer()
   if (restoreTimer) {
     clearTimeout(restoreTimer)
   }
-  if (clickSaveTimer) {
-    clearTimeout(clickSaveTimer)
-  }
+  clearClickSaveTimer()
   // 清理拖拽事件
   document.removeEventListener('mousemove', onDrag)
   document.removeEventListener('mouseup', endDrag)
@@ -366,6 +378,8 @@ onUnmounted(() => {
 watch(
   () => route.path,
   () => {
+    clearBookmarkSaveTimer()
+    clearClickSaveTimer()
     resetRouteState()
     restoreBookmark()
   }

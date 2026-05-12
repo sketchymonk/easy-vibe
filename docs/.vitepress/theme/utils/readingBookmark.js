@@ -27,6 +27,24 @@ export const createReadingBookmark = ({
   updatedAt: now()
 })
 
+
+export const createReadingBookmarkSnapshot = ({
+  path,
+  getTitle = () => '',
+  getSection = () => '',
+  getScrollY = () => 0,
+  getProgress = () => 0,
+  now = () => Date.now()
+}) =>
+  createReadingBookmark({
+    path,
+    title: getTitle(),
+    section: getSection(),
+    scrollY: getScrollY(),
+    progress: getProgress(),
+    now
+  })
+
 const normalizeBookmark = (
   value,
   expectedPath,
