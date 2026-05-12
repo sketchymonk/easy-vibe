@@ -206,7 +206,7 @@ AI Agent는 환경을 감지하고, 결정을 내리고, 특정 목표를 달성
 
 - **결과 예시**
 
-![](images/image1.png)![](images/image2.png)
+![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image1.png)![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image2.png)
 
 ---
 
@@ -245,13 +245,13 @@ AI Agent는 환경을 감지하고, 결정을 내리고, 특정 목표를 달성
 - **주요 특징과 워크플로:** Lovable은 통합과 협업 측면에서 잘 만들어져 있습니다. Supabase 데이터베이스 연결 같은 초기화 작업을 자동으로 처리하여 프로젝트 구축 과정이 매우 매끄럽습니다. 프로젝트 요구사항만 설명하면 Agent가 각종 서비스를 연결하고 기본 구조를 만들어 줍니다.
 - **적합한 사용자:** Vibe Coding을 처음 시도하는 초보자에게 Lovable은 매우 친절한 선택입니다. 여러 서비스를 함께 연결하는 복잡도를 단순화해 주므로 환경 설정이 아니라 프롬프트와 반복 개선에 집중할 수 있습니다. 높은 자동화 덕분에 실행 가능한 프로토타입을 빠르게 얻을 수 있습니다.
 - **프롬프트 과정:**
-  ![](images/image3.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image3.png)
 - **스네이크 게임 결과:**
 
-![](images/image4.png)![](images/image5.png)
+![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image4.png)![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image5.png)
 
 - **가격:** 비교적 비싼 편이지만, 학교 이메일이 있으면 학생 인증을 통해 반값으로 사용할 수 있습니다.
-  ![](images/image6.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image6.png)
 
 ### 2. Cursor(IDE)
 
@@ -259,13 +259,13 @@ AI Agent는 환경을 감지하고, 결정을 내리고, 특정 목표를 달성
 - **주요 특징과 워크플로:** Cursor는 AI 기능이 통합된 전용 IDE이며 Windows, macOS, Linux를 지원합니다. 코드 생성, 지능형 재작성, 코드베이스 질의 같은 기능을 개발 환경 안에 직접 넣었습니다. Web 도구와 비교하면 전통적인 로컬 개발 경험에 더 가깝습니다. 로컬 환경이기 때문에 컴퓨터마다 설정이 다르고, 때때로 환경 관련 문제가 발생할 수 있습니다. 장점은 프로젝트가 내 컴퓨터에 있으므로 추가로 다운로드하거나 실행 환경을 설정할 필요가 적고, Cursor가 많은 번거로운 단계를 처리해 준다는 점입니다.
 - **적합한 사용자:** 어느 정도 프로그래밍 기초가 있는 사용자에게 Cursor는 매우 강력하고 익숙한 환경입니다. 그러나 완전 초보자에게는 프로젝트 구조, 의존성 관리, 파일 구성 같은 개념을 스스로 이해해야 하므로 학습 곡선이 더 가파를 수 있습니다. 전통적인 코딩 흐름에 AI 어시스턴트를 추가하고 싶은 개발자에게 더 적합합니다.
 - **프롬프트 과정:**
-  ![](images/image7.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image7.png)
 - **스네이크 게임 결과:**
 
-![](images/image8.png)![](images/image9.png)
+![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image8.png)![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image9.png)
 
 - **가격:**
-  ![](images/image10.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image10.png)
 
 ### 3. Z.ai(Web-based)
 
@@ -273,30 +273,30 @@ AI Agent는 환경을 감지하고, 결정을 내리고, 특정 목표를 달성
 - **주요 특징과 워크플로:** Z.ai의 사용 방식은 비교적 직접적이지만, 뚜렷한 어려움이 하나 있습니다. **생성된 코드를 수동으로 복사해 붙여 넣어야 한다**는 점입니다. 플랫폼 자체에 실시간 미리보기 창이 부족하여 코드 실행 결과를 즉시 보기 어렵습니다.
 - **적합한 사용자:** 이 플랫폼은 비교적 “직접 손을 대는” 사용 방식을 요구합니다. 자동화가 부족하다는 것은 코드와 직접 마주해야 한다는 뜻이고, AI 출력 내용을 깊이 이해하고 싶은 사람에게는 오히려 훈련이 될 수 있습니다. 하지만 잦은 복사 붙여넣기는 효율 문제와 실수 위험을 가져옵니다. 원클릭 경험을 원하는 사람보다는 “AI가 원시적으로 출력한 코드”를 보고 싶은 학생에게 더 적합합니다.
 - **프롬프트 과정:**
-  ![](images/image11.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image11.png)
 - **스네이크 게임 결과:**
 
-![](images/image12.png)![](images/image13.png)
+![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image12.png)![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image13.png)
 
 - **가격:**
-  ![](images/image14.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image14.png)
 
 ### 4. Replit(Web-based)
 
 - **플랫폼 유형:** Web
 - **주요 특징과 워크플로:** Replit은 통합 온라인 개발 및 배포 환경입니다. 브라우저 안에서 코드를 작성하고, 프로그램을 실행하고, 온라인 접속 주소를 생성할 수 있습니다. 코딩을 시작하기 전에 명확한 실행 계획을 제시합니다. 또한 시각적 편집기도 제공하므로 미리보기 창에서 UI를 직접 수정할 수 있고, 소스 코드는 자동으로 동기화되어 업데이트됩니다. 이를 통해 AI 출력이 기대와 맞는지 수시로 확인할 수 있어 왕복 수정 횟수를 크게 줄일 수 있습니다.
 
-  ![](images/image15.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image15.png)
 
 - **적합한 사용자:** Replit은 초보자에게 매우 친절합니다. 코딩부터 배포까지의 전체 폐쇄 루프를 단순화하여 서버나 호스팅 서비스를 직접 따로 설정할 필요가 없습니다. 협업 기능도 강력해 학생들이 함께 프로젝트를 하거나 다른 사람에게 원격으로 코드 확인을 부탁하기에도 적합합니다.
 - **프롬프트 과정:** 구축 과정에서 AI가 처음부터 요구사항을 완전히 이해한 것은 아니었고, 중간에 약 3번의 반복을 거친 뒤에야 최종 출력이 이상적인 결과에 도달했습니다.
-  ![](images/image16.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image16.png)
 - **스네이크 게임 결과:**
 
-![](images/image17.png)![](images/image18.png)
+![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image17.png)![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image18.png)
 
 - **가격:**
-  ![](images/image19.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image19.png)
 
 ### 5. Minimax(Web-based)
 
@@ -305,14 +305,14 @@ AI Agent는 환경을 감지하고, 결정을 내리고, 특정 목표를 달성
 - **적합한 사용자:** 자동으로 테스트를 실행하고 오류를 수정하기 때문에 시간과 Token 소비가 모두 큰 편입니다. 하지만 AI가 문제를 찾고 해결하는 과정을 분명히 볼 수 있으므로 학습 관점에서는 가치가 있습니다.
 - **프롬프트 과정:**
 
-![](images/image20.png)![](images/image21.png)![](images/image22.png)![](images/image23.png)
+![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image20.png)![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image21.png)![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image22.png)![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image23.png)
 
 - **스네이크 게임 결과:**
 
-![](images/image24.png)![](images/image25.png)
+![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image24.png)![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image25.png)
 
 - **가격:** 무료 버전은 복잡한 프로젝트에서 처음부터 끝까지 순조롭게 실행되지 않을 가능성이 높으므로, 프로젝트를 완전히 구축하려면 유료 업그레이드를 더 추천합니다.
-  ![](images/image26.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image26.png)
 
 ### 6. Trae(IDE)
 
@@ -320,13 +320,13 @@ AI Agent는 환경을 감지하고, 결정을 내리고, 특정 목표를 달성
 - **주요 특징과 워크플로:** 데스크톱 애플리케이션인 Trae는 Web 도구와 비교했을 때 보통 성능과 응답 속도에서 더 유리합니다. 하지만 다운로드와 설치가 필요하므로 일부 사용자에게는 입문 장벽이 조금 높을 수 있습니다. 마찬가지로 로컬 환경이기 때문에 컴퓨터 설정과 의존성 환경의 차이에서 일정한 불확실성이 생깁니다. 장점은 Trae가 로컬에서 프로젝트 생성과 실행 설정을 도와주며, 사용자가 자신의 컴퓨터에서 바로 개발하고 디버깅할 수 있다는 점입니다.
 - **적합한 사용자:** 장기적으로 Vibe Coding 프로젝트를 진행할 계획이 있고, 전용 데스크톱 도구를 사용하고 싶은 사용자에게 더 적합합니다. “가끔 한 번 해보는” 정도를 원하는 학생에게는 가장 가벼운 선택이 아닐 수 있습니다.
 - **프롬프트 과정:**
-  ![](images/image27.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image27.png)
 - **스네이크 게임 결과:**
 
-![](images/image28.png)![](images/image29.png)
+![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image28.png)![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image29.png)
 
 - **가격:** 가격은 비교적 친근한 편이며, 무료 버전만으로도 품질이 괜찮은 작은 프로젝트를 완성하기에 충분합니다.
-  ![](images/image30.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image30.png)
 
 ### 7. V0(Web-based)
 
@@ -334,14 +334,14 @@ AI Agent는 환경을 감지하고, 결정을 내리고, 특정 목표를 달성
 - **주요 특징과 워크플로:** V0는 Vercel이 제공하는 React UI 컴포넌트 생성에 집중한 도구입니다. 고품질의 프로덕션 사용 가능한 인터페이스를 생성하는 데 뛰어납니다. 하지만 실제 사용 중에는 “코드 보기 화면을 찾기 어렵다”, “API Key를 어디에 설정해야 하는지 명확히 설명하지 않는다” 같은 문제가 나타납니다.
 - **적합한 사용자:** V0는 프론트엔드와 UI/UX 디자인에 집중하는 학생이나 디자이너에게 매우 적합합니다. 하지만 완전한 풀스택 솔루션은 아니므로 백엔드 로직과 API 통합을 구현하려면 여전히 다른 플랫폼을 사용해야 합니다. 따라서 목표가 “한 번에 완전한 애플리케이션 구축”이라면 최우선 선택은 아닐 수 있습니다.
 - **프롬프트 과정:**
-  ![](images/image31.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image31.png)
 
-  ![](images/image32.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image32.png)
 
 - **스네이크 게임 결과:**
-  ![](images/image33.png)![](images/image34.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image33.png)![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image34.png)
 - **가격:** 무료 사용자는 대략 4-5개의 간단한 프로젝트를 만들 수 있습니다.
-  ![](images/image35.png)
+  ![](../../../../zh-cn/stage-1/appendix-articles/example0-1/images/image35.png)
 
 ## 3. 플랫폼 요약 비교
 
