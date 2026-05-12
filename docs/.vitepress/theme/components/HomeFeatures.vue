@@ -3039,6 +3039,15 @@ a {
     sans-serif;
 }
 
+.dark .section-category,
+.dark .section-headline {
+  color: var(--vp-c-text-1);
+}
+
+.dark .section-sub {
+  color: var(--vp-c-text-2);
+}
+
 /* Bento Grid */
 .bento-grid {
   display: grid;
@@ -3131,6 +3140,11 @@ a {
   scroll-snap-align: start;
 }
 
+.dark .comm-card {
+  background: var(--vp-c-bg-soft);
+  border-color: var(--vp-c-divider);
+}
+
 .comm-card:hover {
   transform: scale(1.015);
 }
@@ -3178,6 +3192,14 @@ a {
   letter-spacing: -0.01em;
 }
 
+.dark .comm-title {
+  color: var(--vp-c-text-1);
+}
+
+.dark .comm-desc {
+  color: var(--vp-c-text-2);
+}
+
 /* Productivity Scroll (Now used for Stage 3) */
 .scroll-container {
   overflow-x: auto;
@@ -3218,6 +3240,11 @@ a {
   box-shadow: none;
 }
 
+.dark .prod-card {
+  background: var(--vp-c-bg-soft);
+  border-color: var(--vp-c-divider);
+}
+
 .prod-card:hover {
   transform: scale(1.015);
 }
@@ -3245,6 +3272,15 @@ a {
   color: #6e6e73;
   font-size: 16px;
   line-height: 1.5;
+}
+
+.dark .prod-tag,
+.dark .prod-card p {
+  color: var(--vp-c-text-2);
+}
+
+.dark .prod-card h4 {
+  color: var(--vp-c-text-1);
 }
 
 .prod-visual {
@@ -3327,6 +3363,10 @@ a {
   line-height: 1.35;
   letter-spacing: -0.01em;
   white-space: normal;
+}
+
+.dark .appendix-title {
+  color: var(--vp-c-text-1);
 }
 
 .appendix-scroll-hint {
@@ -3412,6 +3452,10 @@ a {
   border-radius: 40px;
 }
 
+.dark .footer-callout {
+  background: var(--vp-c-bg-soft);
+}
+
 .footer-callout h2 {
   font-size: 62px;
   font-weight: 700;
@@ -3428,6 +3472,14 @@ a {
   color: #6e6e73;
   font-size: 20px;
   margin-bottom: 18px;
+}
+
+.dark .footer-callout h2 {
+  color: var(--vp-c-text-1);
+}
+
+.dark .footer-callout p {
+  color: var(--vp-c-text-2);
 }
 
 .apple-site-footer {
@@ -3743,7 +3795,7 @@ a {
 
 .dark .feature-card {
   border: 1px solid rgba(255, 255, 255, 0.06);
-  background: var(--vp-c-bg-mute);
+  background: var(--vp-c-bg-soft);
 }
 
 .feature-card:hover {
@@ -3786,6 +3838,14 @@ a {
   line-height: 1.6;
   margin-top: 4px;
   margin-bottom: 0;
+}
+
+.dark .feature-content h4 {
+  color: var(--vp-c-text-1);
+}
+
+.dark .feature-content p {
+  color: var(--vp-c-text-2);
 }
 
 @media (max-width: 960px) {
