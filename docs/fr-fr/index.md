@@ -17,10 +17,10 @@ hero:
   actions:
     - theme: brand
       text: Commencer à vibe ensemble !
-      link: /fr-fr/stage-1/
+      link: /zh-cn/stage-1/learning-map/
     - theme: alt
       text: Plan du Cours
-      link: /fr-fr/stage-1/
+      link: /zh-cn/stage-1/learning-map/
 ---
 
 <HomeFeatures />
