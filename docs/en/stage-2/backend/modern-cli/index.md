@@ -41,7 +41,7 @@ To compare more intuitively, we can look at the difference between Claude Code a
 | Context length     | ✅ Very long       | ⚠️ Good             | Claude Code   |
 | Debug assistance   | ✅ Automated       | ⚠️ More manual work | Claude Code   |
 
-Table source: https://northflank.com/blog/claude-code-vs-cursor-comparison
+Table source: <https://northflank.com/blog/claude-code-vs-cursor-comparison>
 
 In short, CLI AI coding tools usually can:
 
@@ -57,6 +57,7 @@ Although there are many open-source implementations now, in practice we only rec
 
 - Codex uses GPT-5 and is stronger overall in capability.
 - Claude Code, routed through GLM 4.6 compatible APIs, offers an experience close to Claude 4 at a lower cost.
+- OpenCode lets you freely switch and combine models, includes free model options, and gives you better cost control.
 
 However, which one works better in your real project can only be determined by hands-on testing. Mastering multiple AI coding tools is always beneficial. Once you are skilled, you can switch flexibly among Claude Code, Codex, or Trae in different scenarios. If one tool does not perform well after multiple tries, just switch to another tool or model and continue experimenting.
 
@@ -77,7 +78,7 @@ In actual use, you can ask it through chat to create new projects, perform CLI o
 ![](/zh-cn/stage-2/backend/modern-cli/images/image9.png)![](/zh-cn/stage-2/backend/modern-cli/images/image10.png)
 
 If you want to systematically learn Claude Code, you can refer to the course jointly launched by Andrew Ng and Anthropic:  
-https://www.bilibili.com/video/BV176t2zSEpr
+<https://www.bilibili.com/video/BV176t2zSEpr>
 
 Next, we will learn how to use Claude Code. Because directly using the official Claude Code is often very expensive (as shown below), we will instead use API platforms that are compatible with Claude Code protocol but based on other large models.
 
@@ -122,8 +123,8 @@ Next, we need to change Claude Code's default API request endpoint so it support
 
 First, you need to obtain your GLM API key and store it in whatever way is most convenient for you.
 
-Domestic URL: https://bigmodel.cn/usercenter/proj-mgmt/apikeys  
-International URL: https://z.ai/manage-apikey/apikey-list
+Domestic URL: <https://bigmodel.cn/usercenter/proj-mgmt/apikeys>  
+International URL: <https://z.ai/manage-apikey/apikey-list>
 
 If you are using the **domestic GLM** service, use the following variable configuration:
 
@@ -192,11 +193,11 @@ Kimi K2 is a new-generation large language model released by Moonshot AI, with e
 
 **Get API Key:**
 
-Visit https://platform.moonshot.cn/console/account to register and obtain an API key.
+Visit <https://platform.moonshot.cn/console/account> to register and obtain an API key.
 
 **Configuration method:**
 
-Reference docs: https://platform.moonshot.cn/docs/guide/agent-support
+Reference docs: <https://platform.moonshot.cn/docs/guide/agent-support>
 
 ```bash
 export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic
@@ -215,7 +216,7 @@ Minimax is a new-generation large language model released by MiniMax, with excel
 
 **Get API Key:**
 
-Visit https://platform.minimax.io/ to register and obtain an API key.
+Visit <https://platform.minimax.io/> to register and obtain an API key.
 
 **Configuration method:**
 
@@ -237,7 +238,7 @@ DeepSeek is an open-source large language model released by DeepSeek, popular am
 
 **Get API Key:**
 
-Visit https://platform.deepseek.com/usage to register and obtain an API key.
+Visit <https://platform.deepseek.com/usage> to register and obtain an API key.
 
 **Configuration method:**
 
@@ -262,7 +263,7 @@ Volcano Engine is ByteDance's cloud service platform, providing enterprise-level
 
 **Get API Key:**
 
-Visit https://console.volcengine.com/ark/region:ark+cn-beijing/apiKey to register and obtain an API key.
+Visit <https://console.volcengine.com/ark/region:ark+cn-beijing/apiKey> to register and obtain an API key.
 
 **Configuration method:**
 
@@ -282,7 +283,7 @@ export ANTHROPIC_MODEL="moonshotai/Kimi-K2-Instruct-0905"    # You can change to
 export ANTHROPIC_API_KEY="YOUR_SILICONCLOUD_API_KEY"    # Replace with your API key
 ```
 
-Aliyun DashScope (Aliyuncs): https://help.aliyun.com/zh/model-studio/get-api-key
+Aliyun DashScope (Aliyuncs): <https://help.aliyun.com/zh/model-studio/get-api-key>
 
 ```python
 export ANTHROPIC_BASE_URL="https://dashscope.aliyuncs.com/apps/anthropic"
@@ -355,8 +356,8 @@ Many people initially use Claude Code only as a normal chat tool. But in fact it
 
 Reference docs:
 
-https://docs.claude.com/en/docs/claude-code/cli-reference  
-https://docs.claude.com/en/docs/claude-code/slash-commands
+<https://docs.claude.com/en/docs/claude-code/cli-reference>  
+<https://docs.claude.com/en/docs/claude-code/slash-commands>
 
 | Command           | Purpose                                   | Example                                  |
 | ----------------- | ----------------------------------------- | ---------------------------------------- |
@@ -380,7 +381,7 @@ https://docs.claude.com/en/docs/claude-code/slash-commands
 
 **CLAUDE.md**
 
-Reference: https://www.anthropic.com/engineering/claude-code-best-practices
+Reference: <https://www.anthropic.com/engineering/claude-code-best-practices>
 
 `CLAUDE.md` is a special file that Claude automatically reads and includes in context at the beginning of a session. So it is very suitable for recording:
 
@@ -411,7 +412,7 @@ Reference: https://www.anthropic.com/engineering/claude-code-best-practices
 
 #### Internal Principles of Claude Code
 
-Reference: https://github.com/shareAI-lab/analysis_claude_code
+Reference: <https://github.com/shareAI-lab/analysis_claude_code>
 
 If you are curious why Claude Code performs better than Trae or Cursor agent tools in many scenarios, we can briefly look at its internal working mechanism.
 
@@ -458,8 +459,8 @@ Because official OpenAI API can have issues such as high cost and strict network
 
 With this approach, we only need to buy corresponding Codex API quota on a third-party relay platform, and we can get an experience close to native OpenAI Codex.
 
-Reference: https://open-dev.feishu.cn/wiki/PAqUwWG4IiuwTvkQ2sGcaQuPnXc  
-Recharge URL: https://api.zyai.online/account/topup/recharge
+Reference: <https://open-dev.feishu.cn/wiki/PAqUwWG4IiuwTvkQ2sGcaQuPnXc>  
+Recharge URL: <https://api.zyai.online/account/topup/recharge>
 
 One thing to note: after obtaining token quota, we still need to configure the API key locally.
 
@@ -515,6 +516,100 @@ I can use the command `codex --profile myrelay` to run it
 ````
 
 After configuration, you can launch Codex with relayed API through `codex --profile myrelay`. Usage afterward is similar to Claude Code: just keep entering your ideas and requirements in chat at any time.
+
+### OpenCode
+
+![](/zh-cn/stage-2/backend/modern-cli/images/image32.png)
+
+![](/zh-cn/stage-2/backend/modern-cli/images/image33.png)
+
+OpenCode is an open-source AI coding agent platform for developers, positioned like a "multi-model version of Claude Code." It uses the terminal as the core interaction entry, while also supporting editor integrations (such as VS Code and Neovim). It can deeply connect with local repositories and complete an end-to-end workflow through natural language, from code understanding to engineering execution.
+
+It is not bound to one single model. Instead, it is an open platform where you can switch freely among GPT, Claude, Gemini, and even local models. OpenAI itself also supports connecting Codex/OpenAI subscription access through OpenCode.
+
+![](/zh-cn/stage-2/backend/modern-cli/images/image34.png)
+
+You can install OpenCode with the following commands:
+
+```bash
+# Linux / Unix
+curl -fsSL https://opencode.ai/install | bash
+
+# Windows
+npm i -g opencode-ai
+```
+
+#### Use Free Models in OpenCode
+
+OpenCode periodically provides free models, and setup is very simple. In any folder where you want to use OpenCode, run `opencode` in terminal to open the chat panel. Then use `/models` and search for the keyword `free` to find models marked as free.
+
+![](/zh-cn/stage-2/backend/modern-cli/images/image35.png)
+
+In most cases, free models are slower than paid/subscription models for coding tasks. This usually depends on route congestion, peak usage hours, and the model's own capability.
+
+#### Use Third-Party Models as OpenCode's Main Coding Model
+
+This is OpenCode's core advantage: with the same MCP, Skills, and context, you can freely switch models for different coding tasks. Below we use OpenAI's official GPT-5.3 Codex as an example for connecting OpenCode as the main coding model.
+
+In OpenCode chat, enter `/connect`, select the first relevant command, and press Enter to choose third-party provider authentication.
+
+![](/zh-cn/stage-2/backend/modern-cli/images/image36.png)
+
+Here we use OpenAI as an example and press Enter to choose an authentication method.
+
+![](/zh-cn/stage-2/backend/modern-cli/images/image37.png)
+
+Either option works; the only difference is the auth flow. Here we choose browser login.
+
+![](/zh-cn/stage-2/backend/modern-cli/images/image38.png)
+
+Copy the link to your browser and complete normal OpenAI login. After "Authorization Successful" appears in the browser, OpenCode will automatically move to the OpenAI model selection screen.
+
+![](/zh-cn/stage-2/backend/modern-cli/images/image39.png)
+
+![](/zh-cn/stage-2/backend/modern-cli/images/image40.png)
+
+#### Install the Oh My OpenAgent Plugin
+
+Another strength of OpenCode is its active community ecosystem. You can find many OpenCode-related plugins on GitHub. If OpenCode is a model-switchable AI collaboration tool, then Oh-My-OpenAgent is a "multi-agent AI coding orchestration system" running on top of OpenCode. It can split a complex task into sub-tasks and assign them to different models for specialized execution.
+
+![](/zh-cn/stage-2/backend/modern-cli/images/image41.png)
+
+You can copy the following prompt and send it to the model you already configured in OpenCode to install Oh My OpenAgent:
+
+```text
+Install and configure oh-my-openagent by following the instructions here:
+https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/docs/guide/installation.md
+```
+
+Below is a brief feature overview of Oh-My-OpenAgent.
+
+| Feature | Description |
+| :-------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Discipline Agents** | Sisyphus coordinates Hephaestus, Oracle, Librarian, and Explore. A complete AI dev team works in parallel. |
+| **Team Mode** (v4.0, optional) | One leader agent + up to 8 parallel members, real-time tmux visualization, dedicated `team_*` tool family. Powers `hyperplan` (5 adversarial reviewers) and `security-research` (3 hunters + 2 PoC engineers). [Docs →](docs/guide/team-mode.md) |
+| **`ultrawork` / `ulw`** | One command launch; all agents mobilize. They do not stop until the task is done. |
+| **[IntentGate](https://factory.ai/news/terminal-bench)** | Analyze true user intent before acting. Avoid literal-interpretation AI noise. |
+| **Hash-based editing tools** | Every edit is validated with `LINE#ID` content hashes for 0% wrong-line edits. Inspired by [oh-my-pi](https://github.com/can1357/oh-my-pi). [The Harness Problem →](https://blog.can.ac/2026/02/12/the-harness-problem/) |
+| **LSP + AST-Grep** | Workspace-level rename, pre-build diagnostics, AST-based rewrites. IDE-grade precision for agents. |
+| **Background agents** | Launch 5+ experts in parallel while keeping the main context clean. |
+| **Built-in MCP** | Exa (web search), Context7 (official docs), Grep.app (GitHub code search). Enabled by default. |
+| **Ralph Loop / `/ulw-loop`** | Self-referential loop. It does not stop before 100% completion. |
+| **Forced todo execution** | If an agent drifts, the system pulls it back. Your task must be finished. |
+| **Comment reviewer** | Removes AI-flavored noisy comments so code reads like senior-engineer output. |
+| **Tmux integration** | Full interactive terminal support: REPL, debugger, TUI tools in live sessions. |
+| **Claude Code compatibility** | Existing hooks, commands, skills, MCPs, and plugins can migrate seamlessly. |
+| **Skill-embedded MCP** | Skills can carry their own MCP servers, loaded on demand to protect context window size. |
+| **Prometheus planner** | Strategic interview-style planning before writing code. |
+| **`/init-deep`** | Auto-generates `AGENTS.md` through the project tree. Saves tokens and improves agent understanding. |
+
+Sisyphus (claude-opus-4-7 / kimi-k2.6 / glm-5.1) is your chief orchestrator. It plans, delegates to specialists, and pushes tasks with aggressive parallel execution until complete.
+
+Hephaestus (gpt-5.5) is your autonomous deep worker. Give goals, not hand-holding steps. It explores repo patterns and executes tasks end-to-end without babysitting.
+
+Prometheus (claude-opus-4-7 / kimi-k2.6 / glm-5.1) is your strategic planner. Through interview-style clarification, it defines scope and builds a detailed execution plan before any coding starts.
+
+After this, you can use OpenCode with the Oh-My-OpenAgent plugin to complete coding tasks.
 
 ## More Use Cases for CLI AI Coding Tools
 
