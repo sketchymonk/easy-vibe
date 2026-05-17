@@ -12,7 +12,7 @@ const relatedArticles = relatedArticlesMap['zh-cn/stage-1/learning-map'] ?? []
 # 从创意到 AI 产品
 
 ::: info 特别感谢
-特别感谢来自 **清华大学深圳国际研究生院（THU SIGS）** 的同学们对本课程的测试、反馈和支持！你们的意见和贡献让这门课程变得更好。[👉 查看完整贡献者名单](https://github.com/datawhalechina/easy-vibe#contributing--contributors)
+特别感谢来自 **清华大学深圳国际研究生院** 的同学们对本课程的测试、反馈和支持！你们的意见和贡献让这门课程变得更好。[👉 查看完整贡献者名单](https://github.com/datawhalechina/easy-vibe#-contributing--contributors)
 :::
 
 以前做软件，门槛很高：你要懂编程、懂算法，还得有几年的项目经验。
