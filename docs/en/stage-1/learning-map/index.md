@@ -5,6 +5,10 @@ description: 'Complete roadmap for learning AI programming: from zero basics to 
 
 # From Idea to AI Product
 
+::: info Special Thanks
+Special thanks to the students from **Tsinghua University Shenzhen International Graduate School (THU SIGS)** for their testing, feedback, and support for this course! Your contributions and suggestions have made this course better. [👉 View full contributors list](https://github.com/datawhalechina/easy-vibe#contributing--contributors)
+:::
+
 In the past, building software had a high barrier: you had to understand programming and algorithms and have years of project experience.
 Now it's different. As long as you have an idea, AI can help you write the code.
 
