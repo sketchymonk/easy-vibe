@@ -3,6 +3,8 @@
 
 <img src="../../assets/easy-vibe-logo-hd.svg" alt="Easy-Vibe Logo" width="300">
 
+<img src="../../assets/banner.png" alt="Easy-Vibe Banner" width="100%">
+
 <p align="center" style="font-size: 1.2em; color: #666; margin: 20px 0;">
   Leg direkt los und vibe mit uns. Wenn du sprechen kannst, kannst du Apps bauen.<br>
   <span style="font-size: 0.9em; color: #888;">直接上手，一起 vibe！会说话就会做应用。</span>
@@ -11,16 +13,16 @@
 <a href="https://trendshift.io/repositories/22079" target="_blank"><img src="https://trendshift.io/api/badge/repositories/22079" alt="datawhalechina/easy-vibe | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
 
 <p align="center">
-  🚀 <a href="https://datawhalechina.github.io/easy-vibe/welcome.html">Jetzt starten</a> · ✨ <a href="https://datawhalechina.github.io/easy-vibe/en/appendix/">Interaktives Tutorial</a> · 🦞 <a href="https://github.com/datawhalechina/hello-claw">OpenClaw lernen</a><br>
+  🚀 <a href="https://datawhalechina.github.io/easy-vibe/welcome.html">Jetzt entdecken</a> · ✨ <a href="https://datawhalechina.github.io/easy-vibe/en/appendix/">Interaktives Tutorial</a> · 🦞 <a href="https://github.com/datawhalechina/hello-claw">OpenClaw lernen</a> · 📖 <a href="#table-of-contents">Inhaltsverzeichnis</a><br>
   <span style="font-size: 0.85em; color: #888;">🚀 <a href="https://datawhalechina.github.io/easy-vibe/welcome.html">开始体验</a> · ✨ <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/">交互式教程</a> · 🦞 <a href="https://github.com/datawhalechina/hello-claw">学习 OpenClaw</a> · 📖 <a href="#table-of-contents">查看目录</a></span>
 </p>
 
 <p align="center">
-  <a href="https://datawhalechina.github.io/easy-vibe/welcome.html">Jetzt lesen</a> ·
+  <a href="https://datawhalechina.github.io/easy-vibe/welcome.html">Online lesen</a> ·
   <a href="#-content-navigation">Lernpfad</a><br>
   <span style="font-size: 0.85em; color: #888;">
     <a href="https://datawhalechina.github.io/easy-vibe/welcome.html">开始阅读</a> ·
-    <a href="#-内容导航">学习地图</a>
+    <a href="#-content-navigation">学习地图</a>
   </span>
 </p>
 
@@ -34,9 +36,9 @@
 </p>
 
 <p align="center">
+  <a href="../../README.md"><img alt="English" src="https://img.shields.io/badge/English-d9d9d9"></a>
   <a href="../zh-CN/README.md"><img alt="简体中文" src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
   <a href="../zh-TW/README.md"><img alt="繁體中文" src="https://img.shields.io/badge/繁體中文-d9d9d9"></a>
-  <a href="../en-US/README.md"><img alt="English" src="https://img.shields.io/badge/English-d9d9d9"></a>
   <a href="../ja-JP/README.md"><img alt="日本語" src="https://img.shields.io/badge/日本語-d9d9d9"></a>
   <a href="../es-ES/README.md"><img alt="Español" src="https://img.shields.io/badge/Español-d9d9d9"></a>
   <a href="../fr-FR/README.md"><img alt="Français" src="https://img.shields.io/badge/Français-d9d9d9"></a>
@@ -52,68 +54,85 @@
     <td width="50%" valign="top" align="center">
       <img src="../../assets/gif-header.png" width="100%">
       <br>
-      <strong>新手专属学习地图</strong>
+      <strong>Eine anfaengerfreundliche Lernkarte</strong>
       <br>
-      <sub>零基础专属指引，清晰规划路径，告别“学了忘”</sub>
+      <sub>Klare Orientierung von Null an, damit du aufhoerst zu "lernen und vergessen"</sub>
     </td>
     <td width="50%" valign="top" align="center">
       <img src="../../assets/gif-tutorial.png" width="100%">
       <br>
-      <strong>手把手图文教程</strong>
+      <strong>Schritt-fuer-Schritt visuelle Tutorials</strong>
       <br>
-      <sub>保姆级图文详解，如同私教在旁，跟着做就能学会</sub>
+      <sub>Ausfuehrliche Anleitungen, die sich anfuehlen wie Lernen mit einem Privatlehrer</sub>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top" align="center">
       <img src="../../assets/gif-ide.gif" width="100%">
       <br>
-      <strong>沉浸式模拟编程</strong>
+      <strong>Immersives simuliertes Codieren</strong>
       <br>
-      <sub>虚拟鼠标自动导览，带你快速上手 IDE 核心用法</sub>
+      <sub>Virtuelle Mausfuehrung hilft dir, den Kern-IDE-Workflow schnell zu lernen</sub>
     </td>
     <td width="50%" valign="top" align="center">
       <img src="../../assets/gif-diffusion.gif" width="100%">
       <br>
-      <strong>看得见的 AI 原理</strong>
+      <strong>Sichtbare KI-Prinzipien</strong>
       <br>
-      <sub>算法原理动画化，一眼看懂 AI 如何“画”出图片</sub>
+      <sub>Animierte Erklaerungen machen es leicht zu sehen, wie KI Bilder erzeugt</sub>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top" align="center">
       <img src="../../assets/gif-rag.gif" width="100%">
       <br>
-      <strong>像玩游戏一样学 RAG</strong>
+      <strong>RAG lernen wie ein Spiel</strong>
       <br>
-      <sub>独家交互组件，点击即可看清 RAG 数据流向</sub>
+      <sub>Interaktive Komponenten lassen dich den gesamten RAG-Datenfluss durchklicken</sub>
     </td>
     <td width="50%" valign="top" align="center">
       <img src="../../assets/git-terminal.gif" width="100%">
       <br>
-      <strong>可视化终端原理</strong>
+      <strong>Visuelle Terminal-Konzepte</strong>
       <br>
-      <sub>命令行操作可视化，直观展示后台逻辑与原理</sub>
+      <sub>Kommandozeilenverhalten wird intuitiv, wenn die zugrundeliegende Logik visualisiert wird</sub>
     </td>
   </tr>
 </table>
 <div align="center">
-  <h3>⭐ 欢迎 <a href="https://github.com/datawhalechina/easy-vibe" style="color: #d0cd16ff;">点击此处Star</a> 加速更新 ❤️</h3>
+  <h3>⭐ <a href="https://github.com/datawhalechina/easy-vibe" style="color: #d0cd16ff;">Sterne hier vergeben</a>, um Aktualisierungen zu beschleunigen ❤️</h3>
 </div>
 
 <div align="center" style="margin: 30px 0;">
   <a href="https://github.com/datawhalechina/easy-vibe/issues/new?template=story_submission.md">
-    <img src="https://raw.githubusercontent.com/datawhalechina/easy-vibe/main/assets/stories_image.png" alt="Share Your Vibe Story" width="80%" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <img src="https://raw.githubusercontent.com/datawhalechina/easy-vibe/main/assets/stories_image.png" alt="Teile deine Vibe-Story" width="80%" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
   </a>
   <p style="margin-top: 15px; font-size: 1.1em; color: #666;">
-    📝 <strong>Have your own vibe coding story?</strong>
-    Submit it here and inspire others!
+    📝 <strong>Hast du deine eigene Vibe-Coding-Story?</strong>
+    Reiche sie hier ein und inspiriere andere!
   </p>
 </div>
 
-## 为什么需要 Easy-Vibe
+## Inhaltsverzeichnis
 
-Du willst eine App fur Einnahmen und Ausgaben? Sag es einfach.
+- [Warum Easy-Vibe](#warum-easy-vibe)
+- [Neuigkeiten](#-neuigkeiten)
+- [Fuer wen ist das](#fuer-wen-ist-das)
+- [Deine Lernpfade](#deine-lernpfade)
+- [Lernempfehlungen](#lernempfehlungen)
+  - [I. Einsteiger-Einstieg](#i-einsteiger-einstieg)
+  - [II. Junior- und Mid-Level-Entwickler](#ii-junior-und-mid-level-entwickler)
+  - [III. Fortgeschrittene Entwickler](#iii-fortgeschrittene-entwickler)
+  - [Anhang Wissensdatenbank](#-anhang-wissensdatenbank)
+- [Wie man lernt](#️-wie-man-lernt)
+- [Lokal ausfuehren](#-lokal-ausfuehren)
+- [Weitere Kurse](#weitere-kurse)
+- [Mitmachen & Mitwirkende](#mitmachen--mitwirkende)
+- [Lizenz](#-lizenz)
+
+## Warum Easy-Vibe
+
+Du willst eine Ausgabenverfolgung? Sag es einfach.
 
 Du brauchst ein Buchungssystem mit WeChat-Login? Sag es einfach.
 
@@ -121,326 +140,271 @@ Du willst einen Blog mit Kommentaren? Sag es einfach.
 
 Im KI-Zeitalter beginnt Programmieren damit, zu beschreiben, was du willst.
 
-Easy-Vibe zeigt dir, wie daraus ein echtes Produkt wird.
+Easy-Vibe zeigt dir, wie du daraus ein echtes Produkt machst.
 
 
-## 🔥 News
+## 🔥 Neuigkeiten
 
-- **[2026-03-29]** ✨ **Neue Nutzergeschichten-Sektion mit 4 echten Fallbeispielen**: Auf der Startseite gibt es jetzt ein interaktives Story-Karussell und eigene Story-Seiten. Außerdem haben wir Platzhalter durch vier echte Geschichten ersetzt, von einem Grundschullehrer auf dem Land, einer Studentin, einem Informatiklehrer und einem Lkw-Fahrer. [👉 View the stories](https://datawhalechina.github.io/easy-vibe/zh-cn/vibe-stories/story-1.html)
-- **[2026-03-26]** 🚀 **Großes Update für Phase 2 Praxis**: SaaS-Kappenprojekt "[Ihre erste SaaS Full-Stack-App: Copywriting-Generator-Website](https://datawhalechina.github.io/easy-vibe/en/stage-2/assignments/fullstack-app/)" abgeschlossen und Abschnitt "[Wie man Stripe und Zahlungssysteme integriert](https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/stripe-payment/)" erheblich erweitert.
-- **[2026-03-25]** 📚 **Neuer Anhang: Nutzerforschung und Anforderungsvalidierung**: Vier neue Artikel hinzugefügt, die Ideenfindung, das Double-Diamond-Modell, Jobs to Be Done und The Mom Test abdecken, um Anfängern zu helfen, Produktideen zu entdecken und zu validieren. [👉 Anhang lesen](https://datawhalechina.github.io/easy-vibe/en/appendix/)
-- **[2026-03-25]** 📚 **Englische Dokumentation vollständig aktualisiert**: Phase 2 (Full-Stack-Entwicklung) und Phase 3 (Fortgeschrittene Entwicklung) sind jetzt vollständig auf Englisch verfügbar. [👉 Lernen beginnen](https://datawhalechina.github.io/easy-vibe/en/stage-2/)
-- **[2026-03-02]** 🦞 **OpenClaw & AI Agent freundliche Unterstützung**: `llms.txt` hinzugefügt, damit OpenClaw, Claude, Cursor, Trae und andere AI Agents die Repository-Struktur schnell verstehen und die richtigen Tutorial-Inhalte finden können.
-- **[2026-03-01]** Der Abschnitt [Fortgeschrittene Entwicklung](https://datawhalechina.github.io/easy-vibe/en/stage-3/) wurde umfassend mit tiefen Anleitungen für Claude Code aktualisiert, einschließlich MCP, Skills, Agent Teams und mehr, zusammen mit acht plattformübergreifenden Projekttutorials.
-- **[2026-02-25]** [Anhang-Wissensbasis](https://datawhalechina.github.io/easy-vibe/en/appendix/) aktualisiert, deckt jetzt 9 Wissensbereiche und über 80 interaktive Themen ab.
-- **[2026-01-27]** Android- und iOS-App-Entwicklungstutorials hinzugefügt.
-- **[2026-01-19]** Interaktive Demos für Prompt Engineering, KI-Geschichte, Authentifizierungsdesign, Git-Prinzipien und mehr veröffentlicht.
-
+- **[2026-03-29]** ✨ **Vibe Stories gestartet und mit echten Nutzerreisen aktualisiert**: Eine neue Vibe-Stories-Sektion mit interaktivem Karussell und dedizierten Story-Seiten wurde auf der Startseite hinzugefuegt. Platzhalter wurden durch vier echte Nutzergeschichten ersetzt: eine Grundschullehrerin vom Land, einen Studenten, einen IT-Lehrer an einer weiterfuehrenden Schule und einen Lkw-Fahrer, die alle echte Produkte mit KI gebaut haben. [👉 Geschichten ansehen](https://datawhalechina.github.io/easy-vibe/zh-cn/vibe-stories/story-1.html)
+- **[2026-03-26]** 🚀 **Grosses Phase-2-Praxis-Update**: Das SaaS-Abschlussprojekt "[Deine erste SaaS-Full-Stack-App: Copywriting-Generator-Website](https://datawhalechina.github.io/easy-vibe/en/stage-2/assignments/fullstack-app/)" wurde abgeschlossen und der Abschnitt "[Stripe- und Zahlungssysteme integrieren](https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/stripe-payment/)" deutlich erweitert, plus wichtige Inhalte zu Multi-Produkt-UI und WeChat-Mini-Programm-Backend-Workflows.
+- **[2026-03-25]** 📚 **Neuer Anhang: Nutzerforschung und Anforderungsvalidierung**: Vier neue Artikel hinzugefuegt, die Ideenfindung, das Double-Diamond-Modell, Jobs to Be Done und The Mom Test abdecken, um Anfaengern zu helfen, Produktideen zu entdecken und zu validieren. [👉 Anhang lesen](https://datawhalechina.github.io/easy-vibe/en/appendix/)
+- **[2026-03-25]** 📚 **Englische Dokumentation vollstaendig aktualisiert**: Phase 2 (Full-Stack-Entwicklung) und Phase 3 (Fortgeschrittene Entwicklung) sind jetzt vollstaendig auf Englisch verfuegbar. [👉 Lernen beginnen](https://datawhalechina.github.io/easy-vibe/en/stage-2/)
 <details>
 <summary>Vergangene Neuigkeiten</summary>
 
-- **[2026-01-16]** Projektstruktur reorganisiert und offiziell das Kapitel "Einstieg für Anfänger" etabliert.
-- **[2026-01-14]** Großes Update der Dokumente für Produktprototyping in Phase 1 abgeschlossen.
-- **[2026-01-13]** Dokumentenarchitektur umgestaltet und mehrsprachige Unterstützung (i18n) vollständig aktiviert.
-- **[2026-01-01]** Veröffentlichung der Kern-Lernkarte des Projekts.
+- **[2026-03-02]** 🦞 **OpenClaw- und KI-Agent-freundliche Unterstuetzung**: `llms.txt` hinzugefuegt, damit OpenClaw, Claude, Cursor, Trae und andere KI-Agenten die Repository-Struktur schnell verstehen und die richtigen Tutorial-Inhalte finden koennen.
+- **[2026-03-01]** Der Abschnitt [Fortgeschrittene Entwicklung](https://datawhalechina.github.io/easy-vibe/en/stage-3/) wurde umfassend mit tiefen Anleitungen fuer Claude Code aktualisiert, einschliesslich MCP, Skills, Agent Teams und mehr, zusammen mit acht plattformuebergreifenden Projekttutorials.
+- **[2026-02-25]** Die [Anhang-Wissensdatenbank](https://datawhalechina.github.io/easy-vibe/en/appendix/) wurde aktualisiert und deckt jetzt 9 Wissensbereiche und ueber 80 interaktive Themen ab.
+- **[2026-01-27]** Tutorials fuer Android- und iOS-App-Entwicklung hinzugefuegt.
+- **[2026-01-19]** Interaktive Demos fuer Prompt Engineering, KI-Geschichte, Authentifizierungsdesign, Git-Prinzipien und mehr veroeffentlicht.
+- **[2026-01-16]** Projektstruktur reorganisiert und einen Einsteiger-Einstiegspfad offiziell etabliert.
+- **[2026-01-14]** Grosses Update der Phase-1-Produktprototyp-Dokumentation abgeschlossen.
+- **[2026-01-13]** Dokumentenarchitektur umgestaltet und Mehrsprachigkeitsunterstuetzung vollstaendig aktiviert.
+- **[2026-01-01]** Die Kern-Lernkarte des Projekts wurde veroeffentlicht.
 </details>
 
-## 适合谁
+## Fuer wen ist das
 
-- **零基础爱好者**：先做出第一个作品，再理解怎么做
-- **产品经理 / 创业者**：快速验证想法，低成本做 MVP
-- **学生**：建立 AI 时代的实战技能
-- **初级开发者**：补齐从想法到上线的完整开发链路
-- **中高级开发者**：掌握 AI 协作开发、复杂项目实战与效率升级
+- **Komplette Anfaenger**: Baue zuerst dein erstes Projekt, dann verstehe, wie es funktioniert
+- **Produktmanager / Gruender**: Ideen schnell validieren und MVPs mit niedrigen Kosten erstellen
+- **Studierende**: Praktische Faehigkeiten fuer das KI-Zeitalter entwickeln
+- **Junior-Entwickler**: Den vollstaendigen Weg von der Idee zum Launch lernen
+- **Mid-Level- und Senior-Entwickler**: Deine KI-Zusammenarbeitsworkflow fuer komplexe Projekte aufwerten
 
 
 
-## 你的学习路径
+## Deine Lernpfade
 
-### 🎮 我想先试试（5分钟体验）
-**适合人群**：所有人
-**学什么**：AI 编程初体验、贪吃蛇小游戏
-**你会得到**：5 分钟做出第一个 AI 应用
+### 🎮 Ich moechte einen schnellen ersten Erfolg
+**Am besten fuer**: Alle
+**Was du lernen wirst**: Wie sich KI-Coding wirklich anfuehlt, an einem einfachen, konkreten praktischen Beispiel
+**Was du bekommst**: Ein klarer erster Eindruck von Vibe-Coding und wie man mit KI durch Konversation arbeitet
 
-[开始体验](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/learning-map/)
+[Hier starten](https://datawhalechina.github.io/easy-vibe/en/stage-1/ai-capabilities-through-games/)
 
-### 💡 我有个想法要实现
-**适合人群**：零基础/产品经理/创业者
-**学什么**：AI IDE 工具、需求拆解、页面设计、功能规划、提示词写法、原型迭代
-**你会得到**：一个可演示的产品原型
+### 💡 Ich moechte eine Idee in einen Produktprototyp umwandeln
+**Am besten fuer**: Anfaenger / Produktmanager / Gruender
+**Was du lernen wirst**: Lernkarte, KI-IDE-Tools, Ideenvalidierung, Prototyping, KI-Faehigkeitsintegration und vollstaendige Demo-Iteration
+**Was du bekommst**: Ein demo-basierter KI-Produktprototyp, den du tatsaechlich Nutzern oder Teammitgliedern zeigen kannst
 
-[开始学习](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/learning-map/)
+[Lernen beginnen](https://datawhalechina.github.io/easy-vibe/en/stage-1/learning-map/)
 
-### 🚀 我想系统学习
-**适合人群**：开发者/进阶学习者
-**学什么**：前端、后端、数据库、AI 集成、部署运维、Claude Code 开发技巧
-**你会得到**：独立完成一个可上线的全栈 AI 应用
+### 🚀 Ich moechte Full-Stack-Produkte Ende zu Ende erstellen
+**Am besten fuer**: Junior-Entwickler / Indie-Hacker / Fortgeschrittene Lernende
+**Was du lernen wirst**: Frontend-Workflows, Design-to-Code, Datenbanken, Backend-APIs, Bereitstellung, Abrechnung und grosse Projekte
+**Was du bekommst**: Die Faehigkeit, unabhaengig moderne KI-gestuetzte Webanwendungen bereitzustellen
 
-[开始学习](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/)
+[Lernen beginnen](https://datawhalechina.github.io/easy-vibe/en/stage-2/)
 
-### 🦞 我想构建 AI Agent
-**适合人群**：对 AI Agent 感兴趣的开发者
-**学什么**：OpenClaw AI 助理、Skills 系统、自动化工作流
-**你会得到**：一个属于你的命令行 AI 助理
+### KI-Nativ: Ich moechte fortgeschrittene Claude-Code- und Agenten-Workflows
+**Am besten fuer**: Entwickler, die sich fuer KI-native Entwicklung interessieren
+**Was du lernen wirst**: Claude Code, MCP, Skills, Agent Teams, langlaufende Aufgaben, Spec Coding und plattformuebergreifende App-Bereitstellung
+**Was du bekommst**: Ein staerkerer Workflow fuer komplexe KI-gestuetzte Entwicklung und Automatisierung
 
-[开始学习](https://github.com/datawhalechina/hello-claw)
+[Zur fortgeschrittenen Entwicklung](https://datawhalechina.github.io/easy-vibe/en/stage-3/)
 
-### 📚 我想查资料
-**适合人群**：所有人
-**学什么**：计算机基础、AI 原理、9 大知识领域
-**你会得到**：80+ 交互式专题资料
+### 📚 Ich moechte Referenzmaterial und Grundlagen
+**Am besten fuer**: Alle
+**Was du lernen wirst**: Informatik-Grundlagen, Frontend-/Backend-Basics, Infrastruktur, KI-Prinzipien und Engineering-Praktiken
+**Was du bekommst**: Eine langfristige Referenz-Wissensdatenbank, die 9 grosse Wissensbereiche abdeckt
 
-[查看知识库](https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/)
+[Wissensdatenbank durchsuchen](https://datawhalechina.github.io/easy-vibe/en/appendix/)
 
-## 学习建议
+## Lernempfehlungen
 
-- 零基础、产品经理、创业者：从 [第一阶段](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/learning-map/) 开始
-- 有开发经验：从 [第二阶段](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/) 开始
-- 想直接做复杂项目：进入 [第三阶段](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/)
-- 想学 AI Agent：看 [Hello Claw](https://github.com/datawhalechina/hello-claw)
+- Wenn du Anfaenger, Produktmanager oder Gruender bist, beginne mit [Phase 1](https://datawhalechina.github.io/easy-vibe/en/stage-1/learning-map/)
+- Wenn du von Prototypen zur Full-Stack-Bereitstellung wechseln moechtest, beginne mit [Phase 2](https://datawhalechina.github.io/easy-vibe/en/stage-2/)
+- Wenn du fortgeschrittene Claude-Code-Workflows oder plattformuebergreifende Projekte moechtest, gehe zu [Phase 3](https://datawhalechina.github.io/easy-vibe/en/stage-3/)
+- Wenn du durch Konzepte oder fehlendes Hintergrundwissen blockiert wirst, nutze die [Anhang-Wissensdatenbank](https://datawhalechina.github.io/easy-vibe/en/appendix/)
 
-### 📖 内容导航
+### 📖 Inhaltliche Navigation
 
 <div align="center">
-  <img src="../../assets/readme-image1.png" alt="Learning Map" width="70%" style="border-radius: 10px; box-shadow: 0 8px 20px rgba(45,55,72,0.3); margin: 15px 0;"/>
+  <img src="../../assets/readme-image1.png" alt="Lernkarte" width="70%" style="border-radius: 10px; box-shadow: 0 8px 20px rgba(45,55,72,0.3); margin: 15px 0;"/>
 </div>
 
-### 一、零基础入门
+### I. Einsteiger-Einstieg
 
-| 章节                                                                                 | 关键内容                                          |
-| :----------------------------------------------------------------------------------- | :------------------------------------------------ |
-| [学习地图](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/learning-map/)                             | 整体学习路径导览                                  |
-| [AI 时代，会说话就会编程](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/ai-capabilities-through-games/) | 通过贪吃蛇等案例初步感受 AI 编程的能力            |
-| [寻找好想法](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/finding-great-idea/)                     | 学会寻找和验证产品想法，找到值得做的项目          |
-| [认识 AI IDE 工具](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/introduction-to-ai-ide/)           | 学会使用 IDE，在本地制作小游戏                    |
-| [动手做出原型](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/building-prototype/)                   | 从需求分析、AI 生成单页面，再到生成多页面产品原型 |
-| [给原型加上 AI 能力](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/integrating-ai-capabilities/)    | 学会接入常见 AI 能力（文本、图片、视频）          |
-| [完整项目实战](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/complete-project-practice/)            | 模拟真实场景、接受用户反馈迭代，完整化项目        |
+| Abschnitt | Wichtiger Inhalt |
+| :------ | :---------- |
+| [Lernkarte](https://datawhalechina.github.io/easy-vibe/en/stage-1/learning-map/) | Eine gefuehrte Uebersicht der gesamten Lernreise |
+| [KI-Aera: Wenn du sprechen kannst, kannst du coden](https://datawhalechina.github.io/easy-vibe/en/stage-1/ai-capabilities-through-games/) | Ersten Eindruck von KI-Coding durch Beispiele wie Snake bekommen |
+| [KI-Programmierwerkzeuge meistern](https://datawhalechina.github.io/easy-vibe/en/stage-1/introduction-to-ai-ide/) | Lernen, wie KI-IDE-Tools funktionieren und einfache lokale Projekte damit erstellen |
+| [Grossartige Ideen finden](https://datawhalechina.github.io/easy-vibe/en/stage-1/finding-great-idea/) | Lernen, wie man Produktideen entdeckt und validiert, die es wert sind, umgesetzt zu werden |
+| [Produktprototypen erstellen](https://datawhalechina.github.io/easy-vibe/en/stage-1/building-prototype/) | Von Anforderungen zu Einzelseiten- und Mehrseiten-Produktprototypen |
+| [KI-Faehigkeiten integrieren](https://datawhalechina.github.io/easy-vibe/en/stage-1/integrating-ai-capabilities/) | Text-, Bild- und Video-KI-Funktionen integrieren |
+| [Vollstaendiges Projektpraktikum](https://datawhalechina.github.io/easy-vibe/en/stage-1/complete-project-practice/) | Reale Szenarien simulieren, Nutzerfeedback sammeln und ein vollstaendiges Projekt iterieren |
 
-#### 附录：业务思维
+#### Anhang: Produkt- und Geschaeftsdenken
 
-| 章节                                                                                 | 关键内容                                   |
-| :----------------------------------------------------------------------------------- | :----------------------------------------- |
-| [产品思维与方案设计](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/appendix-a-product-thinking/)        | 从零到一做产品需要考虑的思维框架           |
-| [AI 行业应用场景参考 (B端)](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/appendix-industry-scenarios/) | 了解 AI 在不同产业的应用场景               |
-| [AI 消费场景灵感参考 (C端)](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/appendix-c-consumer-scenarios/) | 探索 AI 在消费级产品中的应用场景           |
+| Abschnitt | Wichtiger Inhalt |
+| :------ | :---------- |
+| [Produktdenken und Loungsdesign](https://datawhalechina.github.io/easy-vibe/en/stage-1/appendix-a-product-thinking/) | Kern-Frameworks fuer den Weg von Null zu Eins mit einem Produkt |
+| [KI-Branchen-Anwendungsszenarien (B2B)](https://datawhalechina.github.io/easy-vibe/en/stage-1/appendix-industry-scenarios/) | Verstehen, wie KI ueber Branchen hinweg angewendet wird |
+| [KI-Konsumentenszenarien-Inspiration (B2C)](https://datawhalechina.github.io/easy-vibe/en/stage-1/appendix-c-consumer-scenarios/) | Produktmoeglichkeiten in der Konsum-KI erkunden |
 
-#### 附录：技术方案
+#### Anhang: Nutzerforschung und Anforderungsvalidierung
 
-| 章节                                                                                                                    | 关键内容                                   |
-| :---------------------------------------------------------------------------------------------------------------------- | :----------------------------------------- |
-| [写代码时遇到错误怎么办](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/appendix-b-common-errors/)                                         | vibe coding 中的常见错误及排查方法         |
-| [七款 AI 编程工具对比](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/appendix-articles/example0-1/vibe-coding-tools-snake-game-tutorial)       | 对比测试主流 AI 编程平台                   |
-| [用设计和编程 Agent 设计网站](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-1/appendix-articles/example0-2/vibe-coding-tools-build-website-with-ai-coding-and-design-agents) | 学习如何使用 AI 智能体协同工作             |
+| Abschnitt | Wichtiger Inhalt |
+| :------ | :---------- |
+| [Wo man Ideen findet: 3 Referenzquellen, die fuer Anfaenger am besten funktionieren](https://datawhalechina.github.io/easy-vibe/en/stage-1/appendix-idea-sources/) | Eine zuverlaessige Pipeline fuer konkrete Produktmoeglichkeiten aufbauen |
+| [Double Diamond: Erst das Richtige tun, dann es richtig machen](https://datawhalechina.github.io/easy-vibe/en/stage-1/appendix-double-diamond/) | Einen strukturierten Prozess nutzen, um von verstreuter Inspiration zu einer machbaren Richtung zu kommen |
+| [Jobs to Be Done nutzen, um herauszufinden, was Nutzer wirklich wollen](https://datawhalechina.github.io/easy-vibe/en/stage-1/appendix-jobs-to-be-done/) | Nutzerziele durch echte Aufgaben analysieren statt durch oberflaechliche Feature-Anfragen |
+| [The Mom Test: Eine Nutzerinterview-Methode zur Validierung von Bedarf](https://datawhalechina.github.io/easy-vibe/en/stage-1/appendix-mom-test/) | Lernen, bessere Fragen zu stellen und falsch-positive Rueckmeldungen zu vermeiden |
 
-### 二、初中级开发工程师
+#### Anhang: Technische Loesungen
 
-#### 前端部分
+| Abschnitt | Wichtiger Inhalt |
+| :------ | :---------- |
+| [Was tun bei Fehlern](https://datawhalechina.github.io/easy-vibe/en/stage-1/appendix-b-common-errors/) | Haeufige Vibe-Coding-Probleme und wie man sie behebt |
+| [Vergleich von sieben KI-Programmierwerkzeugen](https://datawhalechina.github.io/easy-vibe/en/stage-1/appendix-articles/example0-1/vibe-coding-tools-snake-game-tutorial) | Wichtige KI-Coding-Plattformen durch praktisches Testen vergleichen |
+| [Websites mit Agenten entwerfen](https://datawhalechina.github.io/easy-vibe/en/stage-1/appendix-articles/example0-2/vibe-coding-tools-build-website-with-ai-coding-and-design-agents) | Multi-Agent-Zusammenarbeit in der Praxis lernen |
 
-| 章节                                                                                                       | 关键内容                                                                     |
-| :--------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------- |
-| [从Lovart出发，搭建自己的素材生产Agent](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/lovart-assets/)                             | 从零开始，利用Nanobanana和Lovart批量生成高质量的设计素材，并动手构建一个能意图识别的绘图Agent |
-| [Figma 与 MasterGo 入门](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/figma-mastergo/)                          | 用设计工具梳理信息架构和页面结构，为前端实现打基础                           |
-| [构建第一个现代应用程序-UI 设计](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/ui-design/)                       | 基于设计稿完成组件化界面，实现从设计到代码的第一条链路                       |
-| [参考 UI 设计规范与多产品 UI 设计](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/multi-product-ui/)              | 围绕统一主视觉扩展多产品界面，练习系统化设计能力                             |
-| [用 LLM 和 Skills 让界面变好看](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/llm-skills-beautiful/)             | 用提示词和 Skills 插件让 AI 生成美观独特的界面                               |
-| [一起做霍格沃茨画像](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/hogwarts-portraits/)                          | 从 0 到 1 做出接入 AI 能力的前端应用，串联设计与开发                         |
-| [从设计原型到项目代码](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/design-to-code/)                            | 三种路径将设计工具中的原型转化为前端代码                                     |
-| [使用现代组件库更新你的界面](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/modern-component-library/)            | 用组件库快速构建专业级界面，统一风格、提升开发效率                           |
+### II. Junior- und Mid-Level-Entwickler
 
-#### 后端开发部分
+#### Frontend
 
-| 章节                                                                                               | 关键内容                                                    |
-| :------------------------------------------------------------------------------------------------- | :---------------------------------------------------------- |
-| [从数据库到 Supabase](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/database-supabase/)                   | 在 Supabase 上落地数据库和 API，打通数据模型与前端页面      |
-| [大模型辅助编写接口代码与接口文档](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/ai-interface-code/)       | 用大模型协助生成接口与数据库文档及代码，实现可读可测的后端  |
-| [Git 和 GitHub 工作流](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/git-workflow/)                        | 在 Git 工作流中管理代码，进行版本控制和协作                 |
-| [如何部署 Web 应用](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/zeabur-deployment/)                     | 使用 CloudBase、Vercel、Zeabur 等平台部署应用上线           |
-| [CLI AI 编程工具](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/modern-cli/)                              | 使用 CLI 类 AI 编程工具加速开发与调试，形成个人工程化工作流 |
-| [如何集成 Stripe 等收费系统](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/stripe-payment/)               | 接入支付系统，完成收费链路与基础结算流程                    |
-| [大作业：构建第一个现代应用程序-全栈应用](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/copywriting-platform-supabase/) | 综合前端、后端与支付模块，完成可上线的全栈 Web 应用         |
+| Abschnitt | Wichtiger Inhalt |
+| :------ | :---------- |
+| [Frontend 0: Erstelle deinen eigenen Asset-Produktions-Agenten mit Lovart](https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/lovart-assets/) | Nanobanana und Lovart verwenden, um visuelle Assets in Mengen zu generieren und einen Zeichen-Agenten mit Intent-Erkennung zu erstellen |
+| [Frontend 1: Figma & MasterGo Grundlagen](https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/figma-mastergo/) | Den Workflow von Designentwuerfen zu implementierungsbereitem UI-Denken lernen |
+| [Frontend 2: Erste moderne App erstellen - UI-Design](https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/ui-design/) | Die UI-Design-Grundlagen hinter modernen Anwendungsoberflaechen lernen |
+| [Frontend 3: UI-Richtlinien und Multi-Produkt-Design](https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/multi-product-ui/) | Konsistenz und Aesthetik ueber mehrere Produkte hinweg mit gemeinsamen UI-Regeln verbessern |
+| [Frontend 4: Schnittstellen mit LLMs und Skills verschoenern](https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/llm-skills-beautiful/) | Prompts und Plugins verwenden, damit KI ausgefeiltere, einzigartige Schnittstellen generiert |
+| [Frontend 4: Lasst uns Hogwarts-Portraets erstellen](https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/hogwarts-portraits/) | Ein interaktives KI-Bild-Frontend-Projekt von Grund auf neu erstellen |
+| [Frontend 6: Vom Designprototyp zum Projektcode](https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/design-to-code/) | Designprototypen in Frontend-Code umwandeln, der tatsaechlich im Browser laeuft |
+| [Frontend 7: UI mit modernen Komponentenbibliotheken aufwerten](https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/modern-component-library/) | Komponentenbibliotheken verwenden, um schneller professionelle Schnittstellen zu erstellen |
 
-#### AI 能力附录
+#### Backend
 
-| 章节                                                                                                     | 关键内容                                                       |
-| :------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------- |
-| [Dify 入门与知识库集成](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/) | 用 Dify Workflow 与基础 RAG 搭建工具类产品，为后续应用升级打样 |
+| Abschnitt | Wichtiger Inhalt |
+| :------ | :---------- |
+| [Backend 1: Git und GitHub lernen](https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/git-workflow/) | Kern-Versionskontrolloperationen und Zusammenarbeitsworkflows mit Git meistern |
+| [Backend 2: Von Datenbanken zu Supabase](https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/database-supabase/) | Relationale Datenbankgrundlagen lernen und Supabase als moderne BaaS-Plattform verwenden |
+| [Backend 3: Backend-API-Design und Entwicklung](https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/ai-interface-code/) | KI zur Unterstuetzung von API-Design, Backend-Code-Generierung und API-Dokumentation verwenden |
+| [Backend 4: Produktprototyp bereitstellen](https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/zeabur-deployment/) | Full-Stack-Anwendungen schnell mit Zeabur in der Cloud bereitstellen |
+| [Backend 5: Von IDEs zu CLI-KI-Coding-Tools](https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/modern-cli/) | Terminal-first-KI-Coding-Workflows fuer moderne Entwicklung erkunden |
+| [Backend 6: Stripe und andere Abrechnungssysteme integrieren](https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/stripe-payment/) | Monetarisierung mit Zahlungs- und Abrechnungsfaehigkeiten hinzufuegen |
 
-### 三、高级开发工程师
+#### Große Projekte
 
-#### Claude Code 核心技能
+| Abschnitt | Wichtiger Inhalt |
+| :------ | :---------- |
+| [Grosses Projekt 1: Deine erste SaaS-Full-Stack-App - KI-Copywriting-Website](https://datawhalechina.github.io/easy-vibe/en/stage-2/assignments/fullstack-app/) | Einen KI-Marketing-Copy-Workspace mit Login, Generierung, Abrechnung und Admin-Verwaltung erstellen |
+| [Grosses Projekt 2: Online-Pruefungs- und Managementsystem](https://datawhalechina.github.io/easy-vibe/en/stage-2/assignments/modern-frontend-trae/) | Ein Online-Pruefungssystem mit Fragengenerierung, Pruefungsablaeufen und Admin-Tools erstellen |
 
-| 章节                                                                                                    | 关键内容                                                     |
-| :------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------- |
-| [Claude Code 快速上手](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/core-skills/basics/)                                  | 安装配置、基础操作、实用技巧和常用指令                       |
-| [Claude Code MCP 完全指南](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/core-skills/mcp/)                                 | 通过 MCP 让 Claude Code 连接 GitHub、数据库、API 等外部服务  |
-| [Claude Code Skills 完全指南](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/core-skills/skills/)                           | 将专业知识打包成可复用技能包，一次配置反复使用               |
-| [Claude Code 工作流最佳实践](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/core-skills/workflow/)                          | 日常开发、代码重构、Code Review 等场景的最佳实践             |
-| [Claude Agent Teams 完全指南](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/core-skills/agent-teams/)                      | 多 AI 实例协同工作，像真正的开发团队一样并行协作             |
-| [Claude Code Superpowers 工程级开发](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/core-skills/superpowers/)               | 让 AI 写出工程级代码，遵循 TDD 和最佳实践                    |
-| [如何让 Claude Code 长时间工作](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/core-skills/long-running-tasks/)             | 设计长时间运行的任务，让 Coding Tools 持续工作直到完成        |
+#### KI-Faehigkeiten Anhang
 
-#### 多平台开发
+| Abschnitt | Wichtiger Inhalt |
+| :------ | :---------- |
+| [KI 1: Dify-Grundlagen & Wissensdatenbank-Integration](https://datawhalechina.github.io/easy-vibe/en/stage-2/ai-capabilities/dify-knowledge-base/) | Lernen, KI-Anwendungen mit Dify zu erstellen und private Wissensdatenbanken zu integrieren |
 
-| 章节                                                                                                           | 关键内容                                                     |
-| :------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------- |
-| [如何构建微信小程序](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/cross-platform/wechat-miniprogram/)                       | 了解微信小程序生态，从官方模板到上线完成一个前端小程序       |
-| [如何构建微信小程序-包含后端](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/cross-platform/wechat-miniprogram-backend/)      | 在小程序中接入数据库与后端逻辑，打通完整业务闭环             |
-| [如何构建安卓程序](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/cross-platform/android-app/)                                | 使用 Expo 等工具，完成 Web/原生一体化的安卓应用开发          |
-| [如何构建 iOS 程序](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/cross-platform/ios-app/)                                   | 使用 Expo 等工具，完成 Web/原生一体化的 iOS 应用开发         |
-| [如何开发 PWA 本地应用](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/cross-platform/pwa-local-app/)                         | 让网页变成"真正的 App"，支持离线、推送、桌面安装            |
-| [如何开发浏览器 AI 助手插件](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/cross-platform/browser-ai-extension/)             | 开发 Chrome 插件，一键总结任意网页，支持云端 API 和内置 AI   |
-| [如何开发 Electron 桌面程序](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/cross-platform/electron-voice-to-text/)          | 用 Electron 构建语音转文字桌面应用，支持三平台安装运行       |
-| [如何快速开发并铸造 NFT](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/cross-platform/nft-minting/)                         | 从零编写智能合约，部署到以太坊测试网，铸造自己的 NFT         |
-| [如何开发 VS Code 插件](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/cross-platform/vscode-extension/)                     | 开发 AI 项目助手插件，支持模板生成、代码对话、多文件问答     |
-| [如何开发工业级 Qt 桌面应用](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/cross-platform/qt-industrial-hmi/)               | 用 Qt 构建工业级水泵监控 HMI 系统，实时数据、趋势图、报警    |
+### III. Fortgeschrittene Entwickler
 
-#### AI 能力附录
+#### Claude Code Kernkompetenzen
 
-| 章节                                                                                                                                      | 关键内容                                                |
-| :---------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------ |
-| [什么是 RAG 以及它如何工作](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/ai-advanced/rag-introduction/)                | 系统理解 RAG 原理与常见架构，为复杂应用提供知识检索基础 |
-| [中高级 RAG 与工作流编排：以 LangGraph 为例](https://datawhalechina.github.io/easy-vibe/zh-cn/stage-3/ai-advanced/langgraph-advanced-rag/) | 使用 LangGraph 等工具设计多步工作流与中高级 RAG 系统    |
+| Abschnitt | Wichtiger Inhalt |
+| :------ | :---------- |
+| [Erste Schritte mit Claude Code](https://datawhalechina.github.io/easy-vibe/en/stage-3/core-skills/basics/) | Installation, Einrichtung, Grundlagen und nuetzliche Befehle |
+| [Claude Code MCP-Leitfaden](https://datawhalechina.github.io/easy-vibe/en/stage-3/core-skills/mcp/) | Claude Code ueber MCP mit GitHub, Datenbanken, APIs und anderen Diensten verbinden |
+| [Claude Code Skills-Leitfaden](https://datawhalechina.github.io/easy-vibe/en/stage-3/core-skills/skills/) | Expertise in wiederverwendbare Skills verpacken, die du immer wieder nutzen kannst |
+| [Claude Code fuer langlaufende Aufgaben am Arbeiten halten](https://datawhalechina.github.io/easy-vibe/en/stage-3/core-skills/long-running-tasks/) | Langlaufende Aufgaben so gestalten, dass Coding-Tools weiterarbeiten, bis der Job erledigt ist |
+| [Claude Agent Teams-Leitfaden](https://datawhalechina.github.io/easy-vibe/en/stage-3/core-skills/agent-teams/) | Mehrere KI-Instanzen wie ein echtes Entwicklungsteam koordinieren |
+| [Claude Code Superpowers fuer engineering-grade Entwicklung](https://datawhalechina.github.io/easy-vibe/en/stage-3/core-skills/superpowers/) | KI helfen, engineering-grade Code mit TDD und Best Practices zu produzieren |
+| [Claude Code Workflow Best Practices](https://datawhalechina.github.io/easy-vibe/en/stage-3/core-skills/workflow/) | Best Practices fuer Refactoring, Code Review und taegliche Entwicklung |
+| [Claude Code Remote-Entwicklung auf Mobilgeraeten](https://datawhalechina.github.io/easy-vibe/en/stage-3/core-skills/mobile-development/) | Claude Code ueber den Desktop hinaus nutzen und einen produktiven Remote-Workflow auf Mobilgeraeten aufbauen |
+| [Claude Agent SDK vollstaendiger Leitfaden](https://datawhalechina.github.io/easy-vibe/en/stage-3/core-skills/claude-agent-sdk/) | Benutzerdefinierte Agenten-Workflows erstellen und Claude mit dem SDK in deine eigenen Tools integrieren |
+| [Vom Vibe-Coding zum Spec-Coding](https://datawhalechina.github.io/easy-vibe/en/stage-3/core-skills/spec-coding/) | Vom ad-hoc-Prompting zu einem strukturierteren, spezifikationsgesteuerten KI-Entwicklungsworkflow wechseln |
 
-### 📚 附录知识库
+#### Plattformuebergreifende Entwicklung
 
-> 涵盖 **9 大知识领域**、**80+ 交互式专题**，以动画和可视化组件帮助你直观理解从计算机底层到 AI 前沿的核心概念。
+| Abschnitt | Wichtiger Inhalt |
+| :------ | :---------- |
+| [Die richtige Plattform fuer deine App waehlen](https://datawhalechina.github.io/easy-vibe/en/stage-3/cross-platform/choose-platform/) | App-Formen vergleichen und die richtige Plattform basierend auf Nutzern, Szenarien und Bereitstellungszielen waehlen |
+| [WeChat-Mini-Programm erstellen](https://datawhalechina.github.io/easy-vibe/en/stage-3/cross-platform/wechat-miniprogram/) | Das Oekosystem verstehen und ein Frontend-Mini-Programm von der Vorlage bis zum Launch bereitstellen |
+| [WeChat-Mini-Programm mit Backend erstellen](https://datawhalechina.github.io/easy-vibe/en/stage-3/cross-platform/wechat-miniprogram-backend/) | Backend-Logik und Datenbanken hinzufuegen, um die vollstaendige Geschaeftsschleife abzuschliessen |
+| [Android-App erstellen](https://datawhalechina.github.io/easy-vibe/en/stage-3/cross-platform/android-app/) | Android-App-Entwicklung mit einem modernen nativen Workflow lernen |
+| [iOS-App erstellen](https://datawhalechina.github.io/easy-vibe/en/stage-3/cross-platform/ios-app/) | iOS-App-Entwicklung und die Konventionen des Apple-Oekosystems lernen |
+| [Lokale PWA-App erstellen](https://datawhalechina.github.io/easy-vibe/en/stage-3/cross-platform/pwa-local-app/) | Eine Website in eine echte App mit Offline-Unterstuetzung, Push und Installation umwandeln |
+| [Browser-KI-Assistenten-Erweiterung erstellen](https://datawhalechina.github.io/easy-vibe/en/stage-3/cross-platform/browser-ai-extension/) | Eine Chrome-Erweiterung erstellen, die jede Seite mit Cloud-APIs oder eingebauter KI zusammenfasst |
+| [Electron-Desktop-App erstellen](https://datawhalechina.github.io/easy-vibe/en/stage-3/cross-platform/electron-voice-to-text/) | Eine Sprache-zu-Text-Desktop-App mit Electron fuer drei Plattformen erstellen |
+| [Schnell ein NFT erstellen und praegen](https://datawhalechina.github.io/easy-vibe/en/stage-3/cross-platform/nft-minting/) | Einen Smart Contract von Grund auf schreiben, bereitstellen und dein eigenes NFT praegen |
+| [VS-Code-Erweiterung erstellen](https://datawhalechina.github.io/easy-vibe/en/stage-3/cross-platform/vscode-extension/) | Einen KI-Projektassistenten mit Vorlagen, Code-Chat und Multi-File-Q&A erstellen |
+| [Industrie-grade Qt-Desktop-App erstellen](https://datawhalechina.github.io/easy-vibe/en/stage-3/cross-platform/qt-industrial-hmi/) | Ein Echtzeit-Qt-HMI-System mit Trends, Alarmen und Ueberwachung erstellen |
+
+#### KI-Faehigkeiten Anhang
+
+| Abschnitt | Wichtiger Inhalt |
+| :------ | :---------- |
+| [Was ist RAG und wie funktioniert es](https://datawhalechina.github.io/easy-vibe/en/stage-3/ai-advanced/rag-introduction/) | Ein systematisches Verstaendnis von RAG-Prinzipien und haeufigen Architekturen aufbauen |
+| [Fortgeschrittene RAG-Workflows mit LangGraph](https://datawhalechina.github.io/easy-vibe/en/stage-3/ai-advanced/langgraph-advanced-rag/) | Multi-Step-Workflows und fortgeschrittenere RAG-Systeme entwerfen |
+
+### 📚 Anhang Wissensdatenbank
+
+> Mit **9 grossen Wissensbereichen** und **ueber 80 interaktiven Themen** hilft dieser Anhang durch Animation und visuelle Komponenten, Kernkonzepte von Informatik-Grundlagen bis zur KI-Frontier intuitiv zu verstehen.
 >
-> 👉 [查看完整附录](https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/) · [AI 能力词典](https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/ai-capability-dictionary)
+> 👉 [Vollstaendigen Anhang ansehen](https://datawhalechina.github.io/easy-vibe/en/appendix/)
 
-<table>
-  <tr>
-    <td valign="top" width="33%">
-      <strong>💻 计算机基础</strong><br><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/1-computer-fundamentals/transistor-to-cpu.html">从晶体管到 CPU</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/1-computer-fundamentals/operating-systems.html">操作系统</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/1-computer-fundamentals/data-encoding-storage.html">数据的编码、存储与传输</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/1-computer-fundamentals/computer-networks.html">网络：两台电脑如何对话</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/1-computer-fundamentals/data-structures.html">数据结构</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/1-computer-fundamentals/algorithm-thinking.html">算法思维入门</a>
-    </td>
-    <td valign="top" width="33%">
-      <strong>🔧 开发工具</strong><br><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/2-development-tools/git-version-control.html">Git：代码的时光机</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/2-development-tools/command-line-shell.html">命令行与 Shell 脚本</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/2-development-tools/package-managers.html">包管理器</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/2-development-tools/debugging-art/">调试的艺术</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/2-development-tools/regex.html">正则表达式</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/2-development-tools/environment-path.html">环境变量与 PATH</a>
-    </td>
-    <td valign="top" width="33%">
-      <strong>🌐 浏览器与前端</strong><br><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive.html">JavaScript 语言深入</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/3-browser-and-frontend/browser-as-os-rendering.html">浏览器渲染管道</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/3-browser-and-frontend/frontend-frameworks.html">前端框架对比</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/3-browser-and-frontend/graphics-animation.html">图形与动画</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/3-browser-and-frontend/web-performance.html">网页性能的度量与优化</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/3-browser-and-frontend/frontend-engineering.html">前端工程化全貌</a>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top" width="33%">
-      <strong>🖥️ 服务器与后端</strong><br><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/4-server-and-backend/http-protocol.html">HTTP 协议</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/4-server-and-backend/api-design.html">API 设计哲学</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/4-server-and-backend/auth-authorization.html">认证与授权体系</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/4-server-and-backend/concurrency-async.html">并发、异步与多线程</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/4-server-and-backend/message-queues.html">消息队列与事件驱动</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/4-server-and-backend/backend-layered-architecture.html">后端分层架构</a>
-    </td>
-    <td valign="top" width="33%">
-      <strong>📊 数据</strong><br><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/5-data/database-fundamentals.html">数据库原理与 SQL</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/5-data/database-fundamentals.html">数据库原理</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/5-data/data-tracking.html">数据埋点与用户行为采集</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/5-data/data-analysis.html">数据分析基础</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/5-data/ab-testing.html">A/B 测试与实验驱动</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/5-data/data-visualization.html">数据可视化与仪表盘</a>
-    </td>
-    <td valign="top" width="33%">
-      <strong>🏗️ 架构与系统设计</strong><br><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/6-architecture-and-system-design/monolith-to-microservices.html">从单体到微服务的演进</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/6-architecture-and-system-design/distributed-systems.html">分布式系统的挑战</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/6-architecture-and-system-design/high-availability.html">高可用与容灾</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/6-architecture-and-system-design/system-design-methodology.html">系统设计方法论</a>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top" width="33%">
-      <strong>☁️ 基础设施与运维</strong><br><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/7-infrastructure-and-operations/docker-containers.html">Docker 容器化</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/7-infrastructure-and-operations/kubernetes.html">Kubernetes 编排</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/7-infrastructure-and-operations/ci-cd.html">CI / CD 自动化</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/7-infrastructure-and-operations/dns-https.html">域名、DNS 与 HTTPS</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/7-infrastructure-and-operations/monitoring-logging.html">监控、日志与告警</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/7-infrastructure-and-operations/infrastructure-as-code.html">基础设施即代码</a>
-    </td>
-    <td valign="top" width="33%">
-      <strong>🤖 人工智能</strong><br><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/llm-principles.html">大语言模型的工作原理</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/transformer-attention.html">Transformer 与注意力机制</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/rag.html">RAG 架构</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/ai-agents.html">AI Agent 与工具调用</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/prompt-engineering.html">提示词工程</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/image-generation.html">图像生成原理</a>
-    </td>
-    <td valign="top" width="33%">
-      <strong>🎯 工程素养</strong><br><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/9-engineering-excellence/code-quality-refactoring.html">代码质量与重构</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/9-engineering-excellence/testing-strategies.html">测试策略</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/9-engineering-excellence/design-patterns.html">设计模式</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/9-engineering-excellence/security-thinking.html">安全思维与攻防基础</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/9-engineering-excellence/technical-writing.html">技术文档写作</a><br>
-      • <a href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/9-engineering-excellence/open-source-collaboration.html">开源协作</a>
-    </td>
-  </tr>
-</table>
+### 🎓 Weitere Kurse
 
-## 🛠️ 如何学习
+- [Hands-on Modern RL](#weitere-kurse)
+- [Learn Harness Engineering](#weitere-kurse)
 
-- 根据个人能力，选择性地阅读和实践相关章节，如果有问题欢迎 issue 提问。
+## 🛠️ Wie man lernt
 
-## 💻 本地启动本课件
+- Lies und praktiziere die Abschnitte, die deinem aktuellen Level entsprechen. Wenn du nicht weiterkommst, oeffne gerne ein Issue.
 
-### 现代方案
+## 💻 Lokal ausfuehren
 
-在 AI IDE 对话框（vscode、cursor、trae 等）中，输入下列提示词启动本课件：
+### Moderner Ansatz
 
-```
-请你帮我运行这个项目的本地服务
+In einem KI-IDE-Chatfenster wie VS Code, Cursor oder Trae kannst du einfach sagen:
+
+```text
+Bitte hilf mir, dieses Projekt lokal auszufuehren.
 ```
 
-### 旧方案
+### Klassischer Ansatz
 
-1. npm install
-2. npm run dev
-3. 打开浏览器访问 `http://localhost:3000` 即可查看。
+1. `npm install`
+2. `npm run dev`
+3. Oeffne `http://localhost:3000` in deinem Browser.
 
-## 🤝 参与贡献
+## Weitere Kurse
 
-- 如果你发现了一些问题，或者觉得任何可以改进本项目的地方，可以提 Issue 进行反馈。如果提完没有人回复你可以联系[保姆团队](https://github.com/datawhalechina/DOPMC/blob/main/OP.md)的同学进行反馈跟进~
-- 如果你想参与贡献本项目，可以提 Pull Request，如果提完没有人回复你可以联系[保姆团队](https://github.com/datawhalechina/DOPMC/blob/main/OP.md)的同学进行反馈跟进~
-- 如果你对 Datawhale 很感兴趣并想要发起一个新的项目，请按照[Datawhale 开源项目指南](https://github.com/datawhalechina/DOPMC/blob/main/GUIDE.md)进行操作即可~
+Unser Team hat auch weitere Kurse erstellt! Schau dir an:
 
-## 🙏 感谢每位贡献者
+[![Hands-on Modern RL](https://img.shields.io/badge/HANDS--ON_MODERN_RL-0052cc?style=for-the-badge)](https://github.com/walkinglabs/hands-on-modern-rl)
 
-- [散步-项目负责人](https://github.com/sanbuphy) (Datawhale成员)
-- 方可-指导老师（Datawhale成员, 清华大学）
-- [Yerim Kang](https://github.com/yerim25)（实践项目部分-清华大学）
-- [赵芷霖](https://github.com/ChileenZ)（实践项目部分-清华大学）
-- [李亦萱](https://yixuan20.github.io/)（页面美术设计-清华大学）
-- 刘思怡（实践项目部分-清华大学）
-- [刘丽欣](https://github.com/liulx25xx)（实践项目部分-清华大学）
-- AI Vibe Coding 101 内测群完整给建议体验的小伙伴们
+**Hands-on Modern RL**: Ein Open-Source-Hands-on-Lehrplan, der die Luecke von grundlegenden RL-Konzepten zu LLM-Alignment, RLVR und fortgeschrittenen Agenten-Systemen schliesst.
 
-### 特别感谢
+[![Learn Harness Engineering](https://img.shields.io/badge/LEARN_HARNESS_ENGINEERING-0052cc?style=for-the-badge)](https://github.com/walkinglabs/learn-harness-engineering/tree/main)
 
-- 感谢 [@Sm1les](https://github.com/Sm1les) 对本项目的帮助与支持
-- 感谢所有为本项目做出贡献的开发者们和支持点赞的朋友们 ❤️
+**Learn Harness Engineering**: Ein umfassender Leitfaden fuer Harness Engineering.
+
+## 🤝 Mitmachen & Mitwirkende
+
+- Wenn du ein Problem findest oder etwas siehst, das verbessert werden kann, oeffne gerne ein Issue. Wenn niemand antwortet, kannst du auch das [Datawhale-Supportteam](https://github.com/datawhalechina/DOPMC/blob/main/OP.md) kontaktieren.
+- Wenn du einen Beitrag leisten moechtest, oeffne einen Pull Request. Wenn niemand antwortet, kannst du auch das [Datawhale-Supportteam](https://github.com/datawhalechina/DOPMC/blob/main/OP.md) kontaktieren.
+- Wenn du ein neues Datawhale-Open-Source-Projekt starten moechtest, folge dem [Datawhale Open-Source-Projekt-Leitfaden](https://github.com/datawhalechina/DOPMC/blob/main/GUIDE.md).
+
+### 🙏 Mitwirkende
+
+- [Sanbu - Projektleitung](https://github.com/sanbuphy) (Datawhale-Mitglied)
+- Fang Ke - Mentor (Datawhale-Mitglied, Tsinghua-Universitaet)
+- [Yerim Kang](https://github.com/yerim25) (Praxisprojekte, Tsinghua-Universitaet)
+- [Zhilin Zhao](https://github.com/ChileenZ) (Praxisprojekte, Tsinghua-Universitaet)
+- [Yixuan Li](https://yixuan20.github.io/) (Visuelles Design, Tsinghua-Universitaet)
+- Siyi Liu (Praxisprojekte, Tsinghua-Universitaet)
+- [Lixin Liu](https://github.com/liulx25xx) (Praxisprojekte, Tsinghua-Universitaet)
+- Alle in der internen Testgruppe AI Vibe Coding 101, die Vorschlaege und Feedback geteilt haben
+
+### Besonderer Dank
+
+- Danke an [@Sm1les](https://github.com/Sm1les) fuer die Hilfe und Unterstuetzung bei diesem Projekt
+- Danke an alle Mitwirkenden und alle, die das Projekt mit Feedback und Sternen unterstuetzt haben ❤️
 
 <div align="center"> 
- 
- 
  <a href="https://www.star-history.com/#datawhalechina/easy-vibe&type=timeline&legend=top-left"> 
    <picture> 
      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=datawhalechina/easy-vibe&type=timeline&theme=dark&legend=top-left" /> 
@@ -455,24 +419,23 @@ Easy-Vibe zeigt dir, wie daraus ein echtes Produkt wird.
   </a>
 </div>
 
-## 📄 LICENSE
+## 📄 Lizenz
 
 <div align="center">
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
   <img
-    alt="知识共享许可协议"
+    alt="Creative Commons License"
     style="border-width:0"
     src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey"
   />
 </a>
 <br />
-本作品采用
+Dieses Werk ist lizenziert unter der
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-  知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议
-</a>
-进行许可。
+  Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+</a>.
 </div>
 
-## Star History
+## Stern-Historie
 
 [![Star History Chart](https://api.star-history.com/svg?repos=datawhalechina/easy-vibe&type=date&legend=top-left)](https://www.star-history.com/#datawhalechina/easy-vibe&type=date&legend=top-left)
