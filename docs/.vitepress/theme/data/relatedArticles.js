@@ -4,7 +4,7 @@
  * - value: 该文档底部相关文章卡片数组
  * 页面只负责按 key 读取并渲染，不在页面内重复维护映射数据。
  */
-export const relatedArticlesMap = {
+const rawRelatedArticlesMap = {
   'zh-cn/stage-1/learning-map': [
     {
       href: '/zh-cn/stage-1/ai-capabilities-through-games/',
@@ -178,3 +178,41 @@ export const relatedArticlesMap = {
     }
   ]
 }
+
+const supportedLocales = [
+  'zh-cn',
+  'en',
+  'zh-tw',
+  'ja-jp',
+  'ko-kr',
+  'es-es',
+  'fr-fr',
+  'de-de',
+  'ar-sa',
+  'vi-vn'
+]
+
+const getLocaleFromKey = (key) =>
+  supportedLocales.find((locale) => key.startsWith(`${locale}/`))
+
+const localizeArticleLinks = (items, locale) =>
+  items.map((item) => ({
+    ...item,
+    href: item.href.replace(/^\/zh-cn\/stage-1\//, `/${locale}/stage-1/`)
+  }))
+
+export const relatedArticlesMap = new Proxy(rawRelatedArticlesMap, {
+  get(target, prop) {
+    if (typeof prop !== 'string') return target[prop]
+    if (prop in target) return target[prop]
+
+    const locale = getLocaleFromKey(prop)
+    if (!locale || locale === 'zh-cn') return undefined
+
+    const fallbackKey = prop.replace(`${locale}/`, 'zh-cn/')
+    const fallbackItems = target[fallbackKey]
+    if (!fallbackItems) return undefined
+
+    return localizeArticleLinks(fallbackItems, locale)
+  }
+})

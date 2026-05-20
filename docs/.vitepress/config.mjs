@@ -1330,6 +1330,335 @@ const productManagerSidebar = [
   }
 ]
 
+const localizeSidebarLinks = (sidebar, locale) =>
+  sidebar.map((group) => ({
+    ...group,
+    items: group.items.map((item) => ({
+      ...item,
+      link: item.link.replace(/^\/(?:zh-cn|en|ko-kr)\//, `/${locale}/`)
+    }))
+  }))
+
+const stage1SidebarLabels = {
+  'ja-jp': [
+    {
+      text: 'はじめに',
+      items: ['学習ロードマップ', 'AI時代、話せればプログラミングできる']
+    },
+    {
+      text: 'プロダクトプロトタイプ実践',
+      items: [
+        'AIプログラミングツールを学ぶ',
+        '良いアイデアを見つける',
+        'プロトタイプを作る',
+        'AI能力を統合する',
+        '完全プロジェクト実践'
+      ]
+    },
+    {
+      text: '付録：ビジネス思考',
+      items: [
+        'プロダクト思考とソリューション設計',
+        'AI業界応用シナリオ参考（B向け）',
+        'AI消費者シナリオの着想参考（C向け）'
+      ]
+    },
+    {
+      text: '付録：ユーザー調査と需要検証',
+      items: [
+        'アイデアの見つけ方：初心者向けの3つの参考ソース',
+        'Double Diamond：正しいことを先に、次に正しく行う',
+        'Jobs to Be Doneでユーザーの本当の目的を見つける',
+        'The Mom Test：需要を検証するユーザーインタビュー法'
+      ]
+    },
+    {
+      text: '付録：技術的な解決策',
+      items: [
+        'コードでエラーが出たらどうするか',
+        '7つのAIプログラミングツール比較',
+        'デザインAgentとコーディングAgentでWebサイトを作る'
+      ]
+    }
+  ],
+  'zh-tw': [
+    {
+      text: '新手入門',
+      items: ['學習地圖', 'AI 時代，會說話就會程式設計']
+    },
+    {
+      text: '產品原型實戰',
+      items: [
+        '學會 AI 程式設計工具',
+        '找到好點子',
+        '搭建產品原型',
+        '接入 AI 能力',
+        '完整專案實戰'
+      ]
+    },
+    {
+      text: '附錄：業務思維',
+      items: [
+        '產品思維與方案設計',
+        'AI 產業應用場景參考（B 端）',
+        'AI 消費場景靈感參考（C 端）'
+      ]
+    },
+    {
+      text: '附錄：使用者研究與需求驗證',
+      items: [
+        '從哪裡找點子：3 種最適合新手的參考來源',
+        '雙鑽模型：先做對的事，再把事做對',
+        '用 Jobs to Be Done 找到使用者真正想完成的事',
+        'The Mom Test 使用者訪談法'
+      ]
+    },
+    {
+      text: '附錄：技術方案',
+      items: [
+        '寫程式碼時遇到錯誤怎麼辦',
+        '七款 AI 程式設計工具對比',
+        '用設計和程式設計 Agent 設計網站'
+      ]
+    }
+  ],
+  'es-es': [
+    {
+      text: 'Primeros pasos',
+      items: ['Ruta de aprendizaje', 'En la era de la IA, hablar es programar']
+    },
+    {
+      text: 'Práctica de prototipos de producto',
+      items: [
+        'Aprender herramientas de programación con IA',
+        'Encontrar buenas ideas',
+        'Construir un prototipo',
+        'Integrar capacidades de IA',
+        'Práctica de proyecto completo'
+      ]
+    },
+    {
+      text: 'Apéndice: pensamiento de negocio',
+      items: [
+        'Pensamiento de producto y diseño de soluciones',
+        'Escenarios de aplicación industrial de IA (B2B)',
+        'Inspiración para escenarios de consumo con IA (B2C)'
+      ]
+    },
+    {
+      text: 'Apéndice: investigación de usuarios y validación',
+      items: [
+        'Dónde encontrar ideas: 3 fuentes para principiantes',
+        'Double Diamond: primero lo correcto, luego hacerlo bien',
+        'Jobs to Be Done para descubrir lo que el usuario quiere lograr',
+        'The Mom Test: entrevistas para validar demanda'
+      ]
+    },
+    {
+      text: 'Apéndice: soluciones técnicas',
+      items: [
+        'Qué hacer si aparecen errores al programar',
+        'Comparación de siete herramientas de programación con IA',
+        'Diseñar sitios web con agentes de diseño y programación'
+      ]
+    }
+  ],
+  'fr-fr': [
+    {
+      text: 'Bien démarrer',
+      items: [
+        "Parcours d'apprentissage",
+        "À l'ère de l'IA, savoir parler, c'est savoir programmer"
+      ]
+    },
+    {
+      text: 'Pratique de prototype produit',
+      items: [
+        'Apprendre les outils de programmation IA',
+        'Trouver une bonne idée',
+        'Créer un prototype produit',
+        'Intégrer des capacités IA',
+        'Projet complet en conditions réelles'
+      ]
+    },
+    {
+      text: 'Annexe : pensée métier',
+      items: [
+        'Pensée produit et conception de solutions',
+        "Scénarios d'application IA en entreprise (B2B)",
+        "Inspirations de scénarios consommateurs avec l'IA (B2C)"
+      ]
+    },
+    {
+      text: 'Annexe : recherche utilisateur et validation',
+      items: [
+        'Où trouver des idées : 3 sources pour débutants',
+        "Double Diamond : faire d'abord la bonne chose, puis bien la faire",
+        'Jobs to Be Done pour trouver ce que les utilisateurs veulent accomplir',
+        'The Mom Test : entretiens utilisateur pour valider la demande'
+      ]
+    },
+    {
+      text: 'Annexe : solutions techniques',
+      items: [
+        "Que faire en cas d'erreur de code",
+        'Comparaison de sept outils de programmation IA',
+        'Concevoir un site avec des agents de design et de programmation'
+      ]
+    }
+  ],
+  'de-de': [
+    {
+      text: 'Einstieg',
+      items: ['Lernpfad', 'Im KI-Zeitalter reicht Reden zum Programmieren']
+    },
+    {
+      text: 'Produktprototyp-Praxis',
+      items: [
+        'KI-Programmierwerkzeuge lernen',
+        'Gute Ideen finden',
+        'Produktprototyp erstellen',
+        'KI-Fähigkeiten integrieren',
+        'Vollständiges Projektpraktikum'
+      ]
+    },
+    {
+      text: 'Anhang: Geschäftsdenken',
+      items: [
+        'Produktdenken und Lösungsentwurf',
+        'KI-Anwendungsszenarien in Branchen (B2B)',
+        'Inspiration für KI-Konsumszenarien (B2C)'
+      ]
+    },
+    {
+      text: 'Anhang: Nutzerforschung und Validierung',
+      items: [
+        'Wo findet man Ideen: 3 Quellen für Einsteiger',
+        'Double Diamond: Erst das Richtige tun, dann richtig tun',
+        'Mit Jobs to Be Done erkennen, was Nutzer wirklich erreichen wollen',
+        'The Mom Test: Nutzerinterviews zur Nachfragevalidierung'
+      ]
+    },
+    {
+      text: 'Anhang: technische Lösungen',
+      items: [
+        'Was tun bei Fehlern im Code',
+        'Vergleich von sieben KI-Programmierwerkzeugen',
+        'Websites mit Design- und Programmier-Agenten entwerfen'
+      ]
+    }
+  ],
+  'ar-sa': [
+    {
+      text: 'البدء',
+      items: [
+        'خريطة التعلم',
+        'في عصر الذكاء الاصطناعي، من يستطيع التحدث يستطيع البرمجة'
+      ]
+    },
+    {
+      text: 'تطبيق نموذج المنتج الأولي',
+      items: [
+        'تعلم أدوات البرمجة بالذكاء الاصطناعي',
+        'إيجاد فكرة جيدة',
+        'بناء نموذج أولي للمنتج',
+        'دمج قدرات الذكاء الاصطناعي',
+        'مشروع عملي كامل'
+      ]
+    },
+    {
+      text: 'ملحق: التفكير التجاري',
+      items: [
+        'التفكير المنتجي وتصميم الحلول',
+        'سيناريوهات تطبيق الذكاء الاصطناعي في الصناعة (B2B)',
+        'إلهام سيناريوهات المستهلك بالذكاء الاصطناعي (B2C)'
+      ]
+    },
+    {
+      text: 'ملحق: بحث المستخدم والتحقق من الطلب',
+      items: [
+        'من أين تجد الأفكار: 3 مصادر مناسبة للمبتدئين',
+        'نموذج الماس المزدوج: افعل الشيء الصحيح أولاً ثم افعله بشكل صحيح',
+        'استخدم Jobs to Be Done لمعرفة ما يريد المستخدم إنجازه',
+        'The Mom Test: مقابلات المستخدم للتحقق من الطلب'
+      ]
+    },
+    {
+      text: 'ملحق: حلول تقنية',
+      items: [
+        'ماذا تفعل عند ظهور أخطاء في الكود',
+        'مقارنة سبع أدوات برمجة بالذكاء الاصطناعي',
+        'تصميم المواقع باستخدام وكلاء التصميم والبرمجة'
+      ]
+    }
+  ],
+  'vi-vn': [
+    {
+      text: 'Nhập môn',
+      items: ['Lộ trình học tập', 'Thời đại AI, biết nói là biết lập trình']
+    },
+    {
+      text: 'Thực hành nguyên mẫu sản phẩm',
+      items: [
+        'Học công cụ lập trình AI',
+        'Tìm ý tưởng tốt',
+        'Xây dựng nguyên mẫu sản phẩm',
+        'Tích hợp năng lực AI',
+        'Thực chiến dự án hoàn chỉnh'
+      ]
+    },
+    {
+      text: 'Phụ lục: tư duy kinh doanh',
+      items: [
+        'Tư duy sản phẩm và thiết kế giải pháp',
+        'Tham khảo kịch bản ứng dụng AI trong ngành (B2B)',
+        'Gợi ý kịch bản tiêu dùng với AI (B2C)'
+      ]
+    },
+    {
+      text: 'Phụ lục: nghiên cứu người dùng và xác thực nhu cầu',
+      items: [
+        'Tìm ý tưởng ở đâu: 3 nguồn phù hợp cho người mới',
+        'Double Diamond: làm đúng việc trước, rồi làm đúng cách',
+        'Dùng Jobs to Be Done để tìm điều người dùng thật sự muốn hoàn thành',
+        'The Mom Test: phỏng vấn người dùng để xác thực nhu cầu'
+      ]
+    },
+    {
+      text: 'Phụ lục: giải pháp kỹ thuật',
+      items: [
+        'Làm gì khi gặp lỗi trong code',
+        'So sánh bảy công cụ lập trình AI',
+        'Thiết kế website bằng agent thiết kế và agent lập trình'
+      ]
+    }
+  ]
+}
+
+const applySidebarLabels = (sidebar, locale) => {
+  const labels = stage1SidebarLabels[locale]
+  if (!labels) return sidebar
+
+  return sidebar.map((group, groupIndex) => ({
+    ...group,
+    text: labels[groupIndex]?.text ?? group.text,
+    items: group.items.map((item, itemIndex) => ({
+      ...item,
+      text: labels[groupIndex]?.items[itemIndex] ?? item.text
+    }))
+  }))
+}
+
+const getStage1Sidebar = (locale) => {
+  if (locale === 'zh-cn') return productManagerSidebar
+  if (locale === 'en') return productManagerSidebarEn
+  if (locale === 'ko-kr') return productManagerSidebarKo
+  return applySidebarLabels(
+    localizeSidebarLinks(productManagerSidebarEn, locale),
+    locale
+  )
+}
+
 export default defineConfig({
   markdown: {
     config: (md) => {
@@ -2427,8 +2756,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           { text: 'ホーム', link: '/ja-jp/' },
           {
             text: '初心者とPM',
-            link: '/zh-cn/stage-1/learning-map/',
-            activeMatch: '/zh-cn/stage-1/'
+            link: '/ja-jp/stage-1/learning-map/',
+            activeMatch: '/ja-jp/stage-1/'
           },
           {
             text: 'フルスタック開発',
@@ -2446,8 +2775,9 @@ Sitemap: ${siteUrl}/sitemap.xml
             activeMatch: '/zh-cn/appendix/'
           }
         ],
-        // TODO: Add Japanese sidebar when content is ready
-        sidebar: {}
+        sidebar: {
+          '/ja-jp/stage-1/': getStage1Sidebar('ja-jp')
+        }
       }
     },
     'zh-tw': {
@@ -2478,8 +2808,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           { text: '首頁', link: '/zh-tw/' },
           {
             text: '新手與產品原型',
-            link: '/zh-cn/stage-1/learning-map/',
-            activeMatch: '/zh-cn/stage-1/'
+            link: '/zh-tw/stage-1/learning-map/',
+            activeMatch: '/zh-tw/stage-1/'
           },
           {
             text: '初中級開發',
@@ -2497,7 +2827,9 @@ Sitemap: ${siteUrl}/sitemap.xml
             activeMatch: '/zh-cn/appendix/'
           }
         ],
-        sidebar: {}
+        sidebar: {
+          '/zh-tw/stage-1/': getStage1Sidebar('zh-tw')
+        }
       }
     },
     'ko-kr': {
@@ -2580,8 +2912,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           { text: 'Inicio', link: '/es-es/' },
           {
             text: 'Principiante y PM',
-            link: '/zh-cn/stage-1/learning-map/',
-            activeMatch: '/zh-cn/stage-1/'
+            link: '/es-es/stage-1/learning-map/',
+            activeMatch: '/es-es/stage-1/'
           },
           {
             text: 'Desarrollo Full Stack',
@@ -2599,7 +2931,9 @@ Sitemap: ${siteUrl}/sitemap.xml
             activeMatch: '/zh-cn/appendix/'
           }
         ],
-        sidebar: {}
+        sidebar: {
+          '/es-es/stage-1/': getStage1Sidebar('es-es')
+        }
       }
     },
     'fr-fr': {
@@ -2630,8 +2964,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           { text: 'Accueil', link: '/fr-fr/' },
           {
             text: 'Débutant & PM',
-            link: '/zh-cn/stage-1/learning-map/',
-            activeMatch: '/zh-cn/stage-1/'
+            link: '/fr-fr/stage-1/learning-map/',
+            activeMatch: '/fr-fr/stage-1/'
           },
           {
             text: 'Développement Full Stack',
@@ -2649,7 +2983,9 @@ Sitemap: ${siteUrl}/sitemap.xml
             activeMatch: '/zh-cn/appendix/'
           }
         ],
-        sidebar: {}
+        sidebar: {
+          '/fr-fr/stage-1/': getStage1Sidebar('fr-fr')
+        }
       }
     },
     'de-de': {
@@ -2680,8 +3016,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           { text: 'Start', link: '/de-de/' },
           {
             text: 'Anfänger & PM',
-            link: '/zh-cn/stage-1/learning-map/',
-            activeMatch: '/zh-cn/stage-1/'
+            link: '/de-de/stage-1/learning-map/',
+            activeMatch: '/de-de/stage-1/'
           },
           {
             text: 'Full Stack Entwicklung',
@@ -2699,7 +3035,9 @@ Sitemap: ${siteUrl}/sitemap.xml
             activeMatch: '/zh-cn/appendix/'
           }
         ],
-        sidebar: {}
+        sidebar: {
+          '/de-de/stage-1/': getStage1Sidebar('de-de')
+        }
       }
     },
     'ar-sa': {
@@ -2730,8 +3068,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           { text: 'الرئيسية', link: '/ar-sa/' },
           {
             text: 'مبتدأ & PM',
-            link: '/zh-cn/stage-1/learning-map/',
-            activeMatch: '/zh-cn/stage-1/'
+            link: '/ar-sa/stage-1/learning-map/',
+            activeMatch: '/ar-sa/stage-1/'
           },
           {
             text: 'تطوير Full Stack',
@@ -2749,7 +3087,9 @@ Sitemap: ${siteUrl}/sitemap.xml
             activeMatch: '/zh-cn/appendix/'
           }
         ],
-        sidebar: {}
+        sidebar: {
+          '/ar-sa/stage-1/': getStage1Sidebar('ar-sa')
+        }
       }
     },
     'vi-vn': {
@@ -2781,8 +3121,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           { text: 'Trang chủ', link: '/vi-vn/' },
           {
             text: 'Người mới & PM',
-            link: '/zh-cn/stage-1/learning-map/',
-            activeMatch: '/zh-cn/stage-1/'
+            link: '/vi-vn/stage-1/learning-map/',
+            activeMatch: '/vi-vn/stage-1/'
           },
           {
             text: 'Phát triển Full Stack',
@@ -2800,7 +3140,9 @@ Sitemap: ${siteUrl}/sitemap.xml
             activeMatch: '/zh-cn/appendix/'
           }
         ],
-        sidebar: {}
+        sidebar: {
+          '/vi-vn/stage-1/': getStage1Sidebar('vi-vn')
+        }
       }
     }
   }

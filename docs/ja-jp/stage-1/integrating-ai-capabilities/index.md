@@ -8,7 +8,7 @@ import { relatedArticlesMap } from '@theme/data/relatedArticles'
 
 const duration = '約 <strong>1 日</strong>'
 const relatedArticles =
-  relatedArticlesMap['zh-cn/stage-1/integrating-ai-capabilities'] ?? []
+  relatedArticlesMap['ja-jp/stage-1/integrating-ai-capabilities'] ?? []
 </script>
 
 # 初級四：プロトタイプに AI 能力を注入する

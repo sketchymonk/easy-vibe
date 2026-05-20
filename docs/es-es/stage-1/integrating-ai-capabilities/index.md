@@ -8,7 +8,7 @@ import { relatedArticlesMap } from '@theme/data/relatedArticles'
 
 const duration = 'aprox. <strong>1 dia</strong>'
 const relatedArticles =
-  relatedArticlesMap['zh-cn/stage-1/integrating-ai-capabilities'] ?? []
+  relatedArticlesMap['es-es/stage-1/integrating-ai-capabilities'] ?? []
 </script>
 
 # Nivel inicial 4: Incorporar capacidades de IA al prototipo

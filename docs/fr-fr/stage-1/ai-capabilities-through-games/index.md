@@ -14,7 +14,7 @@ import { relatedArticlesMap } from '@theme/data/relatedArticles'
 
 const duration = 'Environ <strong>4 heures</strong>, réalisables en plusieurs sessions'
 const relatedArticles =
-  relatedArticlesMap['zh-cn/stage-1/ai-capabilities-through-games'] ?? []
+  relatedArticlesMap['fr-fr/stage-1/ai-capabilities-through-games'] ?? []
 </script>
 
 ## Introduction du chapitre

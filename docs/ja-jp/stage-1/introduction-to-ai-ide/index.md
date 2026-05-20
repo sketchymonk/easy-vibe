@@ -12,7 +12,7 @@ import { relatedArticlesMap } from '@theme/data/relatedArticles'
 
 const duration = '約 <strong>1 日</strong>、複数回に分けても可'
 const relatedArticles =
-  relatedArticlesMap['zh-cn/stage-1/introduction-to-ai-ide'] ?? []
+  relatedArticlesMap['ja-jp/stage-1/introduction-to-ai-ide'] ?? []
 </script>
 
 <ChapterIntroduction :duration="duration" :tags="['ローカル開発環境構築', 'IDE と AI IDE', '効率的な開発テクニック']" coreOutput="1つの自作ミニゲーム" expectedOutput="Trae を使用して制作">

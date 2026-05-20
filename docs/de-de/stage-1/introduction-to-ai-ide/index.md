@@ -12,7 +12,7 @@ import { relatedArticlesMap } from '@theme/data/relatedArticles'
 
 const duration = 'ca. <strong>1 Tag</strong>, in mehreren Sitzungen moeglich'
 const relatedArticles =
-  relatedArticlesMap['zh-cn/stage-1/introduction-to-ai-ide'] ?? []
+  relatedArticlesMap['de-de/stage-1/introduction-to-ai-ide'] ?? []
 </script>
 
 <ChapterIntroduction :duration="duration" :tags="['Lokale Entwicklungsumgebung', 'IDE und AI IDE', 'Trae', 'Agent-Entwicklung']" coreOutput="1 selbst erstelltes Spiel" expectedOutput="Ein lokal laufendes Snake-Spiel">
