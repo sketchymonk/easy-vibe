@@ -81,7 +81,7 @@ We need Android Studio to provide the Android SDK and emulator required for runn
 
 **Special reminder for beginners:**
 
-Although modern versions of Android Studio have greatly simplified configuration, it still depends on the **JDK (Java Development Kit)** under the hood. If this is your first time doing development, or if you encounter errors related to environment variables or SDK configuration during installation, do not panic. You can refer to this detailed setup guide: [Android Studio2024版本安装环境SDK、Gradle配置](https://blog.csdn.net/keiraee/article/details/142321644?ops_request_misc=elastic_search_misc&request_id=a2b858d1f665095c53afa9114ad8864d&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-142321644-null-null.142^v102^pc_search_result_base4&utm_term=android%20studio%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE&spm=1018.2226.3001.4187)
+Although modern versions of Android Studio have greatly simplified configuration, it still depends on the **JDK (Java Development Kit)** under the hood. If this is your first time doing development, or if you encounter errors related to environment variables or SDK configuration during installation, do not panic. You can refer to this detailed setup guide: [Android Studio 2024 setup: SDK and Gradle configuration](https://blog.csdn.net/keiraee/article/details/142321644?ops_request_misc=elastic_search_misc&request_id=a2b858d1f665095c53afa9114ad8864d&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-142321644-null-null.142^v102^pc_search_result_base4&utm_term=android%20studio%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE&spm=1018.2226.3001.4187)
 
 ![](../../../../zh-cn/stage-3/cross-platform/android-app/images/image6.png)
 
@@ -654,7 +654,7 @@ Under the `Production` menu, click `Create new release`, upload your `.aab` file
 
 ![](../../../../zh-cn/stage-3/cross-platform/android-app/images/image64.png)
 
-_If you have already completed developer account registration, this video tutorial can guide you through the rest of the process:_ [Android应用上传GooglePlay谷歌市场全流程教程](https://www.bilibili.com/video/BV16REQzGEnk/?share_source=weixin&vd_source=b42f227a4f2d413fbde18499d83227cf)
+_If you have already completed developer account registration, this video tutorial can guide you through the rest of the process:_ [Full workflow: uploading an Android app to Google Play](https://www.bilibili.com/video/BV16REQzGEnk/?share_source=weixin&vd_source=b42f227a4f2d413fbde18499d83227cf)
 
 # 7 Final Notes
 
@@ -674,6 +674,6 @@ I am really looking forward to your next creation. Keep going!
 
 # References
 
-CSDN: [（2024.03.04）如何打包Android Studio项目？](https://blog.csdn.net/GenuineMonster/article/details/136443130?ops_request_misc=&request_id=&biz_id=102&utm_term=android%20studio%20%E6%89%93%E5%8C%85%20APK%20%E5%B9%B6%E5%88%86%E4%BA%AB&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-136443130.142^v102^pc_search_result_base4&spm=1018.2226.3001.4187)
+CSDN: [How to package/build an Android Studio project (2024-03-04)](https://blog.csdn.net/GenuineMonster/article/details/136443130?ops_request_misc=&request_id=&biz_id=102&utm_term=android%20studio%20%E6%89%93%E5%8C%85%20APK%20%E5%B9%B6%E5%88%86%E4%BA%AB&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-136443130.142^v102^pc_search_result_base4&spm=1018.2226.3001.4187)
 
-CSDN: [Android Studio安装及配置](https://blog.csdn.net/Changersh/article/details/149838228?ops_request_misc=&request_id=&biz_id=102&utm_term=android%20studio%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-149838228.142^v102^pc_search_result_base4&spm=1018.2226.3001.4187)
+CSDN: [Android Studio installation and configuration](https://blog.csdn.net/Changersh/article/details/149838228?ops_request_misc=&request_id=&biz_id=102&utm_term=android%20studio%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-149838228.142^v102^pc_search_result_base4&spm=1018.2226.3001.4187)

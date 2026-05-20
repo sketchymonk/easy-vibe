@@ -1,3 +1,7 @@
+---
+title: 'Beginner 2: Learn AI Coding Tools'
+description: 'Move from web-based AI coding to local development: understand IDE vs AI IDE, build a snake game with Trae, and learn practical AI collaboration tips.'
+---
 
 # Beginner Level 2: Learn AI Programming Tools
 

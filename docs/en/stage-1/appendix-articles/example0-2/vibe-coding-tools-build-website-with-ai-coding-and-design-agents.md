@@ -1,3 +1,8 @@
+---
+title: 'Build A Website With Design + Coding Agents'
+description: 'From idea to launch: coordinate a design agent to produce visuals, then use a coding agent to turn it into a working website with a reusable workflow.'
+---
+
 # Designing Websites with Design and Programming Agents
 
 ## Chapter Introduction

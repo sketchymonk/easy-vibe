@@ -1,3 +1,8 @@
+---
+title: 'Comparison Of 7 AI Coding Tools'
+description: 'A hands-on benchmark of popular Web Vibe Coding platforms using one unified task, covering beginner-friendliness, code control, and deployment.'
+---
+
 # Seven AI Programming Tools Comparison
 
 ## Chapter Introduction

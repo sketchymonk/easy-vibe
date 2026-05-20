@@ -80,14 +80,22 @@ function mdPathToUrl(mdPath, locale) {
   let urlPath = mdPath.replace(/\.md$/, '')
 
   // 如果是 index.md，只保留目录
+  let isIndex = false
   if (urlPath.endsWith('/index')) {
     urlPath = urlPath.slice(0, -6)
+    isIndex = true
   } else if (urlPath === 'index') {
     urlPath = ''
+    isIndex = true
   }
 
   // 构建完整 URL
-  return `${siteUrl}/${locale}/${urlPath}${urlPath ? '/' : ''}`
+  // VitePress "clean URLs" typically map:
+  // - index pages to trailing-slash paths: /foo/
+  // - non-index pages to non-trailing-slash paths: /foo/bar
+  // Having a trailing slash for non-index pages can lead to 404 on static hosts.
+  const suffix = isIndex ? '/' : ''
+  return `${siteUrl}/${locale}/${urlPath}${suffix}`
 }
 
 function getGitLastModified(filePath) {

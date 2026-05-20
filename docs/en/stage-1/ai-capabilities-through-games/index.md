@@ -1,3 +1,8 @@
+---
+title: 'Beginner 1: In The AI Era, Talking Is Programming'
+description: 'Build an AI-native snake game through conversation, then generalize the workflow to create your own mini game or demo.'
+---
+
 # Primary 1: AI Era, If You Can Speak, You Can Code
 
 This is a **project-based learning** tutorial. We encourage you to follow the steps one by one and try to reproduce the results.

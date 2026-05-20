@@ -9,7 +9,7 @@ import { withBase } from 'vitepress'
 const WELCOME_SEEN_KEY = 'easy-vibe-welcome-seen'
 
 onMounted(() => {
-  // 语言映射：浏览器语言代码 -> 网站路径
+  // Language map: browser language code -> site path
   const langMap = {
     'zh': '/zh-cn/',
     'zh-cn': '/zh-cn/',
@@ -34,14 +34,14 @@ onMounted(() => {
     'vi-vn': '/vi-vn/'
   }
 
-  // 获取浏览器语言
+  // Get browser language
   const browserLang = navigator.language.toLowerCase()
   const browserLangShort = browserLang.split('-')[0]
 
-  // 确定目标语言
+  // Resolve target language
   let targetLang = langMap[browserLang] || langMap[browserLangShort]
 
-  // 如果没有匹配的语言，默认使用中文
+  // Fallback when no match
   if (!targetLang) {
     targetLang = '/zh-cn/'
   }
@@ -61,8 +61,8 @@ onMounted(() => {
     return
   }
 
-  // 立即跳转，不显示任何内容
-  // 使用 withBase 自动处理 base 路径（根据 config.mjs 中的配置）
+  // Redirect immediately without rendering content.
+  // Use withBase to handle base path (see config.mjs).
   window.location.replace(targetPath)
 })
 </script>

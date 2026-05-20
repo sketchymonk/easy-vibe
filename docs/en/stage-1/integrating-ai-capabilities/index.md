@@ -452,7 +452,7 @@ curl -X POST https://ark.cn-beijing.volces.com/api/v3/images/generations \
   -H "Authorization: Bearer xxxxxxx" \
   -d '{
     "model": "doubao-seedream-4-5-251128",
-    "prompt": "将图1的服装换为图2的服装",
+    "prompt": "Replace the outfit in image 1 with the outfit in image 2",
     "image": ["https://ark-project.tos-cn-beijing.volces.com/doc_image/seedream4_imagesToimage_1.png", "https://ark-project.tos-cn-beijing.volces.com/doc_image/seedream4_imagesToimage_2.png"],
     "sequential_image_generation": "disabled",
     "response_format": "url",

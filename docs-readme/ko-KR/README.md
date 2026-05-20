@@ -145,6 +145,7 @@ Easy-Vibe는 그것을 실제 제품으로 만드는 방법을 가르칩니다.
 
 ## 🔥 소식
 
+- **[2026-05-20]** 🌍 **Stage 1 다국어 커버리지 완료**: Stage 1 은 지원되는 모든 언어(zh-cn, en, zh-tw, ja-jp, ko-kr, es-es, fr-fr, de-de, ar-sa, vi-vn)에서 완전하게 제공됩니다. 내비게이션/빌드 검증을 통해 404 를 방지했습니다.
 - **[2026-03-29]** ✨ **Vibe 스토리 공개 및 실제 사용자 여정으로 업그레이드**: 홈페이지에 인터랙티브 스토리 캐러셀과 전용 스토리 페이지를 추가하고, 시골 초등학교 교사, 대학생, 고등학교 IT 교사, 트럭 운전사의 실제 사용자 스토리 4편으로 교체했습니다. [👉 스토리 보기](https://datawhalechina.github.io/easy-vibe/zh-cn/vibe-stories/story-1.html)
 - **[2026-03-26]** 🚀 **단계 2 실습 대규모 업데이트**: SaaS 캡스톤 프로젝트 "[첫 번째 SaaS 풀스택 앱: 카피라이팅 생성기 웹사이트](https://datawhalechina.github.io/easy-vibe/en/stage-2/assignments/fullstack-app/)"를 완료하고 "[Stripe 및 결제 시스템 통합 방법](https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/stripe-payment/)" 섹션을 대폭 확장했으며, 멀티 프로덕트 UI 및 위챗 미니 프로그램 백엔드 워크플로우 핵심 콘텐츠를 추가했습니다.
 - **[2026-03-25]** 📚 **새로운 부록: 사용자 연구 및 요구사항 검증**: 아이디어 소싱, 더블 다이아몬드 모델, Jobs to Be Done, The Mom Test를 다루는 4편의 새로운 글을 추가하여 초보자가 제품 아이디어를 발견하고 검증하는 데 도움을 줍니다. [👉 부록 읽기](https://datawhalechina.github.io/easy-vibe/en/appendix/)
