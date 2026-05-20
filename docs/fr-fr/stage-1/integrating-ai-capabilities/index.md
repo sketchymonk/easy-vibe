@@ -58,7 +58,7 @@ Concrètement, vous devez maîtriser les éléments clés suivants :
 6. **Gestion des erreurs** : savoir comment diagnostiquer et résoudre les problèmes (API Key incorrecte, requêtes trop fréquentes, etc.)
 
 ::: info ℹ️ Qu'est-ce qu'une API
-Pour une explication plus approfondie des API, consultez l'annexe : [Introduction aux API](/fr-fr/appendix/4-server-and-backend/api-intro).
+Pour une explication plus approfondie des API, consultez l'annexe : [Introduction aux API](/zh-cn/appendix/4-server-and-backend/api-intro).
 
 ::: warning 🔐 **Consignes de sécurité des API**
 L'API Key est votre « passe » pour accéder aux services IA. C'est une chaîne de caractères de type mot de passe, utilisée pour l'authentification et la facturation.
@@ -93,7 +93,7 @@ Une fois ces concepts maîtrisés, vous découvrirez que le processus est le mê
 Dans la section 1.2, vous avez déjà créé un prototype interactif. Ce que nous allons faire maintenant, c'est transformer les « fonctionnalités qui ressemblent à de l'IA » en véritables capacités : <strong>quand l'utilisateur clique sur un bouton, le prototype envoie une requête à un service IA externe et affiche le texte renvoyé.</strong>
 
 ::: info ℹ️ Pour aller plus loin sur les principes
-Si vous voulez en savoir plus sur les principes, consultez l'annexe : [Introduction aux grands modèles de langage (LLM)](/fr-fr/appendix/8-artificial-intelligence/llm-principles).
+Si vous voulez en savoir plus sur les principes, consultez l'annexe : [Introduction aux grands modèles de langage (LLM)](/zh-cn/appendix/8-artificial-intelligence/llm-principles).
 ::: details Pour en savoir plus : Qu'est-ce que DeepSeek ?
 
 **Hangzhou DeepSeek Artificial Intelligence Basic Technology Research Co., Ltd.**, commercialisée sous le nom de DeepSeek, est une <strong>entreprise chinoise d'intelligence artificielle (IA) qui développe des grands modèles de langage (LLM)</strong>. DeepSeek est basée à Hangzhou, dans la province du Zhejiang, et est détenue et financée par le fonds quantitatif chinois High-Flyer. DeepSeek a été fondée en juillet 2023 par Liang Wenfeng, cofondateur de High-Flyer, qui est également PDG des deux entreprises. L'entreprise a lancé son chatbot éponyme et son modèle DeepSeek-R1 en janvier 2025.
@@ -219,7 +219,7 @@ Pour plus d'informations, consultez la [documentation de l'interface compatible 
 # 3. Intégrer l'API de conversion image-texte : Qwen3 VL
 
 ::: info ℹ️ Pour aller plus loin sur les principes
-Si vous voulez en savoir plus sur les principes, consultez l'annexe : [Introduction aux modèles de langage visuel (VLM)](/fr-fr/appendix/8-artificial-intelligence/multimodal-models).
+Si vous voulez en savoir plus sur les principes, consultez l'annexe : [Introduction aux modèles de langage visuel (VLM)](/zh-cn/appendix/8-artificial-intelligence/multimodal-models).
 
 ::: details Pour en savoir plus : Qu'est-ce que Qwen3 VL ?
 
@@ -369,7 +369,7 @@ Résultat final :
 Dans les parties précédentes, nous avons principalement traité des tâches liées au texte. Nous allons maintenant essayer d'intégrer la génération d'images, en prenant en charge la génération d'images à partir de descriptions textuelles ou la modification d'images.
 
 ::: info ℹ️ Pour aller plus loin sur les principes
-Si vous voulez en savoir plus sur les principes, consultez l'annexe : [Introduction à la génération d'images](/fr-fr/appendix/8-artificial-intelligence/image-generation).
+Si vous voulez en savoir plus sur les principes, consultez l'annexe : [Introduction à la génération d'images](/zh-cn/appendix/8-artificial-intelligence/image-generation).
 
 ::: details Pour en savoir plus : Qu'est-ce que [Seedream Jimeng](https://seed.bytedance.com/en/seedream4_5) ?
 

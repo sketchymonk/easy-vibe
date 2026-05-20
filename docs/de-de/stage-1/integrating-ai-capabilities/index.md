@@ -58,7 +58,7 @@ Konkret müssen Sie folgende Kernelemente beherrschen:
 6. **Fehlerbehandlung**: Wissen, wie man Probleme diagnostiziert, wenn etwas schiefgeht (falscher API Key, zu häufige Anfragen etc.)
 
 ::: info Was ist eine API?
-Eine ausführlichere Erklärung finden Sie im Anhang: [API-Einführung](/de-de/appendix/4-server-and-backend/api-intro).
+Eine ausführlichere Erklärung finden Sie im Anhang: [API-Einführung](/zh-cn/appendix/4-server-and-backend/api-intro).
 
 ::: warning API-Sicherheitshinweise
 API Key ist Ihr "Ausweis" für AI-Dienst-Anfragen &ndash; eine Passwort-Zeichenkette zur Authentifizierung und Abrechnung.
@@ -93,7 +93,7 @@ Mit diesem Verständnis werden Sie feststellen: Ob Text- oder Bildmodell &ndash;
 In "1.2 Prototyp erstellen" haben Sie bereits einen interaktiven Prototypen erstellt. Als Nächstes verwandeln wir die "AI-ähnlichen Funktionen" im Prototyp in echte Fähigkeiten: **Wenn der Nutzer auf den Button klickt, sendet der Prototyp eine Anfrage an einen externen AI-Dienst und zeigt den zurückgegebenen Text an.**
 
 ::: info Prinzip-Erweiterung
-Wenn Sie mehr über die Prinzipien erfahren möchten, siehe Anhang: [Große Sprachmodelle (LLM) Einführung](/de-de/appendix/8-artificial-intelligence/llm-principles).
+Wenn Sie mehr über die Prinzipien erfahren möchten, siehe Anhang: [Große Sprachmodelle (LLM) Einführung](/zh-cn/appendix/8-artificial-intelligence/llm-principles).
 ::: details Mehr erfahren: Was ist DeepSeek?
 
 **Hangzhou DeepSeek Artificial Intelligence Basic Technology Research Co., Ltd.**, unter dem Handelsnamen DeepSeek, ist ein **chinesisches AI-Unternehmen, das große Sprachmodelle (LLMs) entwickelt**. DeepSeek hat seinen Hauptsitz in Hangzhou, Provinz Zhejiang, und wird von dem chinesischen Hedgefonds High-Flyer besessen und finanziert. DeepSeek wurde im Juli 2023 von Liang Wenfeng, Mitbegründer von High-Flyer, gegründet, der auch CEO beider Unternehmen ist. Das Unternehmen brachte im Januar 2025 den gleichnamigen Chatbot und das DeepSeek-R1-Modell auf den Markt.
@@ -220,7 +220,7 @@ Weitere Informationen finden Sie in der [MiniMax OpenAI-kompatiblen Schnittstell
 # 3. Bild-zu-Text-API integrieren: Qwen3 VL
 
 ::: info Prinzip-Erweiterung
-Wenn Sie mehr über die Prinzipien erfahren möchten, siehe Anhang: [Visuelle Sprachmodelle (VLM) Einführung](/de-de/appendix/8-artificial-intelligence/multimodal-models).
+Wenn Sie mehr über die Prinzipien erfahren möchten, siehe Anhang: [Visuelle Sprachmodelle (VLM) Einführung](/zh-cn/appendix/8-artificial-intelligence/multimodal-models).
 
 ::: details Mehr erfahren: Was ist Qwen3 VL?
 
@@ -371,7 +371,7 @@ Schließlich erhalten wir das Generierungsergebnis:
 In den vorherigen Abschnitten haben wir hauptsächlich mit textbezogenen Aufgaben gearbeitet. Als Nächstes werden wir die Integration der Bildgenerierungsfunktion ausprobieren, die die Generierung von Bildern aus Textbeschreibungen oder die Bearbeitung von Bildern unterstützt.
 
 ::: info Prinzip-Erweiterung
-Wenn Sie mehr über die Prinzipien erfahren möchten, siehe Anhang: [Bildgenerierung Einführung](/de-de/appendix/8-artificial-intelligence/image-generation).
+Wenn Sie mehr über die Prinzipien erfahren möchten, siehe Anhang: [Bildgenerierung Einführung](/zh-cn/appendix/8-artificial-intelligence/image-generation).
 
 ::: details Mehr erfahren: Was ist [Seedream](https://seed.bytedance.com/en/seedream4_5)?
 

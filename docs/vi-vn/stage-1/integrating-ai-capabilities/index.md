@@ -58,7 +58,7 @@ Cụ thể, bạn cần nắm các yếu tố cốt lõi sau:
 6. **Xử lý lỗi**: khi có vấn đề như API Key sai hoặc yêu cầu quá thường xuyên, biết cách kiểm tra và giải quyết.
 
 ::: info ℹ️ API là gì
-Để hiểu sâu hơn về API, hãy xem phụ lục: [Nhập môn API](/vi-vn/appendix/4-server-and-backend/api-intro).
+Để hiểu sâu hơn về API, hãy xem phụ lục: [Nhập môn API](/zh-cn/appendix/4-server-and-backend/api-intro).
 
 ::: warning 🔐 **Lưu ý an toàn API**
 API Key là "thẻ thông hành" để bạn yêu cầu dịch vụ AI. Nó là một chuỗi mật khẩu dùng cho xác thực danh tính và tính phí.
@@ -93,7 +93,7 @@ Sau khi nắm được các khái niệm này, bạn sẽ thấy dù kết nối
 Trong `1.2 Tự tay làm ra nguyên mẫu`, bạn đã tạo được một nguyên mẫu có thể tương tác. Tiếp theo, việc cần làm là biến những chức năng "trông giống AI" trong nguyên mẫu thành năng lực thật sự dùng được: **khi người dùng bấm nút, nguyên mẫu sẽ gửi yêu cầu tới dịch vụ AI bên ngoài và hiển thị văn bản trả về.**
 
 ::: info ℹ️ Mở rộng nguyên lý
-Nếu muốn hiểu thêm nội dung liên quan đến nguyên lý, hãy xem phụ lục: [Nhập môn mô hình ngôn ngữ lớn (LLM)](/vi-vn/appendix/8-artificial-intelligence/llm-principles).
+Nếu muốn hiểu thêm nội dung liên quan đến nguyên lý, hãy xem phụ lục: [Nhập môn mô hình ngôn ngữ lớn (LLM)](/zh-cn/appendix/8-artificial-intelligence/llm-principles).
 ::: details Tìm hiểu thêm: DeepSeek là gì?
 
 **Hangzhou DeepSeek Artificial Intelligence Basic Technology Research Co., Ltd.**, hoạt động dưới thương hiệu DeepSeek, là một **công ty trí tuệ nhân tạo Trung Quốc phát triển mô hình ngôn ngữ lớn (LLMs)**. DeepSeek đặt trụ sở tại Hàng Châu, Chiết Giang, thuộc sở hữu và được tài trợ bởi quỹ định lượng Trung Quốc High-Flyer. DeepSeek được thành lập vào tháng 7 năm 2023 bởi Liang Wenfeng, đồng sáng lập High-Flyer, người đồng thời là CEO của cả hai công ty. Tháng 1 năm 2025, công ty ra mắt chatbot cùng tên và mô hình DeepSeek-R1.
@@ -219,7 +219,7 @@ Thông tin thêm xem [tài liệu giao diện tương thích OpenAI của MiniMa
 # 3. Tich hop API chuyen hinh anh thanh van ban: Qwen3 VL
 
 ::: info ℹ️ Mo rong nguyen ly
-Neu ban muon tim hieu them ve nguyen ly lien quan, hay xem phu luc: [Nhap mon mo hinh thi giac-ngon ngu (VLM)](/vi-vn/appendix/8-artificial-intelligence/multimodal-models).
+Neu ban muon tim hieu them ve nguyen ly lien quan, hay xem phu luc: [Nhap mon mo hinh thi giac-ngon ngu (VLM)](/zh-cn/appendix/8-artificial-intelligence/multimodal-models).
 
 ::: details Tim hieu them: Qwen3 VL la gi?
 
@@ -369,7 +369,7 @@ Cuoi cung, ket qua tao ra nhu sau:
 Trong cac phan truoc, chung ta chu yeu lam viec voi tac vu lien quan den van ban. Tiep theo, chung ta se thu tich hop tinh nang tao hinh anh, ho tro tao hinh tu mo ta bang van ban hoac chinh sua hinh anh co san.
 
 ::: info ℹ️ Mo rong nguyen ly
-Neu ban muon tim hieu them ve nguyen ly lien quan, hay xem phu luc: [Nhap mon tao hinh anh](/vi-vn/appendix/8-artificial-intelligence/image-generation).
+Neu ban muon tim hieu them ve nguyen ly lien quan, hay xem phu luc: [Nhap mon tao hinh anh](/zh-cn/appendix/8-artificial-intelligence/image-generation).
 
 ::: details Tim hieu them: [Seedream](https://seed.bytedance.com/en/seedream4_5) la gi?
 

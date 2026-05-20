@@ -305,7 +305,7 @@ Mit dem Wachsen der Schlange generiert das LLM ein fortlaufendes Geschichtsgedic
 
 Darüber hinaus können wir das LLM bitten, projektweite Prompts für uns zu generieren. Im vorherigen Abschnitt haben wir nur selbst den Prompt für das Snake-Spiel geschrieben. Lass uns jetzt versuchen, das Modell einen Prompt mit einem Gesamtframework und Implementierungspfad generieren zu lassen (du kannst das direkt mit z.ai machen).
 
-Wenn du lernen möchtest, bessere Prompts zu schreiben, siehe das [Prompt-Engineering-Appendix](/de-de/appendix/8-artificial-intelligence/prompt-engineering).
+Wenn du lernen möchtest, bessere Prompts zu schreiben, siehe das [Prompt-Engineering-Appendix](/zh-cn/appendix/8-artificial-intelligence/prompt-engineering).
 
 > Ich möchte, dass AI ein Web-Snake-Spiel generiert. Ich brauche einen umfassenderen Prompt, damit das Ergebnis beeindruckender und interessanter wird. Bitte generiere einen entsprechenden Prompt. Das aktuelle Ziel ist: ein Snake-Spiel zu generieren, das die Funktion des Fressens verschiedener Wörter zur Gedichtgenerierung implementieren soll und ein Bildgenerierungsmodul enthalten sollte.
 
@@ -644,7 +644,7 @@ Nach dem Verständnis von Frontend-Konzepten kannst du Anforderungen so an AI be
 
 > „Erstelle mit React eine Bestenliste-Seite: rechts die Punkteliste, bei Klick auf eine Zeile werden unten die Spielerdetails angezeigt, im minimalistischen modernen Stil."
 
-Wenn du HTML, CSS, JavaScript und andere Frontend-Grundlagen vertiefen möchtest, siehe das [Web-Basics-Appendix](/de-de/appendix/3-browser-and-frontend/javascript-deep-dive). Für die Entwicklungsgeschichte der Frontend-Technologie siehe das [Frontend-Evolutionsgeschichte-Appendix](/de-de/appendix/3-browser-and-frontend/frontend-frameworks).
+Wenn du HTML, CSS, JavaScript und andere Frontend-Grundlagen vertiefen möchtest, siehe das [Web-Basics-Appendix](/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive). Für die Entwicklungsgeschichte der Frontend-Technologie siehe das [Frontend-Evolutionsgeschichte-Appendix](/zh-cn/appendix/3-browser-and-frontend/frontend-frameworks).
 
 ## <span id="appendix-2">[Anhang 2: Was genau ist Vibe Coding](#appendix-nav)</span>
 

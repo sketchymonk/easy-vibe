@@ -58,7 +58,7 @@ En concreto, necesitas dominar estos elementos centrales:
 6. **Manejo de errores**: saber diagnosticar y resolver problemas como API Key incorrecta o demasiadas solicitudes.
 
 ::: info ℹ️ Que es una API
-Para una explicacion mas profunda de API, consulta el apendice: [Introduccion a API](/es-es/appendix/4-server-and-backend/api-intro).
+Para una explicacion mas profunda de API, consulta el apendice: [Introduccion a API](/zh-cn/appendix/4-server-and-backend/api-intro).
 
 ::: warning 🔐 **Notas de seguridad sobre API**
 La API Key es tu "pase de acceso" para solicitar servicios de IA. Es una cadena secreta usada para autenticacion y facturacion.
@@ -93,7 +93,7 @@ Cuando entiendas estos conceptos, veras que conectar un modelo de texto o un mod
 En `1.2 Crear un prototipo con tus manos`, ya construiste un prototipo interactivo. Ahora vamos a convertir las funciones que "parecen IA" en capacidades realmente utilizables: **cuando el usuario haga clic en un boton, el prototipo enviara una solicitud a un servicio externo de IA y mostrara el texto devuelto.**
 
 ::: info ℹ️ Ampliacion conceptual
-Si quieres conocer mas sobre los principios, consulta el apendice: [Introduccion a los modelos de lenguaje grandes (LLM)](/es-es/appendix/8-artificial-intelligence/llm-principles).
+Si quieres conocer mas sobre los principios, consulta el apendice: [Introduccion a los modelos de lenguaje grandes (LLM)](/zh-cn/appendix/8-artificial-intelligence/llm-principles).
 ::: details Saber mas: que es DeepSeek
 
 **Hangzhou DeepSeek Artificial Intelligence Basic Technology Research Co., Ltd.**, que opera bajo la marca DeepSeek, es una **empresa china de inteligencia artificial dedicada al desarrollo de modelos de lenguaje grandes (LLMs)**. DeepSeek tiene sede en Hangzhou, Zhejiang, y pertenece al fondo cuantitativo chino High-Flyer, que tambien la financia. Fue fundada en julio de 2023 por Liang Wenfeng, cofundador de High-Flyer, quien tambien es CEO de ambas companias. En enero de 2025 lanzo su chatbot homonimo y el modelo DeepSeek-R1.
@@ -219,7 +219,7 @@ Para mas informacion, consulta la [documentacion de la interfaz compatible con O
 # 3. Conectar una API de imagen a texto: Qwen3 VL
 
 ::: info ℹ️ Ampliacion conceptual
-Si quieres conocer mas sobre los principios, consulta el apendice: [Introduccion a los modelos vision-lenguaje (VLM)](/es-es/appendix/8-artificial-intelligence/multimodal-models).
+Si quieres conocer mas sobre los principios, consulta el apendice: [Introduccion a los modelos vision-lenguaje (VLM)](/zh-cn/appendix/8-artificial-intelligence/multimodal-models).
 
 ::: details Saber mas: que es Qwen3 VL
 
@@ -369,7 +369,7 @@ Finalmente se obtiene el resultado generado:
 En las secciones anteriores trabajamos principalmente con tareas relacionadas con texto. Ahora intentaremos conectar capacidades de generacion de imagenes, para soportar generar imagenes desde descripciones de texto o modificar imagenes existentes.
 
 ::: info ℹ️ Ampliacion conceptual
-Si quieres conocer mas sobre los principios, consulta el apendice: [Introduccion a la generacion de imagenes](/es-es/appendix/8-artificial-intelligence/image-generation).
+Si quieres conocer mas sobre los principios, consulta el apendice: [Introduccion a la generacion de imagenes](/zh-cn/appendix/8-artificial-intelligence/image-generation).
 
 ::: details Saber mas: que es [Seedream](https://seed.bytedance.com/en/seedream4_5)
 

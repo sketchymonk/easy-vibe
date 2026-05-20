@@ -58,7 +58,7 @@ Specifically, you need to master the following core elements:
 6. **Error Handling**: Knowing how to troubleshoot when problems occur (such as incorrect API Key, too many requests, etc.)
 
 ::: info ℹ️ What is an API
-For a more in-depth explanation of APIs, see the appendix: [Introduction to APIs](/en/appendix/4-server-and-backend/api-intro).
+For a more in-depth explanation of APIs, see the appendix: [Introduction to APIs](/zh-cn/appendix/4-server-and-backend/api-intro).
 
 ::: warning 🔐 **API Security Notes**
 The API Key is your "pass" for requesting AI services — it's a secret string used for authentication and billing.
@@ -93,7 +93,7 @@ Once you've grasped these concepts, you'll find that whether you're integrating 
 In `1.2 Building Your Prototype`, you already created an interactive prototype. What we need to do next is turn the "AI-like features" in the prototype into real, working capabilities: **when the user clicks a button, the prototype sends a request to an external AI service and displays the returned text.**
 
 ::: info ℹ️ Further Reading on Principles
-If you want to learn more about the underlying principles, check out the appendix: [Introduction to Large Language Models (LLM)](/en/appendix/8-artificial-intelligence/llm-principles).
+If you want to learn more about the underlying principles, check out the appendix: [Introduction to Large Language Models (LLM)](/zh-cn/appendix/8-artificial-intelligence/llm-principles).
 ::: details Learn More: What is DeepSeek?
 
 **Hangzhou DeepSeek Artificial Intelligence Basic Technology Research Co., Ltd.**, operating under the brand name DeepSeek, is a **Chinese artificial intelligence (AI) company that develops large language models (LLMs)**. DeepSeek is headquartered in Hangzhou, Zhejiang, and is owned and funded by the Chinese hedge fund High-Flyer. DeepSeek was founded in July 2023 by Liang Wenfeng, co-founder of High-Flyer, who also serves as CEO of both companies. The company launched its eponymous chatbot and its DeepSeek-R1 model in January 2025.
@@ -219,7 +219,7 @@ For more details, refer to the [MiniMax OpenAI Compatible API Documentation](htt
 # 3. Integrating the Image-to-Text API: Qwen3 VL
 
 ::: info ℹ️ Further Reading on Principles
-If you want to learn more about the underlying principles, check out the appendix: [Introduction to Vision Language Models (VLM)](/en/appendix/8-artificial-intelligence/multimodal-models).
+If you want to learn more about the underlying principles, check out the appendix: [Introduction to Vision Language Models (VLM)](/zh-cn/appendix/8-artificial-intelligence/multimodal-models).
 
 ::: details Learn More: What is Qwen3 VL?
 
@@ -369,7 +369,7 @@ Final generated result:
 In the previous section, we mainly handled text-related tasks. Next, we will try integrating image generation capabilities to support generating images from text descriptions, or editing images.
 
 ::: info ℹ️ Further Reading on Principles
-If you want to learn more about the underlying principles, check out the appendix: [Introduction to Image Generation](/en/appendix/8-artificial-intelligence/image-generation).
+If you want to learn more about the underlying principles, check out the appendix: [Introduction to Image Generation](/zh-cn/appendix/8-artificial-intelligence/image-generation).
 
 ::: details Learn More: What is [Seedream](https://seed.bytedance.com/en/seedream4_5)?
 
