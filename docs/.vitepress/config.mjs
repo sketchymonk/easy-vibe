@@ -1659,6 +1659,19 @@ const getStage1Sidebar = (locale) => {
   )
 }
 
+const docFooterLabels = {
+  'zh-cn': { prev: '上一页', next: '下一页' },
+  en: { prev: 'Previous page', next: 'Next page' },
+  'ja-jp': { prev: '前のページ', next: '次のページ' },
+  'zh-tw': { prev: '上一頁', next: '下一頁' },
+  'ko-kr': { prev: '이전 페이지', next: '다음 페이지' },
+  'es-es': { prev: 'Página anterior', next: 'Página siguiente' },
+  'fr-fr': { prev: 'Page précédente', next: 'Page suivante' },
+  'de-de': { prev: 'Vorherige Seite', next: 'Nächste Seite' },
+  'ar-sa': { prev: 'الصفحة السابقة', next: 'الصفحة التالية' },
+  'vi-vn': { prev: 'Trang trước', next: 'Trang tiếp theo' }
+}
+
 export default defineConfig({
   markdown: {
     config: (md) => {
@@ -1813,6 +1826,7 @@ Sitemap: ${siteUrl}/sitemap.xml
           level: [1, 6],
           label: '页面导航'
         },
+        docFooter: docFooterLabels['zh-cn'],
         nav: [
           { text: '首页', link: '/zh-cn/' },
           {
@@ -2666,6 +2680,7 @@ Sitemap: ${siteUrl}/sitemap.xml
           level: [1, 6],
           label: 'On this page'
         },
+        docFooter: docFooterLabels.en,
         nav: [
           { text: 'Home', link: '/en/' },
           {
@@ -2752,6 +2767,7 @@ Sitemap: ${siteUrl}/sitemap.xml
           level: [1, 6],
           label: 'このページの目次'
         },
+        docFooter: docFooterLabels['ja-jp'],
         nav: [
           { text: 'ホーム', link: '/ja-jp/' },
           {
@@ -2804,6 +2820,7 @@ Sitemap: ${siteUrl}/sitemap.xml
           level: [1, 6],
           label: '頁面導航'
         },
+        docFooter: docFooterLabels['zh-tw'],
         nav: [
           { text: '首頁', link: '/zh-tw/' },
           {
@@ -2856,6 +2873,7 @@ Sitemap: ${siteUrl}/sitemap.xml
           level: [1, 6],
           label: '페이지 탐색'
         },
+        docFooter: docFooterLabels['ko-kr'],
         nav: [
           { text: '홈', link: '/ko-kr/' },
           {
@@ -2908,6 +2926,7 @@ Sitemap: ${siteUrl}/sitemap.xml
           level: [1, 6],
           label: 'Navegación de página'
         },
+        docFooter: docFooterLabels['es-es'],
         nav: [
           { text: 'Inicio', link: '/es-es/' },
           {
@@ -2960,6 +2979,7 @@ Sitemap: ${siteUrl}/sitemap.xml
           level: [1, 6],
           label: 'Navigation de page'
         },
+        docFooter: docFooterLabels['fr-fr'],
         nav: [
           { text: 'Accueil', link: '/fr-fr/' },
           {
@@ -3012,6 +3032,7 @@ Sitemap: ${siteUrl}/sitemap.xml
           level: [1, 6],
           label: 'Seitennavigation'
         },
+        docFooter: docFooterLabels['de-de'],
         nav: [
           { text: 'Start', link: '/de-de/' },
           {
@@ -3064,6 +3085,7 @@ Sitemap: ${siteUrl}/sitemap.xml
           level: [1, 6],
           label: 'تنقل الصفحة'
         },
+        docFooter: docFooterLabels['ar-sa'],
         nav: [
           { text: 'الرئيسية', link: '/ar-sa/' },
           {
@@ -3117,6 +3139,7 @@ Sitemap: ${siteUrl}/sitemap.xml
           level: [1, 6],
           label: 'Điều hướng trang'
         },
+        docFooter: docFooterLabels['vi-vn'],
         nav: [
           { text: 'Trang chủ', link: '/vi-vn/' },
           {
