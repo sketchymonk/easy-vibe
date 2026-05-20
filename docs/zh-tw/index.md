@@ -17,10 +17,10 @@ hero:
   actions:
     - theme: brand
       text: 開始一起 vibe！
-      link: /zh-cn/stage-1/learning-map/
+      link: /zh-tw/stage-1/learning-map/
     - theme: alt
       text: 課程大綱
-      link: /zh-cn/stage-1/learning-map/
+      link: /zh-tw/stage-1/learning-map/
 ---
 
 <HomeFeatures />

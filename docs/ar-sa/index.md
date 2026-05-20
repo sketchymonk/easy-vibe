@@ -17,10 +17,10 @@ hero:
   actions:
     - theme: brand
       text: ابدأ vibe معًا!
-      link: /zh-cn/stage-1/learning-map/
+      link: /ar-sa/stage-1/learning-map/
     - theme: alt
       text: مخطط الدورة
-      link: /zh-cn/stage-1/learning-map/
+      link: /ar-sa/stage-1/learning-map/
 ---
 
 <HomeFeatures />

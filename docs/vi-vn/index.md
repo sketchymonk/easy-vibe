@@ -17,10 +17,10 @@ hero:
   actions:
     - theme: brand
       text: Bắt đầu vibe cùng nhau!
-      link: /zh-cn/stage-1/learning-map/
+      link: /vi-vn/stage-1/learning-map/
     - theme: alt
       text: Đề cương khóa học
-      link: /zh-cn/stage-1/learning-map/
+      link: /vi-vn/stage-1/learning-map/
 ---
 
 <HomeFeatures />
