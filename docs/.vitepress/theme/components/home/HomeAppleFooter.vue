@@ -88,6 +88,11 @@ const appleFooterInfo = computed(() => {
   return content[locale] || content.en
 })
 
+const footerBtnLink = computed(() => {
+  const locale = t.value._locale || 'zh-cn'
+  return withBase(`/${locale}/stage-1/learning-map/`)
+})
+
 const footerRepositoryLink = 'https://github.com/datawhalechina/easy-vibe'
 
 const footerPolicyLinkMap = {
@@ -100,26 +105,34 @@ const footerPolicyLinkMap = {
 }
 
 const footerColumnLinkMap = {
-  '零基础入门': '/zh-cn/stage-1/',
-  '初中级开发': '/zh-cn/stage-2/',
-  '高级开发': '/zh-cn/stage-3/',
-  '附录': '/zh-cn/appendix/',
-  '学习地图': '/zh-cn/stage-1/learning-map/',
-  '课程总览': '/zh-cn/stage-1/',
+  '零基础入门': '/stage-1/',
+  '初中级开发': '/stage-2/',
+  '高级开发': '/stage-3/',
+  '附录': '/appendix/',
+  '学习地图': '/stage-1/learning-map/',
+  '课程总览': '/stage-1/',
+  'Foundations': '/stage-1/',
+  'Junior/Mid Dev': '/stage-2/',
+  'Senior Dev': '/stage-3/',
+  'Appendix': '/appendix/',
+  'Learning Map': '/stage-1/learning-map/',
+  'Course Outline': '/stage-1/',
+  'Overview': '/guide/introduction',
+}
+
+const footerExternalLinks = {
   'GitHub 仓库': 'https://github.com/datawhalechina/easy-vibe',
-  'Foundations': '/en/stage-1/',
-  'Junior/Mid Dev': '/en/stage-2/',
-  'Senior Dev': '/en/stage-3/',
-  'Appendix': '/en/appendix/',
-  'Learning Map': '/en/stage-1/learning-map/',
-  'Course Outline': '/en/stage-1/',
   'GitHub Repository': 'https://github.com/datawhalechina/easy-vibe',
-  'Overview': '/en/guide/introduction',
-  'Changelog': 'https://github.com/datawhalechina/easy-vibe/releases'
+  'Changelog': 'https://github.com/datawhalechina/easy-vibe/releases',
 }
 
 const getFooterLink = (label) => {
-  return footerColumnLinkMap[label] || '#'
+  const external = footerExternalLinks[label]
+  if (external) return external
+  const basePath = footerColumnLinkMap[label]
+  if (!basePath) return '#'
+  const locale = t.value._locale || 'zh-cn'
+  return `/${locale}${basePath}`
 }
 
 const getPolicyLink = (label) => {
@@ -140,7 +153,7 @@ const resolveFooterHref = (link) => {
     <p>{{ t.footer.desc }}</p>
     <a
       class="buy-btn large"
-      :href="withBase('/zh-cn/stage-1/learning-map/')"
+      :href="footerBtnLink"
     >{{ t.footer.btn }}</a>
   </div>
 

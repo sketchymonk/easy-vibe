@@ -41,8 +41,7 @@
   color: #6e6e73;
   max-width: 760px;
   font-family:
-    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC',
-    sans-serif;
+    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', sans-serif;
 }
 
 .dark .section-category,
@@ -65,13 +64,12 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-:is(
-    .feature-card,
-    .comm-card,
-    .prod-card,
-    .appendix-card,
-    .buy-btn
-  ):is(:hover, :focus, :focus-visible, :active) {
+:is(.feature-card, .comm-card, .prod-card, .appendix-card, .buy-btn):is(
+  :hover,
+  :focus,
+  :focus-visible,
+  :active
+) {
   border-bottom-color: transparent !important;
   text-decoration: none !important;
   outline: none !important;

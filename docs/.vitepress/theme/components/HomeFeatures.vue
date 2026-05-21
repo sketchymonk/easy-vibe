@@ -47,17 +47,13 @@ const isCjkLocale = computed(() => {
 
 const topPromo = computed(() => {
   const code = lang.value ? lang.value.toLowerCase() : 'en'
-  if (code === 'zh-cn' || code === 'zh-tw') {
-    return {
-      text: '用 Easy-Vibe 构建你的第一个 AI 应用，最快当天可上线原型。',
-      cta: '开始学习 ›',
-      link: '/zh-cn/stage-1/learning-map/'
-    }
-  }
+  const isChinese = code === 'zh-cn' || code === 'zh-tw'
   return {
-    text: 'Build your first AI app with Easy-Vibe and ship a working prototype fast.',
-    cta: 'Start learning ›',
-    link: '/en/stage-1/learning-map/'
+    text: isChinese
+      ? '用 Easy-Vibe 构建你的第一个 AI 应用，最快当天可上线原型。'
+      : 'Build your first AI app with Easy-Vibe and ship a working prototype fast.',
+    cta: isChinese ? '开始学习 ›' : 'Start learning ›',
+    link: `/${code}/stage-1/learning-map/`
   }
 })
 

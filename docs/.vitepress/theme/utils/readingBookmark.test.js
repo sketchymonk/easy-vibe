@@ -74,12 +74,10 @@ describe('reading bookmarks', () => {
       }
     )
     assert.equal(
-      readReadingBookmark(storage, '/easy-vibe/en/stage-1/intro/', 1000)
-        .title,
+      readReadingBookmark(storage, '/easy-vibe/en/stage-1/intro/', 1000).title,
       'English title'
     )
   })
-
 
   it('keeps delayed saves bound to the path captured before navigation', () => {
     const storage = createStorage()
@@ -100,22 +98,16 @@ describe('reading bookmarks', () => {
       })
     )
 
-    assert.equal(
-      readReadingBookmark(storage, currentPath, 1000),
-      null
-    )
-    assert.deepEqual(
-      readReadingBookmark(storage, scheduledPath, 1000),
-      {
-        version: 1,
-        path: scheduledPath,
-        title: '页面 A',
-        section: '小节 A',
-        scrollY: 240,
-        progress: 32,
-        updatedAt: 777
-      }
-    )
+    assert.equal(readReadingBookmark(storage, currentPath, 1000), null)
+    assert.deepEqual(readReadingBookmark(storage, scheduledPath, 1000), {
+      version: 1,
+      path: scheduledPath,
+      title: '页面 A',
+      section: '小节 A',
+      scrollY: 240,
+      progress: 32,
+      updatedAt: 777
+    })
   })
 
   it('normalizes invalid numeric values', () => {

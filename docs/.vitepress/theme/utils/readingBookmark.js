@@ -27,7 +27,6 @@ export const createReadingBookmark = ({
   updatedAt: now()
 })
 
-
 export const createReadingBookmarkSnapshot = ({
   path,
   getTitle = () => '',
