@@ -6,10 +6,10 @@ In the previous lessons, we learned in groups the basics of AI coding, prompt en
 
 To help you review the previous lesson, think through these quick questions:
 
-1. What is AI programming? How can you use an AI coding tool (for example, [z.ai](http://z.ai)) to create a webpage?
+1. What is AI programming? How can you use an AI coding tool (for example, [z.ai](https://z.ai)) to create a webpage?
 2. What is a large language model? What are prompt engineering and context engineering? How should you write a complex prompt?
 3. Across text, AI coding, and image generation, where do you think model strengths and weaknesses show up most clearly?
-4. What is an API? How do you use [z.ai](http://z.ai) to connect to third-party APIs?
+4. What is an API? How do you use [z.ai](https://z.ai) to connect to third-party APIs?
 
 If any question still feels unclear, you can revisit the previous lesson docs or ask directly in the WeChat group.
 
@@ -727,7 +727,7 @@ This time we use local code editor [Trae](https://www.trae.cn/).
 If you are not familiar with IDE concepts, read:
 [Extra Knowledge 4 - What is AI IDE and Trae](https://github.com/datawhalechina/easy-vibe/blob/main/docs/extra/extra4/extra4-what-is-ai-ide-and-trae.md)
 
-If your local environment is not fully configured, do not worry. If you trust your coding assistant (whether [z.ai](http://z.ai) or Trae), you can directly send any issue/errors and it will provide resolution guidance.
+If your local environment is not fully configured, do not worry. If you trust your coding assistant (whether [z.ai](https://z.ai) or Trae), you can directly send any issue/errors and it will provide resolution guidance.
 
 ![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image78.png)
 
@@ -735,7 +735,7 @@ The right panel is Copilot/Agent interaction window. If not visible, click top-r
 
 ![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image79.png)
 
-After opening sidebar, you will see `Builder` option. This is Agent mode. You can roughly treat "Builder" as the "development mode" of [z.ai](http://z.ai): it can help with local environment operations, dependency installs, opening webpages, etc.
+After opening sidebar, you will see `Builder` option. This is Agent mode. You can roughly treat "Builder" as the "development mode" of [z.ai](https://z.ai): it can help with local environment operations, dependency installs, opening webpages, etc.
 
 ![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image80.png)
 
@@ -751,7 +751,7 @@ At the bottom, there is model selection dropdown. You can choose Kimi k2 or GLM.
 
 ![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image82.png)
 
-That is a brief Trae intro. Next we reuse operational ideas from [z.ai](http://z.ai) inside Trae.
+That is a brief Trae intro. Next we reuse operational ideas from [z.ai](https://z.ai) inside Trae.
 
 ## 2.9 Build a Frontend Chat App Using Dify API
 
@@ -867,7 +867,7 @@ Because LLMs are stochastic, a single round may work while multi-turn chat fails
 
 ![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image93.png)
 
-At this point, you can build a simple Dify knowledge-base agent and use Trae (instead of [z.ai](http://z.ai)) to build an interactive frontend. From now on, Trae will become our primary prototyping tool, gradually replacing [z.ai](http://z.ai). You can try re-implementing the snake game in Trae and compare the experience. Keep going.
+At this point, you can build a simple Dify knowledge-base agent and use Trae (instead of [z.ai](https://z.ai)) to build an interactive frontend. From now on, Trae will become our primary prototyping tool, gradually replacing [z.ai](https://z.ai). You can try re-implementing the snake game in Trae and compare the experience. Keep going.
 
 # 3. More Business Workflow References
 
