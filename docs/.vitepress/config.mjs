@@ -2482,7 +2482,7 @@ Sitemap: ${siteUrl}/sitemap.xml
                 },
                 {
                   text: 'Extra 2: What is API',
-                  link: '/zh-cn/stage-2/backend/what-is-api/'
+                  link: '/zh-cn/stage-2/backend/ai-interface-code/'
                 },
                 {
                   text: 'Extra 5: What is RAG',
@@ -2505,11 +2505,11 @@ Sitemap: ${siteUrl}/sitemap.xml
               items: [
                 {
                   text: 'Ex 0.1: Snake Game',
-                  link: '/zh-cn/examples/example0/example0-1/vibe-coding-tools-snake-game-tutorial'
+                  link: '/zh-cn/stage-1/appendix-articles/example0-1/vibe-coding-tools-snake-game-tutorial'
                 },
                 {
                   text: 'Ex 0.2: Build Website with AI',
-                  link: '/zh-cn/examples/example0/example0-2/vibe-coding-tools-build-website-with-ai-coding-and-design-agents'
+                  link: '/zh-cn/stage-1/appendix-articles/example0-2/vibe-coding-tools-build-website-with-ai-coding-and-design-agents'
                 }
               ]
             }

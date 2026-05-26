@@ -3,8 +3,8 @@
 
 在开始之前，建议你先补两块"基础砖"：
 
-- **Token 是什么**：可以先阅读 [大语言模型入门](./llm-intro.md) 的「分词 & Token」部分。
-- **Prompt 是什么**：如果你还不熟悉 System / User / Assistant 的基本结构，可以先看 [提示词工程](./prompt-engineering/)。
+- **Token 是什么**：可以先阅读 [大语言模型入门](../8-artificial-intelligence/llm-principles.md) 的「分词 & Token」部分。
+- **Prompt 是什么**：如果你还不熟悉 System / User / Assistant 的基本结构，可以先看 [提示词工程](../8-artificial-intelligence/prompt-engineering/)。
 
 ---
 
