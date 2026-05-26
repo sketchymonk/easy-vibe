@@ -618,6 +618,121 @@ const stage2SidebarEn = [
   }
 ]
 
+const zhCnStage2Sidebar = [
+  {
+    text: '前端开发',
+    collapsed: false,
+    items: [
+      {
+        text: 'NanoBanana 素材生产',
+        link: '/zh-cn/stage-2/frontend/lovart-assets/'
+      },
+      {
+        text: 'Figma 与 MasterGo 入门',
+        link: '/zh-cn/stage-2/frontend/figma-mastergo/'
+      },
+      {
+        text: 'UI 设计规范与多产品界面',
+        link: '/zh-cn/stage-2/frontend/multi-product-ui/'
+      },
+      {
+        text: '结合 Agent Skills 美化界面',
+        link: '/zh-cn/stage-2/frontend/llm-skills-beautiful/'
+      },
+      {
+        text: '设计原型到项目代码',
+        link: '/zh-cn/stage-2/frontend/design-to-code/'
+      },
+      {
+        text: '现代组件库与界面升级',
+        link: '/zh-cn/stage-2/frontend/modern-component-library/'
+      }
+    ]
+  },
+  {
+    text: '后端开发',
+    collapsed: false,
+    items: [
+      {
+        text: '数据库与 Supabase 入门',
+        link: '/zh-cn/stage-2/backend/database-supabase/'
+      },
+      {
+        text: '大模型辅助接口开发',
+        link: '/zh-cn/stage-2/backend/ai-interface-code/'
+      },
+      {
+        text: 'Git 与 GitHub 入门指南',
+        link: '/zh-cn/stage-2/backend/git-workflow/'
+      },
+      {
+        text: '网页应用部署全面指南',
+        link: '/zh-cn/stage-2/backend/zeabur-deployment/'
+      },
+      {
+        text: 'CLI Coding Agent 编程助手',
+        link: '/zh-cn/stage-2/backend/modern-cli/'
+      },
+      {
+        text: 'Stripe 支付集成',
+        link: '/zh-cn/stage-2/backend/stripe-payment/'
+      }
+    ]
+  },
+  {
+    text: 'AI 能力附录',
+    collapsed: false,
+    items: [
+      {
+        text: 'Dify 入门与知识库集成',
+        link: '/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/'
+      }
+    ]
+  },
+  {
+    text: '综合项目',
+    collapsed: false,
+    items: [
+      {
+        text: '一起做霍格沃茨画像',
+        link: '/zh-cn/stage-2/frontend/hogwarts-portraits/'
+      },
+      {
+        text: 'AI 营销文案 SaaS',
+        link: '/zh-cn/stage-2/assignments/copywriting-platform-supabase/'
+      },
+      {
+        text: '在线考试与管理系统',
+        link: '/zh-cn/stage-2/assignments/exam-management-express/'
+      },
+      {
+        text: '现代 AI 生图 SaaS',
+        link: '/zh-cn/stage-2/assignments/modern-landing-page/'
+      },
+      {
+        text: '类 Dify 智能体平台',
+        link: '/zh-cn/stage-2/assignments/custom-dify-agent-platform/'
+      },
+      {
+        text: '智能旅游规划 Agent 平台',
+        link: '/zh-cn/stage-2/assignments/travel-planning-agent-platform/'
+      },
+      {
+        text: 'Spring Boot 电影推荐系统',
+        link: '/zh-cn/stage-2/assignments/movie-recommendation-springboot/'
+      },
+      {
+        text: '生鲜电商微服务系统',
+        link: '/zh-cn/stage-2/assignments/simple-grocery-microservices/'
+      },
+      {
+        text: 'Go 交通数据分析平台',
+        link: '/zh-cn/stage-2/assignments/traffic-data-visualization-go/'
+      }
+    ]
+  }
+]
+
 const stage3SidebarEn = [
   {
     text: 'Core Skills',
@@ -1635,8 +1750,12 @@ const stage1SidebarLabels = {
   ]
 }
 
-const applySidebarLabels = (sidebar, locale) => {
-  const labels = stage1SidebarLabels[locale]
+const applySidebarLabels = (
+  sidebar,
+  locale,
+  labelsSource = stage1SidebarLabels
+) => {
+  const labels = labelsSource[locale]
   if (!labels) return sidebar
 
   return sidebar.map((group, groupIndex) => ({
@@ -1656,6 +1775,355 @@ const getStage1Sidebar = (locale) => {
   return applySidebarLabels(
     localizeSidebarLinks(productManagerSidebarEn, locale),
     locale
+  )
+}
+
+const stage2SidebarLabels = {
+  'ja-jp': [
+    {
+      text: 'フロントエンド開発',
+      items: [
+        'NanoBanana 素材生産',
+        'Figma & MasterGo 入門',
+        'UI デザイン仕様とマルチプロダクトUI',
+        'Agent Skills でインターフェース美化',
+        'デザインプロトタイプからプロジェクトコードへ',
+        'モダンコンポーネントライブラリとUIアップグレード'
+      ]
+    },
+    {
+      text: 'バックエンド開発',
+      items: [
+        'データベースと Supabase 入門',
+        '大規模モデル補助インターフェース開発',
+        'Git & GitHub 入門ガイド',
+        'Webアプリケーションデプロイ包括ガイド',
+        'CLI Coding Agent プログラミングアシスタント',
+        'Stripe 決済統合'
+      ]
+    },
+    {
+      text: 'AI 能力付録',
+      items: ['Dify 入門とナレッジベース統合']
+    },
+    {
+      text: '総合プロジェクト',
+      items: [
+        'ホグワーツ肖像画を作ろう',
+        'AI マーケティングコピー SaaS',
+        'オンライン試験・管理システム',
+        'モダン AI 画像生成 SaaS',
+        'Dify ライクなエージェントプラットフォーム',
+        'スマート旅行プランニング Agent プラットフォーム',
+        'Spring Boot 映画推薦システム',
+        '生鮮ECマイクロサービスシステム',
+        'Go 交通データ分析プラットフォーム'
+      ]
+    }
+  ],
+  'zh-tw': [
+    {
+      text: '前端開發',
+      items: [
+        'NanoBanana 素材生產',
+        'Figma 與 MasterGo 入門',
+        'UI 設計規範與多產品介面',
+        '結合 Agent Skills 美化介面',
+        '設計原型到專案程式碼',
+        '現代元件庫與介面升級'
+      ]
+    },
+    {
+      text: '後端開發',
+      items: [
+        '資料庫與 Supabase 入門',
+        '大模型輔助介面開發',
+        'Git 與 GitHub 入門指南',
+        '網頁應用部署全面指南',
+        'CLI Coding Agent 程式設計助手',
+        'Stripe 支付整合'
+      ]
+    },
+    {
+      text: 'AI 能力附錄',
+      items: ['Dify 入門與知識庫整合']
+    },
+    {
+      text: '綜合專案',
+      items: [
+        '一起做霍格沃茨畫像',
+        'AI 行銷文案 SaaS',
+        '線上考試與管理系統',
+        '現代 AI 生圖 SaaS',
+        '類 Dify 智能體平台',
+        '智慧旅遊規劃 Agent 平台',
+        'Spring Boot 電影推薦系統',
+        '生鮮電商微服務系統',
+        'Go 交通資料分析平台'
+      ]
+    }
+  ],
+  'ko-kr': [
+    {
+      text: '프론트엔드 개발',
+      items: [
+        'NanoBanana 에셋 생산',
+        'Figma & MasterGo 입문',
+        'UI 디자인 가이드라인과 멀티 프로덕트 UI',
+        'Agent Skills 인터페이스 미화',
+        '디자인 프로토타입에서 프로젝트 코드로',
+        '모던 컴포넌트 라이브러리와 UI 업그레이드'
+      ]
+    },
+    {
+      text: '백엔드 개발',
+      items: [
+        '데이터베이스와 Supabase 입문',
+        '대규모 모델 보조 인터페이스 개발',
+        'Git & GitHub 입문 가이드',
+        '웹 애플리케이션 배포 종합 가이드',
+        'CLI Coding Agent 프로그래밍 어시스턴트',
+        'Stripe 결제 통합'
+      ]
+    },
+    {
+      text: 'AI 역량 부록',
+      items: ['Dify 입문과 지식 베이스 통합']
+    },
+    {
+      text: '종합 프로젝트',
+      items: [
+        '호그와트 초상화 만들기',
+        'AI 마케팅 카피 SaaS',
+        '온라인 시험 및 관리 시스템',
+        '모던 AI 이미지 생성 SaaS',
+        'Dify 유사 에이전트 플랫폼',
+        '스마트 여행 계획 Agent 플랫폼',
+        'Spring Boot 영화 추천 시스템',
+        '신선 식품 전자상거래 마이크로서비스',
+        'Go 교통 데이터 분석 플랫폼'
+      ]
+    }
+  ],
+  'es-es': [
+    {
+      text: 'Desarrollo Frontend',
+      items: [
+        'Producción de activos NanoBanana',
+        'Introducción a Figma y MasterGo',
+        'Especificaciones de diseño UI y multi-producto',
+        'Embellecimiento de interfaces con Agent Skills',
+        'De prototipo de diseño a código de proyecto',
+        'Bibliotecas de componentes modernas'
+      ]
+    },
+    {
+      text: 'Desarrollo Backend',
+      items: [
+        'Introducción a bases de datos y Supabase',
+        'Desarrollo de interfaces asistido por LLM',
+        'Guía de introducción a Git y GitHub',
+        'Guía completa de despliegue de aplicaciones web',
+        'CLI Coding Agent - Asistente de programación',
+        'Integración de pagos con Stripe'
+      ]
+    },
+    {
+      text: 'Apéndice de capacidades IA',
+      items: ['Introducción a Dify e integración de base de conocimientos']
+    },
+    {
+      text: 'Proyectos integrales',
+      items: [
+        'Creemos retratos de Hogwarts',
+        'SaaS de copywriting con IA',
+        'Sistema de exámenes en línea y gestión',
+        'SaaS moderno de generación de imágenes con IA',
+        'Plataforma de agentes tipo Dify',
+        'Plataforma de planificación de viajes con Agent',
+        'Sistema de recomendación de películas con Spring Boot',
+        'Sistema de microservicios de comercio electrónico de alimentos',
+        'Plataforma de análisis de datos de tráfico con Go'
+      ]
+    }
+  ],
+  'fr-fr': [
+    {
+      text: 'Développement Frontend',
+      items: [
+        'Production de ressources NanoBanana',
+        'Introduction à Figma et MasterGo',
+        'Spécifications UI et interfaces multi-produits',
+        'Embellissement des interfaces avec Agent Skills',
+        'Du prototype de design au code de projet',
+        'Bibliothèques de composants modernes'
+      ]
+    },
+    {
+      text: 'Développement Backend',
+      items: [
+        'Introduction aux bases de données et Supabase',
+        "Développement d'interfaces assisté par LLM",
+        "Guide d'introduction à Git et GitHub",
+        "Guide complet de déploiement d'applications web",
+        'CLI Coding Agent - Assistant de programmation',
+        'Intégration de paiements avec Stripe'
+      ]
+    },
+    {
+      text: 'Annexe des capacités IA',
+      items: ['Introduction à Dify et intégration de base de connaissances']
+    },
+    {
+      text: 'Projets globaux',
+      items: [
+        'Créons des portraits de Poudlard',
+        'SaaS de rédaction IA',
+        "Système d'examens en ligne et de gestion",
+        "SaaS moderne de génération d'images IA",
+        "Plateforme d'agents de type Dify",
+        'Plateforme de planification de voyages avec Agent',
+        'Système de recommandation de films avec Spring Boot',
+        'Système de microservices e-commerce alimentaire',
+        "Plateforme d'analyse de données de trafic avec Go"
+      ]
+    }
+  ],
+  'de-de': [
+    {
+      text: 'Frontend-Entwicklung',
+      items: [
+        'NanoBanana Asset-Produktion',
+        'Einführung in Figma und MasterGo',
+        'UI-Design-Spezifikationen und Multi-Produkt-UI',
+        'Interface-Verschönerung mit Agent Skills',
+        'Vom Design-Prototyp zum Projektcode',
+        'Moderne Komponentenbibliotheken und UI-Upgrade'
+      ]
+    },
+    {
+      text: 'Backend-Entwicklung',
+      items: [
+        'Einführung in Datenbanken und Supabase',
+        'LLM-gestützte Schnittstellenentwicklung',
+        'Git und GitHub Einführungsleitfaden',
+        'Umfassender Leitfaden zur Webanwendungsbereitstellung',
+        'CLI Coding Agent Programmierassistent',
+        'Stripe-Zahlungsintegration'
+      ]
+    },
+    {
+      text: 'KI-Fähigkeiten Anhang',
+      items: ['Dify Einführung und Wissensdatenbank-Integration']
+    },
+    {
+      text: 'Übergreifende Projekte',
+      items: [
+        'Erstellen wir Hogwarts-Porträts',
+        'KI-Copywriting SaaS',
+        'Online-Prüfung und Managementsystem',
+        'Modernes KI-Bildgenerierungs-SaaS',
+        'Dify-ähnliche Agenten-Plattform',
+        'Intelligente Reiseplanungs-Agent-Plattform',
+        'Spring Boot Filmempfehlungssystem',
+        'Lebensmittel-E-Commerce-Microservices',
+        'Go Verkehrsanalyseplattform'
+      ]
+    }
+  ],
+  'ar-sa': [
+    {
+      text: 'تطوير الواجهة الأمامية',
+      items: [
+        'إنتاج أصول NanoBanana',
+        'مقدمة في Figma و MasterGo',
+        'مواصفات تصميم UI وواجهات متعددة المنتجات',
+        'تحسين الواجهات باستخدام Agent Skills',
+        'من النموذج الأولي إلى كود المشروع',
+        'مكتبات المكونات الحديثة وترقية الواجهة'
+      ]
+    },
+    {
+      text: 'تطوير الواجهة الخلفية',
+      items: [
+        'مقدمة في قواعد البيانات و Supabase',
+        'تطوير الواجهات بمساعدة النماذج الكبيرة',
+        'دليل مقدمة في Git و GitHub',
+        'دليل شامل لنشر تطبيقات الويب',
+        'مساعد برمجة CLI Coding Agent',
+        'تكامل مدفوعات Stripe'
+      ]
+    },
+    {
+      text: 'ملحق قدرات الذكاء الاصطناعي',
+      items: ['مقدمة في Dify وتكامل قاعدة المعرفة']
+    },
+    {
+      text: 'مشاريع شاملة',
+      items: [
+        'لنصنع صور هوغوورتس',
+        'SaaS كتابة التسويق بالذكاء الاصطناعي',
+        'نظام الامتحانات عبر الإنترنت والإدارة',
+        'SaaS حديث لتوليد الصور بالذكاء الاصطناعي',
+        'منصة وكلاء شبيهة بـ Dify',
+        'منصة تخطيط السفر الذكي مع Agent',
+        'نظام توصية الأفلام بـ Spring Boot',
+        'نظام الخدمات المصغرة للتجارة الإلكترونية للأغذية',
+        'منصة تحليل بيانات المرور بـ Go'
+      ]
+    }
+  ],
+  'vi-vn': [
+    {
+      text: 'Phát triển Frontend',
+      items: [
+        'Sản xuất tài sản NanoBanana',
+        'Giới thiệu Figma và MasterGo',
+        'Quy cách thiết kế UI và đa sản phẩm',
+        'Làm đẹp giao diện với Agent Skills',
+        'Từ nguyên mẫu thiết kế đến mã dự án',
+        'Thư viện thành phần hiện đại và nâng cấp UI'
+      ]
+    },
+    {
+      text: 'Phát triển Backend',
+      items: [
+        'Giới thiệu cơ sở dữ liệu và Supabase',
+        'Phát triển giao diện hỗ trợ bằng mô hình lớn',
+        'Hướng dẫn入门 Git và GitHub',
+        'Hướng dẫn toàn diện triển khai ứng dụng web',
+        'Trợ lý lập trình CLI Coding Agent',
+        'Tích hợp thanh toán Stripe'
+      ]
+    },
+    {
+      text: 'Phụ lục năng lực AI',
+      items: ['Giới thiệu Dify và tích hợp cơ sở tri thức']
+    },
+    {
+      text: 'Dự án tổng hợp',
+      items: [
+        'Cùng làm chân dung Hogwarts',
+        'SaaS viết文案 AI',
+        'Hệ thống thi trực tuyến và quản lý',
+        'SaaS tạo ảnh AI hiện đại',
+        'Nền tảng Agent giống Dify',
+        'Nền tảng Agent lập kế hoạch du lịch thông minh',
+        'Hệ thống gợi ý phim Spring Boot',
+        'Hệ thống microservice thương mại điện tử thực phẩm',
+        'Nền tảng phân tích dữ liệu giao thông Go'
+      ]
+    }
+  ]
+}
+
+const getStage2Sidebar = (locale) => {
+  if (locale === 'zh-cn') return zhCnStage2Sidebar
+  if (locale === 'en') return stage2SidebarEn
+  return applySidebarLabels(
+    localizeSidebarLinks(stage2SidebarEn, locale),
+    locale,
+    stage2SidebarLabels
   )
 }
 
@@ -1881,120 +2349,7 @@ Sitemap: ${siteUrl}/sitemap.xml
             }
           ],
           '/zh-cn/stage-1/': productManagerSidebar,
-          '/zh-cn/stage-2/': [
-            {
-              text: '前端开发',
-              collapsed: false,
-              items: [
-                {
-                  text: 'NanoBanana 素材生产',
-                  link: '/zh-cn/stage-2/frontend/lovart-assets/'
-                },
-                {
-                  text: 'Figma 与 MasterGo 入门',
-                  link: '/zh-cn/stage-2/frontend/figma-mastergo/'
-                },
-                {
-                  text: 'UI 设计规范与多产品界面',
-                  link: '/zh-cn/stage-2/frontend/multi-product-ui/'
-                },
-                {
-                  text: '结合 Agent Skills 美化界面',
-                  link: '/zh-cn/stage-2/frontend/llm-skills-beautiful/'
-                },
-                {
-                  text: '设计原型到项目代码',
-                  link: '/zh-cn/stage-2/frontend/design-to-code/'
-                },
-                {
-                  text: '现代组件库与界面升级',
-                  link: '/zh-cn/stage-2/frontend/modern-component-library/'
-                }
-              ]
-            },
-            {
-              text: '后端开发',
-              collapsed: false,
-              items: [
-                {
-                  text: '数据库与 Supabase 入门',
-                  link: '/zh-cn/stage-2/backend/database-supabase/'
-                },
-                {
-                  text: '大模型辅助接口开发',
-                  link: '/zh-cn/stage-2/backend/ai-interface-code/'
-                },
-                {
-                  text: 'Git 与 GitHub 入门指南',
-                  link: '/zh-cn/stage-2/backend/git-workflow/'
-                },
-                {
-                  text: '网页应用部署全面指南',
-                  link: '/zh-cn/stage-2/backend/zeabur-deployment/'
-                },
-                {
-                  text: 'CLI Coding Agent 编程助手',
-                  link: '/zh-cn/stage-2/backend/modern-cli/'
-                },
-                {
-                  text: 'Stripe 支付集成',
-                  link: '/zh-cn/stage-2/backend/stripe-payment/'
-                }
-              ]
-            },
-            {
-              text: 'AI 能力附录',
-              collapsed: false,
-              items: [
-                {
-                  text: 'Dify 入门与知识库集成',
-                  link: '/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/'
-                }
-              ]
-            },
-            {
-              text: '综合项目',
-              collapsed: false,
-              items: [
-                {
-                  text: '一起做霍格沃茨画像',
-                  link: '/zh-cn/stage-2/frontend/hogwarts-portraits/'
-                },
-                {
-                  text: 'AI 营销文案 SaaS',
-                  link: '/zh-cn/stage-2/assignments/copywriting-platform-supabase/'
-                },
-                {
-                  text: '在线考试与管理系统',
-                  link: '/zh-cn/stage-2/assignments/exam-management-express/'
-                },
-                {
-                  text: '现代 AI 生图 SaaS',
-                  link: '/zh-cn/stage-2/assignments/modern-landing-page/'
-                },
-                {
-                  text: '类 Dify 智能体平台',
-                  link: '/zh-cn/stage-2/assignments/custom-dify-agent-platform/'
-                },
-                {
-                  text: '智能旅游规划 Agent 平台',
-                  link: '/zh-cn/stage-2/assignments/travel-planning-agent-platform/'
-                },
-                {
-                  text: 'Spring Boot 电影推荐系统',
-                  link: '/zh-cn/stage-2/assignments/movie-recommendation-springboot/'
-                },
-                {
-                  text: '生鲜电商微服务系统',
-                  link: '/zh-cn/stage-2/assignments/simple-grocery-microservices/'
-                },
-                {
-                  text: 'Go 交通数据分析平台',
-                  link: '/zh-cn/stage-2/assignments/traffic-data-visualization-go/'
-                }
-              ]
-            }
-          ],
+          '/zh-cn/stage-2/': zhCnStage2Sidebar,
           '/zh-cn/stage-3/': [
             {
               text: 'Claude Code 深入浅出',
@@ -2777,8 +3132,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: 'フルスタック開発',
-            link: '/zh-cn/stage-2/frontend/lovart-assets/',
-            activeMatch: '/zh-cn/stage-2/'
+            link: '/ja-jp/stage-2/',
+            activeMatch: '/ja-jp/stage-2/'
           },
           {
             text: '上級開発',
@@ -2792,7 +3147,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           }
         ],
         sidebar: {
-          '/ja-jp/stage-1/': getStage1Sidebar('ja-jp')
+          '/ja-jp/stage-1/': getStage1Sidebar('ja-jp'),
+          '/ja-jp/stage-2/': getStage2Sidebar('ja-jp')
         }
       }
     },
@@ -2830,8 +3186,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: '初中級開發',
-            link: '/zh-cn/stage-2/frontend/lovart-assets/',
-            activeMatch: '/zh-cn/stage-2/'
+            link: '/zh-tw/stage-2/',
+            activeMatch: '/zh-tw/stage-2/'
           },
           {
             text: '高級開發',
@@ -2845,7 +3201,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           }
         ],
         sidebar: {
-          '/zh-tw/stage-1/': getStage1Sidebar('zh-tw')
+          '/zh-tw/stage-1/': getStage1Sidebar('zh-tw'),
+          '/zh-tw/stage-2/': getStage2Sidebar('zh-tw')
         }
       }
     },
@@ -2898,7 +3255,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           }
         ],
         sidebar: {
-          '/ko-kr/stage-1/': productManagerSidebarKo
+          '/ko-kr/stage-1/': productManagerSidebarKo,
+          '/ko-kr/stage-2/': getStage2Sidebar('ko-kr')
         }
       }
     },
@@ -2936,8 +3294,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: 'Desarrollo Full Stack',
-            link: '/zh-cn/stage-2/frontend/lovart-assets/',
-            activeMatch: '/zh-cn/stage-2/'
+            link: '/es-es/stage-2/',
+            activeMatch: '/es-es/stage-2/'
           },
           {
             text: 'Desarrollo Avanzado',
@@ -2951,7 +3309,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           }
         ],
         sidebar: {
-          '/es-es/stage-1/': getStage1Sidebar('es-es')
+          '/es-es/stage-1/': getStage1Sidebar('es-es'),
+          '/es-es/stage-2/': getStage2Sidebar('es-es')
         }
       }
     },
@@ -2989,8 +3348,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: 'Développement Full Stack',
-            link: '/zh-cn/stage-2/frontend/lovart-assets/',
-            activeMatch: '/zh-cn/stage-2/'
+            link: '/fr-fr/stage-2/',
+            activeMatch: '/fr-fr/stage-2/'
           },
           {
             text: 'Développement Avancé',
@@ -3004,7 +3363,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           }
         ],
         sidebar: {
-          '/fr-fr/stage-1/': getStage1Sidebar('fr-fr')
+          '/fr-fr/stage-1/': getStage1Sidebar('fr-fr'),
+          '/fr-fr/stage-2/': getStage2Sidebar('fr-fr')
         }
       }
     },
@@ -3042,8 +3402,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: 'Full Stack Entwicklung',
-            link: '/zh-cn/stage-2/frontend/lovart-assets/',
-            activeMatch: '/zh-cn/stage-2/'
+            link: '/de-de/stage-2/',
+            activeMatch: '/de-de/stage-2/'
           },
           {
             text: 'Fortgeschrittene Entwicklung',
@@ -3057,7 +3417,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           }
         ],
         sidebar: {
-          '/de-de/stage-1/': getStage1Sidebar('de-de')
+          '/de-de/stage-1/': getStage1Sidebar('de-de'),
+          '/de-de/stage-2/': getStage2Sidebar('de-de')
         }
       }
     },
@@ -3095,8 +3456,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: 'تطوير Full Stack',
-            link: '/zh-cn/stage-2/frontend/lovart-assets/',
-            activeMatch: '/zh-cn/stage-2/'
+            link: '/ar-sa/stage-2/',
+            activeMatch: '/ar-sa/stage-2/'
           },
           {
             text: 'تطوير متقدم',
@@ -3110,7 +3471,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           }
         ],
         sidebar: {
-          '/ar-sa/stage-1/': getStage1Sidebar('ar-sa')
+          '/ar-sa/stage-1/': getStage1Sidebar('ar-sa'),
+          '/ar-sa/stage-2/': getStage2Sidebar('ar-sa')
         }
       }
     },
@@ -3149,8 +3511,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: 'Phát triển Full Stack',
-            link: '/zh-cn/stage-2/frontend/lovart-assets/',
-            activeMatch: '/zh-cn/stage-2/'
+            link: '/vi-vn/stage-2/',
+            activeMatch: '/vi-vn/stage-2/'
           },
           {
             text: 'Phát triển Nâng cao',
@@ -3164,7 +3526,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           }
         ],
         sidebar: {
-          '/vi-vn/stage-1/': getStage1Sidebar('vi-vn')
+          '/vi-vn/stage-1/': getStage1Sidebar('vi-vn'),
+          '/vi-vn/stage-2/': getStage2Sidebar('vi-vn')
         }
       }
     }

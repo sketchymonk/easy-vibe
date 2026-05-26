@@ -594,7 +594,7 @@
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/ai-capability-dictionary</loc>
-    <lastmod>2026-03-18T07:57:16-05:00</lastmod>
+    <lastmod>2026-05-21T01:01:06Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/ai-capability-dictionary"/>
@@ -623,7 +623,7 @@
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/context-engineering</loc>
-    <lastmod>2026-02-15T01:57:52+08:00</lastmod>
+    <lastmod>2026-05-21T00:57:00Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/context-engineering"/>
@@ -658,7 +658,7 @@
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/multimodal-models</loc>
-    <lastmod>2026-02-24T12:54:06+08:00</lastmod>
+    <lastmod>2026-05-21T00:57:00Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/multimodal-models"/>
@@ -672,7 +672,7 @@
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/prompt-engineering</loc>
-    <lastmod>2026-02-15T02:08:12+08:00</lastmod>
+    <lastmod>2026-05-21T00:57:00Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/8-artificial-intelligence/prompt-engineering"/>
@@ -1069,11 +1069,19 @@
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T08:41:30.384Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/ai-capabilities/dify-knowledge-base/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/ai-capabilities/dify-knowledge-base/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/ai-capabilities/dify-knowledge-base/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/ai-capabilities/dify-knowledge-base/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/ai-capabilities/dify-knowledge-base/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/ai-capabilities/dify-knowledge-base/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/ai-capabilities/dify-knowledge-base/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/ai-capabilities/dify-knowledge-base/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/ai-capabilities/dify-knowledge-base/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/copywriting-platform-supabase/PRD</loc>
@@ -1084,10 +1092,18 @@
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/copywriting-platform-supabase/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T03:11:31.121Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/copywriting-platform-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/assignments/copywriting-platform-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/assignments/copywriting-platform-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/assignments/copywriting-platform-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/assignments/copywriting-platform-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/assignments/copywriting-platform-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/assignments/copywriting-platform-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/assignments/copywriting-platform-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/assignments/copywriting-platform-supabase/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/custom-dify-agent-platform/PRD</loc>
@@ -1098,10 +1114,18 @@
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/custom-dify-agent-platform/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T01:56:27.256Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/custom-dify-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/assignments/custom-dify-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/assignments/custom-dify-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/assignments/custom-dify-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/assignments/custom-dify-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/assignments/custom-dify-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/assignments/custom-dify-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/assignments/custom-dify-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/assignments/custom-dify-agent-platform/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/exam-management-express/PRD</loc>
@@ -1112,10 +1136,18 @@
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/exam-management-express/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T03:08:44.360Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/exam-management-express/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/assignments/exam-management-express/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/assignments/exam-management-express/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/assignments/exam-management-express/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/assignments/exam-management-express/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/assignments/exam-management-express/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/assignments/exam-management-express/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/assignments/exam-management-express/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/assignments/exam-management-express/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/modern-landing-page/PRD</loc>
@@ -1126,10 +1158,18 @@
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/modern-landing-page/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T03:12:48.504Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/modern-landing-page/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/assignments/modern-landing-page/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/assignments/modern-landing-page/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/assignments/modern-landing-page/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/assignments/modern-landing-page/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/assignments/modern-landing-page/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/assignments/modern-landing-page/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/assignments/modern-landing-page/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/assignments/modern-landing-page/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/movie-recommendation-springboot/PRD</loc>
@@ -1140,10 +1180,18 @@
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/movie-recommendation-springboot/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T02:02:31.300Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/movie-recommendation-springboot/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/assignments/movie-recommendation-springboot/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/assignments/movie-recommendation-springboot/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/assignments/movie-recommendation-springboot/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/assignments/movie-recommendation-springboot/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/assignments/movie-recommendation-springboot/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/assignments/movie-recommendation-springboot/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/assignments/movie-recommendation-springboot/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/assignments/movie-recommendation-springboot/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/simple-grocery-microservices/PRD</loc>
@@ -1154,10 +1202,18 @@
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/simple-grocery-microservices/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T02:04:27.432Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/simple-grocery-microservices/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/assignments/simple-grocery-microservices/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/assignments/simple-grocery-microservices/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/assignments/simple-grocery-microservices/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/assignments/simple-grocery-microservices/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/assignments/simple-grocery-microservices/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/assignments/simple-grocery-microservices/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/assignments/simple-grocery-microservices/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/assignments/simple-grocery-microservices/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/traffic-data-visualization-go/PRD</loc>
@@ -1168,10 +1224,18 @@
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/traffic-data-visualization-go/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T02:09:47.515Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/traffic-data-visualization-go/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/assignments/traffic-data-visualization-go/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/assignments/traffic-data-visualization-go/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/assignments/traffic-data-visualization-go/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/assignments/traffic-data-visualization-go/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/assignments/traffic-data-visualization-go/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/assignments/traffic-data-visualization-go/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/assignments/traffic-data-visualization-go/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/assignments/traffic-data-visualization-go/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/travel-planning-agent-platform/PRD</loc>
@@ -1182,122 +1246,242 @@
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/travel-planning-agent-platform/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T02:01:00.611Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/assignments/travel-planning-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/assignments/travel-planning-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/assignments/travel-planning-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/assignments/travel-planning-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/assignments/travel-planning-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/assignments/travel-planning-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/assignments/travel-planning-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/assignments/travel-planning-agent-platform/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/assignments/travel-planning-agent-platform/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/ai-interface-code/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T03:05:09.949Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/ai-interface-code/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/ai-interface-code/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/backend/ai-interface-code/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/backend/ai-interface-code/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/backend/ai-interface-code/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/backend/ai-interface-code/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/backend/ai-interface-code/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/backend/ai-interface-code/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/backend/ai-interface-code/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/backend/ai-interface-code/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/database-supabase/</loc>
-    <lastmod>2026-05-20T10:43:18+08:00</lastmod>
+    <lastmod>2026-05-25T08:41:30.630Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/database-supabase/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/database-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/backend/database-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/backend/database-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/backend/database-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/backend/database-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/backend/database-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/backend/database-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/backend/database-supabase/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/backend/database-supabase/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/git-workflow/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T08:41:30.594Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/git-workflow/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/git-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/backend/git-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/backend/git-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/backend/git-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/backend/git-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/backend/git-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/backend/git-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/backend/git-workflow/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/backend/git-workflow/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/modern-cli/</loc>
-    <lastmod>2026-05-17T02:30:20+08:00</lastmod>
+    <lastmod>2026-05-25T08:41:30.610Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/modern-cli/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/modern-cli/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/backend/modern-cli/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/backend/modern-cli/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/backend/modern-cli/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/backend/modern-cli/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/backend/modern-cli/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/backend/modern-cli/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/backend/modern-cli/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/backend/modern-cli/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/stripe-payment/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T05:00:38.508Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/stripe-payment/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/stripe-payment/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/backend/stripe-payment/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/backend/stripe-payment/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/backend/stripe-payment/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/backend/stripe-payment/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/backend/stripe-payment/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/backend/stripe-payment/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/backend/stripe-payment/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/backend/stripe-payment/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/zeabur-deployment/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T09:20:50.451Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/backend/zeabur-deployment/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/backend/zeabur-deployment/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/backend/zeabur-deployment/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/backend/zeabur-deployment/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/backend/zeabur-deployment/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/backend/zeabur-deployment/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/backend/zeabur-deployment/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/backend/zeabur-deployment/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/backend/zeabur-deployment/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/backend/zeabur-deployment/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/design-to-code/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T08:41:30.529Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/design-to-code/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/design-to-code/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/frontend/design-to-code/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/frontend/design-to-code/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/frontend/design-to-code/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/frontend/design-to-code/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/frontend/design-to-code/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/frontend/design-to-code/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/frontend/design-to-code/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/frontend/design-to-code/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/figma-mastergo/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T08:41:30.563Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/figma-mastergo/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/figma-mastergo/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/frontend/figma-mastergo/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/frontend/figma-mastergo/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/frontend/figma-mastergo/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/frontend/figma-mastergo/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/frontend/figma-mastergo/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/frontend/figma-mastergo/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/frontend/figma-mastergo/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/frontend/figma-mastergo/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/hogwarts-portraits/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T08:41:30.545Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/hogwarts-portraits/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/hogwarts-portraits/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/frontend/hogwarts-portraits/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/frontend/hogwarts-portraits/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/frontend/hogwarts-portraits/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/frontend/hogwarts-portraits/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/frontend/hogwarts-portraits/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/frontend/hogwarts-portraits/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/frontend/hogwarts-portraits/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/frontend/hogwarts-portraits/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/llm-skills-beautiful/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T02:29:13.557Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/llm-skills-beautiful/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/llm-skills-beautiful/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/frontend/llm-skills-beautiful/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/frontend/llm-skills-beautiful/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/frontend/llm-skills-beautiful/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/frontend/llm-skills-beautiful/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/frontend/llm-skills-beautiful/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/frontend/llm-skills-beautiful/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/frontend/llm-skills-beautiful/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/frontend/llm-skills-beautiful/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/lovart-assets/</loc>
-    <lastmod>2026-05-20T10:43:18+08:00</lastmod>
+    <lastmod>2026-05-25T08:41:30.495Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/lovart-assets/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/lovart-assets/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/frontend/lovart-assets/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/frontend/lovart-assets/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/frontend/lovart-assets/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/frontend/lovart-assets/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/frontend/lovart-assets/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/frontend/lovart-assets/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/frontend/lovart-assets/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/frontend/lovart-assets/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/modern-component-library/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T08:41:30.512Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/modern-component-library/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/modern-component-library/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/frontend/modern-component-library/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/frontend/modern-component-library/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/frontend/modern-component-library/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/frontend/modern-component-library/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/frontend/modern-component-library/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/frontend/modern-component-library/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/frontend/modern-component-library/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/frontend/modern-component-library/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/multi-product-ui/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-25T02:17:40.955Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/multi-product-ui/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/multi-product-ui/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/frontend/multi-product-ui/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/frontend/multi-product-ui/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/frontend/multi-product-ui/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/frontend/multi-product-ui/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/frontend/multi-product-ui/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/frontend/multi-product-ui/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/frontend/multi-product-ui/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/frontend/multi-product-ui/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/ui-design/</loc>
-    <lastmod>2026-04-02T13:48:55+08:00</lastmod>
+    <lastmod>2026-05-24T16:35:47.109Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/frontend/ui-design/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://datawhalechina.github.io/easy-vibe/en/stage-2/frontend/ui-design/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://datawhalechina.github.io/easy-vibe/zh-tw/stage-2/frontend/ui-design/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://datawhalechina.github.io/easy-vibe/ja-jp/stage-2/frontend/ui-design/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://datawhalechina.github.io/easy-vibe/ko-kr/stage-2/frontend/ui-design/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://datawhalechina.github.io/easy-vibe/es-es/stage-2/frontend/ui-design/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://datawhalechina.github.io/easy-vibe/fr-fr/stage-2/frontend/ui-design/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://datawhalechina.github.io/easy-vibe/de-de/stage-2/frontend/ui-design/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://datawhalechina.github.io/easy-vibe/ar-sa/stage-2/frontend/ui-design/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://datawhalechina.github.io/easy-vibe/vi-vn/stage-2/frontend/ui-design/"/>
   </url>
   <url>
     <loc>https://datawhalechina.github.io/easy-vibe/zh-cn/stage-2/</loc>
