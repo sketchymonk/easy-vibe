@@ -1,253 +1,253 @@
-# 如何Despliegue Web 应用
+# Cómo desplegar aplicaciones web
 
-在本教程中，我们将介绍如何将你的 Web 应用Despliegue到互联网上，让其他人可以访问。我们会介绍三个常用的Despliegue平台：**腾讯云 CloudBase**、**Vercel** 和 **Zeabur**，帮助你快速完成从"写好代码"到"让别人可以在互联网上访问你的网站"的完整流程。
+En este tutorial, aprenderás a desplegar tu aplicación web en Internet para que otras personas puedan acceder a ella. Presentaremos tres plataformas de despliegue populares: **Tencent CloudBase**, **Vercel** y **Zeabur**, ayudándote a completar todo el proceso, desde "escribir el código" hasta "poner tu sitio web al alcance de cualquier persona en Internet".
 
-# 什么是"Despliegue"？
+# ¿Qué es el "despliegue"?
 
-在开始之前，我们先弄清楚"Despliegue（Deployment）"到底是什么意思。任何一个网站想要被外部用户访问，都必须有一个可以公开访问的网络地址（这个地址可以是 IP 地址，比如 123.45.67.89，也可以是域名，比如 [google.com](https://google.com/) 等）。但只有地址是不够的——你写好的网页代码（例如 HTML、CSS、JavaScript 文件，或者使用 React、Vue 等框架写的项目），以及相关的图片 / 视频资源，都必须"放"在一台 24 小时在线的服务器上，由它来响应网络请求，这样任何人的浏览器才能访问并下载这些资源。
+Antes de empezar, aclaremos qué significa exactamente "despliegue (Deployment)". Para que cualquier sitio web pueda ser visitado por usuarios externos, necesita una dirección de red accesible públicamente (esta dirección puede ser una dirección IP, como 123.45.67.89, o un nombre de dominio, como [google.com](https://google.com/)). Pero la dirección por sí sola no basta: el código de tu página web (por ejemplo, archivos HTML, CSS, JavaScript, o proyectos escritos con frameworks como React o Vue), junto con los recursos de imágenes y vídeos asociados, deben estar "alojados" en un servidor que esté conectado las 24 horas del día, para que pueda responder a las solicitudes de red y permitir que cualquier navegador acceda y descargue estos recursos.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image1.png)
 
-图片来源：https://www.hostinger.com/tutorials/what-is-cloud-hosting
+Fuente de la imagen: https://www.hostinger.com/tutorials/what-is-cloud-hosting
 
-把资源上传、配置好环境并让服务"跑起来"的整个过程，就被称为 **Despliegue（Deployment）**。
+El proceso completo de subir los recursos, configurar el entorno y poner el servicio en marcha se conoce como **despliegue (Deployment)**.
 
-简单来说：你在自己电脑上写好的网页，只要在本机启动程序，就只能通过本地地址在自己的浏览器里访问，因为这些代码只存在于你的硬盘上。"Despliegue"就是把你的代码和资源转移到一台连接着公网的专业服务器上，并做好配置，让这台服务器知道"别人访问时我要怎么响应"——比如：当有人在浏览器中输入你的域名时，服务器会立刻找到对应的网页文件，把内容传回给对方的设备，从而让用户看到你的页面。
+En términos sencillos: la página web que escribes en tu ordenador, si solo inicias el programa localmente, solo podrás acceder a ella desde tu propio navegador a través de una dirección local, porque ese código solo existe en tu disco duro. El "despliegue" consiste en transferir tu código y recursos a un servidor profesional conectado a la red pública, y configurarlo para que sepa "cómo responder cuando alguien accede"; por ejemplo, cuando alguien escribe tu dominio en el navegador, el servidor encuentra inmediatamente los archivos de la página web correspondientes y envía el contenido al dispositivo del usuario, permitiéndole ver tu página.
 
-如果手动Despliegue，一个项目往往需要好几个步骤，每一步都可能踩坑。常见关键步骤包括：
+Si realizas el despliegue manualmente, un proyecto suele requerir varios pasos, y cada uno puede tener sus complicaciones. Los pasos clave más comunes son:
 
-1. **服务器准备**：你需要先购买云服务器（比如阿里云、腾讯云、或 AWS EC2），选择服务器所在地区（如上海、新加坡）、配置（CPU、内存、磁盘大小等），还要学会如何远程连接服务器（例如通过 SSH 工具登录）。
+1. **Preparación del servidor**: Primero necesitas comprar un servidor en la nube (como Alibaba Cloud, Tencent Cloud o AWS EC2), elegir la región del servidor (por ejemplo, Shanghái, Singapur), la configuración (CPU, memoria, tamaño del disco, etc.) y aprender a conectarte remotamente al servidor (por ejemplo, mediante herramientas SSH).
    ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image2.png)
-2. **环境配置**：Web 应用需要在特定"环境"中才能运行——例如运行 Node.js 项目必须先安装 Node.js；运行 Python 项目必须安装 Python 以及对应的第三方库。如果环境版本不匹配，程序就可能报错、无法启动。
-3. **上传资源**：你需要把本地的代码和资源上传到服务器上，常用的方法包括 FTP 或 Git。如果项目体积比较大（比如包含视频文件），中途一旦断线，有时需要重新上传。
+2. **Configuración del entorno**: Las aplicaciones web necesitan un "entorno" específico para funcionar; por ejemplo, para ejecutar un proyecto Node.js debes instalar primero Node.js, y para un proyecto Python, debes instalar Python y las bibliotecas de terceros correspondientes. Si la versión del entorno no coincide, el programa puede dar errores o no iniciar.
+3. **Subida de recursos**: Necesitas subir el código y los recursos locales al servidor, utilizando métodos como FTP o Git. Si el proyecto es grande (por ejemplo, si contiene archivos de vídeo), una interrupción de la conexión puede obligarte a reiniciar la subida.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image3.png)
 
-4. **启动服务并测试**：上传完成后，你还需要在服务器上执行命令启动应用，并测试"分配的网络地址是否能访问"。如果访问不了，有可能是服务器防火墙没有放行对应端口（比如你的应用监听 3000 端口，但该端口被防火墙拦截），也可能是程序本身有 Bug，这时就需要查看服务器日志进行排查。
-   > 💡 可以把端口理解为区分同一台设备上不同应用的"房间号"，而 IP 则是这台设备的"门牌号"。IP 和端口合在一起（IP:port），就可以精确定位到某一个网络服务。
-5. **维护与更新**：后续每次你修改代码，都要重新上传并重启服务。如果服务器宕机（例如断电、网络故障），还需要手动重启应用，有时还要额外配置"进程守护工具"，让程序在异常退出后自动拉起。
+4. **Inicio del servicio y pruebas**: Una vez completada la subida, debes ejecutar comandos en el servidor para iniciar la aplicación y verificar si "la dirección de red asignada es accesible". Si no se puede acceder, puede deberse a que el firewall del servidor no ha abierto el puerto correspondiente (por ejemplo, tu aplicación escucha en el puerto 3000, pero ese puerto está bloqueado por el firewall), o puede haber un error en el propio programa, en cuyo caso deberás revisar los registros del servidor para diagnosticar el problema.
+   > 💡 Puedes entender el puerto como el "número de habitación" que distingue las diferentes aplicaciones en un mismo dispositivo, mientras que la IP es el "número de puerta" del dispositivo. La combinación de IP y puerto (IP:puerto) permite localizar con precisión un servicio de red específico.
+5. **Mantenimiento y actualización**: Cada vez que modifiques el código, deberás volver a subirlo y reiniciar el servicio. Si el servidor se cae (por ejemplo, por un corte de energía o un fallo de red), tendrás que reiniciar la aplicación manualmente, y en ocasiones deberás configurar además una "herramienta de guardianía de procesos" para que el programa se reinicie automáticamente si se cierra de forma anómala.
 
-像 CloudBase、Vercel、Zeabur 这样的"低代码Despliegue平台"，就是为了解决上述复杂问题而诞生的。它们会帮你自动完成"买服务器、配环境、上传代码、启动服务、监控运行"等步骤。你只需要把自己的代码仓库（比如 GitHub 或 GitLab）连接到平台，或者直接上传代码，它就会自动拉取代码、识别应用类型、配置对应的运行时环境，最后给你一个可以被任何人访问的公网地址。它甚至可以一键绑定你自己的域名。
+Plataformas de "despliegue de bajo código" como CloudBase, Vercel y Zeabur nacieron precisamente para resolver estos problemas complejos. Se encargan automáticamente de "comprar servidores, configurar entornos, subir código, iniciar servicios y supervisar la ejecución". Solo necesitas conectar tu repositorio de código (como GitHub o GitLab) a la plataforma, o subir el código directamente, y la plataforma se encargará de descargar el código, identificar el tipo de aplicación, configurar el entorno de ejecución correspondiente y, finalmente, darte una dirección pública accesible para cualquier persona. Incluso puedes vincular tu propio dominio con un solo clic.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image4.png)
 
-接下来，我们会分别介绍这三个平台的特点和使用方法，帮助你选择最适合自己的Despliegue方案。
+A continuación, presentaremos las características y los métodos de uso de cada plataforma, para ayudarte a elegir la solución de despliegue que mejor se adapte a tus necesidades.
 
 ---
 
-# Despliegue平台对比
+# Comparación de plataformas de despliegue
 
-| 平台 | 特点 | 适用场景 | 免费额度 |
+| Plataforma | Características | Casos de uso | Cuota gratuita |
 |------|------|----------|----------|
-| **腾讯云 CloudBase** | 国内访问速度快，与微信生态深度整合 | 国内用户为主、需要微信小程序支持的项目 | 有免费额度 |
-| **Vercel** | 前端框架支持好，与 GitHub 集成紧密 | React/Vue/Next.js 等现代前端项目 | 有免费额度 |
-| **Netlify** | 功能全面，支持表单处理和身份验证，与 Git 集成好 | 需要表单处理、身份验证等高级功能的静态网站 | 有免费额度 |
-| **Zeabur** | 支持多种语言和服务模板，配置灵活 | 需要Despliegue多种服务（如 Dify、n8n）的复杂项目 | 每月约 5 美元免费额度 |
+| **Tencent CloudBase** | Velocidad de acceso rápida en China continental, integración profunda con el ecosistema WeChat | Proyectos orientados al mercado chino que necesitan soporte para mini programas de WeChat | Dispone de cuota gratuitas |
+| **Vercel** | Buen soporte para frameworks frontend, integración estrecha con GitHub | Proyectos frontend modernos como React/Vue/Next.js | Dispone de cuota gratuita |
+| **Netlify** | Funcionalidad completa, soporte para procesamiento de formularios y autenticación, buena integración con Git | Sitios estáticos que necesitan funcionalidades avanzadas como procesamiento de formularios y autenticación | Dispone de cuota gratuita |
+| **Zeabur** | Soporta múltiples lenguajes y plantillas de servicios, configuración flexible | Proyectos complejos que necesitan desplegar múltiples servicios (como Dify, n8n) | Aproximadamente 5 USD gratuitos al mes |
 
 ---
 
-# 1. 腾讯云 CloudBase
+# 1. Tencent CloudBase
 
-腾讯云 CloudBase（云开发）是腾讯云提供的一站式后端云服务，特别适合国内开发者使用。它的优势在于：
+Tencent CloudBase (Cloud Development) es un servicio en la nube backend todo en uno proporcionado por Tencent Cloud, especialmente adecuado para desarrolladores en China. Sus ventajas son:
 
-- **国内访问速度快**：服务器位于国内，访问延迟低
-- **微信生态整合**：可以方便地对接微信小程序、公众号
-- **一站式解决方案**：提供静态网站托管、云函数、数据库、存储等全套服务
-- **免费额度充足**：个人开发者有充足的免费资源额度
+- **Velocidad de acceso rápida en China**: Los servidores están ubicados en China continental, con baja latencia de acceso
+- **Integración con el ecosistema WeChat**: Permite conectar fácilmente con mini programas y cuentas oficiales de WeChat
+- **Solución todo en uno**: Ofrece alojamiento de sitios estáticos, funciones en la nube, bases de datos, almacenamiento y más
+- **Cuotas gratuitas generosas**: Los desarrolladores individuales disponen de amplias cuotas de recursos gratuitos
 
-## 使用 CloudBase Despliegue Web 应用
+## Usar CloudBase para desplegar aplicaciones web
 
-### 步骤 1：注册并登录
+### Paso 1: Registro e inicio de sesión
 
-访问 [腾讯云 CloudBase 控制台](https://console.cloud.tencent.com/tcb)，使用微信或 QQ 登录。
+Accede a la [consola de Tencent CloudBase](https://console.cloud.tencent.com/tcb) e inicia sesión con WeChat o QQ.
 
-### 步骤 2：创建环境
+### Paso 2: Crear un entorno
 
-点击"新建环境"，选择一个环境名称（如 `my-web-app`）。
+Haz clic en "Nuevo entorno" y elige un nombre para el entorno (como `my-web-app`).
 
-> ⚠️ **注意**：CloudBase 的免费体验版需要兑换码才能开通。你需要关注腾讯云 CloudBase 公众号，在公众号中输入"领取兑换码"获取免费体验版的兑换码，然后在创建环境时填写兑换码即可开通免费环境（免费试用期为 6 个月）。
+> ⚠️ **Nota**: La versión de prueba gratuita de CloudBase requiere un código de canje para activarse. Debes seguir la cuenta oficial de Tencent CloudBase en WeChat, enviar "领取兑换码" (solicitar código de canje) para obtenerlo, y luego introducir el código al crear el entorno para activar el entorno gratuito (el período de prueba gratuito es de 6 meses).
 
-### 步骤 3：开通静态网站托管
+### Paso 3: Activar el alojamiento de sitios estáticos
 
-在环境管理页面，找到"静态网站托管"功能并开通。开通后你会获得一个默认的访问域名。
+En la página de gestión del entorno, busca la función "Alojamiento de sitios estáticos" y actívala. Una vez activada, recibirás un dominio de acceso predeterminado.
 
-CloudBase 的静态网站托管提供多种Despliegue方式，与 Zeabur 类似：
+El alojamiento de sitios estáticos de CloudBase ofrece múltiples métodos de despliegue, similares a Zeabur:
 
-- **本地项目上传**：直接从本地上传构建好的静态文件（HTML、CSS、JS 等）
-- **模板Despliegue**：使用预设模板快速创建项目，如 React Web 应用模板、Vue Web 应用模板
-- **Git 仓库Despliegue**：支持从 GitHub 等代码仓库自动拉取代码并Despliegue
+- **Subida de proyecto local**: Sube directamente archivos estáticos ya compilados (HTML, CSS, JS, etc.) desde tu ordenador
+- **Despliegue desde plantilla**: Crea proyectos rápidamente usando plantillas preestablecidas, como plantillas de aplicaciones web React o Vue
+- **Despliegue desde repositorio Git**: Permite descargar código automáticamente desde repositorios como GitHub y desplegarlo
 
-### 步骤 4：Despliegue代码
+### Paso 4: Desplegar el código
 
-在静态网站托管页面，CloudBase 提供三种Despliegue方式：
+En la página de alojamiento de sitios estáticos, CloudBase ofrece tres métodos de despliegue:
 
-**方式一：本地项目Despliegue（本地项目上传）**
-- 在控制台选择"本地项目Despliegue"
-- 直接上传构建好的静态文件（HTML、CSS、JS 等）
-- 选择你本地构建好的项目文件夹（如 `dist` 或 `build` 目录）
-- 等待上传完成即可访问
+**Método 1: Despliegue de proyecto local (subida de proyecto local)**
+- Selecciona "Despliegue de proyecto local" en la consola
+- Sube directamente los archivos estáticos compilados (HTML, CSS, JS, etc.)
+- Selecciona la carpeta de tu proyecto compilado localmente (como el directorio `dist` o `build`)
+- Espera a que se complete la subida para acceder
 
-**方式二：模板Despliegue**
-- 使用预设模板快速创建项目
-- 支持 React Web 应用模板、Vue Web 应用模板等
-- 基于模板自动构建并Despliegue
+**Método 2: Despliegue desde plantilla**
+- Crea proyectos rápidamente usando plantillas preestablecidas
+- Soporta plantillas de aplicaciones web React, Vue, etc.
+- Construcción y despliegue automáticos basados en la plantilla
 
-**方式三：Git 仓库Despliegue**
-- **Git 个人仓库Despliegue**：绑定你的 GitHub 等个人代码仓库
-- **公开仓库Despliegue**：支持从公开的 Git 仓库拉取代码
-- 配置自动构建命令（如 `npm run build`）
-- 每次推送代码会自动重新Despliegue
+**Método 3: Despliegue desde repositorio Git**
+- **Despliegue desde repositorio personal de Git**: Vincula tu repositorio personal de GitHub u otras plataformas
+- **Despliegue desde repositorio público**: Permite descargar código desde repositorios Git públicos
+- Configura comandos de construcción automática (como `npm run build`)
+- Cada vez que envías código, se redespliega automáticamente
 
-> 💡 **提示**：你也可以使用 CLI 工具进行Despliegue：
+> 💡 **Consejo**: También puedes usar la herramienta CLI para desplegar:
 > ```bash
-> # 安装 CloudBase CLI
+> # Instalar CloudBase CLI
 > npm install -g @cloudbase/cli
-> # 登录
+> # Iniciar sesión
 > tcb login
-> # Despliegue
+> # Desplegar
 > tcb hosting deploy ./dist -e your-env-id
 > ```
 
-### 步骤 5：配置自定义域名（可选）
+### Paso 5: Configurar un dominio personalizado (opcional)
 
-在静态网站托管设置中，可以绑定你自己的域名，并申请免费的 HTTPS 证书。
+En la configuración de alojamiento de sitios estáticos, puedes vincular tu propio dominio y solicitar un certificado HTTPS gratuito.
 
 ---
 
 # 2. Vercel
 
-Vercel 是全球最流行的前端Despliegue平台之一，特别适合Despliegue React、Vue、Next.js 等现代前端框架项目。它的特点包括：
+Vercel es una de las plataformas de despliegue frontend más populares del mundo, especialmente adecuada para desplegar proyectos con frameworks frontend modernos como React, Vue y Next.js. Sus características incluyen:
 
-- **与 GitHub 深度集成**：推送代码即自动Despliegue
-- **自动预览**：每个 Pull Request 都会生成独立的预览链接
-- **全球 CDN**：网站自动分发到全球节点，访问速度快
-- **Serverless 函数**：支持在项目中编写后端 API
+- **Integración profunda con GitHub**: El despliegue es automático al enviar código
+- **Previsualización automática**: Cada Pull Request genera un enlace de previsualización independiente
+- **CDN global**: El sitio web se distribuye automáticamente a nodos de todo el mundo, con alta velocidad de acceso
+- **Funciones Serverless**: Permite escribir APIs backend dentro del proyecto
 
-> ⚠️ **注意**：Vercel 在部分网络环境下访问可能不太稳定，国内用户建议优先考虑 CloudBase。
+> ⚠️ **Nota**: El acceso a Vercel puede ser inestable en algunos entornos de red. Para usuarios en China, se recomienda priorizar CloudBase.
 
-## 使用 Vercel Despliegue Web 应用
+## Usar Vercel para desplegar aplicaciones web
 
-### 步骤 1：注册账号
+### Paso 1: Crear una cuenta
 
-访问 [Vercel 官网](https://vercel.com)，使用 GitHub 账号登录。
+Visita el [sitio oficial de Vercel](https://vercel.com) e inicia sesión con tu cuenta de GitHub.
 
-### 步骤 2：导入项目
+### Paso 2: Importar el proyecto
 
-1. 点击 "Add New Project"
-2. 选择你要Despliegue的 GitHub 仓库
-3. 如果没有看到想要的仓库，点击 "Adjust GitHub App Permissions" 授权访问
+1. Haz clic en "Add New Project"
+2. Selecciona el repositorio de GitHub que deseas desplegar
+3. Si no ves el repositorio que buscas, haz clic en "Adjust GitHub App Permissions" para autorizar el acceso
 
-### 步骤 3：配置构建设置
+### Paso 3: Configurar los ajustes de construcción
 
-Vercel 会自动识别项目类型并配置构建命令：
+Vercel identificará automáticamente el tipo de proyecto y configurará los comandos de construcción:
 
-| 框架 | 构建命令 | 输出目录 |
+| Framework | Comando de construcción | Directorio de salida |
 |------|----------|----------|
 | React | `npm run build` | `build` |
 | Vue | `npm run build` | `dist` |
 | Next.js | `next build` | - |
-| 纯 HTML | - | 项目根目录 |
+| HTML puro | - | Directorio raíz del proyecto |
 
-如果自动识别不正确，可以手动修改：
-- **Build Command**: 构建命令，如 `npm run build`
-- **Output Directory**: 构建输出目录，如 `dist` 或 `build`
-- **Install Command**: 依赖安装命令，通常是 `npm install`
+Si la detección automática no es correcta, puedes modificarla manualmente:
+- **Build Command**: Comando de construcción, como `npm run build`
+- **Output Directory**: Directorio de salida de la construcción, como `dist` o `build`
+- **Install Command**: Comando de instalación de dependencias, normalmente `npm install`
 
-### 步骤 4：Despliegue
+### Paso 4: Desplegar
 
-点击 "Deploy" 按钮，等待构建完成。构建成功后，你会获得一个 `xxx.vercel.app` 的域名。
+Haz clic en el botón "Deploy" y espera a que se complete la construcción. Una vez exitosa, recibirás un dominio con el formato `xxx.vercel.app`.
 
-### 步骤 5：自定义域名（可选）
+### Paso 5: Dominio personalizado (opcional)
 
-在项目设置中的 "Domains" 页面，可以添加你自己的域名。Vercel 会自动配置 HTTPS。
+En la página "Domains" de la configuración del proyecto, puedes añadir tu propio dominio. Vercel configurará HTTPS automáticamente.
 
 ---
 
 # 3. Netlify
 
-Netlify 是另一个非常流行的前端Despliegue平台，与 Vercel 类似，特别适合Despliegue静态网站和单页应用（SPA）。它的特点包括：
+Netlify es otra plataforma de despliegue frontend muy popular, similar a Vercel, especialmente adecuada para desplegar sitios estáticos y aplicaciones de página única (SPA). Sus características incluyen:
 
-- **功能全面**：除了静态网站托管，还支持表单处理、身份验证、边缘函数等高级功能
-- **与 Git 深度集成**：支持 GitHub、GitLab、Bitbucket，推送代码自动Despliegue
-- **分支预览**：每个分支都会自动生成独立的预览链接
-- **全球 CDN**：网站自动分发到全球节点，访问速度快
-- **表单处理**：无需后端代码即可处理网站表单提交
-- **身份验证**：内置用户身份验证功能，可快速实现登录/注册
+- **Funcionalidad completa**: Además del alojamiento de sitios estáticos, soporta procesamiento de formularios, autenticación, funciones edge y otras funciones avanzadas
+- **Integración profunda con Git**: Soporta GitHub, GitLab y Bitbucket; el despliegue es automático al enviar código
+- **Previsualización por ramas**: Cada rama genera automáticamente un enlace de previsualización independiente
+- **CDN global**: El sitio web se distribuye automáticamente a nodos de todo el mundo, con alta velocidad de acceso
+- **Procesamiento de formularios**: Permite procesar envíos de formularios web sin necesidad de código backend
+- **Autenticación**: Función de autenticación de usuarios integrada, permite implementar rápidamente inicio de sesión y registro
 
-> ⚠️ **注意**：Netlify 的国内访问速度可能不如 CloudBase，建议主要面向海外用户的项目使用。
+> ⚠️ **Nota**: La velocidad de acceso a Netlify desde China puede ser inferior a la de CloudBase. Se recomienda para proyectos orientados principalmente a usuarios internacionales.
 
-## 使用 Netlify Despliegue Web 应用
+## Usar Netlify para desplegar aplicaciones web
 
-### 步骤 1：注册账号
+### Paso 1: Crear una cuenta
 
-访问 [Netlify 官网](https://www.netlify.com)，点击 "Sign up" 注册。你可以使用 GitHub、GitLab、Bitbucket 或邮箱注册。
+Visita el [sitio oficial de Netlify](https://www.netlify.com) y haz clic en "Sign up" para registrarte. Puedes usar GitHub, GitLab, Bitbucket o tu correo electrónico.
 
-### 步骤 2：导入项目
+### Paso 2: Importar el proyecto
 
-1. 登录后点击 "Add new site" → "Import an existing project"
-2. 选择你的代码托管平台（如 GitHub）
-3. 授权 Netlify 访问你的仓库
-4. 从列表中选择你要Despliegue的仓库
+1. Tras iniciar sesión, haz clic en "Add new site" → "Import an existing project"
+2. Selecciona tu plataforma de alojamiento de código (como GitHub)
+3. Autoriza a Netlify para acceder a tus repositorios
+4. Selecciona de la lista el repositorio que deseas desplegar
 
-### 步骤 3：配置构建设置
+### Paso 3: Configurar los ajustes de construcción
 
-Netlify 会自动识别常见的前端框架并配置构建设置：
+Netlify detectará automáticamente los frameworks frontend más comunes y configurará los ajustes de construcción:
 
-| 框架 | 构建命令 | 发布目录 |
+| Framework | Comando de construcción | Directorio de publicación |
 |------|----------|----------|
 | React | `npm run build` | `build` |
 | Vue | `npm run build` | `dist` |
 | Angular | `ng build` | `dist/<project-name>` |
 | Next.js | `next build` | `out` |
-| 纯 HTML | - | `.`（项目根目录） |
+| HTML puro | - | `.` (directorio raíz del proyecto) |
 
-如果自动识别不正确，可以手动配置：
-- **Build command**: 构建命令，如 `npm run build`
-- **Publish directory**: 构建输出目录，如 `dist` 或 `build`
+Si la detección automática no es correcta, puedes configurarlo manualmente:
+- **Build command**: Comando de construcción, como `npm run build`
+- **Publish directory**: Directorio de salida de la construcción, como `dist` o `build`
 
-### 步骤 4：Despliegue
+### Paso 4: Desplegar
 
-点击 "Deploy site" 按钮，等待构建完成。构建成功后，你会获得一个 `xxx.netlify.app` 的域名，任何人都可以通过这个地址访问你的网站。
+Haz clic en el botón "Deploy site" y espera a que se complete la construcción. Una vez exitosa, recibirás un dominio con el formato `xxx.netlify.app`, y cualquier persona podrá acceder a tu sitio web a través de esa dirección.
 
-### 步骤 5：配置自定义域名（可选）
+### Paso 5: Configurar un dominio personalizado (opcional)
 
-1. 进入站点设置，点击 "Domain management"
-2. 点击 "Add custom domain"
-3. 输入你的域名并按照提示配置 DNS 记录
-4. Netlify 会自动申请并配置 HTTPS 证书
+1. Accede a la configuración del sitio y haz clic en "Domain management"
+2. Haz clic en "Add custom domain"
+3. Introduce tu dominio y sigue las instrucciones para configurar los registros DNS
+4. Netlify solicitará y configurará automáticamente un certificado HTTPS
 
-### 特色功能
+### Funciones destacadas
 
-#### 1. 表单处理
+#### 1. Procesamiento de formularios
 
-Netlify 提供了一个非常方便的功能：无需后端代码即可处理表单提交。
+Netlify ofrece una función muy práctica: procesar envíos de formularios sin necesidad de código backend.
 
-只需在 HTML 表单中添加 `netlify` 属性：
+Solo tienes que añadir el atributo `netlify` al formulario HTML:
 
 ```html
 <form name="contact" netlify>
   <p>
-    <label>姓名: <input type="text" name="name" /></label>
+    <label>Nombre: <input type="text" name="name" /></label>
   </p>
   <p>
-    <label>邮箱: <input type="email" name="email" /></label>
+    <label>Correo electrónico: <input type="email" name="email" /></label>
   </p>
   <p>
-    <label>留言: <textarea name="message"></textarea></label>
+    <label>Mensaje: <textarea name="message"></textarea></label>
   </p>
   <p>
-    <button type="submit">发送</button>
+    <button type="submit">Enviar</button>
   </p>
 </form>
 ```
 
-Despliegue后，表单提交的数据会自动发送到 Netlify 后台，你可以在 "Forms" 页面查看所有提交记录，也可以设置邮件通知或将数据转发到其他服务。
+Tras el despliegue, los datos enviados desde el formulario se enviarán automáticamente al panel de Netlify. Puedes ver todos los registros de envíos en la página "Forms", y también configurar notificaciones por correo electrónico o reenviar los datos a otros servicios.
 
-#### 2. Netlify Functions（边缘函数）
+#### 2. Netlify Functions (funciones edge)
 
-Netlify 支持Despliegue无服务器函数（Serverless Functions），让你可以在不搭建完整后端服务器的情况下，实现简单的 API 接口。你可以使用 JavaScript 或 TypeScript 编写函数，Despliegue后会自动获得一个可访问的 URL。
+Netlify permite desplegar funciones serverless (Serverless Functions), lo que te permite implementar interfaces API sencillas sin necesidad de montar un servidor backend completo. Puedes escribir funciones en JavaScript o TypeScript, y tras el despliegue obtendrás automáticamente una URL accesible.
 
-例如，创建一个 `hello.js` 文件：
+Por ejemplo, crea un archivo `hello.js`:
 
 ```javascript
 exports.handler = async (event, context) => {
@@ -258,233 +258,233 @@ exports.handler = async (event, context) => {
 };
 ```
 
-Despliegue后，你可以通过 `https://你的域名/.netlify/functions/hello` 访问这个函数。
+Tras el despliegue, podrás acceder a esta función a través de `https://tu-dominio/.netlify/functions/hello`.
 
-#### 3. 本地开发支持
+#### 3. Soporte para desarrollo local
 
-Netlify 提供了 CLI 工具，方便你在本地开发和测试：
+Netlify proporciona una herramienta CLI para facilitar el desarrollo y las pruebas en local:
 
 ```bash
-# 安装 Netlify CLI
+# Instalar Netlify CLI
 npm install -g netlify-cli
 
-# 登录账号
+# Iniciar sesión en tu cuenta
 netlify login
 
-# 本地启动开发服务器
+# Iniciar el servidor de desarrollo local
 netlify dev
 
-# 本地测试函数
+# Probar funciones localmente
 netlify functions:serve
 ```
 
-使用 CLI 工具可以在本地模拟 Netlify 环境，包括表单提交、函数调用等功能，方便在Despliegue前进行测试。
+La herramienta CLI te permite simular el entorno de Netlify en local, incluyendo el envío de formularios y la invocación de funciones, lo que facilita las pruebas antes del despliegue.
 
 ---
 
 # 4. Zeabur
 
-Zeabur 是一个新兴的Despliegue平台，特别适合需要Despliegue多种服务的复杂项目。它的优势在于：
+Zeabur es una plataforma de despliegue emergente, especialmente adecuada para proyectos complejos que necesitan desplegar múltiples servicios. Sus ventajas son:
 
-- **服务模板丰富**：内置 Dify、n8n、数据库等多种服务模板
-- **支持多种Despliegue方式**：GitHub、模板、Docker 镜像、本地项目等
-- **灵活的服务组合**：可以在一个项目中Despliegue多个相互关联的服务
-- **按量计费**：用多少付多少，适合实验性项目
+- **Amplia variedad de plantillas de servicios**: Incluye plantillas integradas para Dify, n8n, bases de datos y más
+- **Soporta múltiples métodos de despliegue**: GitHub, plantillas, imágenes Docker, proyectos locales, etc.
+- **Combinación flexible de servicios**: Permite desplegar múltiples servicios interrelacionados en un solo proyecto
+- **Facturación por uso**: Pagas solo por lo que usas, ideal para proyectos experimentales
 
-## 使用 Zeabur Despliegue Dify
+## Usar Zeabur para desplegar Dify
 
-在之前的课程中，我们已经简单接触过 Dify。现在，我们可以通过 [Zeabur](https://zeabur.com/projects) 非常轻松地启动自己的 Dify 服务。首先打开 [控制台页面](https://zeabur.com/projects)，我们先看一下上面的各个区域。
+En lecciones anteriores ya tuvimos un primer contacto con Dify. Ahora, podemos iniciar nuestro propio servicio de Dify muy fácilmente a través de [Zeabur](https://zeabur.com/projects). Primero abre la [página de la consola](https://zeabur.com/projects) y echemos un vistazo a las diferentes áreas.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image5.png)
 
-在这个页面上，你首先能看到许多方块，这些就是已经启动的服务。在顶部菜单中，你会看到 Agent、Servers、Docs、Templates 等几个选项，它们分别代表：
+En esta página, lo primero que verás son muchos bloques, que representan los servicios ya iniciados. En el menú superior verás varias opciones como Agent, Servers, Docs y Templates, que representan respectivamente:
 
-1. **Agent**：可以打开 Zeabur 内置的智能助手（Agent），向它提问如何操作，或者查询当前服务器的状态。
-2. **Servers**：在这里可以添加你自己购买的云服务器，或者直接通过 Zeabur 购买服务器。
-3. **Docs**：查看 Zeabur 的完整文档说明。
-4. **Templates**：这里列出了所有内置的模板镜像。
+1. **Agent**: Permite abrir el asistente inteligente (Agent) integrado en Zeabur, para preguntarle cómo realizar operaciones o consultar el estado actual del servidor.
+2. **Servers**: Aquí puedes añadir servidores en la nube que hayas comprado, o comprar servidores directamente a través de Zeabur.
+3. **Docs**: Consulta la documentación completa de Zeabur.
+4. **Templates**: Aquí se listan todas las plantillas de imágenes integradas.
 
-> 这里提到的"镜像（Image）"，可以理解为"包含代码和运行环境的压缩包"。当某个服务在一台服务器上成功跑起来之后，我们可以选择把"这套运行环境 + 代码"打包成镜像。之后，在任何新服务器上，只要把这个压缩包解压并运行，就不需要重新配置环境和代码，服务就能直接跑起来。
+> La "imagen (Image)" mencionada aquí puede entenderse como un "paquete comprimido que contiene el código y el entorno de ejecución". Cuando un servicio se ejecuta correctamente en un servidor, podemos elegir empaquetar "este entorno de ejecución + código" como una imagen. Posteriormente, en cualquier servidor nuevo, basta con descomprimir y ejecutar este paquete, sin necesidad de configurar de nuevo el entorno y el código, y el servicio funcionará directamente.
 
-在页面右上角，你还能看到自己的余额。默认情况下，每个月会有 5 美元左右的免费额度。关于细节计费规则暂时可以不用太在意，只需要知道：只要服务器在运行，就会消耗额度。
+En la esquina superior derecha de la página, también puedes ver tu saldo. Por defecto, hay una cuota gratuita de aproximadamente 5 USD al mes. No te preocupes demasiado por los detalles de facturación por ahora; solo necesitas saber que mientras el servidor esté en ejecución, consumirá saldo.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image6.png)
 
-点击余额可以查看每日的消耗明细。
+Haz clic en el saldo para ver los detalles del consumo diario.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image7.png)
 
-现在我们来创建自己的 Dify 服务。首先，在 [控制台首页](https://zeabur.com/projects) 点击 "New Project"。
+Ahora vamos a crear nuestro propio servicio de Dify. Primero, en la [página principal de la consola](https://zeabur.com/projects), haz clic en "New Project".
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image8.png)
 
-接下来是各个创建方式的解释：
+A continuación se explica cada método de creación:
 
-1. **GitHub**  
-   可以连接到你的 GitHub 账号。绑定之后，就可以直接从 GitHub 仓库里选择项目Despliegue（GitHub 是目前全球最大的代码托管平台）。
-2. **Template（模板）**  
-    可以基于模板来Despliegue服务。Zeabur 内置了很多预设项目模板（例如 Dify、n8n 等），你可以基于这些模板快速创建并Despliegue应用。
+1. **GitHub**
+   Permite conectar tu cuenta de GitHub. Una vez vinculada, podrás seleccionar proyectos directamente desde tus repositorios de GitHub para desplegarlos (GitHub es actualmente la plataforma de alojamiento de código más grande del mundo).
+2. **Template (plantilla)**
+   Permite desplegar servicios basados en plantillas. Zeabur incluye muchas plantillas de proyectos preestablecidos (como Dify, n8n, etc.), y puedes crear y desplegar aplicaciones rápidamente a partir de estas plantillas.
    ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image9.png)
-3. **Databases（数据库）**  
-   用于Despliegue数据库服务，比如 MySQL、MongoDB 等常见数据库。
+3. **Databases (bases de datos)**
+   Para desplegar servicios de bases de datos, como MySQL, MongoDB y otras bases de datos comunes.
    ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image10.png)
-4. **Functions（函数）**  
-   可以Despliegue函数服务，你可以编写 JavaScript 或 Python 代码，让它们以函数的形式被调用。
+4. **Functions (funciones)**
+   Permite desplegar servicios de funciones. Puedes escribir código en JavaScript o Python y ejecutarlo como funciones invocables.
    ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image11.png)
 
    ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image12.png)
 
-5. **Local Project（本地项目）**  
-   上传一个本地文件夹，Zeabur 会自动识别其中的启动脚本。这适合将你已经在本地开发好的项目快速Despliegue到 Zeabur 上。
+5. **Local Project (proyecto local)**
+   Sube una carpeta local y Zeabur detectará automáticamente el script de inicio. Es ideal para desplegar rápidamente un proyecto que ya tienes desarrollado en local.
    ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image13.png)
-6. **Docker Image**  
-   Despliegue已经打包好的 Docker 镜像。如果你的项目已经被打成了 Docker 镜像（例如存放在 Docker Hub 或其他镜像仓库中），可以在这里直接Despliegue。
+6. **Docker Image**
+   Despliega una imagen Docker ya empaquetada. Si tu proyecto se ha convertido en una imagen Docker (por ejemplo, almacenada en Docker Hub u otro registro de imágenes), puedes desplegarla directamente aquí.
    ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image14.png)
-7. **Cursor**  
-   如果你安装了 Cursor（例如 Cursor IDE），可以通过这个入口将 Cursor 中的项目直接Despliegue到 Zeabur。
+7. **Cursor**
+   Si tienes instalado Cursor (por ejemplo, Cursor IDE), puedes usar esta opción para desplegar directamente tu proyecto de Cursor en Zeabur.
 
-如果你想Despliegue自己的 Dify 服务，推荐选择 **Template** 方式，然后在搜索框中输入 "dify"。可以看到很多由不同作者维护的版本，你可以任选其一（比如 v1.6.0 版本）。
+Si quieres desplegar tu propio servicio de Dify, te recomendamos elegir el método **Template** y luego escribir "dify" en el cuadro de búsqueda. Verás muchas versiones mantenidas por diferentes autores; puedes elegir cualquiera de ellas (por ejemplo, la versión v1.6.0).
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image15.png)
 
-接着，输入任意一个名称，Zeabur 会基于这个名称生成一个临时的自定义域名。之后所有人都可以通过这个网址访问你的服务。
+A continuación, introduce cualquier nombre y Zeabur generará un dominio personalizado temporal basado en ese nombre. Después, cualquier persona podrá acceder a tu servicio a través de esta URL.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image16.png)
 
-创建完成后，你会看到多个程序（服务）依次启动。需要耐心等待所有服务都进入"已启动"状态。（Dify 服务是由多个程序组成的，每个程序负责不同的功能，它们之间会相互协作。）
+Una vez completada la creación, verás múltiples programas (servicios) iniciándose secuencialmente. Debes esperar pacientemente a que todos los servicios entren en estado "iniciado". (El servicio de Dify está compuesto por múltiples programas, cada uno responsable de diferentes funciones, que colaboran entre sí.)
 
-一般来说，你只需要点击左侧的 Dify 应用，就可以看到默认的访问入口地址。但在本例中，由于前面还套了一层 nginx，你需要点击 nginx 服务来获取最终访问地址。可以理解为：nginx 就是负责对外统一"收发请求"的主程序，它会把外部访问的地址分发给内部各个服务。点击左侧的 Nginx，在详情页中可以看到当前的服务地址，然后在浏览器里打开这个地址，等待服务完全启动。
+Generalmente, solo necesitas hacer clic en la aplicación de Dify en el lado izquierdo para ver la dirección de acceso predeterminada. Sin embargo, en este caso, como hay una capa de nginx por delante, debes hacer clic en el servicio de nginx para obtener la dirección de acceso final. Puedes entenderlo así: nginx es el programa principal responsable de "recibir y enviar solicitudes" de forma unificada hacia el exterior, y distribuye las direcciones de acceso externo a cada servicio interno. Haz clic en Nginx en el lado izquierdo, y en la página de detalles podrás ver la dirección actual del servicio. Luego abre esa dirección en el navegador y espera a que el servicio se inicie completamente.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image17.png)
 
-稍等片刻后，你就能看到 Dify 的登录界面了。输入邮箱地址和注册密码，就可以开始使用你自己的 Dify 服务了。
+Tras unos instantes, verás la pantalla de inicio de sesión de Dify. Introduce tu dirección de correo electrónico y una contraseña de registro, y podrás empezar a usar tu propio servicio de Dify.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image18.png)
 
-如果你有兴趣，还可以顺便启动一个 n8n 服务。n8n 也是海外非常流行的一款 AI 工作流平台。
+Si te interesa, también puedes aprovechar para iniciar un servicio de n8n. n8n es otra plataforma de flujos de trabajo de IA muy popular a nivel internacional.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image19.png)![](/zh-cn/stage-2/backend/zeabur-deployment/images/image20.png)
 
-## 使用 Zeabur 与 Trae Despliegue贪吃蛇游戏
+## Usar Zeabur y Trae para desplegar el juego Snake
 
-在本教程的下一个部分，我们会体验 Zeabur 的一些进阶用法。我们先用 Trae 生成一个贪吃蛇小游戏，再把它Despliegue到 Zeabur 的服务器上，并配置一个可公开访问的链接，让任何人都可以打开你的游戏。
+En la siguiente parte de este tutorial, exploraremos algunos usos avanzados de Zeabur. Primero usaremos Trae para generar un pequeño juego de Snake, luego lo desplegaremos en el servidor de Zeabur y configuraremos un enlace de acceso público para que cualquier persona pueda abrir tu juego.
 
-第一步，是在本地使用 Trae 创建一个贪吃蛇项目。
+El primer paso es crear un proyecto de Snake en local usando Trae.
 
-### 使用 HTML 框架实现
+### Implementación con HTML
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image23.png)
 
-对于 Trae 来说，生成一个基于 HTML 的贪吃蛇网页游戏非常简单。游戏生成完成后，你只需要按照前面介绍的 Zeabur 本地Despliegue方式，把包含所有文件的文件夹上传上去即可。
+Para Trae, generar un juego web de Snake basado en HTML es muy sencillo. Una vez que el juego se haya generado, solo necesitas subir la carpeta que contiene todos los archivos siguiendo el método de despliegue local de Zeabur que describimos anteriormente.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image24.png)![](/zh-cn/stage-2/backend/zeabur-deployment/images/image25.png)![](/zh-cn/stage-2/backend/zeabur-deployment/images/image26.png)
 
-完成后，你就会进入该服务的详情界面：
+Una vez completado, entrarás en la interfaz de detalles del servicio:
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image27.png)
 
-点击左侧的 "Network" 选项，在页面中找到 "Public Address" 区域。点击 "Generate Domain"，即可生成一个对外访问地址，你可以输入任意喜欢的名称。
+Haz clic en la opción "Network" en el lado izquierdo y busca el área "Public Address" en la página. Haz clic en "Generate Domain" para generar una dirección de acceso público; puedes introducir cualquier nombre que te guste.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image28.png)
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image29.png)
 
-生成完成后，只要在浏览器中打开这个地址，就可以运行你自己的贪吃蛇游戏了。其它 HTML 类型的 Web 应用也可以用完全相同的方式来Despliegue。
+Una vez generada, abre esta dirección en el navegador y podrás ejecutar tu propio juego de Snake. Otras aplicaciones web de tipo HTML también pueden desplegarse exactamente de la misma manera.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image30.png)
 
-### 使用 React 框架实现
+### Implementación con React
 
-前面我们学习了如何Despliegue基于 HTML 的 Web 应用。接下来，我们再尝试Despliegue一个目前更常用的前端框架：React 应用。相比纯 HTML，React 被认为是一种更加成熟、现代的前端开发框架。它通过组件化的方式组织页面结构，能够显著加快复杂页面的开发，是企业级项目中非常主流的选择。
+Anteriormente aprendimos a desplegar aplicaciones web basadas en HTML. Ahora vamos a probar el despliegue con un framework frontend más utilizado actualmente: aplicaciones React. Comparado con HTML puro, React se considera un framework de desarrollo frontend más maduro y moderno. Organiza la estructura de la página mediante componentes, lo que acelera significativamente el desarrollo de páginas complejas, y es una opción muy popular en proyectos empresariales.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image31.png)
 
-#### 重构为 React 架构
+#### Refactorización a arquitectura React
 
-在 Trae 中，你只需要向 Agent 说明："帮我把这份代码重构成 React 架构"，就可以比较轻松地把原本基于 HTML 的结构重构成 React 项目。
+En Trae, solo tienes que indicarle al Agent: "Ayúdame a refactorizar este código a una arquitectura React", y podrás convertir fácilmente la estructura basada en HTML en un proyecto React.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image32.png)
 
-不过，相比简单的 HTML 文件，React 应用依赖更复杂的构建工具和项目结构，因此Despliegue过程也会稍微麻烦一些。一个典型的问题体现在端口设置上：默认情况下，React 应用一般会监听 3000 端口（你也可以在配置文件或启动日志中看到这一点）。
+Sin embargo, comparado con los archivos HTML simples, las aplicaciones React dependen de herramientas de construcción y estructuras de proyecto más complejas, por lo que el proceso de despliegue también es algo más complicado. Un problema típico se refleja en la configuración de puertos: por defecto, las aplicaciones React suelen escuchar en el puerto 3000 (puedes ver esto en el archivo de configuración o en los registros de inicio).
 
-然而，在 Zeabur 上这样Despliegue会失败——因为 Zeabur 只支持监听 8080 端口的应用。也就是说，如果想让 React 应用在 Zeabur 上正常运行，我们必须先把默认监听端口从 3000 改成 8080。
+Sin embargo, desplegar de esta manera en Zeabur fallará, porque Zeabur solo soporta aplicaciones que escuchan en el puerto 8080. Es decir, si quieres que una aplicación React funcione correctamente en Zeabur, primero debes cambiar el puerto de escucha predeterminado de 3000 a 8080.
 
-要正确进行这一步配置，我们需要先弄清楚两个概念：什么是"端口（Port）"，以及"监听端口（Listening Port）"是什么意思。
+Para configurar correctamente este paso, primero debemos aclarar dos conceptos: qué es un "puerto (Port)" y qué significa "puerto de escucha (Listening Port)".
 
-#### 什么是端口？
+#### ¿Qué es un puerto?
 
-> 在计算机网络中，端口可以理解为一个"逻辑通信端点"，用来区分同一台设备上运行的不同网络服务。简单类比的话，如果 IP 地址好比一个"门牌号"（例如 162.128.1.1），那端口号就像这栋楼里不同房间的"房间号"——每个房间对应一个服务（例如 Web 服务器、邮箱服务，或者你的 React 应用）。
+> En redes informáticas, un puerto puede entenderse como un "punto final de comunicación lógico" que se utiliza para distinguir los diferentes servicios de red que se ejecutan en un mismo dispositivo. Como analogía sencilla, si la dirección IP es como un "número de puerta" (por ejemplo, 162.128.1.1), entonces el número de puerto es como el "número de habitación" de las diferentes habitaciones en ese edificio; cada habitación corresponde a un servicio (por ejemplo, un servidor web, un servicio de correo, o tu aplicación React).
 >
-> 端口号用 16 位整型表示，取值范围是 0 到 65535。
+> Los números de puerto se representan con enteros de 16 bits, con un rango de 0 a 65535.
 
-如果不想记这些细节，可以简单理解：端口是构成"网络访问地址"的一个必要部分。
+Si no quieres recordar estos detalles, puedes entenderlo de forma sencilla: el puerto es una parte necesaria que forma la "dirección de acceso a la red".
 
-我们平时访问网站或 IP 地址时，通常不会手动加端口号，是因为 Web 的默认端口是 80 或 443（HTTPS）。大多数浏览器会自动使用这些标准端口。而对于一些特殊端口，比如 React 默认的 3000、Zeabur 要求的 8080，我们就必须在地址后面加上 `:3000` 或 `:8080` 才能访问到对应的内容。
+Cuando habitualmente accedemos a sitios web o direcciones IP, normalmente no añadimos manualmente el número de puerto porque el puerto predeterminado de la web es el 80 o 443 (HTTPS). La mayoría de los navegadores usan automáticamente estos puertos estándar. Sin embargo, para algunos puertos especiales, como el 3000 predeterminado de React o el 8080 que requiere Zeabur, debemos añadir `:3000` o `:8080` después de la dirección para poder acceder al contenido correspondiente.
 
-#### 什么是"监听端口号"？
+#### ¿Qué es un "puerto de escucha"?
 
-> "监听端口号"指的是某个程序在一台设备上主动"打开并监控"的端口。当一个应用设置了监听端口时，其实就是在告诉操作系统："我会一直在这个端口上等待网络请求——只要有请求进来，就请转发给我。"
+> El "puerto de escucha" se refiere al puerto que un programa "abre y monitoriza" activamente en un dispositivo. Cuando una aplicación establece un puerto de escucha, básicamente está diciendo al sistema operativo: "Estaré esperando solicitudes de red en este puerto; en cuanto llegue alguna, por favor reenvíamela."
 
-再形象一点地理解：假设你的电脑是一栋写字楼，IP 地址是这栋楼的地址。楼里开了很多公司或部门，它们分别占用不同的房间，房间号就是端口号。
+Para entenderlo de forma más visual: imagina que tu ordenador es un edificio de oficinas y la dirección IP es la dirección del edificio. Hay muchas empresas o departamentos en el edificio, cada uno ocupando diferentes habitaciones, y los números de habitación son los números de puerto.
 
-当默认的 React 开发服务器启动时，它会"打开"某个房间的门，并安排"前台"在门口值班，这个房间号就是它的监听端口——3000。
+Cuando el servidor de desarrollo predeterminado de React se inicia, "abre" la puerta de una habitación y coloca a un "recepcionista" en la entrada; el número de esa habitación es su puerto de escucha: 3000.
 
-同时，React 程序还会告诉这栋楼的"物业管理"（操作系统）："我在 3000 号房间，请把所有寄给 3000 的信件（网络请求）都转给我。"
+Al mismo tiempo, el programa de React le dice a la "administración del edificio" (el sistema operativo): "Estoy en la habitación 3000, por favor reenvíame toda la correspondencia dirigida a esa habitación (las solicitudes de red)."
 
-这样，当你访问 React 网站时，请求首先会到达这栋楼；物业看到请求要送到 3000 号房间，就会立刻把请求交给 React 的"前台"，由它来处理并返回结果——这就是访问 React 应用的过程。
+De esta manera, cuando accedes al sitio de React, la solicitud llega primero al edificio; la administración ve que la solicitud va dirigida a la habitación 3000 y la pasa inmediatamente al "recepcionista" de React, que la procesa y devuelve el resultado. Así es como funciona el acceso a una aplicación React.
 
-当你在本地执行 `npm start`（本地启动 React 开发服务器的默认命令，也可以在 Vibe Coding 的 Agent 侧边栏中执行）时，React 开发服务器就会自动把监听端口设置为 3000。  
-而 Zeabur 的平台设计决定了它只会"识别"监听 8080 端口的应用。如果你的 React 应用仍然使用默认的 3000 端口，Zeabur 就无法将请求正确转发给你的应用，最终导致Despliegue失败。
+Cuando ejecutas `npm start` en local (el comando predeterminado para iniciar el servidor de desarrollo de React, que también puedes ejecutar desde la barra lateral del Agent en Vibe Coding), el servidor de desarrollo de React establece automáticamente el puerto de escucha en 3000.
+El diseño de la plataforma Zeabur determina que solo "reconocerá" aplicaciones que escuchen en el puerto 8080. Si tu aplicación React sigue usando el puerto 3000 predeterminado, Zeabur no podrá reenviar correctamente las solicitudes a tu aplicación, lo que provocará un fallo en el despliegue.
 
-#### 修改默认监听端口
+#### Modificar el puerto de escucha predeterminado
 
-要把 React 默认监听端口（3000）改成 Zeabur 所要求的 8080，有很多做法。最简单的方式，就是直接在 Trae 里对 Agent 下指令："请帮我把这个 React 项目的默认端口改为 8080。"Trae 就会帮你修改项目中对应的配置文件。修改完成后，你只需重新打包并按前面的方式上传到 Zeabur 即可。
+Hay muchas formas de cambiar el puerto de escucha predeterminado de React (3000) al 8080 que requiere Zeabur. La forma más sencilla es darle una instrucción directamente al Agent en Trae: "Por favor, cambia el puerto predeterminado de este proyecto React a 8080." Trae modificará los archivos de configuración correspondientes del proyecto. Una vez completada la modificación, solo tienes que volver a compilar y subir a Zeabur siguiendo el método anterior.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image33.png)
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image34.png)
 
-在网络设置中指定一个访问 URL，方式和Despliegue HTML 项目时基本相同，就可以启动 React 版本的服务。
+En la configuración de red, especifica una URL de acceso de la misma manera que cuando desplegaste el proyecto HTML, y podrás iniciar la versión React del servicio.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image35.png)
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image36.png)
 
-对于其它需要修改端口号的程序，你也可以采用同样的思路：先改默认端口，再上传到 Zeabur Despliegue。至此，你已经掌握了将常见 Web 应用Despliegue到服务器的基础技能。
+Para otros programas que necesiten modificar el número de puerto, puedes seguir el mismo enfoque: primero cambiar el puerto predeterminado y luego subir a Zeabur para desplegar. Con esto, ya has dominado las habilidades básicas para desplegar aplicaciones web comunes en un servidor.
 
-你可以尝试让 Trae 帮你构建不同类型的应用，并把它们Despliegue到 Zeabur 的默认服务器上。在后续课程中，我们还会学习如何把应用Despliegue到你自己购买的云服务器上。
+Puedes intentar que Trae te ayude a construir diferentes tipos de aplicaciones y desplegarlas en los servidores predeterminados de Zeabur. En lecciones posteriores, también aprenderemos a desplegar aplicaciones en servidores en la nube que hayas comprado tú mismo.
 
 ---
 
-# ⚠️ 如何停止和删除项目（Zeabur）
+# ⚠️ Cómo detener y eliminar proyectos (Zeabur)
 
-由于启用服务器相关资源都会产生费用，我们在使用时一定要养成"及时关闭不用服务"的习惯，避免把每个月的免费额度消耗完。
+Dado que la activación de recursos relacionados con el servidor genera costes, es importante adquirir el hábito de "cerrar rápidamente los servicios que no se utilizan" para evitar agotar la cuota gratuita mensual.
 
-如果要找到项目的管理入口，首先点击项目中的 "Settings" 选项。
+Para encontrar la gestión del proyecto, primero haz clic en la opción "Settings" del proyecto.
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image21.png)
 
-进入设置页面后，将页面拉到最下方，你会看到类似下面的界面：
+Tras acceder a la página de configuración, desplázate hasta la parte inferior y verás una interfaz similar a esta:
 
 ![](/zh-cn/stage-2/backend/zeabur-deployment/images/image22.png)
 
-你可以点击 "Suspend All Services" 来暂停所有服务以降低费用；如果服务出现问题，可以点击 "Restart All Services" 对全部服务进行重启。如果你确定不再需要这个项目，可以点击 "Delete Project" 将整个项目彻底删除。
+Puedes hacer clic en "Suspend All Services" para suspender todos los servicios y reducir los costes; si hay problemas con los servicios, puedes hacer clic en "Restart All Services" para reiniciar todos los servicios. Si estás seguro de que ya no necesitas este proyecto, puedes hacer clic en "Delete Project" para eliminarlo por completo.
 
 ---
 
-# 总结
+# Resumen
 
-在本教程中，我们介绍了四个常用的 Web 应用Despliegue平台：
+En este tutorial, hemos presentado cuatro plataformas populares de despliegue de aplicaciones web:
 
-1. **腾讯云 CloudBase**：适合国内用户，访问速度快，与微信生态整合好
-2. **Vercel**：适合现代前端框架项目，与 GitHub 集成紧密，全球 CDN 加速
-3. **Netlify**：功能全面，支持表单处理和身份验证，适合需要高级功能的静态网站
-4. **Zeabur**：适合复杂项目，服务模板丰富，支持多种Despliegue方式
+1. **Tencent CloudBase**: Adecuada para usuarios en China, con velocidad de acceso rápida y buena integración con el ecosistema WeChat
+2. **Vercel**: Adecuada para proyectos con frameworks frontend modernos, con integración estrecha con GitHub y CDN global
+3. **Netlify**: Funcionalidad completa, soporte para procesamiento de formularios y autenticación, ideal para sitios estáticos que necesitan funciones avanzadas
+4. **Zeabur**: Adecuada para proyectos complejos, con amplias plantillas de servicios y múltiples métodos de despliegue
 
-选择哪个平台取决于你的具体需求：
-- 如果主要面向国内用户，推荐 **CloudBase**
-- 如果使用 React/Next.js 等框架，推荐 **Vercel** 或 **Netlify**
-- 如果需要表单处理、身份验证等高级功能，推荐 **Netlify**
-- 如果需要Despliegue Dify、n8n 等服务，推荐 **Zeabur**
+La elección de la plataforma depende de tus necesidades específicas:
+- Si tu público principal está en China, se recomienda **CloudBase**
+- Si usas frameworks como React/Next.js, se recomienda **Vercel** o **Netlify**
+- Si necesitas procesamiento de formularios, autenticación y otras funciones avanzadas, se recomienda **Netlify**
+- Si necesitas desplegar servicios como Dify o n8n, se recomienda **Zeabur**
 
-无论选择哪个平台，Despliegue的核心流程都是相似的：准备代码 → 选择平台 → 配置构建设置 → Despliegue上线。掌握这些技能后，你就可以将自己开发的应用分享给全世界了！
+Independientemente de la plataforma que elijas, el flujo central del despliegue es similar: preparar el código → elegir la plataforma → configurar los ajustes de construcción → desplegar y publicar. Una vez que domines estas habilidades, ¡podrás compartir las aplicaciones que desarrolles con todo el mundo!

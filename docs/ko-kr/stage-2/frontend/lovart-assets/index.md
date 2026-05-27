@@ -4,52 +4,52 @@ import { relatedArticlesMap } from '@theme/data/relatedArticles'
 const relatedArticles = relatedArticlesMap['ko-kr/stage-2/frontend/lovart-assets'] ?? []
 </script>
 
-# 从 NanoBanana 出发，搭建自己的素材生产Agent
+# NanoBanana로 시작하기: 나만의 에셋 제작 Agent 만들기
 
-## 第 1 章：1 分钟生成第一份图片素材
+## 제1장: 1분 만에 첫 번째 이미지 에셋 생성하기
 
-在开始讨论设计、风格或提示词之前，我们先用最少的步骤生成第一张图片。
+디자인, 스타일, 프롬프트 엔지니어링에 대해 논의하기 전에, 먼저 가장 적은 단계로 첫 번째 이미지를 생성해 보겠습니다.
 
-### 1.1 认识 NanoBanana
+### 1.1 NanoBanana 알아보기
 
-在开始讨论设计风格、提示词工程之前，我们先解决一件更重要的事：**确认你真的可以生成一张图片。**
+디자인 스타일과 프롬프트 엔지니어링을 논의하기 전에, 먼저 더 중요한 한 가지를 해결하겠습니다: **실제로 이미지를 생성할 수 있다는 것을 확인하는 것입니다.**
 
-当前主流的大模型已经具备图像生成与编辑能力，这类模型通常被称为**生成式模型。**
+현재 주류 대형 모델은 이미 이미지 생성 및 편집 능력을 갖추고 있으며, 이러한 모델은 보통 **생성형 모델** 이라고 불립니다.
 
-为了把流程尽量简化，本教程选择了一个已经具备稳定图像生成与编辑能力的模型作为示例——NanoBanana。它是 Google 推出的图像生成模型，正式名称为  **Gemini 3.1 Flash Image Preview** ，支持通过自然语言直接生成图片，也支持在已有图片基础上进行修改。
+과정을 최대한 단순화하기 위해, 이 튜토리얼은 안정적인 이미지 생성 및 편집 능력을 갖춘 모델을 예시로 선택했습니다 — NanoBanana. 이는 Google이 출시한 이미지 생성 모델로, 공식 명칭은 **Gemini 3.1 Flash Image Preview** 이며, 자연어로 직접 이미지를 생성할 수 있고, 기존 이미지를 기반으로 수정하는 것도 지원합니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image1.png)
+![](images/image1.png)
 
-在能力层面，它和你可能听说过的其他模型（如 GPT-4o、Claude、Qwen、Midjourney 等）并没有本质区别：**输入描述，模型负责生成结果。**
+기능 측면에서, 여러분이 들어본 다른 모델(예: GPT-4o, Claude, Qwen, Midjourney 등)과 본질적인 차이는 없습니다: **설명을 입력하면, 모델이 결과를 생성합니다.**
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image2.png)![](/zh-cn/stage-2/frontend/lovart-assets/images/image3.png)![](/zh-cn/stage-2/frontend/lovart-assets/images/image4.png)
+![](images/image2.png)![](images/image3.png)![](images/image4.png)
 
-你可以把它理解为一支“画笔”。我们在这一章只关心一件事：
- 👉 **这支画笔能不能在你手里画出第一笔。**
+이를 하나의 "붓"으로 이해할 수 있습니다. 이 장에서 우리는 단 한 가지에만 관심이 있습니다:
+👉 **이 붓이 여러분의 손에서 첫 번째 획을 그릴 수 있는지.**
 
-在实际使用中，NanoBanana 可以通过 **Google AI Studio** 等官方平台直接使用，也可以通过 **API** 的方式集成到开发流程中。本教程采用 API 调用方式。现在还推出了NanoBanana 2模型，你可以使用最新的大模型进行尝试。
+실제 사용에서 NanoBanana은 **Google AI Studio** 등 공식 플랫폼을 통해 직접 사용할 수도 있고, **API** 방식으로 개발 프로세스에 통합할 수도 있습니다. 이 튜토리얼은 API 호출 방식을 사용합니다. 현재 NanoBanana 2 모델도 출시되었으니, 최신 대형 모델로 시도해 볼 수 있습니다.
 
-### 1.2 “Hello World” 级别的生成
+### 1.2 "Hello World" 수준의 생성
 
-在开始之前，你只需要完成下面三步：
+시작하기 전에 다음 세 단계만 완료하면 됩니다:
 
-1. 在 Trae 中新建一个文件夹
+1. Trae에서 새 폴더 만들기
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image5.png)
+![](images/image5.png)
 
-2. 新建一个 Python 文件
+2. 새 Python 파일 만들기
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image6.png)
+![](images/image6.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image7.png)
+![](images/image7.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image8.png)
+![](images/image8.png)
 
-3. 将下面的代码完整粘贴进去
+3. 아래 코드를 완전히 복사하여 붙여넣기
 
-Trae 会自动完成所需的环境部署与依赖安装，不需要额外配置。
+Trae가 필요한 환경 배포와 의존성 설치를 자동으로 완료하므로, 추가 설정이 필요하지 않습니다.
 
-代码中会用到 NanoBanana 的 API Key。这里不展开申请流程——只要你能获取并填入对应参数即可。**这一阶段不追求理解每一行代码，只要它能成功运行。**
+코드에는 NanoBanana의 API Key가 필요합니다. 여기서는 신청 과정을 자세히 설명하지 않습니다 — 해당 파라미터를 얻어 입력하기만 하면 됩니다. **이 단계에서는 모든 코드 라인을 이해하는 것을 추구하지 않고, 성공적으로 실행되기만 하면 됩니다.**
 
 ```Python
 # /// script
@@ -70,58 +70,58 @@ import time
 import re
 from typing import Optional, Dict, Any, List
 
-# 配置 API 信息
+# API 정보 구성
 NANOBANANA_API_URL: str = "YOUR API URL"
 NANOBANANA_API_KEY: str = "YOUR API KEY"
 OUTPUT_DIR: str = "outputs"
 
-# 确保输出目录存在
+# 출력 디렉토리가 존재하는지 확인
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def image_to_base64_data_uri(image: Image.Image) -> str:
     """
-    将 PIL 图像转换为 OpenAI API 兼容的 data URI 格式。
+    PIL 이미지를 OpenAI API 호환 data URI 형식으로 변환합니다.
     """
     buffer = io.BytesIO()
-    # 统一转为 PNG 以保证兼容性
+    # 호환성을 위해 통일하여 PNG로 변환
     image.save(buffer, format="PNG")
     encoded = base64.b64encode(buffer.getvalue()).decode('utf-8')
     return f"data:image/png;base64,{encoded}"
 
 def base64_to_image(base64_str: str) -> Optional[Image.Image]:
     """
-    将纯 base64 字符串转换为 PIL Image。
+    순수 base64 문자열을 PIL Image로 변환합니다.
     """
     try:
         image_bytes = base64.b64decode(base64_str)
         return Image.open(io.BytesIO(image_bytes))
     except Exception as e:
-        print(f"Base64 解码失败: {e}")
+        print(f"Base64 디코딩 실패: {e}")
         return None
 
 def extract_base64_from_response(content: Any) -> Optional[str]:
     """
-    核心解析逻辑：从 API 返回的 content 中提取图片 Base64 数据。
-    兼容 Markdown 格式和结构化列表格式。
+    핵심 파싱 로직: API가 반환한 content에서 이미지 Base64 데이터를 추출합니다.
+    Markdown 형식과 구조화된 리스트 형식을 모두 호환합니다.
     """
     if not content:
         return None
 
     base64_data = None
 
-    # 1. 尝试结构化提取 (List)
-    # 对应返回格式: [{"type": "image_url", "image_url": {"url": "data:..."}}]
+    # 1. 구조화된 추출 시도 (List)
+    # 해당 반환 형식: [{"type": "image_url", "image_url": {"url": "data:..."}}]
     if isinstance(content, list):
-        for part in reversed(content):  # 倒序查找，通常最新的图片在最后
+        for part in reversed(content):  # 역순으로 검색, 일반적으로 최신 이미지가 마지막에 있음
             if isinstance(part, dict):
-                # 检查 image_url 或 output_image 字段
+                # image_url 또는 output_image 필드 확인
                 img_field = part.get("image_url") or part.get("image") or part.get("output_image")
                 if isinstance(img_field, dict):
                     url = img_field.get("url", "")
                     if url.startswith("data:image/") and "," in url:
                         return url.split(",", 1)[1].strip()
 
-        # 如果列表中没有结构化图片，尝试把列表里的文本拼起来找 Markdown
+        # 리스트에 구조화된 이미지가 없으면, 리스트 내 텍스트를 연결하여 Markdown 검색
         text_parts = [
             str(p.get("text", ""))
             for p in content
@@ -131,8 +131,8 @@ def extract_base64_from_response(content: Any) -> Optional[str]:
     else:
         content_str = str(content)
 
-    # 2. 尝试 Markdown 正则提取 (String)
-    # 对应返回格式: "Here is your image: ![img](data:image/png;base64,AAAA...)"
+    # 2. Markdown 정규식 추출 시도 (String)
+    # 해당 반환 형식: "Here is your image: ![img](data:image/png;base64,AAAA...)"
     pattern = re.compile(r"!\[.*?\]\((data:image/[^;]+;base64,[^)]+)\)", re.IGNORECASE)
     match = pattern.search(content_str)
 
@@ -145,25 +145,25 @@ def extract_base64_from_response(content: Any) -> Optional[str]:
 
 def synthesize(prompt: str, input_image: Optional[Image.Image]) -> Optional[Image.Image]:
     """
-    调用 Nanobanana API 进行生成。
+    Nanobanana API를 호출하여 생성합니다.
     """
     if not prompt or not prompt.strip():
-        gr.Warning("请输入提示词")
+        gr.Warning("프롬프트를 입력해 주세요")
         return None
 
-    print(f">>> 开始任务: {prompt[:50]}...")
+    print(f">>> 작업 시작: {prompt[:50]}...")
 
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {NANOBANANA_API_KEY}"
     }
 
-    # 构造符合 OpenAI Vision / Chat 标准的 payload
+    # OpenAI Vision / Chat 표준에 맞는 payload 구성
     messages = []
 
     if input_image is not None:
-        # 图生图/多模态输入模式
-        print(">>> 检测到输入图片，使用多模态模式")
+        # 이미지에서 이미지/멀티모달 입력 모드
+        print(">>> 입력 이미지가 감지되어 멀티모달 모드를 사용합니다")
         img_base64 = image_to_base64_data_uri(input_image)
         messages.append({
             "role": "user",
@@ -173,7 +173,7 @@ def synthesize(prompt: str, input_image: Optional[Image.Image]) -> Optional[Imag
             ]
         })
     else:
-        # 纯文生图模式
+        # 순수 텍스트에서 이미지 생성 모드
         messages.append({
             "role": "user",
             "content": prompt
@@ -181,37 +181,37 @@ def synthesize(prompt: str, input_image: Optional[Image.Image]) -> Optional[Imag
 
     payload = {
         "messages": messages,
-        # 使用第一段代码中验证可用的模型
+        # 첫 번째 코드에서 검증된 사용 가능한 모델 사용
         "model": "gemini-2.5-flash-image",
-        # 可选参数，视 API 支持情况而定
+        # 선택적 파라미터, API 지원 여부에 따라 다름
         "stream": False
     }
 
     try:
-        # 增加超时时间，图片生成通常较慢
+        # 타임아웃 시간 증가, 이미지 생성은 보통 더 느림
         response = requests.post(NANOBANANA_API_URL, headers=headers, json=payload, timeout=120)
 
-        # 检查 HTTP 状态
+        # HTTP 상태 확인
         if response.status_code != 200:
-            error_msg = f"API 请求失败: {response.status_code} - {response.text}"
+            error_msg = f"API 요청 실패: {response.status_code} - {response.text}"
             print(error_msg)
             gr.Error(error_msg)
             return None
 
         result = response.json()
-        # Debug: 打印返回结果的前一部分，方便调试
-        print(f"API 原始响应 (截取): {str(result)[:200]}...")
+        # Debug: 반환 결과의 앞부분 출력, 디버깅에 편리
+        print(f"API 원본 응답 (잘림): {str(result)[:200]}...")
 
-        # 提取 Content
+        # Content 추출
         content = None
         if "choices" in result and len(result["choices"]) > 0:
             content = result["choices"][0].get("message", {}).get("content")
 
         if not content:
-            gr.Warning("API 返回结果中没有 content 字段")
+            gr.Warning("API 반환 결과에 content 필드가 없습니다")
             return None
 
-        # 使用之前验证过的逻辑提取 Base64
+        # 이전에 검증된 로직을 사용하여 Base64 추출
         base64_str = extract_base64_from_response(content)
 
         if base64_str:
@@ -219,41 +219,41 @@ def synthesize(prompt: str, input_image: Optional[Image.Image]) -> Optional[Imag
             if output_image:
                 return output_image
 
-        # 如果没提取到图片，可能是模型拒绝了或只返回了文本
+        # 이미지를 추출하지 못한 경우, 모델이 거부했거나 텍스트만 반환했을 수 있음
         text_content = str(content) if not isinstance(content, list) else " ".join([str(x) for x in content])
-        gr.Info(f"未生成图片，模型返回文本: {text_content[:100]}...")
+        gr.Info(f"이미지가 생성되지 않았습니다, 모델이 텍스트를 반환함: {text_content[:100]}...")
         return None
 
     except requests.exceptions.Timeout:
-        gr.Error("请求超时，请稍后重试")
+        gr.Error("요청 시간이 초과되었습니다, 나중에 다시 시도해 주세요")
         return None
     except Exception as e:
         import traceback
         traceback.print_exc()
-        gr.Error(f"发生未知错误: {str(e)}")
+        gr.Error(f"알 수 없는 오류가 발생했습니다: {str(e)}")
         return None
 
-# Gradio 界面配置
+# Gradio 인터페이스 구성
 with gr.Blocks(title="Nanobanana Image Generator") as app:
     gr.Markdown("# 🍌 Nanobanana Text/Image to Image")
-    gr.Markdown("基于 Gemini-2.5-Flash-Image 模型，支持文生图与图生图。")
+    gr.Markdown("Gemini-2.5-Flash-Image 모델 기반, 텍스트에서 이미지 및 이미지에서 이미지를 지원합니다.")
 
     with gr.Row():
         with gr.Column():
             prompt_input = gr.Textbox(
-                label="提示词 (Prompt)",
-                placeholder="例如: A cyberpunk cat holding a neon sign...",
+                label="프롬프트 (Prompt)",
+                placeholder="예: A cyberpunk cat holding a neon sign...",
                 lines=3
             )
             image_input = gr.Image(
-                label="参考图 (可选，用于图生图)",
+                label="참고 이미지 (선택사항, 이미지에서 이미지 생성용)",
                 type="pil",
                 height=300
             )
-            submit_btn = gr.Button("开始生成", variant="primary")
+            submit_btn = gr.Button("생성 시작", variant="primary")
 
         with gr.Column():
-            image_output = gr.Image(label="生成结果", format="png")
+            image_output = gr.Image(label="생성 결과", format="png")
 
     submit_btn.click(
         fn=synthesize,
@@ -265,685 +265,674 @@ if __name__ == "__main__":
     app.launch(share=True)
 ```
 
-当 Trae 提示运行成功后，点击它提供的本地链接（通常是 http://127.0.0.1:7860）。
+Trae가 실행 성공을 알리면, 제공된 로컬 링크(보통 http://127.0.0.1:7860)를 클릭합니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image9.png)
+![](images/image9.png)
 
-如果一切正常，你会看到一个已经可以工作的 AI 绘图界面。
+모든 것이 정상이라면, 이미 작동하는 AI 이미지 생성 인터페이스를 볼 수 있습니다.
 
-这个界面看起来很简单，但它已经具备了商业级绘图工具中最核心的两项能力，即文生图和图生图。
+이 인터페이스는 간단해 보이지만, 상업용 이미지 생성 도구에서 가장 핵심적인 두 가지 능력인 텍스트에서 이미지 생성과 이미지에서 이미지 생성을 이미 갖추고 있습니다.
 
-* **左侧：** **指令区 (** **Input** Zone) —— 你在这里发号施令。
-* **Prompt (提示词框)：** 输入你的创意描述（推荐使用英文）。
-* **Input** Image (参考图框)：
-  * **文生图模式：** 保持此处 **为空** 。
-  * **图生图模式：** 将本地图片拖入此处，AI 会以它为基础进行创作。
-* **Submit 按钮：** 点击即可发送指令，开始生成。
-* **右侧：展示区 (** **Output** Zone) —— 见证奇迹的地方，生成结果将在此显示。
+* **왼쪽:** **명령 영역 (Input Zone)** — 여기서 지시를 내립니다.
+* **Prompt (프롬프트 입력란):** 창의적인 설명을 입력합니다 (영어 사용 권장).
+* **Input Image (참고 이미지 입력란):**
+  * **텍스트에서 이미지 모드:** 여기를 **비워두세요**.
+  * **이미지에서 이미지 모드:** 로컬 이미지를 여기로 드래그하면, AI가 이를 기반으로 창작합니다.
+* **Submit 버튼:** 클릭하면 지시가 전송되고 생성이 시작됩니다.
+* **오른쪽:** **결과 표시 영역 (Output Zone)** — 기적이 일어나는 곳, 생성 결과가 여기에 표시됩니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image10.png)
+![](images/image10.png)
 
-现在我们可以尝试生成你的第一张图片了！
+이제 첫 번째 이미지를 생성해 볼 수 있습니다!
 
-本示例使用的 prompt 如下：
+이 예시에서 사용한 프롬프트는 다음과 같습니다:
 
 > **A red apple**
 
-这是一个刻意简化的示例，不包含任何风格或参数描述。
+이는 의도적으로 단순화된 예시로, 스타일이나 파라미터 설명이 포함되어 있지 않습니다.
 
-#### 实际流程
+#### 실제 프로세스
 
-运行代码后，流程可以概括为三步：
+코드를 실행한 후, 프로세스는 세 단계로 요약할 수 있습니다:
 
-1. 将文字描述发送给模型
-2. 模型生成对应图片
-3. 图片被保存为本地文件
+1. 텍스트 설명을 모델에 전송
+2. 모델이 해당 이미지를 생성
+3. 이미지가 로컬 파일로 저장
 
-几秒钟后，你会在本地看到生成结果。而模型生成具有随机性，所以相同的prompt会有不同的生成结果，你可以多次生成，选择你心仪的图片。
+몇 초 후, 로컬에서 생성 결과를 볼 수 있습니다. 모델 생성에는 무작위성이 있으므로, 동일한 프롬프트라도 다른 결과가 생성됩니다. 여러 번 생성하여 마음에 드는 이미지를 선택할 수 있습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image11.png)![](/zh-cn/stage-2/frontend/lovart-assets/images/image12.png)
+![](images/image11.png)![](images/image12.png)
 
-也可以丰富你的提示词，给予它更多的描述和限定。例如以下提示词，得到的图片就会更加特殊一些。
+프롬프트를 풍부하게 하여 더 많은 설명과 제한을 추가할 수도 있습니다. 예를 들어 다음 프롬프트를 사용하면 더 특별한 이미지를 얻을 수 있습니다.
 
 ```Plain
 "A hyper-realistic close-up of a fresh red apple with water droplets on its skin, sitting on a dark rustic wooden table. Cinematic dramatic lighting, rim light, shallow depth of field, bokeh background, 8k resolution, macro photography."
-(一个超写实的带水珠的新鲜红苹果特写，放在深色粗糙木桌上。电影级戏剧光效，轮廓光，浅景深，背景虚化，8k分辨率，微距摄影。)
+(초현실적인 물방울이 있는 신선한 붉은 사과 클로즈업, 어두운 거친 나무 테이블 위에 놓여 있음. 영화 드라마틱 조명, 림 라이트, 얕은 피사계 심도, 보케 배경, 8k 해상도, 매크로 촬영.)
 ```
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image13.png)
+![](images/image13.png)
 
-在Output Image区域点击下载图片即可保存到本地。
+Output Image 영역에서 다운로드를 클릭하면 로컬에 저장할 수 있습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image14.png)
+![](images/image14.png)
 
-### 1.3 生图模型常见的素材生成场景
+### 1.3 이미지 생성 모델의 일반적인 에셋 생성 시나리오
 
-在实际工作中，大模型生成图片更多用于 **高效产出设计素材** ，而不是创作单张艺术作品。
+실제 업무에서 대형 모델로 이미지를 생성하는 것은 단일 예술 작품을 창작하는 것보다 **효율적인 디자인 에셋 생산** 에 더 많이 사용됩니다.
 
-当你观察一些设计类营销账号的高赞案例时会发现，它们的产出大多集中在两类场景：
+디자인 관련 마케팅 계정의 인기 사례를 관찰해 보면, 그 산출물은 주로 두 가지 시나리오에 집중되어 있습니다:
 
-* **文生图（从 0 到 1）**
-* **有图参考生图（从 1 到 N）**
+* **텍스트에서 이미지 (0에서 1로)**
+* **참고 이미지로 이미지 생성 (1에서 N으로)**
 
-#### 一、文生图：快速获取设计物料
+#### 하나: 텍스트에서 이미지 — 빠른 디자인 자산 확보
 
-这一类场景关注效率。当需要填补设计中的空白（如空状态、头像、配图）时，AI 本质上充当的是一个 **即时生成的图库** 。
+이러한 유형의 시나리오는 효율성에 초점을 맞춥니다. 디자인의 빈 공간(예: 빈 상태, 아바타, 일러스트)을 채워야 할 때, AI는 본질적으로 **즉시 생성되는 이미지 라이브러리** 역할을 합니다.
 
-1. ##### 生成 UI 设计物料
+1. ##### UI 디자인 에셋 생성
 
-* 流行趋势：Dribbble 上常见的毛玻璃、黏土风 3D 图标
-* 常见表现：通透材质、边缘发光、糖果配色的功能或天气图标
+* 유행 트렌드: Dribbble에서 흔히 볼 수 있는 글래스모피즘, 클레이 스타일 3D 아이콘
+* 일반적인 특징: 투명한 소재, 가장자리 발광, 캔디 색상의 기능 또는 날씨 아이콘
 
-**示例 Prompt：**
+**예시 프롬프트:**
 
 > A set of 3D weather icons (sun, cloud, rain), glassmorphism style, frosted glass texture, soft pastel gradient colors, soft studio lighting, isometric view, transparent background, 4k.
 
-（一套 3D 天气图标，毛玻璃风格，磨砂质感，柔和渐变色，影棚光，等轴视图）
+(3D 날씨 아이콘 세트, 글래스모피즘 스타일, 서리 유리 질감, 부드러운 파스텔 그라데이션 색상, 스튜디오 조명, 등축 투시)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image15.png)
+![](images/image15.png)
 
-2. ##### 生成 Logo
+2. ##### 로고 생성
 
-* 流行趋势：极简线条、几何组合的科技感 Logo
-* 常见表现：黑白配色、负空间设计、品牌感明确
+* 유행 트렌드: 미니멀 라인, 기하학적 조합의 테크놀로지 로고
+* 일반적인 특징: 흑백 색상, 네거티브 스페이스 디자인, 명확한 브랜드 느낌
 
-**示例 Prompt：**
+**예시 프롬프트:**
 
 > Minimalist vector logo design for a tech brand "Coffee Code", combining a coffee cup with coding brackets < >, flat design, solid black lines, white background, Paul Rand style, svg.
 
-（极简矢量 Logo，结合咖啡杯与代码符号，扁平设计，纯黑线条）
+(미니멀 벡터 로고, 커피잔과 코드 기호 결합, 플랫 디자인, 순흑 라인)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image16.png)
+![](images/image16.png)
 
-3. ##### 生成官网用户图片
+3. ##### 공식 웹사이트 사용자 이미지 생성
 
-* 流行趋势：SaaS 官网常用 3D 虚拟头像，用于规避真人版权
-* 常见表现：友好表情、卡通比例、偏 Pixar 或 Memoji 风格
+* 유행 트렌드: SaaS 공식 웹사이트에서 자주 사용하는 3D 가상 아바타, 실제 인물 초상권 문제 회피
+* 일반적인 특징: 친근한 표정, 카툰 비율, Pixar 또는 Memoji 스타일
 
-**示例 Prompt：**
+**예시 프롬프트:**
 
 > Close-up portrait of a friendly young tech professional, smiling, Memoji 3D style, clay render, bright colors, soft lighting, solid plain background, Pixar character design.
 
-（友好的年轻科技从业者，3D Memoji 风格，黏土渲染）
+(친근한 젊은 기술 전문가, 3D Memoji 스타일, 클레이 렌더)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image17.png)
+![](images/image17.png)
 
-4. ##### 生成文章配图
+4. ##### 기사 일러스트 생성
 
-* 流行趋势：科技公司博客中常见的抽象扁平插画
-* 常见表现：紫蓝配色、夸张人物比例、漂浮 UI 元素
+* 유행 트렌드: 기술 기업 블로그에서 흔히 볼 수 있는 추상 플랫 일러스트
+* 일반적인 특징: 보라-파랑 색상, 과장된 인물 비율, 떠다니는 UI 요소
 
-**示例 Prompt：**
+**예시 프롬프트:**
 
 > Editorial flat illustration representing remote work, a person sitting on a giant globe using a laptop, corporate memphis art style, vibrant colors (purple and teal), vector texture.
 
-（远程办公主题扁平插画，企业孟菲斯风格）
+(원격 근무 주제 플랫 일러스트, 기업 멤피스 스타일)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image18.png)
+![](images/image18.png)
 
-#### 二、有图参考生图：保持视觉一致性
+#### 둘: 참고 이미지로 이미지 생성 — 시각적 일관성 유지
 
-这一类场景更关注 **扩展性** 。当你已经有一张满意的主视觉，需要生成一整套风格一致的素材时使用。
+이러한 유형의 시나리오는 **확장성** 에 더 초점을 맞춥니다. 만족스러운 메인 비주얼이 있고, 스타일이 일관된 에셋 세트를 생성해야 할 때 사용합니다.
 
-5. ##### 主视觉相似的一套按钮或交互素材图
+5. ##### 메인 비주얼과 유사한 버튼 또는 인터랙티브 에셋 이미지 세트
 
-在游戏开发中，UI 的一致性非常关键。假设你已经有了主界面的 **“PLAY”** 按钮，现在需要扩展出一整套风格统一的功能按钮（如暂停、设置、主页）。仅靠手绘很难保证每个按钮在光泽、透视和色值上的完全一致。
+게임 개발에서 UI의 일관성은 매우 중요합니다. 메인 화면의 **"PLAY"** 버튼이 이미 있다고 가정해 보겠습니다. 이제 스타일이 통일된 기능 버튼 세트(예: 일시 정지, 설정, 홈)를 확장해야 합니다. 수작업만으로는 각 버튼의 광택, 투시, 색상 값을 완전히 일치시키기 어렵습니다.
 
-**基本操作流程：**
+**기본 작업 흐름:**
 
-1. 保存已有的蓝色 “PLAY” 按钮图片
+1. 기존의 파란색 "PLAY" 버튼 이미지 저장
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image19.png)
+![](images/image19.png)
 
-2. 将其拖入界面的 **Input**** Image** 区域，作为后续生成的参考母版
-3. 保持 prompt 中的风格描述不变，仅修改主体内容
+2. 이를 인터페이스의 **Input Image** 영역으로 드래그하여 후속 생성의 참고 마스터로 사용
+3. 프롬프트의 스타일 설명은 그대로 유지하고, 주요 내용만 수정
 
-在这一流程下，只要替换主体描述，就可以得到不同功能但风格一致的按钮。
+이 흐름에서 주요 설명만 교체하면 다른 기능이지만 스타일이 일관된 버튼을 얻을 수 있습니다.
 
-**示例 Prompt：**
+**예시 프롬프트:**
 
-**变体 A：暂停按钮（图标类）**
+**변형 A: 일시 정지 버튼 (아이콘 유형)**
 
 > A capsule-shaped game UI button with a white pause icon (two vertical bars) inside. Same glossy blue jelly style, shiny plastic texture, white thick outline, vector illustration, high quality.
 
-（胶囊形游戏 UI 按钮，白色暂停图标，蓝色果冻质感）
+(캡슐형 게임 UI 버튼, 흰색 일시 정지 아이콘, 파란색 젤리 질감)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image20.png)
+![](images/image20.png)
 
-**变体 B：设置按钮（复杂图标）**
+**변형 B: 설정 버튼 (복잡한 아이콘)**
 
 > A capsule-shaped game UI button with a white gear icon (settings symbol) inside. Same glossy blue jelly style, shiny plastic texture, white thick outline, vector illustration, high quality.
 
-（胶囊形游戏 UI 按钮，白色齿轮图标，蓝色果冻质感）
+(캡슐형 게임 UI 버튼, 흰색 톱니바퀴 아이콘, 파란색 젤리 질감)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image21.png)
+![](images/image21.png)
 
-**变体 C：重玩按钮（形状变化）**
+**변형 C: 다시하기 버튼 (모양 변화)**
 
-如果需要调整按钮外形，可以在 prompt 中直接描述形状，模型会在保留材质特征的同时尝试改变结构。
+버튼의 외형을 조정해야 한다면, 프롬프트에서 모양을 직접 설명하면 됩니다. 모델은 소재 특징을 유지하면서 구조를 변경하려고 시도합니다.
 
 > A round game UI button with a white circular arrow icon (replay symbol) inside. Same glossy blue jelly style, shiny plastic texture, white thick outline, vector illustration, high quality.
 
-（圆形游戏 UI 按钮，循环箭头图标，蓝色果冻质感）
+(원형 게임 UI 버튼, 순환 화살표 아이콘, 파란색 젤리 질감)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image22.png)
+![](images/image22.png)
 
-通过这一组操作，你不仅可以替换按钮功能和图标，甚至改变按钮形状，但所有生成结果在材质、配色和光影上仍保持高度一致。这正是大模型在设计素材裂变场景中的核心价值。
+이 작업을 통해 버튼 기능과 아이콘을 교체할 수 있을 뿐만 아니라, 버튼 모양까지 변경할 수 있습니다. 그러나 모든 생성 결과는 소재, 색상, 조명 측면에서 여전히 높은 일관성을 유지합니다. 이것이 바로 대형 모델이 디자인 에셋 파생 시나리오에서 가지는 핵심 가치입니다.
 
-## 第 2 章：更听话的图像生成助手 —— 以 Lovart 为例
+## 제2장: 더 잘 따르는 이미지 생성 어시스턴트 — Lovart를 예시로
 
-在第一部分，我们通过代码直接调用 NanoBanana，体验了“输入即生成”的基础流程。这种方式在需求简单时没有问题。但当生成任务开始包含更多约束，例如：
+첫 번째 부분에서 우리는 코드를 통해 NanoBanana를 직접 호출하고, "입력 즉시 생성"이라는 기본 흐름을 경험했습니다. 이 방식은 요구 사항이 간단할 때는 문제가 없습니다. 하지만 생성 작업에 더 많은 제약이 포함되기 시작하면, 예를 들어:
 
-* 需要多张风格一致的图片
-* 需要在已有结果上反复调整
-* 需要根据用户输入动态修改生成方向
+* 여러 장의 스타일이 일관된 이미지가 필요한 경우
+* 기존 결과를 바탕으로 반복적으로 조정해야 하는 경우
+* 사용자 입력에 따라 생성 방향을 동적으로 수정해야 하는 경우
 
-单次调用的方式就会逐渐变得不够用。
+단일 호출 방식으로는 점점 부족해집니다.
 
-这时，就需要引入  **AI Agent（**  **智能体**  **）** 。本节以 **Lovart** 为例，展示当图像生成模型具备“思考层”后，整体工作流会发生怎样的变化。注意！这里不是打广告，只是帮助大家快速get到AI Agent的便捷性～
+이때 **AI Agent(지능형 에이전트)** 를 도입해야 합니다. 이 섹션에서는 **Lovart** 를 예시로, 이미지 생성 모델에 "사고 계층"이 추가되면 전체 작업 흐름이 어떻게 변화하는지 보여줍니다. 참고! 이것은 광고가 아니라, AI Agent의 편리함을 빠르게 이해할 수 있도록 돕기 위한 것입니다~
 
-### 2.0 初识 Lovart：你的 AI 设计代理
+### 2.0 Lovart 처음 만나기: 당신의 AI 디자인 에이전트
 
-Lovart 是一个基于 Agent 的设计工具 Web。相比普通生图工具，它在生成之前多了一层“思考与规划”。
+Lovart는 Agent 기반의 디자인 도구 웹 서비스입니다. 일반 이미지 생성 도구와 비교하여, 생성 전에 "사고와 계획"이라는 계층이 하나 더 있습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image23.png)
+![](images/image23.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image24.png)
+![](images/image24.png)
 
-进入 Lovart 后，主要需要了解以下几个控制项：
+Lovart에 들어간 후, 주로 다음 제어 항목을 이해해야 합니다:
 
-#### 模型选择
+#### 모델 선택
 
-点击输入框下方的立方体图标，可以查看当前可用的生成模型（如 GPT Image、Flux 等）。
+입력 상자 아래의 큐브 아이콘을 클릭하면, 현재 사용 가능한 생성 모델(예: GPT Image, Flux 등)을 볼 수 있습니다.
 
-为了与前文示例保持一致，本节仍然使用 NanoBanana 作为底层生成模型。
+앞선 예시와 일관성을 유지하기 위해, 이 섹션에서는 여전히 NanoBanana를 기본 생성 모델로 사용합니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image25.png)
+![](images/image25.png)
 
-#### 思考模式
+#### 사고 모드
 
-这是 Lovart 的核心开关：
+이것은 Lovart의 핵심 스위치입니다:
 
-* **Fast Mode（⚡）** ：接近原生 API，响应快，适合单张、明确指令的生成
-* **Thinking Mode（💡）** ：Agent 模式，AI 会先拆解需求、改写 prompt，再执行生成
+* **Fast Mode (⚡):** 원시 API에 가까움, 빠른 응답, 단일 이미지 및 명확한 지시 생성에 적합
+* **Thinking Mode (💡):** Agent 모드, AI가 먼저 요구 사항을 분해하고 프롬프트를 재작성한 후 생성을 실행
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image26.png)
+![](images/image26.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image27.png)
+![](images/image27.png)
 
-#### 联网能力
+#### 인터넷 연결 기능
 
-开启地球图标后，Agent 可以在生成过程中检索网络信息（例如设计趋势、配色风格），作为辅助输入。
+지구본 아이콘을 켜면, Agent가 생성 과정에서 웹 정보(예: 디자인 트렌드, 색상 스타일)를 검색하여 보조 입력으로 사용할 수 있습니다.
 
-### 2.1 为什么原生 API 还不够？
+### 2.1 왜 원시 API만으로는 부족한가?
 
-即使已经可以通过 Python 生成质量不错的图片，原生 API 在复杂任务中仍然存在限制。关键原因在于：原生 API 本质上是指令式的。当你要求它生成一个具体对象时，它可以直接执行；但当输入变成“策划一套完整的游戏素材”时，它并不会主动将目标拆解为多个可执行步骤。
+Python으로 품질이 괜찮은 이미지를 생성할 수 있음에도 불구하고, 원시 API는 복잡한 작업에서 여전히 제한이 있습니다. 핵심적인 이유는: 원시 API는 본질적으로 지시형(imperative)입니다. 구체적인 객체를 생성하라고 요청하면 직접 실행할 수 있지만, 입력이 "완전한 게임 에셋 세트를 기획하기"가 되면, 목표를 여러 실행 가능한 단계로 자발적으로 분해하지 않습니다.
 
-Lovart 的核心差异在于 Agent 机制。在用户输入与图像生成模型之间，它加入了一层用于理解和规划的逻辑：先识别用户意图，再拆解任务、重写 prompt，最后才执行生成。
+Lovart의 핵심적인 차이는 Agent 메커니즘에 있습니다. 사용자 입력과 이미지 생성 모델 사이에 이해와 계획을 위한 논리 계층을 추가합니다: 먼저 사용자 의도를 식별하고, 작업을 분해하며, 프롬프트를 재작성한 후 마지막에 생성을 실행합니다.
 
-### 2.2 实战演示：5 分钟打造一套 IP 表情包
+### 2.2 실전 데모: 5분 만에 IP 이모티콘 세트 만들기
 
-以 **“制作一套程序员鸭子 ****IP**** 表情包”** 为例，看看 Agent 是如何参与整个流程的。
+**"프로그래머 오리 IP 이모티콘 세트 만들기"** 를 예시로, Agent가 전체 프로세스에 어떻게 참여하는지 살펴보겠습니다.
 
-#### 环节一：策划（Agent 的思考能力）
+#### 단계 1: 기획 (Agent의 사고 능력)
 
-**原生 ****API**** 的问题：**
-你需要自己思考角色设定、情绪状态，并为每一张图单独编写 prompt。
+**원시 API의 문제:**
+캐릭터 설정, 감정 상태를 직접 생각해야 하며, 각 이미지마다 개별적으로 프롬프트를 작성해야 합니다.
 
-**Lovart 的做法：**
+**Lovart의 방식:**
 
-1. 点亮 💡 **Thinking Mode**
-2. 输入一句指令：
+1. 💡 **Thinking Mode** 활성화
+2. 하나의 지시 입력:
 
-> 设计一套程序员鸭子的 IP 表情包，风格要扁平化、可爱
+> 프로그래머 오리의 IP 이모티콘 세트를 디자인해 줘, 스타일은 플랫하고 귀여운 것으로
 
-AI 不会立即画图，而是先去网络上搜索相关的程序员鸭子的设计图。输出一份拆解后的方案，自动生成 Debug、Coffee Break、Panic 等场景，并对应生成多条视觉描述。
+AI는 즉시 그림을 그리지 않고, 먼저 인터넷에서 관련 프로그래머 오리 디자인 이미지를 검색합니다. 분해된 방안을 출력하고, Debug, Coffee Break, Panic 등의 시나리오를 자동으로 생성하며, 각각에 대응하는 여러 시각적 설명을 생성합니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image28.png)![](/zh-cn/stage-2/frontend/lovart-assets/images/image29.png)
+![](images/image28.png)![](images/image29.png)
 
-这一步，AI 从“执行者”转变为“策划者”。在AI帮你分析完需求后，可以在Lovart的画布区看到多种风格和内容的程序员鸭子图片。可以开始筛选你喜欢的风格。
+이 단계에서 AI는 "실행자"에서 "기획자"로 전환됩니다. AI가 요구 사항을 분석한 후, Lovart의 캔버스 영역에서 다양한 스타일과 내용의 프로그래머 오리 이미지를 볼 수 있습니다. 마음에 드는 스타일을 선택하기 시작할 수 있습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image30.png)
+![](images/image30.png)
 
-#### 环节二：一致性（基于参考的视觉锚定）
+#### 단계 2: 일관성 (참고 기반 시각적 앵커링)
 
-Lovart 中的图片不仅是结果，也参与后续生成。
+Lovart에서 이미지는 결과일 뿐만 아니라 후속 생성에도 참여합니다.
 
-##### 完整参考图
+##### 완전한 참고 이미지
 
-* 从草图中选出一张最满意的“标准鸭子”，在画布区点击对应图片
-* 该图将会自动出现在对话区，作为 Reference
+* 스케치에서 가장 만족스러운 "표준 오리"를 하나 선택하고, 캔버스 영역에서 해당 이미지를 클릭
+* 해당 이미지가 자동으로 대화 영역에 나타나 Reference로 사용됨
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image31.png)
+![](images/image31.png)
 
-* 输入新的动作（如开心）并生成
+* 새로운 동작(예: 행복)을 입력하고 생성
 
-生成结果会继承母版的配色、比例和细节。
+생성 결과는 마스터 이미지의 색상, 비율, 디테일을 물려받습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image32.png)
+![](images/image32.png)
 
-##### 局部参考 / 多图整合
+##### 부분 참고 / 다중 이미지 통합
 
-除了整张图片作为参考，Lovart 还支持：
+전체 이미지를 참고로 사용하는 것 외에도, Lovart는 다음을 지원합니다:
 
-* **只选取图片的局部区域** （例如只参考帽子或表情）
+* **이미지의 특정 영역만 선택** (예: 모자나 표정만 참고)
 
-点击画布区左侧tab栏，选择「Mark」键，在目标图像的局部区域标记即可，这部分内容会自动同步到对话框。比如在这里我们可以选择修改背景的颜色。
+캔버스 영역 왼쪽 탭 바를 클릭하고, "Mark" 키를 선택한 후 대상 이미지의 특정 영역을 마크하면 됩니다. 이 부분의 내용은 자동으로 대화 상자에 동기화됩니다. 예를 들어 여기서 배경 색상 수정을 선택할 수 있습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image33.png)
+![](images/image33.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image34.png)
+![](images/image34.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image35.png)
+![](images/image35.png)
 
-能看到新生成的图片只改变了背景的颜色，这也跟我们输入的要求一致。
+새로 생성된 이미지가 배경 색상만 변경된 것을 볼 수 있으며, 이는 우리가 입력한 요구 사항과도 일치합니다.
 
-* **从多张图片中分别引用子元素** ，再组合生成新结果
+* **여러 이미지에서 각각 하위 요소를 인용** 한 다음 결합하여 새로운 결과 생성
 
-例如：你可以保留 A 图的角色主体，同时只替换帽子为 B 图中的样式，Agent 会在后台自动整合这些视觉约束。
+예를 들어: A 이미지의 캐릭터 주체를 유지하면서, 모자만 B 이미지의 스타일로 교체할 수 있습니다. Agent가 배경에서 이러한 시각적 제약을 자동으로 통합합니다.
 
-以程序员鸭子为例，我们可以选择保留第一个图中的鸭子形象，并将其替换到第二张图中作为主体元素。
+프로그래머 오리를 예로 들면, 첫 번째 이미지의 오리 형상을 유지하고 이를 두 번째 이미지의 주요 요소로 교체하도록 선택할 수 있습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image36.png)
+![](images/image36.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image37.png)
+![](images/image37.png)
 
-最后的效果也非常显著。你也可以试着其他的组合！
+최종 효과도 매우 뚜렷합니다. 다른 조합도 시도해 보세요!
 
-#### 环节三：落地（Agent 的工具调用）
+#### 단계 3: 완성 (Agent의 도구 호출)
 
-生成完成后，可以直接执行：放大、移除背景、擦除等操作
+생성이 완료되면, 확대, 배경 제거, 지우기 등의 작업을 직접 실행할 수 있습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image38.png)
+![](images/image38.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image39.png)
+![](images/image39.png)
 
-这些并不是简单滤镜，而是 Agent 自动调度不同工具完成的结果。
+이것들은 단순한 필터가 아니라 Agent가 다른 도구를 자동으로 호출하여 완성한 결과입니다.
 
-而在确定完基调风格后，可以很快速的生成一系列的表情包图像。
+기조 스타일이 확정된 후, 일련의 이모티콘 이미지를 매우 빠르게 생성할 수 있습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image40.png)
+![](images/image40.png)
 
-最终我们得到的是可直接交付的生产级素材，而不仅是一张展示图。
+최종적으로 우리가 얻은 것은 직접 납품할 수 있는 생산 등급의 에셋이며, 단순한 시연용 이미지가 아닙니다.
 
-### 2.3 使用与收费方式说明
+### 2.3 사용 및 요금 안내
 
-Lovart 采用订阅制收费模式，不同套餐对应不同的使用额度与功能权限，具体以官网展示为准。
+Lovart는 구독제 요금 모델을 채택하고 있으며, 다양한 플랜에 따라 사용 한도와 기능 권한이 다릅니다. 구체적인 내용은 공식 웹사이트에 게시된 것을 기준으로 합니다.
 
-本教程不对任何套餐做推荐或比较；如果在实际使用中有需求，可以根据个人情况选择付费升级。
-目前支持通过**支付宝**等方式完成支付。
+이 튜토리얼은 어떤 플랜도 추천하거나 비교하지 않습니다. 실제 사용에 필요가 있다면 개인 상황에 따라 유료 업그레이드를 선택할 수 있습니다.
+현재 **알리페이** 등의 방식으로 결제를 완료할 수 있습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image41.png)
+![](images/image41.png)
 
-#### 小结
+#### 요약
 
-Lovart 并不是替代底层模型，而是通过 Agent 机制，让图像生成从“单次执行”升级为“连续工作流”。
+Lovart는 기본 모델을 대체하는 것이 아니라, Agent 메커니즘을 통해 이미지 생성을 "단일 실행"에서 "연속 작업 흐름"으로 업그레이드합니다.
 
-当任务开始涉及策划、一致性和交付时，这类工具的优势会变得非常明显。
+작업이 기획, 일관성, 납품과 관련되기 시작하면, 이러한 유형의 도구의 장점이 매우 분명해집니다.
 
-## 第 3 章：自己动手做一个智能绘图助手
+## 제3장: 직접 스마트 이미지 생성 어시스턴트 만들기
 
-除了直接使用 Lovart，我们也可以自己实现一个简化版的绘图助手。
+Lovart를 직접 사용하는 것 외에도, 우리는 간소화된 버전의 이미지 생성 어시스턴트를 직접 구현할 수도 있습니다.
 
-本章以“文章自动配图”为例，从实际问题出发，逐步搭建一个带有思考能力的 Agent。
+이 장에서는 "기사 자동 일러스트"를 예시로, 실제 문제에서 출발하여 사고 능력을 갖춘 Agent를 점진적으로 구축합니다.
 
-### 3.1 痛点引入：为什么直接发文章给画图模型没用？
+### 3.1 문제 소개: 왜 기사를 이미지 생성 모델에 직접 전달하면 안 되는가?
 
-直接将一篇较长的文章输入给 NanoBanana 并要求配图，通常很难得到理想结果。原因并不在于模型“画得不行”，而在于 **它并不擅长理解长文本** 。
+긴 기사를 NanoBanana에 입력하고 일러스트 생성을 요청하면, 일반적으로 만족스러운 결과를 얻기 어렵습니다. 그 이유는 모델이 "그림을 못 그려서"가 아니라, **긴 텍스트를 이해하는 데 능숙하지 않기 때문** 입니다.
 
-图像生成模型更适合处理简短、明确的视觉描述，而当输入变成一段包含结构、重点和上下文关系的文章时，模型无法判断哪些内容才是画面中真正需要表达的部分。这往往会导致生成结果偏离主题，或只能捕捉到零散细节，缺乏整体概括能力。
+이미지 생성 모델은 간결하고 명확한 시각적 설명을 처리하는 데 더 적합합니다. 입력이 구조, 핵심, 문맥 관계를 포함하는 기사가 되면, 모델은 어떤 내용이 화면에 실제로 표현되어야 하는지 판단할 수 없습니다. 이는 종종 생성 결과가 주제에서 벗어나거나, 산발적인 디테일만 포착하고 전체적인 개괄 능력이 부족하게 만듭니다.
 
-本质上，图像模型只有“执行”的能力，却缺少对文本进行分析和取舍的过程。
+본질적으로 이미지 모델은 "실행" 능력만 있을 뿐, 텍스트를 분석하고 선택하는 과정이 부족합니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image42.png)
+![](images/image42.png)
 
-### 3.2 解决思路：用 Agent 把「理解」和「执行」拆开
+### 3.2 해결 방안: Agent로 "이해"와 "실행" 분리하기
 
-要解决这个问题，关键并不是更复杂的提示词，而是 **在绘图之前先把事情想清楚** 。因此，我们在生成流程中引入一个独立的「思考层」，并以此构建一个最简单可用的 Agent。
+이 문제를 해결하기 위한 핵심은 더 복잡한 프롬프트가 아니라, **이미지 생성 전에 먼저 생각을 정리하는 것** 입니다. 따라서 생성 흐름에 독립적인 "사고 계층"을 도입하고, 이를 바탕으로 가장 간단하게 사용할 수 있는 Agent를 구축합니다.
 
-这个 Agent 的核心目标只有一个：**让最终生成的图片，尽可能贴近用户真正的表达意图。**
+이 Agent의 핵심 목표는 단 하나입니다: **최종 생성된 이미지가 사용자의 실제 표현 의도에 최대한 가깝게 만드는 것.**
 
-整体流程可以概括为：**长文本输入 → 语言模型理解与判断 → 生成合适的视觉提示词 → 图像模型执行生成 → 输出图片**
+전체 흐름은 다음과 같이 요약할 수 있습니다: **긴 텍스트 입력 → 언어 모델 이해 및 판단 → 적절한 시각적 프롬프트 생성 → 이미지 모델 생성 실행 → 이미지 출력**
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image43.png)
+![](images/image43.png)
 
-那我们构建的 Agent 怎样才能明白用户的意图呢？
+그렇다면 우리가 구축한 Agent는 어떻게 사용자의 의도를 이해할 수 있을까요?
 
-这里选择做一个简化的 **“思考层”** ，我们设置了三种不同的意图：无效输入、直接生图、需要理解的长文本。
+여기서는 간소화된 **"사고 계층"** 을 선택했습니다. 세 가지 다른 의도를 설정했습니다: 무효 입력, 직접 이미지 생성, 이해가 필요한 긴 텍스트.
 
-在这个 Agent 中，各个角色的分工可以概括为四点：
+이 Agent에서 각 역할의 분담은 네 가지로 요약할 수 있습니다:
 
-1. **语言模型作为决策核心**
-   它负责理解文章内容、判断用户输入的意图，并将任务分发到合适的生成路径中，决定接下来“该怎么做”以及如何生成生图提示词。
-2. **图像模型作为执行者**
-   图像模型不参与理解与判断，只接收已经整理好的视觉指令，专注完成图像渲染。
-3. **用户作为可介入的引导者**
-   除了直接输入文本，用户还可以在过程中手动调整生成的提示词，或加入参考图来辅助生成，从而对最终结果进行引导和微调。
-4. **Gradio 与后端 ****API**** 作为整体承载层**
-   它们负责将界面、模型调用和结果展示串联起来，保证整个 Agent 能够以一个完整 Web 应用的形式稳定运行。
+1. **언어 모델이 의사 결정의 핵심 역할**
+   기사 내용을 이해하고, 사용자 입력의 의도를 판단하며, 작업을 적절한 생성 경로에 배분하여, 다음에 "어떻게 해야 하는지"와 이미지 생성 프롬프트를 어떻게 생성할지 결정합니다.
+2. **이미지 모델이 실행자 역할**
+   이미지 모델은 이해와 판단에 참여하지 않고, 이미 정리된 시각적 지시만 받아 이미지 렌더링에 집중합니다.
+3. **사용자가 개입 가능한 안내자 역할**
+   텍스트를 직접 입력하는 것 외에도, 사용자는 과정에서 생성된 프롬프트를 수동으로 조정하거나, 참고 이미지를 추가하여 생성을 보조할 수 있어, 최종 결과를 안내하고 미세 조정할 수 있습니다.
+4. **Gradio와 백엔드 API가 전체 지원 계층 역할**
+   인터페이스, 모델 호출, 결과 표시를 연결하여, 전체 Agent가 완전한 웹 애플리케이션 형태로 안정적으로 실행되도록 보장합니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image44.png)
+![](images/image44.png)
 
-### 3.3 实战准备 ：获取API
+### 3.3 실전 준비: API 얻기
 
-看起来是不是很有趣呢！要跑通上述流程，我们只需要准备两类 API。
+정말 흥미롭지 않나요! 위의 흐름을 실행하려면 두 가지 유형의 API만 준비하면 됩니다.
 
-#### 手：NanoBanana API（图像生成）
+#### 손: NanoBanana API (이미지 생성)
 
-直接沿用第 1 章中已经配置好的 API Key 和 API URL，无需额外设置。
+제1장에서 이미 구성한 API Key와 API URL을 그대로 사용하며, 추가 설정이 필요하지 않습니다.
 
-#### 脑：SiliconFlow API（文本思考）
+#### 뇌: SiliconFlow API (텍스트 사고)
 
-我们需要一个大语言模型来承担“思考层”的职责。本教程使用 SiliconFlow 提供的模型服务：[https://cloud.siliconflow.cn](https://cloud.siliconflow.cn/)
+우리는 대형 언어 모델이 "사고 계층"의 역할을 담당하도록 해야 합니다. 이 튜토리얼은 SiliconFlow에서 제공하는 모델 서비스를 사용합니다: [https://cloud.siliconflow.cn](https://cloud.siliconflow.cn/)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image45.png)
+![](images/image45.png)
 
-  SiliconFlow 提供了兼容 OpenAI API 规范的接口，可以非常方便地在项目中通过标准网络请求进行调用。在这里我们选择的是免费的Qwen2.5-7B-Instruct模型，调用需要的内容都已经写入下面的Prompt。在开始之前，你只需要在官网注册账号并创建一个 API Key。
+SiliconFlow는 OpenAI API 규격과 호환되는 인터페이스를 제공하여, 프로젝트에서 표준 네트워크 요청을 통해 매우 편리하게 호출할 수 있습니다. 여기서 선택한 것은 무료 Qwen2.5-7B-Instruct 모델이며, 호출에 필요한 내용은 아래의 프롬프트에 모두 작성되어 있습니다. 시작하기 전에 공식 웹사이트에서 계정을 등록하고 API Key를 생성하기만 하면 됩니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image46.png)
+![](images/image46.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image47.png)
+![](images/image47.png)
 
-  该 Key 将用于后续的模型调用。
+이 Key는 후속 모델 호출에 사용됩니다.
 
-### 3.4 搭建Agent ：
+### 3.4 Agent 구축:
 
-本次实验主要使用Trae来帮我们编写代码，本教程选用的是Gemini-3-Pro-Preview模型。总思路是，新建项目后将下述完整 Prompt 复制到对话框并输入，逐步替换 API KEY 后运行代码，完成测试即可。
+이번 실험은 주로 Trae를 사용하여 코드를 작성하며, 이 튜토리얼에서 선택한 모델은 Gemini-3-Pro-Preview입니다. 전체적인 아이디어는, 새 프로젝트를 만든 후 아래의 완전한 프롬프트를 대화 상자에 복사하여 입력하고, API KEY를 점진적으로 교체한 후 코드를 실행하여 테스트를 완료하는 것입니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image48.png)
+![](images/image48.png)
 
-#### 环节1️⃣：Gradio Blocks 基础框架与界面布局
+#### 단계 1️⃣: Gradio Blocks 기본 프레임워크 및 인터페이스 레이아웃
 
-在这个环节，我们的主要目标是先给整个Agent搭建出一个“外观”，实现前端的页面设计。复制以下Prompt在Trae对话框中实现后，你将会得到一个本地的URL（通常是 http://127.0.0.1:7860 ）即可查看界面，并且检验实现效果。
+이 단계에서 우리의 주요 목표는 전체 Agent의 "외관"을 먼저 구축하는 것입니다, 즉 프론트엔드 페이지 디자인을 구현합니다. 아래의 프롬프트를 Trae 대화 상자에 복사하여 구현한 후, 로컬 URL(보통 http://127.0.0.1:7860)을 얻게 되며, 이를 통해 인터페이스를 확인하고 구현 효과를 검증할 수 있습니다.
 
 ```Plain
-板块 1：Gradio Blocks 基础框架与界面布局
-1、任务目标
-·基于 Gradio 4.0.0+ 的 Blocks 布局，实现「LLM+Nanobanana 文生图」项目的基础界面，严格遵循固定左右分栏布局，初始化所有 UI 组件并设置正确的初始状态。
+모듈 1: Gradio Blocks 기본 프레임워크 및 인터페이스 레이아웃
+1, 작업 목표
+- Gradio 4.0.0+의 Blocks 레이아웃을 기반으로 "LLM+Nanobanana 텍스트에서 이미지" 프로젝트의 기본 인터페이스를 구현하고, 고정 좌우 분할 레이아웃을 엄격히 따르며, 모든 UI 컴포넌트를 초기화하고 올바른 초기 상태를 설정합니다.
 
-2、技术栈要求
-·必须使用 Gradio 4.0.0+ 的 Blocks 模式开发，禁止使用 Interface 模式；
-·依赖：gradio>=4.0.0，pillow>=10.0.0（仅导入，暂不实现图片处理逻辑）；
-·代码需是完整可运行的 Python 文件，包含所有必要的导入语句。
+2, 기술 스택 요구 사항
+- Gradio 4.0.0+의 Blocks 모드를 사용하여 개발해야 하며, Interface 모드는 사용할 수 없습니다;
+- 의존성: gradio>=4.0.0, pillow>=10.0.0 (가져오기만 하고, 이미지 처리 로직은 일시적으로 구현하지 않음);
+- 코드는 완전히 실행 가능한 Python 파일이어야 하며, 모든 필수 import 문을 포함해야 합니다.
 
-3、界面布局规则（核心约束，融合实战细节）
-·整体布局：
-页面标题：LLM 驱动的文生图全流程工具；
-固定左右分栏：左侧占 60% 宽度，右侧占 40% 宽度，使用 gr.Row 和 gr.Column 实现比例控制。
-·左侧 60%（提示词生成流程区）组件清单：
-input_text：gr.Textbox，标签「输入文本（教程段落 / 绘图指令）」，lines=6，占位符「请输入需要配图的教程文本或直接绘图指令...」；
-identify_intent_btn：gr.Button，value="识别意图"，初始状态正常可点击；
-intent_status：gr.Textbox，标签「意图类型 / 处理状态」，lines=2，interactive=False，初始值「未识别意图」；
-system_prompt：gr.Textbox，标签「System Prompt（仅文章配图意图可编辑）」，lines=4，interactive=False，占位符「LLM 生成提示词的约束规则...」；
-confirm_prompt_btn：gr.Button，value="确认生成生图提示词"，interactive=False（初始禁用防误触）；
-generation_prompt：gr.Textbox，标签「生图提示词（可编辑）」，lines=3，interactive=True，初始值为空，占位符「生成的英文生图提示词将显示在此，支持手动修改...」。
-·右侧 40%（Nanobanana 生图功能区）组件清单：
-ref_image：gr.Image，标签「参考图（可选，图生图）」，type=filepath，height=300，允许上传；
-generate_btn：gr.Button，value="生成图片"，interactive=False（初始禁用，无提示词不可点击）；
-result_image：gr.Image，标签「生成结果」，type=pil，height=300，初始为空，interactive=False。
+3, 인터페이스 레이아웃 규칙 (핵심 제약, 실전 디테일 융합)
+- 전체 레이아웃:
+페이지 제목: LLM 기반 텍스트에서 이미지 전체 프로세스 도구;
+고정 좌우 분할: 왼쪽이 60% 너비, 오른쪽이 40% 너비, gr.Row와 gr.Column을 사용하여 비율 제어를 구현합니다.
+- 왼쪽 60% (프롬프트 생성 흐름 영역) 컴포넌트 목록:
+input_text: gr.Textbox, 레이블 "텍스트 입력 (튜토리얼 단락 / 이미지 생성 지시)", lines=6, 플레이스홀더 "일러스트가 필요한 튜토리얼 텍스트 또는 직접 이미지 생성 지시를 입력하세요...";
+identify_intent_btn: gr.Button, value="의도 식별", 초기 상태는 정상적으로 클릭 가능;
+intent_status: gr.Textbox, 레이블 "의도 유형 / 처리 상태", lines=2, interactive=False, 초기값 "의도 미식별";
+system_prompt: gr.Textbox, 레이블 "System Prompt (기사 일러스트 의도만 편집 가능)", lines=4, interactive=False, 플레이스홀더 "LLM이 프롬프트를 생성하는 제약 규칙...";
+confirm_prompt_btn: gr.Button, value="이미지 생성 프롬프트 생성 확인", interactive=False (초기 비활성화, 오작동 방지);
+generation_prompt: gr.Textbox, 레이블 "이미지 생성 프롬프트 (편집 가능)", lines=3, interactive=True, 초기값 비어 있음, 플레이스홀더 "생성된 영문 이미지 생성 프롬프트가 여기에 표시되며, 수동 수정을 지원합니다...".
+- 오른쪽 40% (Nanobanana 이미지 생성 기능 영역) 컴포넌트 목록:
+ref_image: gr.Image, 레이블 "참고 이미지 (선택사항, 이미지에서 이미지)", type=filepath, height=300, 업로드 허용;
+generate_btn: gr.Button, value="이미지 생성", interactive=False (초기 비활성화, 프롬프트가 없으면 클릭 불가);
+result_image: gr.Image, 레이블 "생성 결과", type=pil, height=300, 초기값 비어 있음, interactive=False.
 
-4、交互逻辑要求
-·所有组件的 interactive 初始状态严格按上述配置，后续通过函数动态更新；
-·按钮禁用状态需直观（置灰），避免用户误操作。
+4, 인터랙션 로직 요구 사항
+- 모든 컴포넌트의 interactive 초기 상태는 위 구성을 엄격히 따르며, 이후 함수를 통해 동적으로 업데이트됩니다;
+- 버튼 비활성화 상태는 직관적이어야 함 (회색으로 표시), 사용자의 오작동을 방지합니다.
 
-5、输出要求
-·生成完整的 Python 代码，仅实现界面布局和组件初始化，不包含任何业务逻辑；
-·代码注释清晰，组件命名与实战版一致（input_text/identify_intent_btn 等）；
-·代码可直接运行，界面结构与描述完全一致。
+5, 출력 요구 사항
+- 완전한 Python 코드를 생성하며, 인터페이스 레이아웃과 컴포넌트 초기화만 구현하고 비즈니스 로직은 포함하지 않습니다;
+- 코드 주석이 명확하고, 컴포넌트 명명이 실전 버전과 일치 (input_text/identify_intent_btn 등);
+- 코드를 직접 실행할 수 있으며, 인터페이스 구조가 설명과 완전히 일치합니다.
 ```
 
-在浏览器打开http://127.0.0.1:7860后可看到Trae已经按照我们的要求生成了以下的网页，跟我们的要求大致相当，可以进行到下一步的生成中了。
+브라우저에서 http://127.0.0.1:7860을 열면 Trae가 우리의 요구 사항에 따라 다음 웹 페이지를 생성한 것을 볼 수 있으며, 우리의 요구 사항과 대략 일치하므로 다음 생성 단계로 진행할 수 있습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image49.png)
+![](images/image49.png)
 
-#### 环节2️⃣：LLM 意图识别模块（Siliconflow API）
+#### 단계 2️⃣: LLM 의도 식별 모듈 (Siliconflow API)
 
-在日常使用VLM画图的时候，可能有以下三种常见输入情况：
+일상적으로 VLM으로 그림을 그릴 때, 다음과 같은 세 가지 일반적인 입력 상황이 있을 수 있습니다:
 
-1. 无意义内容，比如“你好”、“你今天吃饭了吗”等，无法画出对应的图片。
-2. 文章/长文本，字数较多，比如200字左右的一篇有结构的文章，需要先理解文章的结构与内容，再考虑如何生成能完整概括这段文字的图片。
-3. 直接绘图指令，比如“帮我画一只在洗澡的狗”等，要求已经阐述的非常具体，可以直接生成图片。
+1. 무의미한 내용, 예를 들어 "안녕", "오늘 밥 먹었어?" 등, 해당 이미지를 그릴 수 없습니다.
+2. 기사/긴 텍스트, 단어 수가 많고, 예를 들어 200자 정도의 구조화된 기사로, 먼저 기사의 구조와 내용을 이해한 다음 이 텍스트를 완전히 개괄할 수 있는 이미지를 어떻게 생성할지 고려해야 합니다.
+3. 직접 이미지 생성 지시, 예를 들어 "목욕하는 강아지를 그려줘" 등, 요구 사항이 이미 매우 구체적으로 설명되어 있어 직접 이미지를 생성할 수 있습니다.
 
-跟前面一样，复制以下Prompt在Trae对话框中实现，并且补充在前面步骤中获得的API。
+이전과 마찬가지로 아래의 프롬프트를 Trae 대화 상자에 복사하여 구현하고, 이전 단계에서 얻은 API를 추가합니다.
 
 ```Plain
-板块 2：LLM 意图识别模块（Siliconflow API）
-1、任务目标
-在已实现的 Gradio 界面基础上，为「识别意图」按钮添加点击逻辑，调用 Siliconflow API 完成意图识别，并联动组件状态。
+모듈 2: LLM 의도 식별 모듈 (Siliconflow API)
+1, 작업 목표
+이미 구현된 Gradio 인터페이스를 기반으로, "의도 식별" 버튼에 클릭 로직을 추가하고, Siliconflow API를 호출하여 의도 식별을 완료하며, 컴포넌트 상태를 연동합니다.
 
-2、技术栈要求
-基于 Gradio 4.0.0+ Blocks；
-依赖：requests>=2.31.0，openai；
-输出完整可运行 Python 文件，包含板块 1 界面 + 本模块逻辑。
+2, 기술 스택 요구 사항
+Gradio 4.0.0+ Blocks 기반;
+의존성: requests>=2.31.0, openai;
+완전히 실행 가능한 Python 파일 출력, 모듈 1 인터페이스 + 이 모듈 로직 포함.
 
-3、核心业务规则（绝对不可偏离）
-·意图分类规则（仅 3 类，严格返回数字 + 描述）
-1 = 无意义内容：仅闲聊、寒暄、无关对话，没有任何绘图或配图需求（如 “你好”“今天吃了吗”）；
-2 = 文章 / 长文本配图需求：用户输入一段完整文章、教程、段落、说明性文字，内容偏叙事 / 说明 / 讲解，隐含需要为这段内容生成配图的意图，不需要用户明确说 “为这段文字配图”；
-3 = 直接绘图指令：用户输入简短、明确的画图命令，没有长文本背景，直接要求画某个内容（如 “画一只 Apple 风格的猫”）。
-·LLM 调用约束（融合实战版模板）
-接口地址：https://api.siliconflow.cn/v1/chat/completions；
-模型：Qwen/Qwen2.5-7B-Instruct；
-temperature=0.1；
-统一定义代码：
+3, 핵심 비즈니스 규칙 (절대 이탈 불가)
+- 의도 분류 규칙 (단 3가지, 엄격하게 숫자 + 설명 반환)
+1 = 무의미한 내용: 단순 잡담, 인사, 관련 없는 대화, 그리기나 일러스트에 대한 어떠한 요구도 없음 (예: "안녕", "밥 먹었어?");
+2 = 기사 / 긴 텍스트 일러스트 요구: 사용자가 완전한 기사, 튜토리얼, 단락, 설명 텍스트를 입력하며, 내용이 서술/설명/해설에 편중되어 있고, 이 내용에 대한 일러스트를 생성해야 한다는 의도가 내포되어 있음, 사용자가 명시적으로 "이 텍스트에 일러스트를 달아주세요"라고 말할 필요는 없음;
+3 = 직접 이미지 생성 지시: 사용자가 짧고 명확한 그리기 명령을 입력하며, 긴 텍스트 배경이 없고, 직접 특정 내용을 그리라고 요구함 (예: "Apple 스타일의 고양이를 그려줘").
+- LLM 호출 제약 (실전 버전 템플릿 융합)
+인터페이스 주소: https://api.siliconflow.cn/v1/chat/completions;
+모델: Qwen/Qwen2.5-7B-Instruct;
+temperature=0.1;
+통일 정의 코드:
 python
-运行
+실행
 LLM_BASE_URL = "https://api.siliconflow.cn/v1"
-LLM_API_KEY = ""  # 用户自行替换
-LLM_MODEL = "Qwen/Qwen2.5-7B-Instruct"# 实战验证的意图识别模板（固化到代码中）
-INTENT_PROMPT_TEMPLATE = """你需要识别用户输入文本的意图，仅返回以下 3 类结果中的一种（格式：数字 + 中文描述）：
-1 = 无意义内容；2 = 文章 / 长文本配图需求；3 = 直接绘图指令。
+LLM_API_KEY = ""  # 사용자가 직접 교체
+LLM_MODEL = "Qwen/Qwen2.5-7B-Instruct"# 실전 검증된 의도 식별 템플릿 (코드에 고정)
+INTENT_PROMPT_TEMPLATE = """사용자가 입력한 텍스트의 의도를 식별해야 합니다, 다음 3가지 결과 중 하나만 반환하세요 (형식: 숫자 + 한국어 설명):
+1 = 무의미한 내용; 2 = 기사 / 긴 텍스트 일러스트 요구; 3 = 직접 이미지 생성 지시.
 
-用户输入：{user_input}
+사용자 입력: {user_input}
 
-识别结果：
-仅提取返回结果中的数字和描述，禁止额外内容。"""
-
-4、组件联动规则
-·结果为 1：intent_status 显示「1 = 无意义内容：无绘图需求」，system_prompt 保持禁用，confirm_prompt_btn 禁用；
-·结果为 2：intent_status 显示「2 = 文章 / 长文本配图需求：为输入内容生成配图」，启用 system_prompt 并填充默认规则，激活 confirm_prompt_btn；
-·结果为 3：intent_status 显示「3 = 直接绘图指令：根据指令生成图片」，system_prompt 禁用且填充默认规则，激活 confirm_prompt_btn。
-
-5、异常处理
-API 异常、解析异常均给出友好提示，不崩溃，组件恢复初始状态。
-
-6、输出要求
-生成完整可运行代码，替换 LLM_API_KEY 即可使用，逻辑清晰注释完整，意图识别模板严格使用实战版。
+식별 결과:
+반환 결과에서 숫자와 설명만 추출, 추가 내용은 금지합니다."""
 ```
 
-刷新之前的http://127.0.0.1:7860网址，开始测试是否能正确检测三种情况。
+이전의 http://127.0.0.1:7860 웹 주소를 새로고침하고, 세 가지 상황을 올바르게 감지할 수 있는지 테스트를 시작합니다.
 
-1. 无意义内容，可以尝试输入“你好”、“谢谢”等，发现能够正常识别。
+1. 무의미한 내용, "안녕", "고마워" 등을 입력해 보면, 정상적으로 식별되는 것을 확인할 수 있습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image50.png)
+![](images/image50.png)
 
-2. 文章/长文本，在这里我们选用了一段豆包生成的描述人工智能的文字。你也可以尝试使用自己的论文段落进行测试。
+2. 기사/긴 텍스트, 여기서는 Doubao가 생성한 인공지능에 대한 설명 텍스트를 사용했습니다. 자신의 논문 단락을 사용하여 테스트해 볼 수도 있습니다.
 
 ```Plain
-人工智能正在以前所未有的深度和广度重塑教育生态系统。通过自适应学习算法，AI系统能够构建每个学生的认知图谱，实时追踪他们的知识掌握轨迹，并动态调整教学内容的难度和呈现方式。在传统课堂环境中，教师往往难以同时满足不同学习风格和能力水平的学生需求，而基于深度学习的教育平台可以分析学生在交互式模拟实验中的行为模式，识别他们在量子力学或微积分等复杂概念理解上的微妙障碍，并提供精准的认知支架。
+인공지능은 전례 없는 깊이와 폭으로 교육 생태계를 재편하고 있습니다. 적응형 학습 알고리즘을 통해, AI 시스템은 각 학생의 인지 지도를 구축하고, 그들의 지식 습득 궤적을 실시간으로 추적하며, 교육 콘텐츠의 난이도와 제공 방식을 동적으로 조정합니다. 전통적인 교실 환경에서 교사는 종종 다양한 학습 스타일과 능력 수준을 가진 학생들의 요구를 동시에 충족시키기 어렵지만, 딥러닝 기반의 교육 플랫폼은 학생들이 인터랙티브 시뮬레이션 실험에서 보이는 행동 패턴을 분석하고, 양자역학이나 미적분과 같은 복잡한 개념 이해에서의 미묘한 장애물을 식별하며, 정확한 인지 비계를 제공할 수 있습니다.
 
-高级自然语言处理引擎驱动的虚拟导师不仅能够解构开放性问题，如"如何评价法国大革命对现代民主制度的影响"，还能引导苏格拉底式对话，激发批判性思维。当学生撰写关于气候变化对极地生态系统影响的论文时，AI写作助手可以分析其论证逻辑的严密性，指出数据引用中的时效性问题，并建议更精准的科学术语。在特殊教育领域，计算机视觉技术使AI能够识别自闭症谱系儿童在社交互动中的非语言线索，调整干预策略，而情感计算算法则帮助检测在线学习时的挫折感，及时提供鼓励性反馈。
+고급 자연어 처리 엔진 기반의 가상 튜터는 개방형 질문을 해체할 수 있을 뿐만 아니라, 소크라테스식 대화를 이끌어 비판적 사고를 자극합니다. 학생이 기후 변화가 극지 생태계에 미치는 영향에 대한 논문을 작성할 때, AI 작문 조수는 그 논증 논리의 엄밀성을 분석하고, 데이터 인용에서의 시의성 문제를 지적하며, 더 정확한 과학 용어를 제안할 수 있습니다. 특수 교육 분야에서 컴퓨터 비전 기술은 AI가 자폐 스펙트럼 아동이 사회적 상호작용에서 보이는 비언어적 단서를 식별할 수 있게 하여 개입 전략을 조정하고, 정서 컴퓨팅 알고리즘은 온라인 학습 시 좌절감을 감지하여 적시에 격려 피드백을 제공합니다.
 
-然而，这种技术融合引发了一系列伦理困境。算法偏见可能无意中边缘化特定文化背景的学生，数据采集的透明度问题引发了对学术隐私的关切，而过度依赖自动化评分系统可能削弱教师对学生思维过程的深层理解。更复杂的是，当AI开始生成高度逼真的虚拟实验室体验时，我们需要重新定义"实践经验"在教育中的价值。未来教育的范式可能演变为人类教师专注于培养创造力、同理心和道德判断力，而AI系统则承担知识传递、技能训练和个性化评估的职能，形成一种协同进化的教育共生体，既能发挥机器的计算优势，又能保留人类教育的独特温度.
+그러나 이러한 기술 융합은 일련의 윤리적 딜레마를 야기합니다. 알고리즘 편향은 특정 문화적 배경을 가진 학생을 무의식적으로 소외시킬 수 있고, 데이터 수집의 투명성 문제는 학술적 개인정보에 대한 우려를 불러일으키며, 자동화된 평가 시스템에 대한 과도한 의존은 교사의 학생 사고 과정에 대한 깊은 이해를 약화시킬 수 있습니다. 더 복잡한 것은, AI가 고도로 사실적인 가상 실험실 경험을 생성하기 시작할 때, 우리는 교육에서 "실무 경험"의 가치를 재정의해야 한다는 것입니다. 미래 교육의 패러다임은 인간 교사가 창의성, 공감 능력, 도덕적 판단력을 배양하는 데 집중하고, AI 시스템이 지식 전달, 기술 훈련, 개인화된 평가의 기능을 담당하여, 기계의 계산적 장점을 발휘하면서도 인간 교육의 독특한 온기를 보존하는 협동 진화적 교육 공생체로 진화할 수 있습니다.
 ```
 
-同样检测成功～
+마찬가지로 감지에 성공했습니다~
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image51.png)
+![](images/image51.png)
 
-3. 直接绘图指令，这里输入的是“我要画一只猫”，同样检测准确。
+3. 직접 이미지 생성 지시, 여기서는 "고양이를 그리고 싶어요"를 입력했으며, 마찬가지로 정확하게 감지되었습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image52.png)
+![](images/image52.png)
 
-到这里我们就已经顺利实现了第二个环节——意图识别。
+여기까지 우리는 두 번째 단계인 의도 식별을 순조롭게 구현했습니다.
 
-#### 环节3️⃣：生图提示词生成模块（LLM 二次调用）
+#### 단계 3️⃣: 이미지 생성 프롬프트 생성 모듈 (LLM 두 번째 호출)
 
-意图识别后，对于文章或长文本，还有很重要的一步就是生成画图的提示词，而这正是本Agent的重点。
+의도 식별 후, 기사나 긴 텍스트의 경우 그림을 그리기 위한 프롬프트를 생성하는 것이 매우 중요한 단계이며, 이것이 바로 이 Agent의 핵심입니다.
 
 ```SQL
-板块 3：生图提示词生成模块（LLM 二次调用）
-1、任务目标
-在意图识别基础上，实现「确认生成生图提示词」按钮逻辑，调用 LLM 将文本优化为适合绘图的英文视觉提示词，填充到编辑框并联动「生成图片」按钮。
+모듈 3: 이미지 생성 프롬프트 생성 모듈 (LLM 두 번째 호출)
+1, 작업 목표
+의도 식별을 기반으로, "이미지 생성 프롬프트 생성 확인" 버튼 로직을 구현하고, LLM을 호출하여 텍스트를 이미지 생성에 적합한 영문 시각적 프롬프트로 최적화하며, 편집 상자에 채우고 "이미지 생성" 버튼과 연동합니다.
 
-2、技术栈要求
-同板块 2，输出完整代码 = 板块 1 + 板块 2 + 本模块；
-共用板块 2 定义的 LLM_BASE_URL、LLM_API_KEY、LLM_MODEL，不新增密钥。
+2, 기술 스택 요구 사항
+모듈 2와 동일, 완전한 코드 출력 = 모듈 1 + 모듈 2 + 이 모듈;
+모듈 2에서 정의한 LLM_BASE_URL, LLM_API_KEY, LLM_MODEL을 공유하며, 새로운 키를 추가하지 않습니다.
 
-3、核心业务规则（融合实战版 Prompt 组装逻辑）
-·提示词生成输入规则（必须严格遵循）
-生图提示词生成不再是简单字符串拼接，而是构建标准 Chat 消息列表，代码结构如下：
+3, 핵심 비즈니스 규칙 (실전 버전 프롬프트 조립 로직 융합)
+- 프롬프트 생성 입력 규칙 (엄격하게 준수해야 함)
+이미지 생성 프롬프트 생성은 더 이상 단순한 문자열 연결이 아니라, 표준 Chat 메시지 리스트를 구성하는 것입니다. 코드 구조는 다음과 같습니다:
 python
-运行
-messages=[# System角色：网页上用户最终确认/编辑后的system_prompt内容{"role": "system", "content": final_system_prompt},# User角色：承载待处理数据，明确任务目标{"role": "user", "content": f"请为以下内容生成视觉提示词：\n\n{user_input}"}]
-意图为 2 时：System 内容取用户编辑后的 system_prompt 最终版本；
-意图为 3 时：System 内容取禁用状态下填充的默认规则
-user_input 为用户最初输入到 input_text 框的原始文本。
-·实战验证的 System Prompt 预设（固化到代码中）
+실행
+messages=[# System 역할: 웹 페이지에서 사용자가 최종 확인/편집한 system_prompt 내용{"role": "system", "content": final_system_prompt},# User 역할: 처리할 데이터를 담당하며, 작업 목표를 명확히 함{"role": "user", "content": f"다음 내용에 대한 시각적 프롬프트를 생성해 주세요:\n\n{user_input}"}]
+의도가 2일 때: System 내용은 사용자가 편집한 system_prompt의 최종 버전을 사용;
+의도가 3일 때: System 내용은 비활성화 상태에서 채워진 기본 규칙을 사용
+user_input은 사용자가 최초로 input_text 상자에 입력한 원본 텍스트입니다.
+- 실전 검증된 System Prompt 사전 설정 (코드에 고정)
 python
-运行
-SYSTEM_PROMPT_DEFAULT = """你现在是一个创建NanoBanana画图提示词的助手。
-需要根据我的内容处理，我这个图片的作用是能说明这一段在说什么，并且让大家知道这段话的上下结构就是整体说的是什么意思。
-里面可能会类似PPT有一些讲解（如：左上角展示核心观点，右下角展示数据）。
-设计风格要求：简约，Apple设计思维（Apple Design Philosophy）。
-约束：请直接返回NanoBanana可用的英文提示词，不要返回任何解释、前缀或多余的废话。"""
-·LLM 调用约束
-与板块 2 共用同一套 LLM_BASE_URL、LLM_API_KEY、LLM_MODEL；
-temperature=0.7（保证提示词的创意性与适配性）；
-max_tokens=200（限制输出长度，匹配提示词约束）；
-严格使用上述标准 Chat 消息列表结构，禁止字符串拼接。
-·示例输入输出（核心参考）
-输入示例 1（文章配图意图）：原始文本：「AI 如何改变教育：随着人工智能技术的发展，教师的角色从知识传授者转变为引导者，AI 助手可辅助学生完成个性化学习，课堂上人机协作成为常态。」最终 System Prompt：SYSTEM_PROMPT_DEFAULT（未修改）输出预期："Minimalist illustration, Apple Design Philosophy, 1024x1024. Top left shows 'AI + Education' core concept, bottom right shows data of teacher-student-AI collaboration, soft color palette, clean lines, no redundant elements."
-输入示例 2（直接绘图指令）：原始文本：「画一只 Apple 风格的猫，坐在 MacBook 旁边」最终 System Prompt：SYSTEM_PROMPT_DEFAULT（禁用状态）输出预期："Minimalist cat, Apple style, 1024x1024, sitting next to a silver MacBook, clean white background, soft shadows, geometric shapes, no extra details."
-·提示词输出强制约束
-纯英文，无中文；
-必须包含 Apple Design Philosophy/Apple style + 1024x1024；
-长度 50–200 字符，代码内校验；
-无额外解释、前缀或废话，仅返回提示词本身。
+실행
+SYSTEM_PROMPT_DEFAULT = """당신은 이제 NanoBanana 이미지 생성 프롬프트를 생성하는 어시스턴트입니다.
+내 콘텐츠에 따라 처리해야 합니다. 이 이미지의 역할은 이 단락이 무엇을 말하고 있는지 설명하고, 모두가 이 텍스트의 위아래 구조, 즉 전체적으로 무엇을 의미하는지 알 수 있게 하는 것입니다.
+PPT와 유사한 해설이 있을 수 있습니다 (예: 왼쪽 상단에 핵심 관점 표시, 오른쪽 하단에 데이터 표시).
+디자인 스타일 요구 사항: 간결, Apple 디자인 철학 (Apple Design Philosophy).
+제약 사항: NanoBanana에서 사용할 수 있는 영문 프롬프트만 직접 반환하고, 어떠한 설명, 접두사 또는 불필요한 말도 반환하지 마세요."""
+- LLM 호출 제약
+모듈 2와 동일한 LLM_BASE_URL, LLM_API_KEY, LLM_MODEL 공유;
+temperature=0.7 (프롬프트의 창의성과 적합성 보장);
+max_tokens=200 (출력 길이 제한, 프롬프트 제약에 부합);
+위의 표준 Chat 메시지 리스트 구조를 엄격히 사용하며, 문자열 연결은 금지합니다.
+- 예시 입력 및 출력 (핵심 참고)
+입력 예시 1 (기사 일러스트 의도): 원본 텍스트: "AI가 교육을 어떻게 변화시키는가: 인공지능 기술의 발전에 따라, 교사의 역할이 지식 전달자에서 안내자로 변화하고, AI 어시스턴트가 학생의 개인화된 학습을 보조할 수 있으며, 교실에서의 인간-기계 협력이 일상이 되었습니다." 최종 System Prompt: SYSTEM_PROMPT_DEFAULT (수정하지 않음) 예상 출력: "Minimalist illustration, Apple Design Philosophy, 1024x1024. Top left shows 'AI + Education' core concept, bottom right shows data of teacher-student-AI collaboration, soft color palette, clean lines, no redundant elements."
+입력 예시 2 (직접 이미지 생성 지시): 원본 텍스트: "Apple 스타일의 고양이를 그려줘, MacBook 옆에 앉아 있는" 최종 System Prompt: SYSTEM_PROMPT_DEFAULT (비활성화 상태) 예상 출력: "Minimalist cat, Apple style, 1024x1024, sitting next to a silver MacBook, clean white background, soft shadows, geometric shapes, no extra details."
+- 프롬프트 출력 강제 제약
+순수 영문, 중국어 없음;
+반드시 Apple Design Philosophy/Apple style + 1024x1024 포함;
+길이 50-200자, 코드 내 검증;
+추가 설명, 접두사 또는 불필요한 말 없이 프롬프트 자체만 반환.
 
-4、组件联动规则
-生成成功：将提示词填入 generation_prompt 框，激活 generate_btn，intent_status 追加「提示词生成成功，可修改后生成图片」；
-生成失败：提示具体原因（如 API 调用失败、长度不达标），generate_btn 保持禁用，generation_prompt 框为空；
-用户手动修改 / 清空 generation_prompt 框：
-清空时自动禁用 generate_btn；
-非空时保持 generate_btn 激活。
+4, 컴포넌트 연동 규칙
+생성 성공: 프롬프트를 generation_prompt 상자에 채우고, generate_btn을 활성화하며, intent_status에 "프롬프트 생성 성공, 수정 후 이미지 생성 가능"을 추가;
+생성 실패: 구체적인 원인 표시 (예: API 호출 실패, 길이 미달), generate_btn은 비활성화 유지, generation_prompt 상자는 비어 있음;
+사용자가 수동으로 generation_prompt 상자를 수정/비우기:
+비우면 자동으로 generate_btn을 비활성화;
+비어 있지 않으면 generate_btn을 활성화 상태로 유지.
 
-5、异常处理
-API 调用失败：友好提示「提示词生成失败：{具体错误信息}」，不崩溃；
-提示词校验失败：明确提示原因（如 “未包含 Apple style”“长度仅 40 字符”），允许重试；
-响应解析失败：提示「无法解析 LLM 返回结果，请重试」。
+5, 예외 처리
+API 호출 실패: 친절한 안내 "프롬프트 생성 실패: {구체적인 오류 정보}", 충돌하지 않음;
+프롬프트 검증 실패: 명확한 원인 안내 (예: "Apple style 미포함", "길이가 단 40자"), 재시도 허용;
+응답 파싱 실패: 안내 "LLM 반환 결과를 파싱할 수 없습니다, 다시 시도해 주세요".
 
-6、输出要求
-完整可运行代码，替换 LLM_API_KEY 即可使用；
-代码结构清晰、注释完善，界面美观简洁；
-严格实现标准 Chat 消息列表结构，参数与示例逻辑一致；
-包含提示词长度、内容校验逻辑，错误提示友好。
+6, 출력 요구 사항
+완전히 실행 가능한 코드, LLM_API_KEY만 교체하면 사용 가능;
+코드 구조가 명확하고 주석이 완전하며, 인터페이스가 아름답고 간결함;
+표준 Chat 메시지 리스트 구조를 엄격히 구현하고, 파라미터와 예시 로직이 일치함;
+프롬프트 길이, 내용 검증 로직을 포함하며, 오류 안내가 친절함.
 ```
 
-同样复制第二个环节的文本进行检测。
+마찬가지로 두 번째 단계의 텍스트를 복사하여 검증합니다.
 
-值得注意的是，我们在这里预设的生成生图提示词的System Prompt为：
+주목할 점은, 여기서 우리가 사전 설정한 이미지 생성 프롬프트의 System Prompt는 다음과 같습니다:
 
-> 你现在是一个创建NanoBanana画图提示词的助手。
-> 需要根据我的内容处理，我这个图片的作用是能说明这一段在说什么，并且让大家知道这段话的上下结构就是整体说的是什么意思。
-> 里面可能会类似PPT有一些讲解（如：左上角展示核心观点，右下角展示数据）。
-> 设计风格要求：简约，Apple设计思维（Apple Design Philosophy）。
-> 约束：请直接返回NanoBanana可用的英文提示词，不要返回任何解释、前缀或多余的废话。
+> 당신은 이제 NanoBanana 이미지 생성 프롬프트를 생성하는 어시스턴트입니다.
+> 내 콘텐츠에 따라 처리해야 합니다. 이 이미지의 역할은 이 단락이 무엇을 말하고 있는지 설명하고, 모두가 이 텍스트의 위아래 구조, 즉 전체적으로 무엇을 의미하는지 알 수 있게 하는 것입니다.
+> PPT와 유사한 해설이 있을 수 있습니다 (예: 왼쪽 상단에 핵심 관점 표시, 오른쪽 하단에 데이터 표시).
+> 디자인 스타일 요구 사항: 간결, Apple 디자인 철학 (Apple Design Philosophy).
+> 제약 사항: NanoBanana에서 사용할 수 있는 영문 프롬프트만 직접 반환하고, 어떠한 설명, 접두사 또는 불필요한 말도 반환하지 마세요.
 
-如果你想换成其他的预设模版，可以在前面的prompt里修改，或者直接在Trae里通过对话修改。
+다른 사전 설정 템플릿으로 변경하고 싶다면, 앞의 프롬프트에서 수정하거나 Trae에서 대화를 통해 직접 수정할 수 있습니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image53.png)
+![](images/image53.png)
 
-除了修改底层代码，我们在网页上也可以快速编辑。举个例子，我在这里加了一句，“在前面加一句Pic Prompt”，可以看到生成的新的提示词前面也包含了～这样设计是为了方便快速修改生成提示词的System Prompt，帮助我们快速切换风格。
+기본 코드를 수정하는 것 외에도, 웹 페이지에서도 빠르게 편집할 수 있습니다. 예를 들어, 여기에 "앞에 Pic Prompt라는 문장을 추가"라는 문장을 추가했는데, 생성된 새로운 프롬프트의 앞에도 포함되어 있는 것을 볼 수 있습니다~ 이렇게 설계한 것은 생성 프롬프트의 System Prompt를 빠르게 수정할 수 있도록 돕기 위한 것이며, 스타일을 빠르게 전환할 수 있게 합니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image54.png)
+![](images/image54.png)
 
-#### 环节4️⃣：Nanobanana 文生图 / 图生图模块
+#### 단계 4️⃣: Nanobanana 텍스트에서 이미지 / 이미지에서 이미지 모듈
 
-终于来到了最后一步，不接入生图模型，就不是一个完整的Agent！
+드디어 마지막 단계입니다. 이미지 생성 모델을 연결하지 않으면, 완전한 Agent가 아닙니다!
 
 ```Bash
-板块 4：Nanobanana 文生图 / 图生图模块（最终版）
-1、任务目标
-实现「生成图片」按钮逻辑，调用真实 Nanobanana API，支持文生图 / 图生图，解析 Base64 并展示图片。
+모듈 4: Nanobanana 텍스트에서 이미지 / 이미지에서 이미지 모듈 (최종 버전)
+1, 작업 목표
+"이미지 생성" 버튼 로직을 구현하고, 실제 Nanobanana API를 호출하며, 텍스트에서 이미지 / 이미지에서 이미지를 지원하고, Base64를 파싱하여 이미지를 표시합니다.
 
-2、技术栈要求
-基于 Gradio 4.0.0+ Blocks；
-依赖：requests, pillow, base64, io, re；
-完整代码 = 板块 1+2+3 + 本模块。
+2, 기술 스택 요구 사항
+Gradio 4.0.0+ Blocks 기반;
+의존성: requests, pillow, base64, io, re;
+완전한 코드 = 모듈 1+2+3 + 이 모듈.
 
-3、核心 API 配置（实战验证固化）
-固化代码配置：
+3, 핵심 API 구성 (실전 검증 고정)
+고정 코드 구성:
 python
-运行
-# 固化到代码中的API配置
+실행
+# 코드에 고정된 API 구성
 NANOBANANA_API_URL = "https://api.zyai.online/v1/chat/completions"
 NANOBANANA_MODEL = "gemini-2.5-flash-image"
-NANOBANANA_API_KEY = ""  # 用户自行替换
-鉴权方式：Header Authorization: Bearer {NANOBANANA_API_KEY}。
+NANOBANANA_API_KEY = ""  # 사용자가 직접 교체
+인증 방식: Header Authorization: Bearer {NANOBANANA_API_KEY}.
 
-4、图片预处理要求（必须实现）实现函数 image_to_base64_data_uri (ref_image_path)，核心逻辑：
-将 PIL 图片转为 PNG 格式；
-自动缩放到 1024x1024 分辨率；
-透明通道转为白色背景；
-编码为 Base64，返回格式：data:image/png;base64,...。
+4, 이미지 전처리 요구 사항 (반드시 구현해야 함) 함수 image_to_base64_data_uri (ref_image_path) 구현, 핵심 로직:
+PIL 이미지를 PNG 형식으로 변환;
+1024x1024 해상도로 자동 크기 조정;
+투명 채널을 흰색 배경으로 변환;
+Base64로 인코딩, 반환 형식: data:image/png;base64,...
 
-5、请求构建规则（严格按实战版分支逻辑）
-·核心函数定义实现函数 generate_image (prompt, ref_image_path)：
-入参：prompt（generation_prompt 框内容）、ref_image_path（ref_image 上传的文件路径）；
-返回：PIL Image（展示到 result_image）或错误提示。
-·逻辑分支 1：纯文生图（ref_image_path 为空）
+5, 요청 구성 규칙 (실전 버전 분기 로직에 엄격히 따름)
+- 핵심 함수 정의 함수 generate_image (prompt, ref_image_path) 구현:
+입력 파라미터: prompt (generation_prompt 상자 내용), ref_image_path (ref_image에 업로드한 파일 경로);
+반환: PIL Image (result_image에 표시) 또는 오류 안내.
+- 논리 분기 1: 순수 텍스트에서 이미지 (ref_image_path가 비어 있음)
 python
-运行
+실행
 messages = [{"role": "user", "content": prompt}]
-·逻辑分支 2：图生图（ref_image_path 有值）
+- 논리 분기 2: 이미지에서 이미지 (ref_image_path에 값이 있음)
 python
-运行
-# 先调用图片预处理函数
+실행
+# 먼저 이미지 전처리 함수 호출
 image_base64 = image_to_base64_data_uri(ref_image_path)
 messages = [{"role": "user","content": [{"type": "text", "text": prompt},{"type": "image_url", "image_url": {"url": image_base64}}]}]
 
-6、响应解析要求（必须兼容两种格式）从 choices [0].message.content 中提取图片 Base64，支持：
-结构化 JSON 返回的 image_url 字段；
-Markdown 格式 
-；
-统一提取 Base64 编码，解码后转换为 PIL Image 返回。
+6, 응답 파싱 요구 사항 (두 가지 형식을 모두 호환해야 함) choices [0].message.content에서 이미지 Base64를 추출, 지원:
+구조화된 JSON 반환의 image_url 필드;
+Markdown 형식
+;
+통일하여 Base64 인코딩을 추출한 후 디코딩하여 PIL Image로 변환하여 반환.
 
-7、组件联动与异常处理
-生成成功：将 PIL Image 展示到 result_image，intent_status 提示「图片生成成功」；
-生成 / 解析 / 上传失败：在 intent_status 显示清晰文字提示（如 “Base64 解析失败”“API 调用超时”），不崩溃。
+7, 컴포넌트 연동 및 예외 처리
+생성 성공: PIL Image를 result_image에 표시, intent_status에 "이미지 생성 성공" 안내;
+생성 / 파싱 / 업로드 실패: intent_status에 명확한 텍스트 안내 표시 (예: "Base64 파싱 실패", "API 호출 시간 초과"), 충돌하지 않음.
 
-8、输出要求
-完整可运行代码，替换 LLM_API_KEY 和 NANOBANANA_API_KEY 即可直接运行，全流程可用，分支逻辑严格匹配实战版。
+8, 출력 요구 사항
+완전히 실행 가능한 코드, LLM_API_KEY와 NANOBANANA_API_KEY만 교체하면 직접 실행 가능, 전체 프로세스 사용 가능, 분기 로직이 실전 버전과 엄격히 일치함.
 ```
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image55.png)
+![](images/image55.png)
 
-太令人激动啦！我们终于顺利地生成出了这个Agent的第一张图，仔细看看生成的图片，跟我们的文本和提示词是匹配的。到这里你已经基本上实现你自己的Agent啦！
+정말 신나네요! 우리는 드디어 이 Agent의 첫 번째 이미지를 성공적으로 생성했습니다. 생성된 이미지를 자세히 보면, 우리의 텍스트와 프롬프트와 일치합니다. 여기까지 여러분은 이미 자신만의 Agent를 기본적으로 구현했습니다!
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image56.png)
+![](images/image56.png)
 
-我们还添加了图生图功能，上传你喜欢的图片，AI会自动借鉴风格。
+우리는 이미지에서 이미지 기능도 추가하여, 좋아하는 이미지를 업로드하면 AI가 자동으로 스타일을 참고합니다.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image57.png)
+![](images/image57.png)
 
-值得一提的是，前面步骤生成的提示词也是可以在网页上编辑的，并且我们是以最终点击按钮时的提示词为准～哪怕我在这里换成“a cute cat”，最终生成的图片也只会是可爱的小猫。
+언급할 만한 점은, 이전 단계에서 생성된 프롬프트도 웹 페이지에서 편집할 수 있으며, 우리는 최종적으로 버튼을 클릭할 때의 프롬프트를 기준으로 합니다~ 여기서 "a cute cat"으로 바꾸더라도, 최종적으로 생성되는 이미지는 귀여운 고양이가 됩니다.
 
-## 第 4 章：总结
+## 제4장: 요약
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image58.png)
+![](images/image58.png)
 
-**呜呼！终于写完了。**
-说实话，连我自己写完最后一行的时候都忍不住长舒一口气，更别说一路跟着做到这里的你了。能把这一整套流程完整跑下来，本身就已经很厉害了，这说明你真的把手放到键盘上，把事情一步步做完了。Bravo 🎉 🥳 👏
+**드디어 끝났네요!**
+솔직히 말하면, 저 자신도 마지막 줄을 쓰고 나서 긴 한숨을 쉬었는데, 여기까지 따라오신 여러분은 오죽하겠습니까. 이 전체 프로세스를 완전히 실행해 낸 것 자체가 이미 대단한 일입니다. 이는 여러분이 정말로 키보드에 손을 올리고, 일을 단계별로 완료했다는 것을 의미합니다. Bravo 🎉 🥳 👏
 
-在写这套内容的过程中，我一直在想，我们到底要留下些什么？答案其实并不是模型名字、参数或者某种固定套路，而是让你慢慢建立起一种感觉：哪些事情可以放心交给 AI 去理解和规划，哪些地方只需要你来决定方向。一旦这层分工成立，很多原本看起来复杂的生成流程，都会开始变得顺起来。
+이 콘텐츠를 작성하는 동안, 저는 계속 생각했습니다: 우리는 결국 무엇을 남겨야 하는가? 답은 사실 모델 이름, 파라미터, 또는 어떤 고정된 방법이 아니라, 여러분이 점차 하나의 감각을 구축하도록 하는 것입니다: 어떤 일은 AI에게 이해하고 계획하도록 안심하고 맡길 수 있고, 어떤 부분은 여러분이 방향만 결정하면 된다는 것입니다. 이러한 분업이 성립되면, 원래 복잡해 보이던 많은 생성 프로세스들이 순조로워지기 시작할 것입니다.
 
-回头看，这条路其实并不复杂。想清楚你要解决的问题，把长文本交给语言模型去拆解，再把整理好的视觉意图交给绘图模型去呈现，最后把这一整套流程封装成一个属于你自己的小助手。到这里，你已经不只是“在用模型”，而是在搭建一套可以长期陪你工作的系统，而这，才是这套教程最想带给你的东西。
+돌이켜 보면, 이 길은 사실 복잡하지 않습니다. 해결하고자 하는 문제를 명확히 생각하고, 긴 텍스트를 언어 모델에 전달하여 분해시킨 다음, 정리된 시각적 의도를 이미지 생성 모델에 전달하여 표현하게 하고, 마지막으로 이 전체 프로세스를 나만의 작은 어시스턴트로 캡슐화합니다. 여기까지 왔을 때, 여러분은 더 이상 "모델을 사용하는" 것이 아니라, 장기적으로 함께 작업할 수 있는 시스템을 구축하고 있는 것입니다. 그리고 이것이 바로 이 튜토리얼이 여러분에게 전달하고자 하는 핵심입니다.
 
-但是你已经做的很棒啦！相信学到这里的你对Vibe Coding已经有初步的掌握了，给自己放个小假休息一下吧！
+하지만 여러분은 이미 정말 훌륭하게 해냈어요! 여기까지 배운 여러분은 Vibe Coding에 대해 이미 초기 단계의 이해를 갖추었습니다. 잠시 휴식을 취하세요!
 
 <RelatedArticlesSection
-  title="相关文章"
-  description="如果你想把“素材生成”真正接入产品流程，可以继续学习这些章节。"
+  title="관련 글"
+  description="에셋 생성을 제품 프로세스에 실제로 연결하고 싶다면, 다음 챕터를 계속 학습할 수 있습니다."
   :items="relatedArticles"
 />

@@ -1,137 +1,137 @@
-# Go 交通数据分析平台开发实战
+# Desarrollo Practico: Plataforma de Analisis de Datos de Trafico con Go
 
 ## Descripcion general
 
-Este proyecto practico te requiere trabajar con un PRD real，使用 Go 完成一个交通数据分析平台。这个项目的方向与前面的增删改查系统不同——你需要构建一条"Ingesta de datos → 聚合 → Alertas → 可视化"的完整数据链路。这种数据产品在 IoT、监控、运营分析等场景中非常常见。
+Este proyecto practico te requiere trabajar con un PRD real para completar una plataforma de analisis de datos de trafico usando Go. La direccion de este proyecto es diferente a los sistemas CRUD anteriores: necesitas construir un flujo de datos completo de "ingesta de datos -> agregacion -> alertas -> visualizacion". Este tipo de producto de datos es muy comun en escenarios como IoT, monitoreo y analisis de operaciones.
 
-Esta es la seccion de practica integral de la Etapa 2，也是你第一次接触 Go 语言。不用担心，有了前面 JavaScript / TypeScript 的基础，学习 Go 并不难——重点是理解数据链路的设计思路。
+Esta es la seccion de practica integral de la Etapa 2, y tambien tu primer contacto con el lenguaje Go. No te preocupes, con la base de JavaScript/TypeScript que ya tienes, aprender Go no es dificil; el enfoque esta en comprender las ideas de diseno del flujo de datos.
 
 ## Conocimientos previos
 
 Antes de comenzar este proyecto, ya deberias dominar lo siguiente:
 
-- Diseno de paginas frontend y uso de bibliotecas de componentes（[UI 设计](../../frontend/ui-design/)、[现代组件库](../../frontend/modern-component-library/)）
-- Diseno y desarrollo de interfaces backend（[接口代码编写](../../backend/ai-interface-code/)）
-- Fundamentos de bases de datos y Supabase（[从数据库到 Supabase](../../backend/database-supabase/)）
-- Flujo de trabajo de Git y despliegue（[Git 和 GitHub](../../backend/git-workflow/)、[Despliegue Web 应用](../../backend/zeabur-deployment/)）
+- Diseno de paginas frontend y uso de bibliotecas de componentes ([Diseno UI](../../frontend/ui-design/), [Biblioteca de componentes moderna](../../frontend/modern-component-library/))
+- Diseno y desarrollo de interfaces backend ([Escritura de codigo de interfaces](../../backend/ai-interface-code/))
+- Fundamentos de bases de datos y Supabase ([De la base de datos a Supabase](../../backend/database-supabase/))
+- Flujo de trabajo de Git y despliegue ([Git y GitHub](../../backend/git-workflow/), [Despliegue de aplicaciones web](../../backend/zeabur-deployment/))
 
 ## Objetivos de aprendizaje
 
 Despues de completar esta practica, podras:
 
-1. Leer el PRD 并提取数据产品的开发任务清单
+1. Leer un PRD y extraer la lista de tareas de desarrollo para un producto de datos
 2. Usar Go (Gin o Fiber) para construir un servicio API backend
-3. 设计Ingesta de datos、窗口聚合和Alertas的完整链路
+3. Disenar el flujo completo de ingesta de datos, agregacion por ventanas de tiempo y alertas
 4. Mantener la consistencia entre los datos del backend y el dashboard frontend
 5. Completar la integracion de extremo a extremo, entregando un prototipo de producto de datos demostrable
 
 ## Introduccion del proyecto
 
-El producto que vas a construir es一个 Go 交通数据分析平台：
+El producto que vas a construir es una plataforma de analisis de datos de trafico con Go:
 
-| 模块 | Responsabilidad |
+| Modulo | Responsabilidad |
 |------|------|
-| **Ingesta de datos** | Recibir eventos de trafico sin procesar y almacenarlos |
-| **Agregacion de datos** | Calcular tendencias e indicadores de congestion por ventana de tiempo |
-| **Alertas** | 基于规则生成Alertas记录 |
-| **Visualizacion de dashboard** | 在前端展示趋势图、排行榜和Alertas列表 |
+| **Ingesta de datos** | Recibir eventos de trafico sin procesar y almacenarlos en la base de datos |
+| **Agregacion de datos** | Calcular tendencias e indicadores de congestion por ventanas de tiempo |
+| **Alertas** | Generar registros de alertas basados en reglas |
+| **Dashboard de visualizacion** | Mostrar graficos de tendencias, rankings y lista de alertas en el frontend |
 
-::: tip PRD 入口
-El documento de requisitos de este proyecto esta en GitHub： [Ver PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/es-es/stage-2/assignments/traffic-data-visualization-go/PRD.md)
+::: tip PRD
+El documento de requisitos de este proyecto esta en GitHub: [Ver PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/es-es/stage-2/assignments/traffic-data-visualization-go/PRD.md)
 :::
 
 <div style="margin: 32px 0;">
   <ClientOnly>
     <StepBar :active="0" :items="[
-      { title: 'Analisis de requisitos', description: 'Leer el PRD，明确数据来源、指标口径和Alertas规则' },
-      { title: 'Construccion del esqueleto', description: '用 AI 生成 Go API 服务和前端看板骨架' },
-      { title: 'Desarrollo iterativo', description: '补充聚合逻辑、Alertas规则和看板接口' },
-      { title: 'Integracion y despliegue', description: 'Verificar de extremo a extremo，Desplegar y preparar la demostracion' }
+      { title: 'Analisis de requisitos', description: 'Leer el PRD, definir fuentes de datos, definicion de metricas y reglas de alertas' },
+      { title: 'Construccion del esqueleto', description: 'Usar IA para generar el servicio API Go y el esqueleto del dashboard frontend' },
+      { title: 'Desarrollo iterativo', description: 'Agregar logica de agregacion, reglas de alertas e interfaces del dashboard' },
+      { title: 'Integracion y despliegue', description: 'Verificar de extremo a extremo, desplegar y preparar la demostracion' }
     ]" />
   </ClientOnly>
 </div>
 
-## Primera parte：Analisis de requisitos
+## Primera parte: Analisis de requisitos
 
 ### 1.1 Leer el PRD
 
-打开 PRD 文档，重点回答以下问题：
+Abre el documento PRD y responde las siguientes preguntas clave:
 
-- 数据来源是什么？字段有哪些？
-- 核心指标的定义是什么？（比如"拥堵"的具体标准）
-- Alertas规则是什么？第一版是否先收敛到简单规则？
-- 看板包含哪些页面和图表？
+- Cual es la fuente de datos? Que campos tiene?
+- Cual es la definicion de las metricas principales? (por ejemplo, el criterio especifico de "congestion")
+- Cuales son las reglas de alertas? La primera version debe limitarse a reglas simples?
+- Que paginas y graficos incluye el dashboard?
 
 ::: warning
 Si no tienes respuestas claras a las preguntas anteriores, no comiences a escribir codigo. La comprension inadecuada de los requisitos es la causa mas comun de retrabajo.
 :::
 
-### 1.2 确认数据链路
+### 1.2 Confirmar el flujo de datos
 
 ```mermaid
 flowchart TD
-  prd["PRD"] --> ingest["Ingesta de datos API"]
-  ingest --> raw["原始数据表"]
-  raw --> agg["聚合任务"]
-  agg --> alert["Alertas规则"]
-  agg --> dashboard["看板接口"]
+  prd["PRD"] --> ingest["API de ingesta de datos"]
+  ingest --> raw["Tabla de datos sin procesar"]
+  raw --> agg["Tarea de agregacion"]
+  agg --> alert["Reglas de alertas"]
+  agg --> dashboard["Interfaces del dashboard"]
   alert --> dashboard
 ```
 
-## Segunda parte：搭建项目骨架
+## Segunda parte: Construccion del esqueleto del proyecto
 
-### 2.1 生成 Go API 服务
+### 2.1 Generar el servicio API Go
 
-Referencia de prompts：
+Referencia de prompts:
 
 ```text
-请基于当前 PRD，帮我生成一个 Go 交通数据分析平台骨架。
+Basandote en el PRD actual, ayudame a generar el esqueleto de una plataforma de analisis de datos de trafico con Go.
 
-要求：
-1. 使用 Gin 或 Fiber
-2. 提供Ingesta de datos接口
-3. 提供聚合任务骨架
-4. 提供 dashboard 和 alerts 接口骨架
-5. 先不做真实复杂分析，只做可运行结构
+Requisitos:
+1. Usar Gin o Fiber
+2. Proporcionar interfaz de ingesta de datos
+3. Proporcionar esqueleto de tarea de agregacion
+4. Proporcionar esqueletos de interfaces para dashboard y alertas
+5. No hacer analisis complejo real, solo estructura ejecutable
 ```
 
-### 2.2 验证项目结构
+### 2.2 Verificar la estructura del proyecto
 
 Verificar item por item:
 
-- [ ] Go 服务可以正常启动
-- [ ] Ingesta de datos接口可接收并存储数据
-- [ ] 聚合任务框架已搭好
-- [ ] 前端看板页面可展示基本图表
+- [ ] El servicio Go se puede iniciar normalmente
+- [ ] La interfaz de ingesta de datos puede recibir y almacenar datos
+- [ ] El framework de tarea de agregacion esta listo
+- [ ] La pagina del dashboard frontend puede mostrar graficos basicos
 
-## Tercera parte：Desarrollo iterativo
+## Tercera parte: Desarrollo iterativo
 
 ### 3.1 Avanzar por modulos
 
-1. **Ingesta de datos API**：接收原始交通事件，写入数据库
-2. **Agregacion de datos**：按时间窗口聚合，计算趋势和拥堵指标
-3. **Alertas规则**：基于阈值生成Alertas记录
-4. **看板接口**：提供趋势数据、排行数据、Alertas列表
-5. **前端看板**：趋势图、排行榜、Alertas列表页面
+1. **API de ingesta de datos**: Recibir eventos de trafico sin procesar y escribirlos en la base de datos
+2. **Agregacion de datos**: Agregar por ventanas de tiempo, calcular tendencias e indicadores de congestion
+3. **Reglas de alertas**: Generar registros de alertas basados en umbrales
+4. **Interfaces del dashboard**: Proporcionar datos de tendencias, datos de ranking y lista de alertas
+5. **Dashboard frontend**: Graficos de tendencias, rankings y paginas de lista de alertas
 
 ### 3.2 Autoverificacion de modulos
 
 | Item de verificacion | Metodo de verificacion |
 |--------|----------|
-| Ingesta de datos | 原始数据是否正确入库 |
-| 聚合口径 | 趋势、排名指标的计算逻辑是否一致 |
-| Alertas规则 | Alertas触发条件是否符合预期 |
-| Consistencia de datos | Visualizacion de dashboard和后端数据是否对得上 |
-| API 规范 | 是否有统一返回结构和错误处理 |
+| Ingesta de datos | Los datos sin procesar se almacenan correctamente en la base de datos |
+| Definicion de metricas | La logica de calculo de indicadores de tendencias y rankings es consistente |
+| Reglas de alertas | Las condiciones de activacion de alertas cumplen las expectativas |
+| Consistencia de datos | Lo que muestra el dashboard coincide con los datos del backend |
+| Estandares de API | Tiene estructura de retorno unificada y manejo de errores |
 
-## Cuarta parte：联调与上线
+## Cuarta parte: Integracion y despliegue
 
 ### 4.1 Pruebas de extremo a extremo
 
 Verificar al menos los siguientes escenarios:
 
-- 接入一批测试数据 → 聚合任务执行 → Visualizacion de dashboard更新
-- 触发Alertas条件 → Alertas记录生成 → Alertas页面显示
+- Ingresar un lote de datos de prueba -> La tarea de agregacion se ejecuta -> El dashboard se actualiza
+- Activar una condicion de alerta -> Se genera un registro de alerta -> La pagina de alertas lo muestra
 
 ## Entregables
 
@@ -139,25 +139,25 @@ Despues de completar este proyecto, necesitas enviar lo siguiente:
 
 - [ ] Enlace de demostracion en linea accesible
 - [ ] Enlace al repositorio de codigo fuente (incluyendo README)
-- [ ] PRD 文档
-- [ ] Capturas de pantalla de paginas clave（Ingesta de datos演示、趋势看板、Alertas列表）
-- [ ] 60 segundos de video de demostracion
+- [ ] Documento PRD
+- [ ] Capturas de pantalla de paginas clave (demo de ingesta de datos, dashboard de tendencias, lista de alertas)
+- [ ] Video de demostracion de 60 segundos
 
 ## Criterios de evaluacion
 
-| 维度 | Requisitos basicos | Requisitos avanzados |
+| Dimension | Requisitos basicos | Requisitos avanzados |
 |------|---------|---------|
-| Alineacion con PRD | 功能和数据结构基本符合 PRD | 能清晰说明指标口径和聚合逻辑 |
-| 数据链路 | 接入 → 聚合 → Alertas → 看板可跑通 | 聚合任务支持增量更新 |
-| 分析能力 | 趋势、排行、Alertas三个模块可用 | 指标可配置、Alertas规则可自定义 |
-| 前端展示 | 看板能展示基本图表 | 图表支持时间范围筛选 |
-| Completitud de ingenieria | Go API、数据库、前端链路已接通 | API 有统一错误处理和日志 |
+| Alineacion con PRD | Funcionalidades y estructura de datos basicamente cumplen con el PRD | Puede explicar claramente las definiciones de metricas y la logica de agregacion |
+| Flujo de datos | Ingesta -> Agregacion -> Alertas -> Dashboard funciona completamente | La tarea de agregacion soporta actualizaciones incrementales |
+| Capacidad de analisis | Los tres modulos de tendencias, ranking y alertas son funcionales | Las metricas son configurables y las reglas de alertas son personalizables |
+| Visualizacion frontend | El dashboard puede mostrar graficos basicos | Los graficos soportan filtrado por rango de fechas |
+| Completitud de ingenieria | API Go, base de datos y pipeline frontend conectados | La API tiene manejo de errores unificado y registro de logs |
 
 ## Referencias
 
-- [UI 设计](../../frontend/ui-design/)
-- [使用现代组件库更新你的界面](../../frontend/modern-component-library/)
-- [从数据库到 Supabase](../../backend/database-supabase/)
-- [大模型辅助编写接口代码与接口文档](../../backend/ai-interface-code/)
-- [Git 和 GitHub 工作流](../../backend/git-workflow/)
-- [如何Despliegue Web 应用](../../backend/zeabur-deployment/)
+- [Diseno UI](../../frontend/ui-design/)
+- [Biblioteca de componentes moderna](../../frontend/modern-component-library/)
+- [De la base de datos a Supabase](../../backend/database-supabase/)
+- [Escritura de codigo de interfaces](../../backend/ai-interface-code/)
+- [Flujo de trabajo de Git y GitHub](../../backend/git-workflow/)
+- [Despliegue de aplicaciones web](../../backend/zeabur-deployment/)

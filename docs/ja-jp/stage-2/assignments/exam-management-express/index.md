@@ -38,7 +38,7 @@
 バックエンドは Express を使用し、以下をサポートする必要があります：ログイン認証、ロール権限、試験と問題バンクの管理、提出フローと自動採点、成績と統計管理。
 
 ::: tip PRD 入口
-本プロジェクトの要件定義書は GitHub にあります： [PRD を確認](https://github.com/datawhalechina/easy-vibe/blob/main/docs/zh-cn/stage-2/assignments/exam-management-express/PRD.md)
+本プロジェクトの要件定義書は GitHub にあります： [PRD を確認](https://github.com/datawhalechina/easy-vibe/blob/main/docs/ja-jp/stage-2/assignments/exam-management-express/PRD.md)
 :::
 
 <div style="margin: 32px 0;">

@@ -4,52 +4,52 @@ import { relatedArticlesMap } from '@theme/data/relatedArticles'
 const relatedArticles = relatedArticlesMap['es-es/stage-2/frontend/lovart-assets'] ?? []
 </script>
 
-# 从 NanoBanana 出发，搭建自己的素材生产Agent
+# Desde NanoBanana: construye tu propio Agent de produccion de assets
 
-## 第 1 章：1 分钟生成第一份图片素材
+## Capitulo 1: Genera tu primer asset de imagen en 1 minuto
 
-在开始讨论设计、风格或提示词之前，我们先用最少的步骤生成第一张图片。
+Antes de hablar de diseno, estilo o ingenieria de prompts, primero generemos una imagen con los minimos pasos posibles.
 
-### 1.1 认识 NanoBanana
+### 1.1 Conoce NanoBanana
 
-在开始讨论设计风格、提示词工程之前，我们先解决一件更重要的事：**确认你真的可以生成一张图片。**
+Antes de hablar de estilo de diseno e ingenieria de prompts, resolvamos algo mas importante: **confirmar que realmente puedes generar una imagen.**
 
-当前主流的大模型已经具备图像生成与编辑能力，这类模型通常被称为**生成式模型。**
+Los modelos grandes mainstream ya tienen capacidad de generacion y edicion de imagenes. Este tipo de modelos generalmente se llaman **modelos generativos.**
 
-为了把流程尽量简化，本教程选择了一个已经具备稳定图像生成与编辑能力的模型作为示例——NanoBanana。它是 Google 推出的图像生成模型，正式名称为  **Gemini 3.1 Flash Image Preview** ，支持通过自然语言直接生成图片，也支持在已有图片基础上进行修改。
+Para simplificar al maximo el proceso, este tutorial ha elegido un modelo que ya cuenta con capacidades estables de generacion y edicion de imagenes como ejemplo — NanoBanana. Es un modelo de generacion de imagenes lanzado por Google, con nombre oficial **Gemini 3.1 Flash Image Preview**, que soporta la generacion directa de imagenes a partir de lenguaje natural y tambien permite modificar imagenes existentes.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image1.png)
+![](images/image1.png)
 
-在能力层面，它和你可能听说过的其他模型（如 GPT-4o、Claude、Qwen、Midjourney 等）并没有本质区别：**输入描述，模型负责生成结果。**
+A nivel de capacidades, no hay diferencia fundamental con otros modelos que quizas hayas oido (como GPT-4o, Claude, Qwen, Midjourney, etc.): **introduces una descripcion y el modelo genera el resultado.**
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image2.png)![](/zh-cn/stage-2/frontend/lovart-assets/images/image3.png)![](/zh-cn/stage-2/frontend/lovart-assets/images/image4.png)
+![](images/image2.png)![](images/image3.png)![](images/image4.png)
 
-你可以把它理解为一支“画笔”。我们在这一章只关心一件事：
- 👉 **这支画笔能不能在你手里画出第一笔。**
+Puedes entenderlo como un "pincel". En este capitulo solo nos importa una cosa:
+👉 **Si este pincel puede trazar la primera pincelada en tus manos.**
 
-在实际使用中，NanoBanana 可以通过 **Google AI Studio** 等官方平台直接使用，也可以通过 **API** 的方式集成到开发流程中。本教程采用 API 调用方式。现在还推出了NanoBanana 2模型，你可以使用最新的大模型进行尝试。
+En el uso practico, NanoBanana se puede utilizar directamente a traves de plataformas oficiales como **Google AI Studio**, o integrarse en el flujo de desarrollo mediante **API**. Este tutorial utiliza el metodo de llamada API. Ahora tambien se ha lanzado el modelo NanoBanana 2, puedes probar con el modelo mas reciente.
 
-### 1.2 “Hello World” 级别的生成
+### 1.2 Generacion a nivel "Hello World"
 
-在开始之前，你只需要完成下面三步：
+Antes de comenzar, solo necesitas completar estos tres pasos:
 
-1. 在 Trae 中新建一个文件夹
+1. Crea una nueva carpeta en Trae
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image5.png)
+![](images/image5.png)
 
-2. 新建一个 Python 文件
+2. Crea un nuevo archivo Python
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image6.png)
+![](images/image6.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image7.png)
+![](images/image7.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image8.png)
+![](images/image8.png)
 
-3. 将下面的代码完整粘贴进去
+3. Copia y pega el siguiente codigo completo
 
-Trae 会自动完成所需的环境Despliegue与依赖安装，不需要额外配置。
+Trae completara automaticamente el despliegue del entorno y la instalacion de dependencias necesarias, sin configuracion adicional.
 
-代码中会用到 NanoBanana 的 API Key。这里不展开申请流程——只要你能获取并填入对应参数即可。**这一阶段不追求理解每一行代码，只要它能成功运行。**
+El codigo necesitara el API Key de NanoBanana. Aqui no detallamos el proceso de solicitud — con que puedas obtener e ingresar los parametros correspondientes es suficiente. **En esta etapa no buscamos entender cada linea de codigo, solo que se ejecute correctamente.**
 
 ```Python
 # /// script
@@ -70,58 +70,58 @@ import time
 import re
 from typing import Optional, Dict, Any, List
 
-# 配置 API 信息
+# Configurar informacion del API
 NANOBANANA_API_URL: str = "YOUR API URL"
 NANOBANANA_API_KEY: str = "YOUR API KEY"
 OUTPUT_DIR: str = "outputs"
 
-# 确保输出目录存在
+# Asegurar que el directorio de salida existe
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def image_to_base64_data_uri(image: Image.Image) -> str:
     """
-    将 PIL 图像转换为 OpenAI API 兼容的 data URI 格式。
+    Convierte una imagen PIL a formato data URI compatible con OpenAI API.
     """
     buffer = io.BytesIO()
-    # 统一转为 PNG 以保证兼容性
+    # Convertir uniformemente a PNG para garantizar compatibilidad
     image.save(buffer, format="PNG")
     encoded = base64.b64encode(buffer.getvalue()).decode('utf-8')
     return f"data:image/png;base64,{encoded}"
 
 def base64_to_image(base64_str: str) -> Optional[Image.Image]:
     """
-    将纯 base64 字符串转换为 PIL Image。
+    Convierte una cadena base64 pura a una imagen PIL.
     """
     try:
         image_bytes = base64.b64decode(base64_str)
         return Image.open(io.BytesIO(image_bytes))
     except Exception as e:
-        print(f"Base64 解码失败: {e}")
+        print(f"Error de decodificacion Base64: {e}")
         return None
 
 def extract_base64_from_response(content: Any) -> Optional[str]:
     """
-    核心解析逻辑：从 API 返回的 content 中提取图片 Base64 数据。
-    兼容 Markdown 格式和结构化列表格式。
+    Logica de analisis central: extrae datos Base64 de imagen del content devuelto por el API.
+    Compatible con formato Markdown y formato de lista estructurada.
     """
     if not content:
         return None
 
     base64_data = None
 
-    # 1. 尝试结构化提取 (List)
-    # 对应返回格式: [{"type": "image_url", "image_url": {"url": "data:..."}}]
+    # 1. Intento de extraccion estructurada (List)
+    # Formato de retorno correspondiente: [{"type": "image_url", "image_url": {"url": "data:..."}}]
     if isinstance(content, list):
-        for part in reversed(content):  # 倒序查找，通常最新的图片在最后
+        for part in reversed(content):  # Busqueda en orden inverso, generalmente la imagen mas reciente esta al final
             if isinstance(part, dict):
-                # 检查 image_url 或 output_image 字段
+                # Verificar campo image_url u output_image
                 img_field = part.get("image_url") or part.get("image") or part.get("output_image")
                 if isinstance(img_field, dict):
                     url = img_field.get("url", "")
                     if url.startswith("data:image/") and "," in url:
                         return url.split(",", 1)[1].strip()
 
-        # 如果列表中没有结构化图片，尝试把列表里的文本拼起来找 Markdown
+        # Si no hay imagen estructurada en la lista, intentar concatenar textos de la lista para buscar Markdown
         text_parts = [
             str(p.get("text", ""))
             for p in content
@@ -131,8 +131,8 @@ def extract_base64_from_response(content: Any) -> Optional[str]:
     else:
         content_str = str(content)
 
-    # 2. 尝试 Markdown 正则提取 (String)
-    # 对应返回格式: "Here is your image: ![img](data:image/png;base64,AAAA...)"
+    # 2. Intento de extraccion con regex Markdown (String)
+    # Formato de retorno correspondiente: "Here is your image: ![img](data:image/png;base64,AAAA...)"
     pattern = re.compile(r"!\[.*?\]\((data:image/[^;]+;base64,[^)]+)\)", re.IGNORECASE)
     match = pattern.search(content_str)
 
@@ -145,25 +145,25 @@ def extract_base64_from_response(content: Any) -> Optional[str]:
 
 def synthesize(prompt: str, input_image: Optional[Image.Image]) -> Optional[Image.Image]:
     """
-    调用 Nanobanana API 进行生成。
+    Llama al API de Nanobanana para generar.
     """
     if not prompt or not prompt.strip():
-        gr.Warning("请输入提示词")
+        gr.Warning("Por favor ingresa un prompt")
         return None
 
-    print(f">>> 开始任务: {prompt[:50]}...")
+    print(f">>> Iniciando tarea: {prompt[:50]}...")
 
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {NANOBANANA_API_KEY}"
     }
 
-    # 构造符合 OpenAI Vision / Chat 标准的 payload
+    # Construir payload conforme al estandar OpenAI Vision / Chat
     messages = []
 
     if input_image is not None:
-        # 图生图/多模态输入模式
-        print(">>> 检测到输入图片，使用多模态模式")
+        # Modo de entrada multimodal / imagen a imagen
+        print(">>> Imagen de entrada detectada, usando modo multimodal")
         img_base64 = image_to_base64_data_uri(input_image)
         messages.append({
             "role": "user",
@@ -173,7 +173,7 @@ def synthesize(prompt: str, input_image: Optional[Image.Image]) -> Optional[Imag
             ]
         })
     else:
-        # 纯文生图模式
+        # Modo de texto a imagen puro
         messages.append({
             "role": "user",
             "content": prompt
@@ -181,37 +181,37 @@ def synthesize(prompt: str, input_image: Optional[Image.Image]) -> Optional[Imag
 
     payload = {
         "messages": messages,
-        # 使用第一段代码中验证可用的模型
+        # Usar el modelo verificado como disponible en el primer codigo
         "model": "gemini-2.5-flash-image",
-        # 可选参数，视 API 支持情况而定
+        # Parametros opcionales, dependiendo del soporte del API
         "stream": False
     }
 
     try:
-        # 增加超时时间，图片生成通常较慢
+        # Aumentar tiempo de espera, la generacion de imagenes suele ser mas lenta
         response = requests.post(NANOBANANA_API_URL, headers=headers, json=payload, timeout=120)
 
-        # 检查 HTTP 状态
+        # Verificar estado HTTP
         if response.status_code != 200:
-            error_msg = f"API 请求失败: {response.status_code} - {response.text}"
+            error_msg = f"Error en solicitud API: {response.status_code} - {response.text}"
             print(error_msg)
             gr.Error(error_msg)
             return None
 
         result = response.json()
-        # Debug: 打印返回结果的前一部分，方便调试
-        print(f"API 原始响应 (截取): {str(result)[:200]}...")
+        # Debug: imprimir parte de la respuesta, util para depuracion
+        print(f"Respuesta original del API (truncada): {str(result)[:200]}...")
 
-        # 提取 Content
+        # Extraer Content
         content = None
         if "choices" in result and len(result["choices"]) > 0:
             content = result["choices"][0].get("message", {}).get("content")
 
         if not content:
-            gr.Warning("API 返回结果中没有 content 字段")
+            gr.Warning("La respuesta del API no contiene campo content")
             return None
 
-        # 使用之前验证过的逻辑提取 Base64
+        # Usar la logica verificada anteriormente para extraer Base64
         base64_str = extract_base64_from_response(content)
 
         if base64_str:
@@ -219,41 +219,41 @@ def synthesize(prompt: str, input_image: Optional[Image.Image]) -> Optional[Imag
             if output_image:
                 return output_image
 
-        # 如果没提取到图片，可能是模型拒绝了或只返回了文本
+        # Si no se extrajo imagen, puede que el modelo la haya rechazado o solo haya devuelto texto
         text_content = str(content) if not isinstance(content, list) else " ".join([str(x) for x in content])
-        gr.Info(f"未生成图片，模型返回文本: {text_content[:100]}...")
+        gr.Info(f"No se genero imagen, el modelo devolvio texto: {text_content[:100]}...")
         return None
 
     except requests.exceptions.Timeout:
-        gr.Error("请求超时，请稍后重试")
+        gr.Error("Tiempo de espera agotado, intenta de nuevo mas tarde")
         return None
     except Exception as e:
         import traceback
         traceback.print_exc()
-        gr.Error(f"发生未知错误: {str(e)}")
+        gr.Error(f"Error desconocido: {str(e)}")
         return None
 
-# Gradio 界面配置
+# Configuracion de la interfaz Gradio
 with gr.Blocks(title="Nanobanana Image Generator") as app:
     gr.Markdown("# 🍌 Nanobanana Text/Image to Image")
-    gr.Markdown("基于 Gemini-2.5-Flash-Image 模型，支持文生图与图生图。")
+    gr.Markdown("Basado en el modelo Gemini-2.5-Flash-Image, soporta texto a imagen e imagen a imagen.")
 
     with gr.Row():
         with gr.Column():
             prompt_input = gr.Textbox(
-                label="提示词 (Prompt)",
-                placeholder="例如: A cyberpunk cat holding a neon sign...",
+                label="Prompt (Indicacion)",
+                placeholder="Ejemplo: A cyberpunk cat holding a neon sign...",
                 lines=3
             )
             image_input = gr.Image(
-                label="参考图 (可选，用于图生图)",
+                label="Imagen de referencia (opcional, para imagen a imagen)",
                 type="pil",
                 height=300
             )
-            submit_btn = gr.Button("开始生成", variant="primary")
+            submit_btn = gr.Button("Iniciar generacion", variant="primary")
 
         with gr.Column():
-            image_output = gr.Image(label="生成结果", format="png")
+            image_output = gr.Image(label="Resultado generado", format="png")
 
     submit_btn.click(
         fn=synthesize,
@@ -265,685 +265,674 @@ if __name__ == "__main__":
     app.launch(share=True)
 ```
 
-当 Trae 提示运行成功后，点击它提供的本地链接（通常是 http://127.0.0.1:7860）。
+Cuando Trae indique que la ejecucion fue exitosa, haz clic en el enlace local que proporciona (generalmente http://127.0.0.1:7860).
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image9.png)
+![](images/image9.png)
 
-如果一切正常，你会看到一个已经可以工作的 AI 绘图界面。
+Si todo esta correcto, veras una interfaz de generacion de imagenes con IA que ya esta funcional.
 
-这个界面看起来很简单，但它已经具备了商业级绘图工具中最核心的两项能力，即文生图和图生图。
+Esta interfaz parece simple, pero ya cuenta con las dos capacidades mas centrales de las herramientas de generacion de imagenes de nivel comercial: texto a imagen e imagen a imagen.
 
-* **左侧：** **指令区 (** **Input** Zone) —— 你在这里发号施令。
-* **Prompt (提示词框)：** 输入你的创意描述（推荐使用英文）。
-* **Input** Image (参考图框)：
-  * **文生图模式：** 保持此处 **为空** 。
-  * **图生图模式：** 将本地图片拖入此处，AI 会以它为基础进行创作。
-* **Submit 按钮：** 点击即可发送指令，开始生成。
-* **右侧：展示区 (** **Output** Zone) —— 见证奇迹的地方，生成结果将在此显示。
+* **Izquierda:** **Zona de comandos (Input Zone)** — aqui das las ordenes.
+* **Prompt (campo de indicacion):** Ingresa tu descripcion creativa (se recomienda usar ingles).
+* **Input Image (campo de imagen de referencia):**
+  * **Modo texto a imagen:** Manten este campo **vacio**.
+  * **Modo imagen a imagen:** Arrastra una imagen local aqui y la IA creara basandose en ella.
+* **Boton Submit:** Haz clic para enviar la instruccion y comenzar la generacion.
+* **Derecha:** **Zona de resultados (Output Zone)** — donde ocurre la magia, los resultados generados se mostraran aqui.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image10.png)
+![](images/image10.png)
 
-现在我们可以尝试生成你的第一张图片了！
+Ahora podemos intentar generar tu primera imagen!
 
-本示例使用的 prompt 如下：
+El prompt utilizado en este ejemplo es:
 
 > **A red apple**
 
-这是一个刻意简化的示例，不包含任何风格或参数描述。
+Este es un ejemplo deliberadamente simplificado, sin ninguna descripcion de estilo o parametros.
 
-#### 实际流程
+#### Flujo real
 
-运行代码后，流程可以概括为三步：
+Despues de ejecutar el codigo, el flujo se puede resumir en tres pasos:
 
-1. 将文字描述发送给模型
-2. 模型生成对应图片
-3. 图片被保存为本地文件
+1. Enviar la descripcion de texto al modelo
+2. El modelo genera la imagen correspondiente
+3. La imagen se guarda como archivo local
 
-几秒钟后，你会在本地看到生成结果。而模型生成具有随机性，所以相同的prompt会有不同的生成结果，你可以多次生成，选择你心仪的图片。
+Despues de unos segundos, veras el resultado generado localmente. La generacion del modelo tiene aleatoriedad, por lo que el mismo prompt producira diferentes resultados. Puedes generar varias veces y elegir tu imagen favorita.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image11.png)![](/zh-cn/stage-2/frontend/lovart-assets/images/image12.png)
+![](images/image11.png)![](images/image12.png)
 
-也可以丰富你的提示词，给予它更多的描述和限定。例如以下提示词，得到的图片就会更加特殊一些。
+Tambien puedes enriquecer tu prompt, dandole mas descripcion y restricciones. Por ejemplo, con el siguiente prompt obtendras una imagen mas especial.
 
 ```Plain
 "A hyper-realistic close-up of a fresh red apple with water droplets on its skin, sitting on a dark rustic wooden table. Cinematic dramatic lighting, rim light, shallow depth of field, bokeh background, 8k resolution, macro photography."
-(一个超写实的带水珠的新鲜红苹果特写，放在深色粗糙木桌上。电影级戏剧光效，轮廓光，浅景深，背景虚化，8k分辨率，微距摄影。)
+(Un primer plano hiperrealista de una manzana roja fresca con gotas de agua en su piel, sobre una mesa de madera oscura y rustica. Iluminacion dramatica cinematografica, luz de contorno, poca profundidad de campo, fondo con efecto bokeh, resolucion 8k, fotografia macro.)
 ```
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image13.png)
+![](images/image13.png)
 
-在Output Image区域点击下载图片即可保存到本地。
+Haz clic en descargar en el area de Output Image para guardar la imagen localmente.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image14.png)
+![](images/image14.png)
 
-### 1.3 生图模型常见的素材生成场景
+### 1.3 Escenarios comunes de generacion de assets con modelos de generacion de imagenes
 
-在实际工作中，大模型生成图片更多用于 **高效产出设计素材** ，而不是创作单张艺术作品。
+En el trabajo practico, la generacion de imagenes con modelos grandes se usa mas para **producir eficientemente assets de diseno** que para crear obras de arte individuales.
 
-当你观察一些设计类营销账号的高赞案例时会发现，它们的产出大多集中在两类场景：
+Si observas los casos populares de cuentas de marketing de diseno, encontraras que su produccion se concentra principalmente en dos tipos de escenarios:
 
-* **文生图（从 0 到 1）**
-* **有图参考生图（从 1 到 N）**
+* **Texto a imagen (de 0 a 1)**
+* **Generacion con imagen de referencia (de 1 a N)**
 
-#### 一、文生图：快速获取设计物料
+#### Primero: Texto a imagen — obtencion rapida de materiales de diseno
 
-这一类场景关注效率。当需要填补设计中的空白（如空状态、头像、配图）时，AI 本质上充当的是一个 **即时生成的图库** 。
+Este tipo de escenario se enfoca en la eficiencia. Cuando necesitas rellenar espacios vacios en el diseno (como estados vacios, avatares, ilustraciones), la IA actua esencialmente como una **biblioteca de imagenes de generacion instantanea**.
 
-1. ##### 生成 UI 设计物料
+1. ##### Generacion de assets de diseno UI
 
-* 流行趋势：Dribbble 上常见的毛玻璃、黏土风 3D 图标
-* 常见表现：通透材质、边缘发光、糖果配色的功能或天气图标
+* Tendencia: Iconos 3D estilo glassmorphism o clay que se ven a menudo en Dribbble
+* Manifestacion comun: Materiales transparentes, bordes luminosos, iconos de funciones o clima con colores de caramelo
 
-**示例 Prompt：**
+**Prompt de ejemplo:**
 
 > A set of 3D weather icons (sun, cloud, rain), glassmorphism style, frosted glass texture, soft pastel gradient colors, soft studio lighting, isometric view, transparent background, 4k.
 
-（一套 3D 天气图标，毛玻璃风格，磨砂质感，柔和渐变色，影棚光，等轴视图）
+(Un conjunto de iconos 3D del clima, estilo glassmorphism, textura de cristal esmerilado, colores degradado pastel suaves, iluminacion de estudio, vista isometrica)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image15.png)
+![](images/image15.png)
 
-2. ##### 生成 Logo
+2. ##### Generacion de logos
 
-* 流行趋势：极简线条、几何组合的科技感 Logo
-* 常见表现：黑白配色、负空间设计、品牌感明确
+* Tendencia: Logos tecnologicos con lineas minimalistas y combinaciones geometricas
+* Manifestacion comun: Esquema blanco y negro, diseno de espacio negativo, sensacion de marca clara
 
-**示例 Prompt：**
+**Prompt de ejemplo:**
 
 > Minimalist vector logo design for a tech brand "Coffee Code", combining a coffee cup with coding brackets < >, flat design, solid black lines, white background, Paul Rand style, svg.
 
-（极简矢量 Logo，结合咖啡杯与代码符号，扁平设计，纯黑线条）
+(Logo vectorial minimalista, combina taza de cafe con simbolos de codigo, diseno flat, lineas negras puras)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image16.png)
+![](images/image16.png)
 
-3. ##### 生成官网用户图片
+3. ##### Generacion de imagenes de usuarios para sitios web
 
-* 流行趋势：SaaS 官网常用 3D 虚拟头像，用于规避真人版权
-* 常见表现：友好表情、卡通比例、偏 Pixar 或 Memoji 风格
+* Tendencia: Avatares 3D virtuales comunes en sitios web de SaaS, para evitar derechos de imagen de personas reales
+* Manifestacion comun: Expresion amigable, proporciones cartoon, estilo Pixar o Memoji
 
-**示例 Prompt：**
+**Prompt de ejemplo:**
 
 > Close-up portrait of a friendly young tech professional, smiling, Memoji 3D style, clay render, bright colors, soft lighting, solid plain background, Pixar character design.
 
-（友好的年轻科技从业者，3D Memoji 风格，黏土渲染）
+(Profesional tecnologico joven y amigable, estilo Memoji 3D, renderizado clay)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image17.png)
+![](images/image17.png)
 
-4. ##### 生成文章配图
+4. ##### Generacion de ilustraciones para articulos
 
-* 流行趋势：科技公司博客中常见的抽象扁平插画
-* 常见表现：紫蓝配色、夸张人物比例、漂浮 UI 元素
+* Tendencia: Ilustraciones planas abstractas comunes en blogs de empresas tecnologicas
+* Manifestacion comun: Esquema morado-azul, proporciones humanas exageradas, elementos UI flotantes
 
-**示例 Prompt：**
+**Prompt de ejemplo:**
 
 > Editorial flat illustration representing remote work, a person sitting on a giant globe using a laptop, corporate memphis art style, vibrant colors (purple and teal), vector texture.
 
-（远程办公主题扁平插画，企业孟菲斯风格）
+(Ilustracion plana de tema trabajo remoto, estilo memphis corporativo)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image18.png)
+![](images/image18.png)
 
-#### 二、有图参考生图：保持视觉一致性
+#### Segundo: Generacion con imagen de referencia — mantener la consistencia visual
 
-这一类场景更关注 **扩展性** 。当你已经有一张满意的主视觉，需要生成一整套风格一致的素材时使用。
+Este tipo de escenario se enfoca mas en la **escalabilidad**. Se usa cuando ya tienes un visual principal satisfactorio y necesitas generar un conjunto completo de assets con estilo consistente.
 
-5. ##### 主视觉相似的一套按钮或交互素材图
+5. ##### Conjunto de botones o assets interactivos similares al visual principal
 
-在游戏开发中，UI 的一致性非常关键。假设你已经有了主界面的 **“PLAY”** 按钮，现在需要扩展出一整套风格统一的功能按钮（如暂停、设置、主页）。仅靠手绘很难保证每个按钮在光泽、透视和色值上的完全一致。
+En el desarrollo de juegos, la consistencia de la UI es muy importante. Supongamos que ya tienes el boton **"PLAY"** de la pantalla principal y ahora necesitas expandir un conjunto completo de botones de funciones con estilo unificado (como pausa, configuracion, inicio). Solo con dibujo a mano es dificil garantizar que cada boton sea completamente consistente en brillo, perspectiva y valores de color.
 
-**基本操作流程：**
+**Flujo de operacion basico:**
 
-1. 保存已有的蓝色 “PLAY” 按钮图片
+1. Guarda la imagen del boton azul "PLAY" existente
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image19.png)
+![](images/image19.png)
 
-2. 将其拖入界面的 **Input**** Image** 区域，作为后续生成的参考母版
-3. 保持 prompt 中的风格描述不变，仅修改主体内容
+2. Arrastralo al area **Input Image** de la interfaz, como referencia maestra para generaciones posteriores
+3. Manten la descripcion de estilo en el prompt sin cambios, solo modifica el contenido principal
 
-在这一流程下，只要替换主体描述，就可以得到不同功能但风格一致的按钮。
+En este flujo, con solo reemplazar la descripcion principal, puedes obtener botones con diferentes funciones pero estilo consistente.
 
-**示例 Prompt：**
+**Prompts de ejemplo:**
 
-**变体 A：暂停按钮（图标类）**
+**Variante A: Boton de pausa (tipo icono)**
 
 > A capsule-shaped game UI button with a white pause icon (two vertical bars) inside. Same glossy blue jelly style, shiny plastic texture, white thick outline, vector illustration, high quality.
 
-（胶囊形游戏 UI 按钮，白色暂停图标，蓝色果冻质感）
+(Boton UI de juego en forma de capsula, icono de pausa blanco, textura jelly azul)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image20.png)
+![](images/image20.png)
 
-**变体 B：设置按钮（复杂图标）**
+**Variante B: Boton de configuracion (icono complejo)**
 
 > A capsule-shaped game UI button with a white gear icon (settings symbol) inside. Same glossy blue jelly style, shiny plastic texture, white thick outline, vector illustration, high quality.
 
-（胶囊形游戏 UI 按钮，白色齿轮图标，蓝色果冻质感）
+(Boton UI de juego en forma de capsula, icono de engranaje blanco, textura jelly azul)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image21.png)
+![](images/image21.png)
 
-**变体 C：重玩按钮（形状变化）**
+**Variante C: Boton de replay (cambio de forma)**
 
-如果需要调整按钮外形，可以在 prompt 中直接描述形状，模型会在保留材质特征的同时尝试改变结构。
+Si necesitas ajustar la forma exterior del boton, puedes describir la forma directamente en el prompt. El modelo intentara cambiar la estructura mientras mantiene las caracteristicas del material.
 
 > A round game UI button with a white circular arrow icon (replay symbol) inside. Same glossy blue jelly style, shiny plastic texture, white thick outline, vector illustration, high quality.
 
-（圆形游戏 UI 按钮，循环箭头图标，蓝色果冻质感）
+(Boton UI de juego redondo, icono de flecha circular, textura jelly azul)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image22.png)
+![](images/image22.png)
 
-通过这一组操作，你不仅可以替换按钮功能和图标，甚至改变按钮形状，但所有生成结果在材质、配色和光影上仍保持高度一致。这正是大模型在设计素材裂变场景中的核心价值。
+Con este conjunto de operaciones, no solo puedes reemplazar funciones e iconos de botones, sino incluso cambiar la forma del boton. Sin embargo, todos los resultados generados aun mantienen una alta consistencia en material, color e iluminacion. Este es precisamente el valor central de los modelos grandes en escenarios de derivacion de assets de diseno.
 
-## 第 2 章：更听话的图像生成助手 —— 以 Lovart 为例
+## Capitulo 2: Un asistente de generacion de imagenes mas obediente — Ejemplo con Lovart
 
-在Primera parte，我们通过代码直接调用 NanoBanana，体验了“输入即生成”的基础流程。这种方式在需求简单时没有问题。但当生成任务开始包含更多约束，例如：
+En la primera parte, llamamos directamente a NanoBanana a traves de codigo y experimentamos el flujo basico de "entrada y generacion inmediata". Este metodo no tiene problemas cuando los requisitos son simples. Pero cuando las tareas de generacion comienzan a incluir mas restricciones, como por ejemplo:
 
-* 需要多张风格一致的图片
-* 需要在已有结果上反复调整
-* 需要根据用户输入动态修改生成方向
+* Se necesitan multiples imagenes con estilo consistente
+* Se necesitan ajustes iterativos sobre resultados existentes
+* Se necesita modificar dinamicamente la direccion de generacion segun la entrada del usuario
 
-单次调用的方式就会逐渐变得不够用。
+El metodo de llamada unica se vuelve gradualmente insuficiente.
 
-这时，就需要引入  **AI Agent（**  **智能体**  **）** 。本节以 **Lovart** 为例，展示当图像生成模型具备“思考层”后，整体工作流会发生怎样的变化。注意！这里不是打广告，只是帮助大家快速get到AI Agent的便捷性～
+En este momento, es necesario introducir un **AI Agent (agente inteligente)**. Esta seccion usa **Lovart** como ejemplo para mostrar como cambia el flujo de trabajo completo cuando el modelo de generacion de imagenes tiene una "capa de pensamiento". Nota! Esto no es publicidad, solo es para ayudar a todos a captar rapidamente la conveniencia de los AI Agents~
 
-### 2.0 初识 Lovart：你的 AI 设计代理
+### 2.0 Primer encuentro con Lovart: tu agente de diseno AI
 
-Lovart 是一个基于 Agent 的设计工具 Web。相比普通生图工具，它在生成之前多了一层“思考与规划”。
+Lovart es una herramienta de diseno basada en Agent en la web. Comparada con las herramientas comunes de generacion de imagenes, tiene una capa adicional de "pensamiento y planificacion" antes de la generacion.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image23.png)
+![](images/image23.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image24.png)
+![](images/image24.png)
 
-进入 Lovart 后，主要需要了解以下几个控制项：
+Despues de entrar a Lovart, principalmente necesitas conocer los siguientes controles:
 
-#### 模型选择
+#### Seleccion de modelo
 
-点击输入框下方的立方体图标，可以查看当前可用的生成模型（如 GPT Image、Flux 等）。
+Haz clic en el icono del cubo debajo del campo de entrada para ver los modelos de generacion disponibles (como GPT Image, Flux, etc.).
 
-为了与前文示例保持一致，本节仍然使用 NanoBanana 作为底层生成模型。
+Para mantener la coherencia con los ejemplos anteriores, esta seccion continua usando NanoBanana como modelo de generacion base.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image25.png)
+![](images/image25.png)
 
-#### 思考模式
+#### Modo de pensamiento
 
-这是 Lovart 的核心开关：
+Este es el interruptor central de Lovart:
 
-* **Fast Mode（⚡）** ：接近原生 API，响应快，适合单张、明确指令的生成
-* **Thinking Mode（💡）** ：Agent 模式，AI 会先拆解需求、改写 prompt，再执行生成
+* **Fast Mode (⚡):** Similar al API nativo, respuesta rapida, adecuado para generacion de imagenes unicas con instrucciones claras
+* **Thinking Mode (💡):** Modo Agent, la IA primero descompone los requisitos, reescribe el prompt y luego ejecuta la generacion
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image26.png)
+![](images/image26.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image27.png)
+![](images/image27.png)
 
-#### 联网能力
+#### Capacidad de conexion a Internet
 
-开启地球图标后，Agent 可以在生成过程中检索网络信息（例如设计趋势、配色风格），作为辅助输入。
+Al activar el icono del globo, el Agent puede buscar informacion en la web durante el proceso de generacion (como tendencias de diseno, esquemas de color) como entrada auxiliar.
 
-### 2.1 为什么原生 API 还不够？
+### 2.1 Por que el API nativo no es suficiente?
 
-即使已经可以通过 Python 生成质量不错的图片，原生 API 在复杂任务中仍然存在限制。关键原因在于：原生 API 本质上是指令式的。当你要求它生成一个具体对象时，它可以直接执行；但当输入变成“策划一套完整的游戏素材”时，它并不会主动将目标拆解为多个可执行步骤。
+Aunque ya es posible generar imagenes de buena calidad a traves de Python, el API nativo todavia tiene limitaciones en tareas complejas. La razon clave es: el API nativo es esencialmente imperativo. Cuando le pides que genere un objeto especifico, puede ejecutarlo directamente; pero cuando la entrada se convierte en "planificar un conjunto completo de assets de juego", no descompondra activamente el objetivo en multiples pasos ejecutables.
 
-Lovart 的核心差异在于 Agent 机制。在用户输入与图像生成模型之间，它加入了一层用于理解和规划的逻辑：先识别用户意图，再拆解任务、重写 prompt，最后才执行生成。
+La diferencia central de Lovart esta en el mecanismo Agent. Entre la entrada del usuario y el modelo de generacion de imagenes, agrega una capa de logica para comprension y planificacion: primero identifica la intencion del usuario, luego descompone la tarea, reescribe el prompt y finalmente ejecuta la generacion.
 
-### 2.2 实战演示：5 分钟打造一套 IP 表情包
+### 2.2 Demostracion practica: Crea un set de stickers IP en 5 minutos
 
-以 **“制作一套程序员鸭子 ****IP**** 表情包”** 为例，看看 Agent 是如何参与整个流程的。
+Tomemos como ejemplo **"crear un set de stickers IP de pato programador"** y veamos como participa el Agent en todo el proceso.
 
-#### 环节一：策划（Agent 的思考能力）
+#### Fase 1: Planificacion (capacidad de pensamiento del Agent)
 
-**原生 ****API**** 的问题：**
-你需要自己思考角色设定、情绪状态，并为每一张图单独编写 prompt。
+**Problema del API nativo:**
+Necesitas pensar por ti mismo en la configuracion del personaje, los estados emocionales y escribir prompts individuales para cada imagen.
 
-**Lovart 的做法：**
+**El enfoque de Lovart:**
 
-1. 点亮 💡 **Thinking Mode**
-2. 输入一句指令：
+1. Activa 💡 **Thinking Mode**
+2. Ingresa una instruccion:
 
-> 设计一套程序员鸭子的 IP 表情包，风格要扁平化、可爱
+> Disena un set de stickers IP de pato programador, con estilo flat y kawaii
 
-AI 不会立即画图，而是先去网络上搜索相关的程序员鸭子的设计图。输出一份拆解后的方案，自动生成 Debug、Coffee Break、Panic 等场景，并对应生成多条视觉描述。
+La IA no dibuja inmediatamente, sino que primero busca en internet imagenes de diseno relacionadas con patos programadores. Genera un plan descompuesto, crea automaticamente escenarios como Debug, Coffee Break, Panic y genera multiples descripciones visuales correspondientes.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image28.png)![](/zh-cn/stage-2/frontend/lovart-assets/images/image29.png)
+![](images/image28.png)![](images/image29.png)
 
-这一步，AI 从“执行者”转变为“策划者”。在AI帮你分析完需求后，可以在Lovart的画布区看到多种风格和内容的程序员鸭子图片。可以开始筛选你喜欢的风格。
+En este paso, la IA pasa de "ejecutor" a "planificador". Despues de que la IA analiza tus requisitos, puedes ver multiples imagenes de patos programadores con diferentes estilos y contenidos en el area del lienzo de Lovart. Puedes empezar a filtrar los estilos que te gusten.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image30.png)
+![](images/image30.png)
 
-#### 环节二：一致性（基于参考的视觉锚定）
+#### Fase 2: Consistencia (anclaje visual basado en referencias)
 
-Lovart 中的图片不仅是结果，也参与后续生成。
+En Lovart, las imagenes no son solo resultados, tambien participan en generaciones posteriores.
 
-##### 完整参考图
+##### Imagen de referencia completa
 
-* 从草图中选出一张最满意的“标准鸭子”，在画布区点击对应图片
-* 该图将会自动出现在对话区，作为 Reference
+* Selecciona el "pato estandar" mas satisfactorio de los bocetos y haz clic en la imagen correspondiente en el area del lienzo
+* La imagen aparecera automaticamente en el area de chat como Reference
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image31.png)
+![](images/image31.png)
 
-* 输入新的动作（如开心）并生成
+* Ingresa una nueva accion (como feliz) y genera
 
-生成结果会继承母版的配色、比例和细节。
+El resultado generado heredara la paleta de colores, proporciones y detalles de la imagen maestra.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image32.png)
+![](images/image32.png)
 
-##### 局部参考 / 多图整合
+##### Referencia parcial / Integracion de multiples imagenes
 
-除了整张图片作为参考，Lovart 还支持：
+Ademas de usar la imagen completa como referencia, Lovart tambien soporta:
 
-* **只选取图片的局部区域** （例如只参考帽子或表情）
+* **Seleccionar solo un area parcial de la imagen** (por ejemplo, solo referenciar el sombrero o la expresion)
 
-点击画布区左侧tab栏，选择「Mark」键，在目标图像的局部区域标记即可，这部分内容会自动同步到对话框。比如在这里我们可以选择修改背景的颜色。
+Haz clic en la barra de pestañas del lado izquierdo del area del lienzo, selecciona la tecla "Mark" y marca el area parcial de la imagen objetivo. Esta parte del contenido se sincronizara automaticamente con el cuadro de dialogo. Por ejemplo, aqui podemos elegir modificar el color de fondo.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image33.png)
+![](images/image33.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image34.png)
+![](images/image34.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image35.png)
+![](images/image35.png)
 
-能看到新生成的图片只改变了背景的颜色，这也跟我们输入的要求一致。
+Se puede ver que la imagen recien generada solo cambio el color de fondo, lo cual tambien es coherente con nuestros requisitos de entrada.
 
-* **从多张图片中分别引用子元素** ，再组合生成新结果
+* **Referenciar sub-elementos de multiples imagenes** por separado, luego combinarlos para generar un nuevo resultado
 
-例如：你可以保留 A 图的角色主体，同时只替换帽子为 B 图中的样式，Agent 会在后台自动整合这些视觉约束。
+Por ejemplo: puedes mantener el sujeto del personaje de la imagen A mientras reemplazas solo el sombrero con el estilo de la imagen B. El Agent integrara automaticamente estas restricciones visuales en segundo plano.
 
-以程序员鸭子为例，我们可以选择保留第一个图中的鸭子形象，并将其替换到第二张图中作为主体元素。
+Tomando el pato programador como ejemplo, podemos elegir mantener la figura del pato de la primera imagen y reemplazarla como elemento principal en la segunda imagen.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image36.png)
+![](images/image36.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image37.png)
+![](images/image37.png)
 
-最后的效果也非常显著。你也可以试着其他的组合！
+El efecto final tambien es muy notable. Prueba otras combinaciones!
 
-#### 环节三：落地（Agent 的工具调用）
+#### Fase 3: Entrega (llamada a herramientas del Agent)
 
-生成完成后，可以直接执行：放大、移除背景、擦除等操作
+Una vez completada la generacion, puedes ejecutar directamente operaciones como: ampliar, eliminar fondo, borrar, etc.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image38.png)
+![](images/image38.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image39.png)
+![](images/image39.png)
 
-这些并不是简单滤镜，而是 Agent 自动调度不同工具完成的结果。
+Estos no son simples filtros, sino resultados completados por el Agent que despacha automaticamente diferentes herramientas.
 
-而在确定完基调风格后，可以很快速的生成一系列的表情包图像。
+Una vez confirmado el estilo base, puedes generar rapidamente una serie de imagenes de stickers.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image40.png)
+![](images/image40.png)
 
-最终我们得到的是可直接交付的生产级素材，而不仅是一张展示图。
+Lo que finalmente obtenemos son assets de nivel de produccion listos para entrega, no simplemente una imagen de demostracion.
 
-### 2.3 使用与收费方式说明
+### 2.3 Instrucciones de uso y tarifas
 
-Lovart 采用订阅制收费模式，不同套餐对应不同的使用额度与功能权限，具体以官网展示为准。
+Lovart adopta un modelo de suscripcion, donde diferentes planes corresponden a diferentes limites de uso y permisos de funciones. Los detalles especificos estan sujetos a lo publicado en el sitio web oficial.
 
-本教程不对任何套餐做推荐或比较；如果在实际使用中有需求，可以根据个人情况选择付费升级。
-目前支持通过**支付宝**等方式完成支付。
+Este tutorial no recomienda ni compara ningun plan en particular. Si tienes necesidades en el uso practico, puedes elegir la actualizacion de pago segun tu situacion personal.
+Actualmente se soporta el pago a traves de **Alipay** y otros metodos.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image41.png)
+![](images/image41.png)
 
-#### 小结
+#### Resumen
 
-Lovart 并不是替代底层模型，而是通过 Agent 机制，让图像生成从“单次执行”升级为“连续工作流”。
+Lovart no reemplaza el modelo base, sino que a traves del mecanismo Agent, actualiza la generacion de imagenes de "ejecucion unica" a "flujo de trabajo continuo".
 
-当任务开始涉及策划、一致性和交付时，这类工具的优势会变得非常明显。
+Cuando las tareas comienzan a involucrar planificacion, consistencia y entrega, las ventajas de este tipo de herramientas se vuelven muy evidentes.
 
-## 第 3 章：自己动手做一个智能绘图助手
+## Capitulo 3: Construye tu propio asistente de generacion de imagenes inteligente
 
-除了直接使用 Lovart，我们也可以自己实现一个简化版的绘图助手。
+Ademas de usar Lovart directamente, tambien podemos implementar por nosotros mismos una version simplificada de un asistente de generacion de imagenes.
 
-本章以“文章自动配图”为例，从实际问题出发，逐步搭建一个带有思考能力的 Agent。
+Este capitulo toma "ilustracion automatica de articulos" como ejemplo, partiendo de problemas reales y construyendo gradualmente un Agent con capacidad de pensamiento.
 
-### 3.1 痛点引入：为什么直接发文章给画图模型没用？
+### 3.1 Introduccion al problema: Por que enviar directamente un articulo al modelo de generacion de imagenes no funciona?
 
-直接将一篇较长的文章输入给 NanoBanana 并要求配图，通常很难得到理想结果。原因并不在于模型“画得不行”，而在于 **它并不擅长理解长文本** 。
+Si envias un articulo largo a NanoBanana y pides que genere una ilustracion, generalmente es dificil obtener resultados satisfactorios. La razon no es que el modelo "no sepa dibujar", sino que **no es bueno entendiendo textos largos**.
 
-图像生成模型更适合处理简短、明确的视觉描述，而当输入变成一段包含结构、重点和上下文关系的文章时，模型无法判断哪些内容才是画面中真正需要表达的部分。这往往会导致生成结果偏离主题，或只能捕捉到零散细节，缺乏整体概括能力。
+Los modelos de generacion de imagenes son mas adecuados para procesar descripciones visuales breves y claras. Cuando la entrada se convierte en un articulo con estructura, puntos clave y relaciones contextuales, el modelo no puede juzgar que contenido es el que realmente necesita expresarse en la imagen. Esto a menudo resulta en que la salida generada se desvie del tema o solo capture detalles dispersos, sin capacidad de sintesis general.
 
-本质上，图像模型只有“执行”的能力，却缺少对文本进行分析和取舍的过程。
+Esencialmente, los modelos de imagen solo tienen capacidad de "ejecucion", pero carecen del proceso de analisis y seleccion de texto.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image42.png)
+![](images/image42.png)
 
-### 3.2 解决思路：用 Agent 把「理解」和「执行」拆开
+### 3.2 Enfoque de solucion: Separar "comprension" y "ejecucion" con un Agent
 
-要解决这个问题，关键并不是更复杂的提示词，而是 **在绘图之前先把事情想清楚** 。因此，我们在生成流程中引入一个独立的「思考层」，并以此构建一个最简单可用的 Agent。
+La clave para resolver este problema no son prompts mas complejos, sino **pensar con claridad antes de generar la imagen**. Por lo tanto, introducimos una "capa de pensamiento" independiente en el flujo de generacion y construimos con ella el Agent mas simple y util.
 
-这个 Agent 的核心目标只有一个：**让最终生成的图片，尽可能贴近用户真正的表达意图。**
+El objetivo central de este Agent es solo uno: **hacer que la imagen final generada se acerque lo mas posible a la verdadera intencion de expresion del usuario.**
 
-整体流程可以概括为：**长文本输入 → 语言模型理解与判断 → 生成合适的视觉提示词 → 图像模型执行生成 → 输出图片**
+El flujo general se puede resumir como: **Entrada de texto largo → Comprension y juicio del modelo de lenguaje → Generacion de prompts visuales apropiados → Ejecucion de generacion por el modelo de imagen → Salida de imagen**
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image43.png)
+![](images/image43.png)
 
-那我们构建的 Agent 怎样才能明白用户的意图呢？
+Entonces, como puede nuestro Agent entender la intencion del usuario?
 
-这里选择做一个简化的 **“思考层”** ，我们设置了三种不同的意图：无效输入、直接生图、需要理解的长文本。
+Aqui elegimos hacer una **"capa de pensamiento"** simplificada. Hemos configurado tres intenciones diferentes: entrada invalida, generacion directa de imagen, texto largo que necesita comprension.
 
-在这个 Agent 中，各个角色的分工可以概括为四点：
+En este Agent, la division de roles se puede resumir en cuatro puntos:
 
-1. **语言模型作为决策核心**
-   它负责理解文章内容、判断用户输入的意图，并将任务分发到合适的生成路径中，决定接下来“该怎么做”以及如何生成生图提示词。
-2. **图像模型作为执行者**
-   图像模型不参与理解与判断，只接收已经整理好的视觉指令，专注完成图像渲染。
-3. **用户作为可介入的引导者**
-   除了直接输入文本，用户还可以在过程中手动调整生成的提示词，或加入参考图来辅助生成，从而对最终结果进行引导和微调。
-4. **Gradio 与后端 ****API**** 作为整体承载层**
-   它们负责将界面、模型调用和结果展示串联起来，保证整个 Agent 能够以一个完整 Web 应用的形式稳定运行。
+1. **El modelo de lenguaje como nucleo de toma de decisiones**
+   Es responsable de entender el contenido del articulo, juzgar la intencion de la entrada del usuario y distribuir la tarea al camino de generacion apropiado, decidiendo "que hacer a continuacion" y como generar los prompts de imagen.
+2. **El modelo de imagen como ejecutor**
+   El modelo de imagen no participa en la comprension y el juicio, solo recibe instrucciones visuales ya organizadas y se enfoca en completar el renderizado de la imagen.
+3. **El usuario como guia intervinible**
+   Ademas de ingresar texto directamente, el usuario tambien puede ajustar manualmente los prompts generados durante el proceso, o agregar imagenes de referencia para auxiliar la generacion, guiando y refinando el resultado final.
+4. **Gradio y el API backend como capa de soporte integral**
+   Son responsables de conectar la interfaz, las llamadas al modelo y la presentacion de resultados, garantizando que todo el Agent funcione de manera estable como una aplicacion web completa.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image44.png)
+![](images/image44.png)
 
-### 3.3 实战准备 ：获取API
+### 3.3 Preparacion practica: Obtener APIs
 
-看起来是不是很有趣呢！要跑通上述流程，我们只需要准备两类 API。
+Parece muy interesante! Para ejecutar el flujo anterior, solo necesitamos preparar dos tipos de APIs.
 
-#### 手：NanoBanana API（图像生成）
+#### Mano: API de NanoBanana (generacion de imagenes)
 
-直接沿用第 1 章中已经配置好的 API Key 和 API URL，无需额外设置。
+Usa directamente el API Key y API URL ya configurados en el Capitulo 1, sin necesidad de configuracion adicional.
 
-#### 脑：SiliconFlow API（文本思考）
+#### Cerebro: API de SiliconFlow (pensamiento de texto)
 
-我们需要一个大语言模型来承担“思考层”的Responsabilidad。本教程使用 SiliconFlow 提供的模型服务：[https://cloud.siliconflow.cn](https://cloud.siliconflow.cn/)
+Necesitamos un modelo de lenguaje grande para asumir el rol de "capa de pensamiento". Este tutorial utiliza el servicio de modelos proporcionado por SiliconFlow: [https://cloud.siliconflow.cn](https://cloud.siliconflow.cn/)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image45.png)
+![](images/image45.png)
 
-  SiliconFlow 提供了兼容 OpenAI API 规范的接口，可以非常方便地在项目中通过标准网络请求进行调用。在这里我们选择的是免费的Qwen2.5-7B-Instruct模型，调用需要的内容都已经写入下面的Prompt。在开始之前，你只需要在官网注册账号并创建一个 API Key。
+SiliconFlow proporciona interfaces compatibles con la especificacion OpenAI API, que se pueden llamar muy convenientemente a traves de solicitudes de red estandar en el proyecto. Aqui elegimos el modelo gratuito Qwen2.5-7B-Instruct. Todo lo necesario para la llamada ya esta escrito en el siguiente Prompt. Antes de comenzar, solo necesitas registrar una cuenta y crear un API Key en el sitio web oficial.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image46.png)
+![](images/image46.png)
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image47.png)
+![](images/image47.png)
 
-  该 Key 将用于后续的模型调用。
+Esta Key se utilizara para las llamadas posteriores al modelo.
 
-### 3.4 搭建Agent ：
+### 3.4 Construccion del Agent:
 
-本次实验主要使用Trae来帮我们编写代码，本教程选用的是Gemini-3-Pro-Preview模型。总思路是，新建项目后将下述完整 Prompt 复制到对话框并输入，逐步替换 API KEY 后运行代码，完成测试即可。
+Este experimento utiliza principalmente Trae para escribir el codigo. El modelo elegido para este tutorial es Gemini-3-Pro-Preview. La idea general es crear un nuevo proyecto, copiar el Prompt completo a continuacion en el cuadro de dialogo, reemplazar gradualmente las API KEY, ejecutar el codigo y completar las pruebas.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image48.png)
+![](images/image48.png)
 
-#### 环节1️⃣：Gradio Blocks 基础框架与界面布局
+#### Fase 1️⃣: Framework basico de Gradio Blocks y diseno de interfaz
 
-在这个环节，我们的主要目标是先给整个Agent搭建出一个“外观”，实现前端的页面设计。复制以下Prompt在Trae对话框中实现后，你将会得到一个本地的URL（通常是 http://127.0.0.1:7860 ）即可查看界面，并且检验实现效果。
+En esta fase, nuestro objetivo principal es construir primero el "aspecto" de todo el Agent, implementando el diseno de la pagina frontend. Despues de copiar el siguiente Prompt en el cuadro de dialogo de Trae e implementarlo, obtendras una URL local (generalmente http://127.0.0.1:7860) para ver la interfaz y verificar el resultado de la implementacion.
 
 ```Plain
-板块 1：Gradio Blocks 基础框架与界面布局
-1、任务目标
-·基于 Gradio 4.0.0+ 的 Blocks 布局，实现「LLM+Nanobanana 文生图」项目的基础界面，严格遵循固定左右分栏布局，初始化所有 UI 组件并设置正确的初始状态。
+Modulo 1: Framework basico de Gradio Blocks y diseno de interfaz
+1, Objetivo de la tarea
+- Basado en el layout Blocks de Gradio 4.0.0+, implementar la interfaz basica del proyecto "LLM+Nanobanana texto a imagen", siguiendo estrictamente el layout fijo de division izquierda-derecha, inicializando todos los componentes UI y configurando los estados iniciales correctos.
 
-2、技术栈要求
-·必须使用 Gradio 4.0.0+ 的 Blocks 模式开发，禁止使用 Interface 模式；
-·依赖：gradio>=4.0.0，pillow>=10.0.0（仅导入，暂不实现图片处理逻辑）；
-·代码需是完整可运行的 Python 文件，包含所有必要的导入语句。
+2, Requisitos del stack tecnologico
+- Debe desarrollarse usando el modo Blocks de Gradio 4.0.0+, esta prohibido usar el modo Interface;
+- Dependencias: gradio>=4.0.0, pillow>=10.0.0 (solo importar, no implementar logica de procesamiento de imagenes por ahora);
+- El codigo debe ser un archivo Python completo y ejecutable, incluyendo todas las declaraciones de importacion necesarias.
 
-3、界面布局规则（核心约束，融合实战细节）
-·整体布局：
-页面标题：LLM 驱动的文生图全流程工具；
-固定左右分栏：左侧占 60% 宽度，右侧占 40% 宽度，使用 gr.Row 和 gr.Column 实现比例控制。
-·左侧 60%（提示词生成流程区）组件清单：
-input_text：gr.Textbox，标签「输入文本（教程段落 / 绘图指令）」，lines=6，占位符「请输入需要配图的教程文本或直接绘图指令...」；
-identify_intent_btn：gr.Button，value="识别意图"，初始状态正常可点击；
-intent_status：gr.Textbox，标签「意图类型 / 处理状态」，lines=2，interactive=False，初始值「未识别意图」；
-system_prompt：gr.Textbox，标签「System Prompt（仅文章配图意图可编辑）」，lines=4，interactive=False，占位符「LLM 生成提示词的约束规则...」；
-confirm_prompt_btn：gr.Button，value="确认生成生图提示词"，interactive=False（初始禁用防误触）；
-generation_prompt：gr.Textbox，标签「生图提示词（可编辑）」，lines=3，interactive=True，初始值为空，占位符「生成的英文生图提示词将显示在此，支持手动修改...」。
-·右侧 40%（Nanobanana 生图功能区）组件清单：
-ref_image：gr.Image，标签「参考图（可选，图生图）」，type=filepath，height=300，允许上传；
-generate_btn：gr.Button，value="生成图片"，interactive=False（初始禁用，无提示词不可点击）；
-result_image：gr.Image，标签「生成结果」，type=pil，height=300，初始为空，interactive=False。
+3, Reglas de layout de interfaz (restriccion central, fusion de detalles practicos)
+- Layout general:
+Titulo de pagina: Herramienta completa de texto a imagen impulsada por LLM;
+Division fija izquierda-derecha: el lado izquierdo ocupa 60% del ancho, el lado derecho ocupa 40% del ancho, usando gr.Row y gr.Column para implementar el control de proporciones.
+- Lista de componentes del lado izquierdo 60% (area de flujo de generacion de prompts):
+input_text: gr.Textbox, etiqueta "Texto de entrada (parrafo de tutorial / instruccion de dibujo)", lines=6, placeholder "Ingresa el texto de tutorial que necesita ilustracion o una instruccion de dibujo directo...";
+identify_intent_btn: gr.Button, value="Identificar intencion", estado inicial clickeable normalmente;
+intent_status: gr.Textbox, etiqueta "Tipo de intencion / Estado de procesamiento", lines=2, interactive=False, valor inicial "Intencion no identificada";
+system_prompt: gr.Textbox, etiqueta "System Prompt (solo editable para intencion de ilustracion de articulo)", lines=4, interactive=False, placeholder "Reglas de restriccion para la generacion de prompts por LLM...";
+confirm_prompt_btn: gr.Button, value="Confirmar generacion de prompt de imagen", interactive=False (inicialmente deshabilitado para prevenir errores);
+generation_prompt: gr.Textbox, etiqueta "Prompt de generacion (editable)", lines=3, interactive=True, valor inicial vacio, placeholder "El prompt de imagen en ingles generado se mostrara aqui, soporta modificacion manual...".
+- Lista de componentes del lado derecho 40% (area de funcion de generacion de imagenes Nanobanana):
+ref_image: gr.Image, etiqueta "Imagen de referencia (opcional, imagen a imagen)", type=filepath, height=300, permite subir;
+generate_btn: gr.Button, value="Generar imagen", interactive=False (inicialmente deshabilitado, no se puede clickear sin prompt);
+result_image: gr.Image, etiqueta "Resultado generado", type=pil, height=300, inicialmente vacio, interactive=False.
 
-4、交互逻辑要求
-·所有组件的 interactive 初始状态严格按上述配置，后续通过函数动态更新；
-·按钮禁用状态需直观（置灰），避免用户误操作。
+4, Requisitos de logica de interaccion
+- El estado interactive inicial de todos los componentes debe seguir estrictamente la configuracion anterior, y se actualizara dinamicamente a traves de funciones posteriormente;
+- El estado deshabilitado de los botones debe ser intuitivo (en gris), evitando operaciones erroneas del usuario.
 
-5、输出要求
-·生成完整的 Python 代码，仅实现界面布局和组件初始化，不包含任何业务逻辑；
-·代码注释清晰，组件命名与实战版一致（input_text/identify_intent_btn 等）；
-·代码可直接运行，界面结构与描述完全一致。
+5, Requisitos de salida
+- Generar codigo Python completo, implementando solo el layout de interfaz y la inicializacion de componentes, sin incluir logica de negocio;
+- Comentarios de codigo claros, nombres de componentes consistentes con la version practica (input_text/identify_intent_btn, etc.);
+- El codigo debe ser directamente ejecutable, con la estructura de interfaz completamente consistente con la descripcion.
 ```
 
-在浏览器打开http://127.0.0.1:7860后可看到Trae已经按照我们的要求生成了以下的网页，跟我们的要求大致相当，可以进行到下一步的生成中了。
+Despues de abrir http://127.0.0.1:7860 en el navegador, puedes ver que Trae ha generado la siguiente pagina web segun nuestros requisitos, que es aproximadamente consistente con nuestros requisitos, por lo que podemos proceder al siguiente paso de generacion.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image49.png)
+![](images/image49.png)
 
-#### 环节2️⃣：LLM 意图识别模块（Siliconflow API）
+#### Fase 2️⃣: Modulo de identificacion de intencion LLM (API de Siliconflow)
 
-在日常使用VLM画图的时候，可能有以下三种常见输入情况：
+Al usar VLM para dibujar en el dia a dia, pueden existir las siguientes tres situaciones de entrada comunes:
 
-1. 无意义内容，比如“你好”、“你今天吃饭了吗”等，无法画出对应的图片。
-2. 文章/长文本，字数较多，比如200字左右的一篇有结构的文章，需要先理解文章的结构与内容，再考虑如何生成能完整概括这段文字的图片。
-3. 直接绘图指令，比如“帮我画一只在洗澡的狗”等，要求已经阐述的非常具体，可以直接生成图片。
+1. Contenido sin sentido, como "hola", "ya comiste hoy?", no se puede dibujar la imagen correspondiente.
+2. Articulo/texto largo, con muchas palabras, como un articulo estructurado de unas 200 palabras, que requiere primero entender la estructura y el contenido del articulo, y luego considerar como generar una imagen que resuma completamente este texto.
+3. Instruccion de dibujo directa, como "dibujame un perro banandose", donde el requisito ya esta descrito con suficiente especificidad para generar la imagen directamente.
 
-跟前面一样，复制以下Prompt在Trae对话框中实现，并且补充在前面步骤中获得的API。
+Igual que antes, copia el siguiente Prompt en el cuadro de dialogo de Trae para implementarlo, y agrega las APIs obtenidas en los pasos anteriores.
 
 ```Plain
-板块 2：LLM 意图识别模块（Siliconflow API）
-1、任务目标
-在已实现的 Gradio 界面基础上，为「识别意图」按钮添加点击逻辑，调用 Siliconflow API 完成意图识别，并联动组件状态。
+Modulo 2: Modulo de identificacion de intencion LLM (API de Siliconflow)
+1, Objetivo de la tarea
+Sobre la base de la interfaz Gradio ya implementada, agregar logica de clic al boton "Identificar intencion", llamar al API de Siliconflow para completar la identificacion de intencion y vincular el estado de los componentes.
 
-2、技术栈要求
-基于 Gradio 4.0.0+ Blocks；
-依赖：requests>=2.31.0，openai；
-输出完整可运行 Python 文件，包含板块 1 界面 + 本模块逻辑。
+2, Requisitos del stack tecnologico
+Basado en Gradio 4.0.0+ Blocks;
+Dependencias: requests>=2.31.0, openai;
+Salida de archivo Python completo y ejecutable, incluyendo interfaz del Modulo 1 + logica de este modulo.
 
-3、核心业务规则（绝对不可偏离）
-·意图分类规则（仅 3 类，严格返回数字 + 描述）
-1 = 无意义内容：仅闲聊、寒暄、无关对话，没有任何绘图或配图需求（如 “你好”“今天吃了吗”）；
-2 = 文章 / 长文本配图需求：用户输入一段完整文章、教程、段落、说明性文字，内容偏叙事 / 说明 / 讲解，隐含需要为这段内容生成配图的意图，不需要用户明确说 “为这段文字配图”；
-3 = 直接绘图指令：用户输入简短、明确的画图命令，没有长文本背景，直接要求画某个内容（如 “画一只 Apple 风格的猫”）。
-·LLM 调用约束（融合实战版模板）
-接口地址：https://api.siliconflow.cn/v1/chat/completions；
-模型：Qwen/Qwen2.5-7B-Instruct；
-temperature=0.1；
-统一定义代码：
+3, Reglas de negocio centrales (desviacion absoluta no permitida)
+- Reglas de clasificacion de intencion (solo 3 categorias, retornar estrictamente numero + descripcion)
+1 = Contenido sin sentido: solo charla, saludos, conversacion irrelevante, sin ninguna necesidad de dibujo o ilustracion (ej: "hola", "ya comiste?");
+2 = Necesidad de ilustracion de articulo / texto largo: el usuario ingresa un articulo completo, tutorial, parrafo o texto descriptivo, con contenido orientado a narrativa/explicacion/docencia, implicando la intencion de generar una ilustracion para este contenido, sin necesidad de que el usuario diga explicitamente "ilustra este texto";
+3 = Instruccion de dibujo directa: el usuario ingresa un comando de dibujo breve y claro, sin fondo de texto largo, pidiendo directamente dibujar algo especifico (ej: "dibuja un gato estilo Apple").
+- Restricciones de llamada LLM (fusion con plantilla de version practica)
+Direccion de interfaz: https://api.siliconflow.cn/v1/chat/completions;
+Modelo: Qwen/Qwen2.5-7B-Instruct;
+temperature=0.1;
+Codigo de definicion unificada:
 python
-运行
+ejecutar
 LLM_BASE_URL = "https://api.siliconflow.cn/v1"
-LLM_API_KEY = ""  # 用户自行替换
-LLM_MODEL = "Qwen/Qwen2.5-7B-Instruct"# 实战验证的意图识别模板（固化到代码中）
-INTENT_PROMPT_TEMPLATE = """你需要识别用户输入文本的意图，仅返回以下 3 类结果中的一种（格式：数字 + 中文描述）：
-1 = 无意义内容；2 = 文章 / 长文本配图需求；3 = 直接绘图指令。
+LLM_API_KEY = ""  # El usuario debe reemplazar
+LLM_MODEL = "Qwen/Qwen2.5-7B-Instruct"# Plantilla de identificacion de intencion verificada en practica (fijada en el codigo)
+INTENT_PROMPT_TEMPLATE = """Debes identificar la intencion del texto ingresado por el usuario, retornando solo uno de los siguientes 3 resultados (formato: numero + descripcion en espanol):
+1 = Contenido sin sentido; 2 = Necesidad de ilustracion de articulo / texto largo; 3 = Instruccion de dibujo directa.
 
-用户输入：{user_input}
+Entrada del usuario: {user_input}
 
-识别结果：
-仅提取返回结果中的数字和描述，禁止额外内容。"""
-
-4、组件联动规则
-·结果为 1：intent_status 显示「1 = 无意义内容：无绘图需求」，system_prompt 保持禁用，confirm_prompt_btn 禁用；
-·结果为 2：intent_status 显示「2 = 文章 / 长文本配图需求：为输入内容生成配图」，启用 system_prompt 并填充默认规则，激活 confirm_prompt_btn；
-·结果为 3：intent_status 显示「3 = 直接绘图指令：根据指令生成图片」，system_prompt 禁用且填充默认规则，激活 confirm_prompt_btn。
-
-5、异常处理
-API 异常、解析异常均给出友好提示，不崩溃，组件恢复初始状态。
-
-6、输出要求
-生成完整可运行代码，替换 LLM_API_KEY 即可使用，逻辑清晰注释完整，意图识别模板严格使用实战版。
+Resultado de identificacion:
+Extraer solo el numero y la descripcion del resultado retornado, contenido adicional prohibido."""
 ```
 
-刷新之前的http://127.0.0.1:7860网址，开始测试是否能正确检测三种情况。
+Actualiza la direccion web anterior http://127.0.0.1:7860 y comienza a probar si puede detectar correctamente las tres situaciones.
 
-1. 无意义内容，可以尝试输入“你好”、“谢谢”等，发现能够正常识别。
+1. Contenido sin sentido, puedes intentar ingresar "hola", "gracias", y ver que se identifica correctamente.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image50.png)
+![](images/image50.png)
 
-2. 文章/长文本，在这里我们选用了一段豆包生成的描述人工智能的文字。你也可以尝试使用自己的论文段落进行测试。
+2. Articulo/texto largo, aqui usamos un texto sobre inteligencia artificial generado por Doubao. Tambien puedes probar con tu propio parrafo de tesis.
 
 ```Plain
-人工智能正在以前所未有的深度和广度重塑教育生态系统。通过自适应学习算法，AI系统能够构建每个学生的认知图谱，实时追踪他们的知识掌握轨迹，并动态调整教学内容的难度和呈现方式。在传统课堂环境中，教师往往难以同时满足不同学习风格和能力水平的学生需求，而基于深度学习的教育平台可以分析学生在交互式模拟实验中的行为模式，识别他们在量子力学或微积分等复杂概念理解上的微妙障碍，并提供精准的认知支架。
+La inteligencia artificial esta reconfigurando el ecosistema educativo con una profundidad y amplitud sin precedentes. A traves de algoritmos de aprendizaje adaptativo, los sistemas de IA pueden construir el mapa cognitivo de cada estudiante, rastrear en tiempo real su trayectoria de adquisicion de conocimientos y ajustar dinamicamente la dificultad y forma de presentacion del contenido educativo. En entornos de aula tradicionales, los docentes a menudo tienen dificultades para satisfacer simultaneamente las necesidades de estudiantes con diferentes estilos de aprendizaje y niveles de habilidad, mientras que las plataformas educativas basadas en aprendizaje profundo pueden analizar los patrones de comportamiento de los estudiantes en simulaciones interactivas, identificar obstaculos sutiles en la comprension de conceptos complejos como la mecanica cuantica o el calculo, y proporcionar andamios cognitivos precisos.
 
-高级自然语言处理引擎驱动的虚拟导师不仅能够解构开放性问题，如"如何评价法国大革命对现代民主制度的影响"，还能引导苏格拉底式对话，激发批判性思维。当学生撰写关于气候变化对极地生态系统影响的论文时，AI写作助手可以分析其论证逻辑的严密性，指出数据引用中的时效性问题，并建议更精准的科学术语。在特殊教育领域，计算机视觉技术使AI能够识别自闭症谱系儿童在社交互动中的非语言线索，调整干预策略，而情感计算算法则帮助检测在线学习时的挫折感，及时提供鼓励性反馈。
+Los tutores virtuales impulsados por motores avanzados de procesamiento de lenguaje natural no solo pueden deconstruir preguntas abiertas, sino tambien guiar dialogos socraticos que estimulen el pensamiento critico. Cuando un estudiante escribe un ensayo sobre el impacto del cambio climatico en los ecosistemas polares, el asistente de escritura de IA puede analizar la rigidez de su logica argumentativa, senalar problemas de vigencia en las citas de datos y sugerir terminos cientificos mas precisos. En el campo de la educacion especial, la tecnologia de vision por computadora permite a la IA identificar senales no verbales de ninos en el espectro autista durante las interacciones sociales, ajustando las estrategias de intervencion, mientras que los algoritmos de computacion afectiva ayudan a detectar la frustracion durante el aprendizaje en linea, proporcionando retroalimentacion de animacion oportuna.
 
-然而，这种技术融合引发了一系列伦理困境。算法偏见可能无意中边缘化特定文化背景的学生，数据采集的透明度问题引发了对学术隐私的关切，而过度依赖自动化评分系统可能削弱教师对学生思维过程的深层理解。更复杂的是，当AI开始生成高度逼真的虚拟实验室体验时，我们需要重新定义"实践经验"在教育中的价值。未来教育的范式可能演变为人类教师专注于培养创造力、同理心和道德判断力，而AI系统则承担知识传递、技能训练和个性化评估的职能，形成一种协同进化的教育共生体，既能发挥机器的计算优势，又能保留人类教育的独特温度.
+Sin embargo, esta fusion tecnologica plantea una serie de dilemas eticos. Los sesgos algoritmicos pueden marginalizar inadvertidamente a estudiantes de ciertos contextos culturales, los problemas de transparencia en la recopilacion de datos generan preocupaciones sobre la privacidad academica, y la dependencia excesiva de sistemas de calificacion automatizada puede debilitar la comprension profunda del docente sobre los procesos de pensamiento del estudiante. Lo mas complejo es que, cuando la IA comienza a generar experiencias de laboratorio virtual altamente realistas, necesitamos redefinir el valor de la "experiencia practica" en la educacion. El paradigma educativo del futuro podria evolucionar hacia un modelo donde los docentes humanos se concentren en cultivar la creatividad, la empatia y el juicio moral, mientras que los sistemas de IA asumen las funciones de transmision de conocimientos, entrenamiento de habilidades y evaluacion personalizada, formando un simbionte educativo de coevolucion que aproveche las ventajas computacionales de las maquinas mientras preserva el calidez unica de la educacion humana.
 ```
 
-同样检测成功～
+Igualmente detectado con exito~
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image51.png)
+![](images/image51.png)
 
-3. 直接绘图指令，这里输入的是“我要画一只猫”，同样检测准确。
+3. Instruccion de dibujo directa, aqui se ingreso "quiero dibujar un gato", igualmente detectado con precision.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image52.png)
+![](images/image52.png)
 
-到这里我们就已经顺利实现了第二个环节——意图识别。
+Con esto ya hemos implementado exitosamente la segunda fase — la identificacion de intencion.
 
-#### 环节3️⃣：生图提示词生成模块（LLM 二次调用）
+#### Fase 3️⃣: Modulo de generacion de prompts de imagen (segunda llamada LLM)
 
-意图识别后，对于文章或长文本，还有很重要的一步就是生成画图的提示词，而这正是本Agent的重点。
+Despues de la identificacion de intencion, para articulos o textos largos, hay un paso muy importante que es generar el prompt para dibujar, y este es precisamente el punto clave de este Agent.
 
 ```SQL
-板块 3：生图提示词生成模块（LLM 二次调用）
-1、任务目标
-在意图识别基础上，实现「确认生成生图提示词」按钮逻辑，调用 LLM 将文本优化为适合绘图的英文视觉提示词，填充到编辑框并联动「生成图片」按钮。
+Modulo 3: Modulo de generacion de prompts de imagen (segunda llamada LLM)
+1, Objetivo de la tarea
+Sobre la base de la identificacion de intencion, implementar la logica del boton "Confirmar generacion de prompt de imagen", llamar al LLM para optimizar el texto en un prompt visual en ingles adecuado para dibujo, rellenarlo en el campo de edicion y vincularlo con el boton "Generar imagen".
 
-2、技术栈要求
-同板块 2，输出完整代码 = 板块 1 + 板块 2 + 本模块；
-共用板块 2 定义的 LLM_BASE_URL、LLM_API_KEY、LLM_MODEL，不新增密钥。
+2, Requisitos del stack tecnologico
+Igual que el Modulo 2, salida de codigo completo = Modulo 1 + Modulo 2 + este modulo;
+Compartir LLM_BASE_URL, LLM_API_KEY, LLM_MODEL definidos en el Modulo 2, sin agregar nuevas claves.
 
-3、核心业务规则（融合实战版 Prompt 组装逻辑）
-·提示词生成输入规则（必须严格遵循）
-生图提示词生成不再是简单字符串拼接，而是构建标准 Chat 消息列表，代码结构如下：
+3, Reglas de negocio centrales (fusion con logica de ensamblaje de prompt de version practica)
+- Reglas de entrada para generacion de prompts (seguir estrictamente)
+La generacion de prompts de imagen ya no es una simple concatenacion de cadenas, sino la construccion de una lista de mensajes Chat estandar. La estructura del codigo es la siguiente:
 python
-运行
-messages=[# System角色：网页上用户最终确认/编辑后的system_prompt内容{"role": "system", "content": final_system_prompt},# User角色：承载待处理数据，明确任务目标{"role": "user", "content": f"请为以下内容生成视觉提示词：\n\n{user_input}"}]
-意图为 2 时：System 内容取用户编辑后的 system_prompt 最终版本；
-意图为 3 时：System 内容取禁用状态下填充的默认规则
-user_input 为用户最初输入到 input_text 框的原始文本。
-·实战验证的 System Prompt 预设（固化到代码中）
+ejecutar
+messages=[# Rol System: contenido de system_prompt final confirmado/editado por el usuario en la pagina web{"role": "system", "content": final_system_prompt},# Rol User: porta los datos a procesar, aclara el objetivo de la tarea{"role": "user", "content": f"Genera un prompt visual para el siguiente contenido:\n\n{user_input}"}]
+Cuando la intencion es 2: El contenido de System toma la version final del system_prompt editado por el usuario;
+Cuando la intencion es 3: El contenido de System toma la regla por defecto rellenada en estado deshabilitado
+user_input es el texto original que el usuario ingreso inicialmente en el campo input_text.
+- Preset de System Prompt verificado en practica (fijado en el codigo)
 python
-运行
-SYSTEM_PROMPT_DEFAULT = """你现在是一个创建NanoBanana画图提示词的助手。
-需要根据我的内容处理，我这个图片的作用是能说明这一段在说什么，并且让大家知道这段话的上下结构就是整体说的是什么意思。
-里面可能会类似PPT有一些讲解（如：左上角展示核心观点，右下角展示数据）。
-设计风格要求：简约，Apple设计思维（Apple Design Philosophy）。
-约束：请直接返回NanoBanana可用的英文提示词，不要返回任何解释、前缀或多余的废话。"""
-·LLM 调用约束
-与板块 2 共用同一套 LLM_BASE_URL、LLM_API_KEY、LLM_MODEL；
-temperature=0.7（保证提示词的创意性与适配性）；
-max_tokens=200（限制输出长度，匹配提示词约束）；
-严格使用上述标准 Chat 消息列表结构，禁止字符串拼接。
-·示例输入输出（核心参考）
-输入示例 1（文章配图意图）：原始文本：「AI 如何改变教育：随着人工智能技术的发展，教师的角色从知识传授者转变为引导者，AI 助手可辅助学生完成个性化学习，课堂上人机协作成为常态。」最终 System Prompt：SYSTEM_PROMPT_DEFAULT（未修改）输出预期："Minimalist illustration, Apple Design Philosophy, 1024x1024. Top left shows 'AI + Education' core concept, bottom right shows data of teacher-student-AI collaboration, soft color palette, clean lines, no redundant elements."
-输入示例 2（直接绘图指令）：原始文本：「画一只 Apple 风格的猫，坐在 MacBook 旁边」最终 System Prompt：SYSTEM_PROMPT_DEFAULT（禁用状态）输出预期："Minimalist cat, Apple style, 1024x1024, sitting next to a silver MacBook, clean white background, soft shadows, geometric shapes, no extra details."
-·提示词输出强制约束
-纯英文，无中文；
-必须包含 Apple Design Philosophy/Apple style + 1024x1024；
-长度 50–200 字符，代码内校验；
-无额外解释、前缀或废话，仅返回提示词本身。
+ejecutar
+SYSTEM_PROMPT_DEFAULT = """Ahora eres un asistente que crea prompts de dibujo para NanoBanana.
+Debes procesar segun mi contenido. El proposito de esta imagen es poder explicar lo que dice este parrafo y hacer que todos entiendan la estructura de contexto de este texto, es decir, lo que dice en general.
+Puede haber explicaciones similares a PPT (ej: esquina superior izquierda muestra el punto clave, esquina inferior derecha muestra datos).
+Requisitos de estilo de diseno: minimalista, filosofia de diseno Apple (Apple Design Philosophy).
+Restriccion: retorna directamente prompts en ingles utilizables por NanoBanana, sin retornar ninguna explicacion, prefijo o palabras innecesarias."""
+- Restricciones de llamada LLM
+Compartir el mismo conjunto de LLM_BASE_URL, LLM_API_KEY, LLM_MODEL del Modulo 2;
+temperature=0.7 (garantizar creatividad y adecuacion del prompt);
+max_tokens=200 (limitar longitud de salida, coincidir con restricciones de prompt);
+Usar estrictamente la estructura de lista de mensajes Chat estandar anterior, prohibida la concatenacion de cadenas.
+- Ejemplo de entrada y salida (referencia central)
+Ejemplo de entrada 1 (intencion de ilustracion de articulo): Texto original: "Como la IA cambia la educacion: Con el desarrollo de la tecnologia de inteligencia artificial, el rol del docente ha pasado de transmisor de conocimientos a guia, los asistentes de IA pueden auxiliar a los estudiantes en el aprendizaje personalizado, y la colaboracion humano-maquina en el aula se ha convertido en norma." System Prompt final: SYSTEM_PROMPT_DEFAULT (sin modificar) Salida esperada: "Minimalist illustration, Apple Design Philosophy, 1024x1024. Top left shows 'AI + Education' core concept, bottom right shows data of teacher-student-AI collaboration, soft color palette, clean lines, no redundant elements."
+Ejemplo de entrada 2 (instruccion de dibujo directa): Texto original: "Dibuja un gato estilo Apple, sentado junto a un MacBook" System Prompt final: SYSTEM_PROMPT_DEFAULT (estado deshabilitado) Salida esperada: "Minimalist cat, Apple style, 1024x1024, sitting next to a silver MacBook, clean white background, soft shadows, geometric shapes, no extra details."
+- Restriccion forzada de salida de prompt
+Puramente en ingles, sin chino;
+Debe incluir Apple Design Philosophy/Apple style + 1024x1024;
+Longitud de 50-200 caracteres, verificacion en el codigo;
+Sin explicacion adicional, prefijo o palabras innecesarias, retornar solo el prompt en si.
 
-4、组件联动规则
-生成成功：将提示词填入 generation_prompt 框，激活 generate_btn，intent_status 追加「提示词生成成功，可修改后生成图片」；
-生成失败：提示具体原因（如 API 调用失败、长度不达标），generate_btn 保持禁用，generation_prompt 框为空；
-用户手动修改 / 清空 generation_prompt 框：
-清空时自动禁用 generate_btn；
-非空时保持 generate_btn 激活。
+4, Reglas de vinculacion de componentes
+Generacion exitosa: Rellenar el prompt en el campo generation_prompt, activar generate_btn, agregar a intent_status "Prompt generado exitosamente, puede modificar y generar imagen";
+Generacion fallida: Indicar razon especifica (ej: fallo en llamada API, longitud insuficiente), generate_btn permanece deshabilitado, campo generation_prompt vacio;
+El usuario modifica/vacia manualmente el campo generation_prompt:
+Al vaciar, deshabilitar automaticamente generate_btn;
+Cuando no este vacio, mantener generate_btn activado.
 
-5、异常处理
-API 调用失败：友好提示「提示词生成失败：{具体错误信息}」，不崩溃；
-提示词校验失败：明确提示原因（如 “未包含 Apple style”“长度仅 40 字符”），允许重试；
-响应解析失败：提示「无法解析 LLM 返回结果，请重试」。
+5, Manejo de excepciones
+Fallo en llamada API: Mensaje amigable "Fallo en generacion de prompt: {mensaje de error especifico}", sin crashear;
+Fallo en validacion de prompt: Indicar razon claramente (ej: "No incluye Apple style", "Longitud de solo 40 caracteres"), permitir reintentar;
+Fallo en parseo de respuesta: Indicar "No se pudo parsear el resultado retornado por el LLM, por favor reintente".
 
-6、输出要求
-完整可运行代码，替换 LLM_API_KEY 即可使用；
-代码结构清晰、注释完善，界面美观简洁；
-严格实现标准 Chat 消息列表结构，参数与示例逻辑一致；
-包含提示词长度、内容校验逻辑，错误提示友好。
+6, Requisitos de salida
+Codigo completo y ejecutable, solo reemplazar LLM_API_KEY para usar;
+Estructura de codigo clara, comentarios completos, interfaz bonita y concisa;
+Implementar estrictamente la estructura de lista de mensajes Chat estandar, parametros y logica de ejemplo consistentes;
+Incluir logica de validacion de longitud y contenido del prompt, mensajes de error amigables.
 ```
 
-同样复制第二个环节的文本进行检测。
+Igualmente copia el texto del segundo modulo para verificar.
 
-值得注意的是，我们在这里预设的生成生图提示词的System Prompt为：
+Cabe senalar que el System Prompt preset que configuramos aqui para la generacion de prompts de imagen es:
 
-> 你现在是一个创建NanoBanana画图提示词的助手。
-> 需要根据我的内容处理，我这个图片的作用是能说明这一段在说什么，并且让大家知道这段话的上下结构就是整体说的是什么意思。
-> 里面可能会类似PPT有一些讲解（如：左上角展示核心观点，右下角展示数据）。
-> 设计风格要求：简约，Apple设计思维（Apple Design Philosophy）。
-> 约束：请直接返回NanoBanana可用的英文提示词，不要返回任何解释、前缀或多余的废话。
+> Ahora eres un asistente que crea prompts de dibujo para NanoBanana.
+> Debes procesar segun mi contenido. El proposito de esta imagen es poder explicar lo que dice este parrafo y hacer que todos entiendan la estructura de contexto de este texto, es decir, lo que dice en general.
+> Puede haber explicaciones similares a PPT (ej: esquina superior izquierda muestra el punto clave, esquina inferior derecha muestra datos).
+> Requisitos de estilo de diseno: minimalista, filosofia de diseno Apple (Apple Design Philosophy).
+> Restriccion: retorna directamente prompts en ingles utilizables por NanoBanana, sin retornar ninguna explicacion, prefijo o palabras innecesarias.
 
-如果你想换成其他的预设模版，可以在前面的prompt里修改，或者直接在Trae里通过对话修改。
+Si quieres cambiar a otra plantilla preset, puedes modificarla en el prompt anterior, o modificarla directamente en Trae a traves del dialogo.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image53.png)
+![](images/image53.png)
 
-除了修改底层代码，我们在网页上也可以快速编辑。举个例子，我在这里加了一句，“在前面加一句Pic Prompt”，可以看到生成的新的提示词前面也包含了～这样设计是为了方便快速修改生成提示词的System Prompt，帮助我们快速切换风格。
+Ademas de modificar el codigo base, tambien podemos editar rapidamente en la pagina web. Por ejemplo, aqui agregue una frase, "agregar Pic Prompt al inicio", y puedes ver que el nuevo prompt generado tambien incluye esa frase al inicio~ Este diseno es para facilitar la modificacion rapida del System Prompt de generacion, ayudandonos a cambiar estilos rapidamente.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image54.png)
+![](images/image54.png)
 
-#### 环节4️⃣：Nanobanana 文生图 / 图生图模块
+#### Fase 4️⃣: Modulo de texto a imagen / imagen a imagen de Nanobanana
 
-终于来到了最后一步，不接入生图模型，就不是一个完整的Agent！
+Finalmente llegamos al ultimo paso. Sin conectar el modelo de generacion de imagenes, no es un Agent completo!
 
 ```Bash
-板块 4：Nanobanana 文生图 / 图生图模块（最终版）
-1、任务目标
-实现「生成图片」按钮逻辑，调用真实 Nanobanana API，支持文生图 / 图生图，解析 Base64 并展示图片。
+Modulo 4: Modulo de texto a imagen / imagen a imagen de Nanobanana (version final)
+1, Objetivo de la tarea
+Implementar la logica del boton "Generar imagen", llamar al API real de Nanobanana, soportar texto a imagen / imagen a imagen, analizar Base64 y mostrar la imagen.
 
-2、技术栈要求
-基于 Gradio 4.0.0+ Blocks；
-依赖：requests, pillow, base64, io, re；
-完整代码 = 板块 1+2+3 + 本模块。
+2, Requisitos del stack tecnologico
+Basado en Gradio 4.0.0+ Blocks;
+Dependencias: requests, pillow, base64, io, re;
+Codigo completo = Modulo 1+2+3 + este modulo.
 
-3、核心 API 配置（实战验证固化）
-固化代码配置：
+3, Configuracion central del API (fijada y verificada en practica)
+Configuracion de codigo fijada:
 python
-运行
-# 固化到代码中的API配置
+ejecutar
+# Configuracion de API fijada en el codigo
 NANOBANANA_API_URL = "https://api.zyai.online/v1/chat/completions"
 NANOBANANA_MODEL = "gemini-2.5-flash-image"
-NANOBANANA_API_KEY = ""  # 用户自行替换
-鉴权方式：Header Authorization: Bearer {NANOBANANA_API_KEY}。
+NANOBANANA_API_KEY = ""  # El usuario debe reemplazar
+Metodo de autenticacion: Header Authorization: Bearer {NANOBANANA_API_KEY}.
 
-4、图片预处理要求（必须实现）实现函数 image_to_base64_data_uri (ref_image_path)，核心逻辑：
-将 PIL 图片转为 PNG 格式；
-自动缩放到 1024x1024 分辨率；
-透明通道转为白色背景；
-编码为 Base64，返回格式：data:image/png;base64,...。
+4, Requisitos de preprocesamiento de imagen (debe implementarse) Implementar funcion image_to_base64_data_uri (ref_image_path), logica central:
+Convertir imagen PIL a formato PNG;
+Escalar automaticamente a resolucion 1024x1024;
+Convertir canal transparente a fondo blanco;
+Codificar como Base64, formato de retorno: data:image/png;base64,...
 
-5、请求构建规则（严格按实战版分支逻辑）
-·核心函数定义实现函数 generate_image (prompt, ref_image_path)：
-入参：prompt（generation_prompt 框内容）、ref_image_path（ref_image 上传的文件路径）；
-返回：PIL Image（展示到 result_image）或错误提示。
-·逻辑分支 1：纯文生图（ref_image_path 为空）
+5, Reglas de construccion de solicitud (seguir estrictamente la logica de ramificacion de version practica)
+- Definicion de funcion central Implementar funcion generate_image (prompt, ref_image_path):
+Parametros de entrada: prompt (contenido del campo generation_prompt), ref_image_path (ruta del archivo subido a ref_image);
+Retorno: PIL Image (mostrar en result_image) o mensaje de error.
+- Rama logica 1: Texto a imagen puro (ref_image_path vacio)
 python
-运行
+ejecutar
 messages = [{"role": "user", "content": prompt}]
-·逻辑分支 2：图生图（ref_image_path 有值）
+- Rama logica 2: Imagen a imagen (ref_image_path tiene valor)
 python
-运行
-# 先调用图片预处理函数
+ejecutar
+# Primero llamar a la funcion de preprocesamiento de imagen
 image_base64 = image_to_base64_data_uri(ref_image_path)
 messages = [{"role": "user","content": [{"type": "text", "text": prompt},{"type": "image_url", "image_url": {"url": image_base64}}]}]
 
-6、响应解析要求（必须兼容两种格式）从 choices [0].message.content 中提取图片 Base64，支持：
-结构化 JSON 返回的 image_url 字段；
-Markdown 格式 
-；
-统一提取 Base64 编码，解码后转换为 PIL Image 返回。
+6, Requisitos de analisis de respuesta (debe ser compatible con ambos formatos) Extraer imagen Base64 de choices [0].message.content, soportando:
+Campo image_url de retorno JSON estructurado;
+Formato Markdown
+;
+Extraer uniformemente la codificacion Base64, decodificar y convertir a PIL Image para retornar.
 
-7、组件联动与异常处理
-生成成功：将 PIL Image 展示到 result_image，intent_status 提示「图片生成成功」；
-生成 / 解析 / 上传失败：在 intent_status 显示清晰文字提示（如 “Base64 解析失败”“API 调用超时”），不崩溃。
+7, Vinculacion de componentes y manejo de excepciones
+Generacion exitosa: Mostrar PIL Image en result_image, indicar en intent_status "Imagen generada exitosamente";
+Fallo en generacion / analisis / subida: Mostrar indicacion de texto clara en intent_status (ej: "Fallo en analisis Base64", "Tiempo de espera agotado en llamada API"), sin crashear.
 
-8、输出要求
-完整可运行代码，替换 LLM_API_KEY 和 NANOBANANA_API_KEY 即可直接运行，全流程可用，分支逻辑严格匹配实战版。
+8, Requisitos de salida
+Codigo completo y ejecutable, solo reemplazar LLM_API_KEY y NANOBANANA_API_KEY para ejecutar directamente, todo el flujo funcional, logica de ramificacion estrictamente coincidente con la version practica.
 ```
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image55.png)
+![](images/image55.png)
 
-太令人激动啦！我们终于顺利地生成出了这个Agent的第一张图，仔细看看生成的图片，跟我们的文本和提示词是匹配的。到这里你已经基本上实现你自己的Agent啦！
+Que emocionante! Finalmente hemos generado exitosamente la primera imagen de este Agent. Si miras con cuidado la imagen generada, es coherente con nuestro texto y prompt. Con esto ya basicamente has implementado tu propio Agent!
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image56.png)
+![](images/image56.png)
 
-我们还添加了图生图功能，上传你喜欢的图片，AI会自动借鉴风格。
+Tambien agregamos la funcionalidad de imagen a imagen. Sube tu imagen favorita y la IA referenciara automaticamente el estilo.
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image57.png)
+![](images/image57.png)
 
-值得一提的是，前面步骤生成的提示词也是可以在网页上编辑的，并且我们是以最终点击按钮时的提示词为准～哪怕我在这里换成“a cute cat”，最终生成的图片也只会是可爱的小猫。
+Cabe mencionar que los prompts generados en los pasos anteriores tambien son editables en la pagina web, y tomamos como referencia el prompt al momento de hacer clic final en el boton~ Incluso si lo cambias aqui por "a cute cat", la imagen final generada sera un lindo gatito.
 
-## 第 4 章：总结
+## Capitulo 4: Resumen
 
-![](/zh-cn/stage-2/frontend/lovart-assets/images/image58.png)
+![](images/image58.png)
 
-**呜呼！终于写完了。**
-说实话，连我自己写完最后一行的时候都忍不住长舒一口气，更别说一路跟着做到这里的你了。能把这一整套流程完整跑下来，本身就已经很厉害了，这说明你真的把手放到键盘上，把事情一步步做完了。Bravo 🎉 🥳 👏
+**Por fin termino!**
+Sinceramente, hasta yo suspire de alivio al escribir la ultima linea, sin mencionar a todos ustedes que han llegado hasta aqui. Haber completado todo este flujo de principio a fin ya es algo impresionante en si mismo. Esto demuestra que realmente pusieron las manos en el teclado y completaron las cosas paso a paso. Bravo 🎉 🥳 👏
 
-在写这套内容的过程中，我一直在想，我们到底要留下些什么？答案其实并不是模型名字、参数或者某种固定套路，而是让你慢慢建立起一种感觉：哪些事情可以放心交给 AI 去理解和规划，哪些地方只需要你来决定方向。一旦这层分工成立，很多原本看起来复杂的生成流程，都会开始变得顺起来。
+Mientras escribia este contenido, estuve pensando: que es exactamente lo que queremos dejar? La respuesta en realidad no son los nombres de los modelos, los parametros o algun enfoque fijo, sino ayudarte a desarrollar gradualmente una sensibilidad: que cosas puedes confiar tranquilamente a la IA para que entienda y planifique, y en que lugares solo necesitas decidir la direccion. Una vez que esta division del trabajo se establece, muchos de los procesos de generacion que antes parecian complejos comenzaran a volverse mas fluidos.
 
-回头看，这条路其实并不复杂。想清楚你要解决的问题，把长文本交给语言模型去拆解，再把整理好的视觉意图交给绘图模型去呈现，最后把这一整套流程封装成一个属于你自己的小助手。到这里，你已经不只是“在用模型”，而是在搭建一套可以长期陪你工作的系统，而这，才是这套教程最想带给你的东西。
+En retrospectiva, este camino en realidad no es complicado. Piensa claramente en el problema que quieres resolver, entrega el texto largo al modelo de lenguaje para que lo descomponga, luego pasa la intencion visual ya organizada al modelo de generacion de imagenes para que la represente, y finalmente encapsula todo este flujo en tu propio asistente personal. Llegado a este punto, ya no estas "usando un modelo", sino construyendo un sistema que pueda acompanarte a trabajar a largo plazo. Y eso es precisamente lo que este tutorial mas quiere transmitirte.
 
-但是你已经做的很棒啦！相信学到这里的你对Vibe Coding已经有初步的掌握了，给自己放个小假休息一下吧！
+Pero ya lo has hecho muy bien! Los que han aprendido hasta aqui ya tienen un dominio inicial de Vibe Coding. Date un pequeno descanso!
 
 <RelatedArticlesSection
-  title="相关文章"
-  description="如果你想把“素材生成”真正接入产品流程，可以继续学习这些章节。"
+  title="Articulos relacionados"
+  description="Si quieres conectar realmente la generacion de assets al flujo de producto, puedes continuar aprendiendo en estos capitulos."
   :items="relatedArticles"
 />

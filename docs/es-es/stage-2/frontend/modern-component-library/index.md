@@ -1,134 +1,134 @@
-# 使用现代组件库更新你的界面
+# Actualiza tu interfaz con bibliotecas de componentes modernas
 
-在前面的课程中，你已经学会了如何用设计工具画出界面、用 AI IDE 把设计稿变成代码，甚至完成了一个完整的前端项目。但你可能也发现了一个问题：自己从零写出来的按钮、表单、弹窗，虽然能用，但总觉得和"专业产品"差了点意思——样式不够统一、交互细节不够丝滑、适配不同屏幕也很头疼。
+En las lecciones anteriores, ya aprendiste a diseñar interfaces con herramientas de diseño, convertir mockups en código con AI IDE, e incluso completaste un proyecto frontend completo. Pero probablemente también notaste un problema: los botones, formularios y diálogos que escribes desde cero funcionan, pero siempre falta algo para verse como un "producto profesional" — los estilos no son uniformes, los detalles de interacción no son fluidos, y adaptar todo a diferentes pantallas es un dolor de cabeza.
 
-这就是**组件库**要解决的问题。
+Este es exactamente el problema que resuelven las **bibliotecas de componentes**.
 
-组件库是一套预先设计好、开发好的 UI 零件集合。按钮、输入框、下拉菜单、对话框、表格……这些你在任何产品中都会反复用到的界面元素，组件库已经帮你做好了，而且经过了大量用户的验证和打磨。你只需要像搭积木一样把它们组合起来，就能快速构建出专业级的界面。
+Una biblioteca de componentes es un conjunto de piezas de UI pre-diseñadas y pre-desarrolladas. Botones, campos de entrada, menús desplegables, diálogos, tablas... estos elementos de interfaz que usarás repetidamente en cualquier producto ya están listos en la biblioteca, y han sido validados y refinados por miles de usuarios. Solo necesitas combinarlos como si fueran bloques de construcción para crear interfaces de nivel profesional rápidamente.
 
-## Lo que aprenderas
+## Lo que aprenderás
 
-1. 理解什么是前端组件库，以及为什么现代开发几乎都在用它
-2. 认识四个最具代表性的组件库，了解它们各自擅长的场景
-3. 通过三个实战场景（落地页、产品页面、后台管理），学会用 AI IDE + 组件库进行 Vibe Coding
-4. 学会阅读组件库文档，根据需求找到合适的组件并正确使用
+1. Entender qué son las bibliotecas de componentes frontend y por qué el desarrollo moderno prácticamente las utiliza siempre
+2. Conocer las cuatro bibliotecas más representativas y los escenarios donde destaca cada una
+3. Aprender a usar AI IDE + bibliotecas de componentes para Vibe Coding a través de tres escenarios prácticos (landing page, página de producto, panel de administración)
+4. Aprender a leer la documentación de las bibliotecas, encontrar los componentes adecuados y usarlos correctamente
 
-## 1. 为什么需要组件库？
+## 1. ¿Por qué necesitas una biblioteca de componentes?
 
-想象你在装修房子。你可以自己从木头开始做一把椅子，但更常见的做法是去宜家买一把——设计好看、质量稳定、说明书清晰，拿回家组装就行。
+Imagina que estás amueblando una casa. Puedes hacer una silla desde cero con madera, pero lo más común es ir a IKEA y comprar una — buen diseño, calidad consistente, instrucciones claras, y solo tienes que armarla en casa.
 
-组件库就是前端开发中的"宜家"。它提供的不是家具，而是界面零件：
+Una biblioteca de componentes es como el "IKEA" del desarrollo frontend. No ofrece muebles, sino piezas de interfaz:
 
-| 自己手写 | 使用组件库 |
+| Escribir todo manualmente | Usar una biblioteca de componentes |
 | :--- | :--- |
-| 需要自己处理样式、交互、动画 | 开箱即用，样式和交互已经打磨好 |
-| 不同页面的按钮可能长得不一样 | 全局风格统一，自动保持一致性 |
-| 适配手机、平板需要额外工作 | 大多数组件库已内置响应式支持 |
-| 无障碍访问（Accessibility）容易遗漏 | 专业组件库已处理好键盘导航、屏幕阅读器等 |
-| 开发速度慢 | 开发速度快，专注业务逻辑 |
+| Necesitas manejar estilos, interacciones y animaciones | Listo para usar, estilos e interacciones ya refinados |
+| Los botones de diferentes páginas pueden verse distintos | Estilo global unificado, consistencia automática |
+| Adaptar a móvil y tablet requiere trabajo extra | La mayoría ya incluye soporte responsive |
+| La accesibilidad (Accessibility) se olvida fácilmente | Las bibliotecas profesionales ya manejan navegación por teclado, lectores de pantalla, etc. |
+| Velocidad de desarrollo lenta | Velocidad de desarrollo rápida, enfócate en la lógica de negocio |
 
-简单来说：**组件库让你把时间花在"做什么"上，而不是"怎么画"上。**
+En pocas palabras: **las bibliotecas de componentes te permiten gastar tu tiempo en "qué hacer", no en "cómo dibujarlo".**
 
-### 眼见为实：同一个需求，加不加组件库的差距
+### Ver para creer: la diferencia con y sin biblioteca de componentes
 
-光说不练没有说服力。我们在 Trae 中用几乎相同的需求，分别不指定和指定组件库，看看生成结果的差距。
+Las palabras solas no convencen. Usamos casi el mismo prompt en Trae, uno sin especificar biblioteca y otro especificándola, para ver la diferencia en los resultados.
 
-**提示词一：不使用组件库**
-
-```text
-请帮我做一个 AI 写作助手的数据仪表盘页面，包含：
-- 顶部标题栏和导出按钮
-- 四张统计卡片显示用户数、活跃用户、文档数、收入，还要显示涨跌趋势
-- 一个折线图和一个饼图
-- 用户列表表格，带分页功能
-- 左侧导航侧边栏
-```
-
-在 Trae 中直接运行后的效果：
-
-<!-- TODO: 替换为 Trae 中不使用组件库生成的仪表盘截图 -->
-<!-- ![Trae 生成的仪表盘（不使用组件库）](/zh-cn/stage-2/frontend/modern-component-library/images/compare-without-lib.png) -->
-
-**提示词二：使用 shadcn/ui 组件库**
+**Prompt 1: Sin biblioteca de componentes**
 
 ```text
-请帮我做一个 AI 写作助手的数据仪表盘页面，用 shadcn/ui 组件库来做，包含：
-- 顶部标题栏和导出按钮
-- 四张统计卡片显示用户数、活跃用户、文档数、收入，还要显示涨跌趋势
-- 一个折线图和一个饼图
-- 用户列表表格，带分页功能
-- 左侧导航侧边栏
+Ayúdame a crear una página de dashboard para un asistente de escritura con AI, que incluya:
+- Barra de título superior y botón de exportar
+- Cuatro tarjetas de estadísticas mostrando usuarios, usuarios activos, documentos, ingresos, y tendencias
+- Un gráfico de líneas y un gráfico circular
+- Tabla de lista de usuarios con paginación
+- Barra lateral de navegación izquierda
 ```
 
-同样在 Trae 中直接运行后的效果：
+Resultado en Trae:
 
-<!-- TODO: 替换为 Trae 中使用 shadcn/ui 生成的仪表盘截图 -->
-<!-- ![Trae 生成的仪表盘（使用 shadcn/ui）](/zh-cn/stage-2/frontend/modern-component-library/images/compare-with-lib.png) -->
+<!-- TODO: Reemplazar con captura del dashboard generado sin biblioteca de componentes en Trae -->
+<!-- ![Dashboard generado en Trae (sin biblioteca de componentes)](/zh-cn/stage-2/frontend/modern-component-library/images/compare-without-lib.png) -->
 
-同样的需求，唯一的区别只是在提示词开头加上了 `shadcn/ui + Tailwind CSS`，Trae 生成的结果在视觉一致性、交互细节、整体打磨程度上就完全不在一个层级。这就是组件库带来的"免费升级"——你只需要在提示词里多写一个组件库的名字。
+**Prompt 2: Usando la biblioteca shadcn/ui**
 
-## 2. 认识四个核心组件库
+```text
+Ayúdame a crear una página de dashboard para un asistente de escritura con AI usando la biblioteca shadcn/ui, que incluya:
+- Barra de título superior y botón de exportar
+- Cuatro tarjetas de estadísticas mostrando usuarios, usuarios activos, documentos, ingresos, y tendencias
+- Un gráfico de líneas y un gráfico circular
+- Tabla de lista de usuarios con paginación
+- Barra lateral de navegación izquierda
+```
 
-组件库数量众多（完整列表见[附录](#附录-更多组件库一览)），但你只需要先认识这四个最具代表性的：
+Resultado en Trae:
 
-| 组件库 | 框架 | 一句话定位 | 官网 |
+<!-- TODO: Reemplazar con captura del dashboard generado con shadcn/ui en Trae -->
+<!-- ![Dashboard generado en Trae (con shadcn/ui)](/zh-cn/stage-2/frontend/modern-component-library/images/compare-with-lib.png) -->
+
+El mismo requerimiento, la única diferencia fue agregar `shadcn/ui + Tailwind CSS` al inicio del prompt. El resultado generado por Trae con la biblioteca está en un nivel completamente diferente en consistencia visual, detalles de interacción y acabado general. Esta es la "actualización gratuita" que aporta una biblioteca de componentes — solo necesitas agregar un nombre de biblioteca a tu prompt.
+
+## 2. Conoce las cuatro bibliotecas principales
+
+Hay muchas bibliotecas de componentes (la lista completa está en el [apéndice](#apendice-mas-bibliotecas-de-componentes)), pero solo necesitas conocer estas cuatro que son las más representativas:
+
+| Biblioteca | Framework | Descripción | Sitio web |
 | :--- | :--- | :--- | :--- |
-| [Ant Design](https://ant.design) | React | 蚂蚁集团出品，企业级中后台的事实标准，组件覆盖面极广 | ant.design |
-| [shadcn/ui](https://ui.shadcn.com) | React | 不装 npm 包，直接把代码复制到你项目里，基于 Tailwind CSS，定制自由度最高 | ui.shadcn.com |
-| [HeroUI](https://heroui.com)（原 NextUI） | React | 默认样式精美、动画流畅，适合对视觉品质有要求的落地页和产品展示 | heroui.com |
-| [Material UI](https://mui.com) | React | 最老牌的 React 组件库，实现 Google Material Design 规范，生态最成熟 | mui.com |
+| [Ant Design](https://ant.design) | React | Creada por Ant Group, el estándar de facto para paneles de administración empresariales, cobertura de componentes extremadamente amplia | ant.design |
+| [shadcn/ui](https://ui.shadcn.com) | React | No instala paquetes npm, copia el código directamente a tu proyecto, basada en Tailwind CSS, máxima libertad de personalización | ui.shadcn.com |
+| [HeroUI](https://heroui.com) (antes NextUI) | React | Estilos por defecto elegantes, animaciones fluidas, ideal para landing pages y showcases donde la calidad visual es prioritaria | heroui.com |
+| [Material UI](https://mui.com) | React | La biblioteca de componentes React más veterana, implementa las especificaciones de Google Material Design, ecosistema más maduro | mui.com |
 
-> Vue 用户同样有丰富选择：[Element Plus](https://element-plus.org)（国内最流行）、[Ant Design Vue](https://antdv.com)、[Naive UI](https://www.naiveui.com) 等，详见[附录](#附录-更多组件库一览)。
+> Los usuarios de Vue también tienen opciones abundantes: [Element Plus](https://element-plus.org) (la más popular en China), [Ant Design Vue](https://antdv.com), [Naive UI](https://www.naiveui.com), etc. Ver [apéndice](#apendice-mas-bibliotecas-de-componentes) para más detalles.
 
-不同组件库擅长不同场景。接下来我们通过三个真实开发场景，带你体验如何用 AI IDE + 组件库进行 Vibe Coding。
+Diferentes bibliotecas destacan en diferentes escenarios. A continuación, te guiaremos a través de tres escenarios de desarrollo reales para experimentar cómo usar AI IDE + bibliotecas de componentes para Vibe Coding.
 
-为了展示不同组件库的风格和特点，我们在每个场景中刻意选用了不同的库。但请注意：**这只是为了让你多见识几种方案**，实际开发中你完全可以只用自己最顺手的那一个。比如你喜欢 shadcn/ui 的风格，用它做落地页、产品页、后台管理都没问题。选一个你觉得好看、用着舒服的，比什么都重要。
+Para mostrar los estilos y características de diferentes bibliotecas, usamos intencionalmente una biblioteca diferente en cada escenario. Pero ten en cuenta: **esto es solo para que conozcas varias opciones**. En la práctica, puedes usar solo la que más te guste. Si te gusta el estilo de shadcn/ui, úsala para landing pages, páginas de producto y paneles de administración sin problema. Elige la que te parezca bonita y con la que te sientas cómodo/a, eso es lo más importante.
 
-## 3. 实战一：用 HeroUI 构建产品落地页
+## 3. Práctica 1: Construir una landing page con HeroUI
 
-**场景**：你做了一个 AI 写作助手产品，需要一个漂亮的落地页来展示产品特性、吸引用户注册。落地页需要视觉冲击力强、动画流畅、在手机上也好看。
+**Escenario**: Has creado un producto de asistente de escritura con AI y necesitas una landing page bonita para mostrar sus características y atraer registros. La página necesita gran impacto visual, animaciones fluidas y verse bien en móvil.
 
-**为什么选 HeroUI**：HeroUI 的默认样式就很精美，自带流畅的过渡动画，非常适合面向用户的展示型页面。
+**Por qué HeroUI**: Los estilos por defecto de HeroUI son muy elegantes, con transiciones fluidas integradas, perfecta para páginas orientadas al usuario.
 
-### 3.1 创建项目
+### 3.1 Crear el proyecto
 
 ```bash
-# 使用 HeroUI 官方 CLI 创建项目
+# Crear proyecto con el CLI oficial de HeroUI
 npx create-heroui-app@latest ai-writer-landing
 cd ai-writer-landing
 npm install
 ```
 
-<!-- TODO: 替换为 HeroUI 官网首页或组件展示截图 -->
-<!-- ![HeroUI 组件库官网](/zh-cn/stage-2/frontend/modern-component-library/images/heroui-homepage.png) -->
+<!-- TODO: Reemplazar con captura de la página principal o showcase de componentes de HeroUI -->
+<!-- ![Sitio web de la biblioteca HeroUI](/zh-cn/stage-2/frontend/modern-component-library/images/heroui-homepage.png) -->
 
-### 3.2 用 AI IDE 生成落地页
+### 3.2 Generar la landing page con AI IDE
 
-打开 AI IDE（Cursor、Trae 等），在对话框中输入：
+Abre tu AI IDE (Cursor, Trae, etc.) y escribe en el chat:
 
 ```text
-请帮我做一个 AI 写作助手的落地页，用 HeroUI 组件库来做：
+Ayúdame a crear una landing page para un asistente de escritura con AI usando la biblioteca HeroUI:
 
-**页面结构：**
-1. 顶部导航栏：左边放 Logo 和产品名，右边放"功能"、"定价"、"关于"三个链接，再加一个"开始使用"按钮
-2. 首屏区域：大标题写"让 AI 成为你的写作搭档"，副标题介绍产品价值，两个按钮"免费试用"和"查看演示"，下面放一张产品截图
-3. 功能展示：三列卡片，分别介绍"智能续写"、"风格调整"、"多语言翻译"三个功能，每张卡片要有图标、标题、描述
-4. 定价区域：三个定价卡片（免费版、专业版、团队版），专业版要突出显示推荐
-5. 底部号召：一句吸引人的文案，加上注册按钮
-6. 页脚：版权信息和社交媒体链接
+**Estructura de la página:**
+1. Barra de navegación superior: Logo y nombre del producto a la izquierda, enlaces "Funciones", "Precios" y "Acerca de" a la derecha, más un botón "Comenzar"
+2. Sección hero: Título grande "Deja que la AI sea tu compañera de escritura", subtítulo describiendo el valor del producto, dos botones "Prueba gratis" y "Ver demo", y una captura del producto debajo
+3. Sección de funciones: Tres tarjetas en columnas presentando "Autocompletado inteligente", "Ajuste de estilo" y "Traducción multilingüe", cada tarjeta con icono, título y descripción
+4. Sección de precios: Tres tarjetas (Gratis, Pro, Equipo), la Pro destacada como recomendada
+5. Call to action: Un texto atractivo con un botón de registro
+6. Footer: Información de copyright y enlaces a redes sociales
 
-**设计要求：**
-- 看起来要现代、专业
-- 支持暗色模式
-- 手机上看也要好看
+**Requisitos de diseño:**
+- Debe verse moderno y profesional
+- Soporte para modo oscuro
+- Debe verse bien en móvil
 ```
 
-<!-- TODO: 替换为 AI IDE 生成落地页的过程截图或生成结果截图 -->
-<!-- ![AI 生成的 HeroUI 落地页效果](/zh-cn/stage-2/frontend/modern-component-library/images/heroui-landing-result.png) -->
+<!-- TODO: Reemplazar con captura del proceso o resultado de generación de landing page con AI IDE -->
+<!-- ![Resultado de landing page con HeroUI generada por AI](/zh-cn/stage-2/frontend/modern-component-library/images/heroui-landing-result.png) -->
 
-### 3.3 AI 会用到的关键组件
+### 3.3 Componentes clave que usará la AI
 
-AI 生成的代码中，你会看到这些 HeroUI 组件：
+En el código generado, verás estos componentes de HeroUI:
 
 ```jsx
 import {
@@ -141,83 +141,83 @@ import {
 } from '@heroui/react'
 ```
 
-每个组件的作用：
+Función de cada componente:
 
-| 组件 | 用途 | 落地页中的位置 |
+| Componente | Uso | Posición en la landing page |
 | :--- | :--- | :--- |
-| `Navbar` | 顶部导航栏 | 页面最顶部，固定不动 |
-| `Button` | 按钮，支持多种变体和颜色 | CTA 按钮、导航按钮 |
-| `Card` | 卡片容器 | 功能展示、定价卡片 |
-| `Chip` | 小标签 | "推荐"、"最受欢迎"标记 |
-| `Divider` | 分割线 | 区域之间的视觉分隔 |
+| `Navbar` | Barra de navegación superior | Parte superior de la página, fija |
+| `Button` | Botón, soporta múltiples variantes y colores | Botones CTA, botones de navegación |
+| `Card` | Contenedor tipo tarjeta | Showcase de funciones, tarjetas de precios |
+| `Chip` | Etiqueta pequeña | Marcadores "Recomendado", "Más popular" |
+| `Divider` | Línea divisoria | Separación visual entre secciones |
 
-### 3.4 迭代优化
+### 3.4 Iteración y optimización
 
-生成的初版代码可能不完全满意，继续和 AI 对话调整：
+La primera versión del código puede no ser perfecta. Continúa dialogando con la AI para ajustar:
 
 ```text
-请帮我优化一下落地页：
+Ayúdame a optimizar la landing page:
 
-1. 大标题加上渐变色，从蓝色渐变到紫色
-2. 功能卡片鼠标放上去要有上浮的动画效果
-3. 专业版定价卡片要突出显示，加个边框和"最受欢迎"的标签
-4. 手机上的导航改成汉堡菜单（三条横线那种）
+1. Agrega un degradado al título principal, de azul a púrpura
+2. Las tarjetas de funciones deben tener un efecto de elevación al pasar el ratón
+3. La tarjeta de precio Pro debe destacarse, con un borde y etiqueta "Más popular"
+4. En móvil, la navegación debe convertirse en un menú hamburguesa
 ```
 
-<!-- TODO: 替换为迭代优化后的落地页效果截图 -->
-<!-- ![迭代优化后的落地页](/zh-cn/stage-2/frontend/modern-component-library/images/heroui-landing-iterated.png) -->
+<!-- TODO: Reemplazar con captura de la landing page después de iteración -->
+<!-- ![Landing page iterada](/zh-cn/stage-2/frontend/modern-component-library/images/heroui-landing-iterated.png) -->
 
-> **Vibe Coding 的核心**：你不需要记住每个组件的 API，只需要用自然语言描述你想要的效果，AI 会帮你找到合适的组件和写法。遇到不满意的地方，继续对话迭代就好。
+> **El núcleo del Vibe Coding**: No necesitas memorizar la API de cada componente. Solo describe el efecto que quieres en lenguaje natural, y la AI encontrará el componente y la implementación adecuada. Si algo no te satisface, sigue iterando en la conversación.
 
-## 4. 实战二：用 shadcn/ui 构建产品页面
+## 4. Práctica 2: Construir una página de producto con shadcn/ui
 
-**场景**：你的 AI 写作助手需要一个用户登录后的主界面——左侧是文档列表，右侧是编辑器，顶部有工具栏。这是一个功能型产品页面，需要高度定制化的 UI。
+**Escenario**: Tu asistente de escritura con AI necesita una interfaz principal post-login — lista de documentos a la izquierda, editor a la derecha, y una barra de herramientas arriba. Es una página de producto funcional que requiere una UI altamente personalizada.
 
-**为什么选 shadcn/ui**：shadcn/ui 把组件代码直接放进你的项目，你可以随意修改任何细节。对于需要深度定制的产品界面，这种"拥有代码"的模式最灵活。
+**Por qué shadcn/ui**: shadcn/ui coloca el código de los componentes directamente en tu proyecto, permitiéndote modificar cualquier detalle. Para interfaces de producto que necesitan personalización profunda, este modelo de "poseer el código" es el más flexible.
 
-<!-- TODO: 替换为 shadcn/ui 官网或组件展示截图 -->
-<!-- ![shadcn/ui 组件库官网](/zh-cn/stage-2/frontend/modern-component-library/images/shadcn-homepage.png) -->
+<!-- TODO: Reemplazar con captura del sitio web o showcase de componentes de shadcn/ui -->
+<!-- ![Sitio web de la biblioteca shadcn/ui](/zh-cn/stage-2/frontend/modern-component-library/images/shadcn-homepage.png) -->
 
-### 4.1 创建项目
+### 4.1 Crear el proyecto
 
 ```bash
-# 创建 Next.js 项目
+# Crear proyecto Next.js
 npx create-next-app@latest ai-writer-app --typescript --tailwind --app
 cd ai-writer-app
 
-# 初始化 shadcn/ui
+# Inicializar shadcn/ui
 npx shadcn@latest init
 
-# 按需添加组件（不是一次性安装所有组件）
+# Agregar componentes según necesidad (no se instalan todos a la vez)
 npx shadcn@latest add button card input sidebar sheet dialog
 ```
 
-shadcn/ui 的独特之处：每次 `add` 一个组件，它会把源代码复制到你项目的 `components/ui/` 目录下。你可以直接打开这些文件修改样式和行为。
+Lo único de shadcn/ui: cada vez que `add` un componente, copia el código fuente al directorio `components/ui/` de tu proyecto. Puedes abrir estos archivos directamente y modificar estilos y comportamiento.
 
-### 4.2 用 AI IDE 生成产品界面
+### 4.2 Generar la interfaz de producto con AI IDE
 
 ```text
-请帮我做一个 AI 写作助手的主界面，用 shadcn/ui 组件库来做：
+Ayúdame a crear la interfaz principal de un asistente de escritura con AI usando shadcn/ui:
 
-**整体布局：**
-- 左边是可折叠的侧边栏，宽度大概 280px：
-  - 顶部放"新建文档"按钮
-  - 下面是文档列表，每个文档显示标题和最后编辑时间
-  - 右键点击文档可以重命名或删除
-- 右边是主编辑区，分成上下两部分：
-  - 上面是工具栏：可以编辑文档标题、显示字数统计、"AI 续写"按钮、"导出"下拉菜单
-  - 下面是编辑区域：一个大的文本输入框，占满剩余空间
+**Layout general:**
+- Izquierda: barra lateral colapsable, ancho aproximado 280px:
+  - Botón "Nuevo documento" arriba
+  - Lista de documentos debajo, cada uno mostrando título y última fecha de edición
+  - Clic derecho en un documento para renombrar o eliminar
+- Derecha: área de edición principal, dividida en dos partes:
+  - Arriba: barra de herramientas con edición del título del documento, estadísticas de palabras, botón "Autocompletar con AI", menú desplegable "Exportar"
+  - Abajo: área de edición, un campo de texto grande que ocupa el espacio restante
 
-**交互细节：**
-- 点击"AI 续写"后，按钮显示加载状态，编辑器底部出现 AI 生成的文本（像打字机一样逐字显示）
-- 手机上侧边栏变成抽屉式，从左边滑出
-- 当前选中的文档要高亮显示
+**Detalles de interacción:**
+- Al hacer clic en "Autocompletar con AI", el botón muestra estado de carga, y aparece texto generado por AI en la parte inferior del editor (apareciendo letra por letra como una máquina de escribir)
+- En móvil, la barra lateral se convierte en un drawer que desliza desde la izquierda
+- El documento seleccionado actualmente debe destacarse
 ```
 
-<!-- TODO: 替换为 AI 生成的 shadcn/ui 产品界面截图 -->
-<!-- ![AI 生成的 shadcn/ui 产品页面效果](/zh-cn/stage-2/frontend/modern-component-library/images/shadcn-product-result.png) -->
+<!-- TODO: Reemplazar con captura de la interfaz de producto shadcn/ui generada por AI -->
+<!-- ![Resultado de la página de producto con shadcn/ui generada por AI](/zh-cn/stage-2/frontend/modern-component-library/images/shadcn-product-result.png) -->
 
-### 4.3 AI 会用到的关键组件
+### 4.3 Componentes clave que usará la AI
 
 ```tsx
 import { Button } from '@/components/ui/button'
@@ -241,50 +241,50 @@ import {
 } from '@/components/ui/sidebar'
 ```
 
-| 组件 | 用途 | 产品页面中的位置 |
+| Componente | Uso | Posición en la página de producto |
 | :--- | :--- | :--- |
-| `Sidebar` | 可折叠侧边栏 | 左侧文档列表 |
-| `Sheet` | 移动端抽屉 | 移动端侧边栏替代 |
-| `DropdownMenu` | 下拉菜单 | "导出"按钮、右键菜单 |
-| `Dialog` | 对话框 | 重命名、删除确认 |
-| `Button` | 按钮，支持 variant 和 loading | 各种操作按钮 |
-| `Input` | 输入框 | 文档标题编辑 |
+| `Sidebar` | Barra lateral colapsable | Lista de documentos izquierda |
+| `Sheet` | Drawer móvil | Reemplazo de sidebar en móvil |
+| `DropdownMenu` | Menú desplegable | Botón "Exportar", menú contextual |
+| `Dialog` | Diálogo | Confirmación de renombrar/eliminar |
+| `Button` | Botón, soporta variant y loading | Diversos botones de acción |
+| `Input` | Campo de entrada | Edición del título del documento |
 
-### 4.4 定制组件样式
+### 4.4 Personalizar estilos de componentes
 
-shadcn/ui 的优势在于你可以直接修改组件源码。比如你想让按钮的圆角更大：
+La ventaja de shadcn/ui es que puedes modificar directamente el código fuente de los componentes. Por ejemplo, si quieres bordes más redondeados en los botones:
 
 ```text
-请帮我修改 components/ui/button.tsx，
-把所有按钮的默认圆角从 rounded-md 改为 rounded-xl，
-并给 primary 变体加上微妙的阴影效果
+Ayúdame a modificar components/ui/button.tsx,
+cambiando el borde redondeado por defecto de rounded-md a rounded-xl,
+y agregando un efecto de sombra sutil a la variante primary
 ```
 
-AI 会直接修改你项目中的组件文件，而不是覆盖 npm 包的样式——这就是 shadcn/ui "拥有代码"的好处。
+La AI modificará directamente los archivos de componentes en tu proyecto, sin sobrescribir estilos de paquetes npm — este es el beneficio de "poseer el código" de shadcn/ui.
 
-<!-- TODO: 替换为 shadcn/ui 组件源码在项目中的截图，展示可直接编辑 -->
-<!-- ![shadcn/ui 组件代码在项目中可直接编辑](/zh-cn/stage-2/frontend/modern-component-library/images/shadcn-code-ownership.png) -->
+<!-- TODO: Reemplazar con captura del código fuente de componentes shadcn/ui en el proyecto, mostrando que es editable -->
+<!-- ![Código de componentes shadcn/ui directamente editable en el proyecto](/zh-cn/stage-2/frontend/modern-component-library/images/shadcn-code-ownership.png) -->
 
-## 5. 实战三：用 Ant Design 构建后台管理界面
+## 5. Práctica 3: Construir un panel de administración con Ant Design
 
-**场景**：你的 AI 写作助手上线后，需要一个Panel de administracion来查看用户数据、管理文档内容、处理付费订单。后台管理系统的核心是数据展示和操作效率。
+**Escenario**: Tu asistente de escritura con AI ya está en línea y necesitas un panel de administración para ver datos de usuarios, gestionar contenido y procesar órdenes de pago. El núcleo de un sistema de administración es la visualización de datos y la eficiencia operativa.
 
-**为什么选 Ant Design**：Ant Design 在中后台领域积累最深，表格、表单、图表等业务组件开箱即用，内置了大量企业级交互模式（批量操作、高级筛选、数据导出等）。
+**Por qué Ant Design**: Ant Design tiene la mayor experiencia en paneles de administración empresariales. Tablas, formularios, gráficos y otros componentes de negocio están listos para usar, con patrones de interacción empresarial integrados (operaciones en lote, filtros avanzados, exportación de datos, etc.).
 
-<!-- TODO: 替换为 Ant Design 官网或 Pro Components 展示截图 -->
-<!-- ![Ant Design 组件库官网](/zh-cn/stage-2/frontend/modern-component-library/images/antd-homepage.png) -->
+<!-- TODO: Reemplazar con captura del sitio web de Ant Design o showcase de Pro Components -->
+<!-- ![Sitio web de la biblioteca Ant Design](/zh-cn/stage-2/frontend/modern-component-library/images/antd-homepage.png) -->
 
-### 5.1 创建项目
+### 5.1 Crear el proyecto
 
 ```bash
-# 使用 Ant Design Pro 脚手架（内置布局、路由、权限）
+# Usar el scaffolding de Ant Design Pro (layout, rutas y permisos integrados)
 npx create-umi@latest ai-writer-admin
-# 选择 Ant Design Pro 模板
+# Seleccionar la plantilla Ant Design Pro
 cd ai-writer-admin
 npm install
 ```
 
-或者从零开始：
+O empezar desde cero:
 
 ```bash
 npx create-react-app ai-writer-admin --template typescript
@@ -292,30 +292,30 @@ cd ai-writer-admin
 npm install antd @ant-design/icons @ant-design/pro-components
 ```
 
-### 5.2 用 AI IDE 生成Panel de administracion
+### 5.2 Generar el panel de administración con AI IDE
 
 ```text
-请帮我做一个 AI 写作助手的Panel de administracion，用 Ant Design 组件库来做：
+Ayúdame a crear un panel de administración para un asistente de escritura con AI usando Ant Design:
 
-**整体布局：**
-- 左边是菜单栏：仪表盘、用户管理、文档管理、订单管理、系统设置
-- 顶部显示面包屑导航
+**Layout general:**
+- Izquierda: barra de menú con Dashboard, Gestión de usuarios, Gestión de documentos, Gestión de órdenes, Configuración del sistema
+- Arriba: navegación con breadcrumbs
 
-**用户管理页面：**
-- 顶部放四个统计卡片：总用户数、今日新增、活跃用户数、付费用户数
-- 搜索筛选区：可以按用户名搜索、选择注册时间范围、筛选用户状态，还有"搜索"和"重置"按钮
-- 用户表格：
-  - 显示头像、用户名、邮箱、注册时间、订阅计划（用不同颜色标签区分）、状态、操作
-  - 每页显示 20 条，支持分页
-  - 可以批量选择用户，批量禁用或导出
-  - 操作列：查看详情、编辑、禁用（禁用前要二次确认）
-- 点击"查看详情"从右侧滑出抽屉，显示用户详细信息和最近文档列表
+**Página de gestión de usuarios:**
+- Cuatro tarjetas de estadísticas arriba: Total de usuarios, Nuevos hoy, Usuarios activos, Usuarios de pago
+- Área de búsqueda y filtros: buscar por nombre, seleccionar rango de fecha de registro, filtrar por estado, botones "Buscar" y "Resetear"
+- Tabla de usuarios:
+  - Mostrar avatar, nombre, email, fecha de registro, plan de suscripción (con etiquetas de colores), estado, acciones
+  - 20 elementos por página con paginación
+  - Selección múltiple para desactivar o exportar en lote
+  - Columna de acciones: Ver detalle, Editar, Desactivar (con confirmación antes de desactivar)
+- Al hacer clic en "Ver detalle", se abre un drawer desde la derecha mostrando información detallada y documentos recientes
 ```
 
-<!-- TODO: 替换为 AI 生成的 Ant Design 后台管理界面截图 -->
-<!-- ![AI 生成的 Ant Design 后台管理界面](/zh-cn/stage-2/frontend/modern-component-library/images/antd-admin-result.png) -->
+<!-- TODO: Reemplazar con captura del panel de administración Ant Design generado por AI -->
+<!-- ![Panel de administración Ant Design generado por AI](/zh-cn/stage-2/frontend/modern-component-library/images/antd-admin-result.png) -->
 
-### 5.3 AI 会用到的关键组件
+### 5.3 Componentes clave que usará la AI
 
 ```tsx
 import { PageContainer, ProLayout } from '@ant-design/pro-components'
@@ -330,53 +330,53 @@ import {
 } from '@ant-design/icons'
 ```
 
-| 组件 | 用途 | 后台中的位置 |
+| Componente | Uso | Posición en el panel |
 | :--- | :--- | :--- |
-| `ProLayout` | 后台整体布局框架 | 页面骨架（菜单 + 内容区） |
-| `ProTable` | 高级表格，内置搜索、分页、列设置 | 用户列表、文档列表、订单列表 |
-| `StatisticCard` | 数据统计卡片 | 仪表盘、页面顶部概览 |
-| `Tag` / `Badge` | 状态标签 | 订阅计划、用户状态 |
-| `Drawer` | 侧边抽屉 | 用户详情、编辑表单 |
-| `Popconfirm` | 气泡确认框 | 删除、禁用等危险操作 |
+| `ProLayout` | Framework de layout del panel | Esqueleto de la página (menú + área de contenido) |
+| `ProTable` | Tabla avanzada con búsqueda, paginación y configuración de columnas | Lista de usuarios, documentos, órdenes |
+| `StatisticCard` | Tarjeta de estadísticas | Dashboard, resumen superior |
+| `Tag` / `Badge` | Etiquetas de estado | Plan de suscripción, estado de usuario |
+| `Drawer` | Drawer lateral | Detalle de usuario, formulario de edición |
+| `Popconfirm` | Confirmación emergente | Eliminar, desactivar y otras acciones peligrosas |
 
-### 5.4 继续迭代：添加仪表盘
+### 5.4 Seguir iterando: Agregar un dashboard
 
 ```text
-请帮我做一个仪表盘页面：
+Ayúdame a crear una página de dashboard:
 
-1. 顶部四个统计卡片：总用户数、总文档数、今日 API 调用次数、月收入，每个卡片显示数值和环比变化（涨了还是跌了）
-2. 中间放两个图表：
-   - 左边：最近 7 天的用户增长折线图
-   - 右边：订阅计划分布饼图
-3. 底部：最近操作日志表格，显示时间、用户、操作类型、详情
+1. Cuatro tarjetas de estadísticas arriba: Total de usuarios, Total de documentos, Llamadas API hoy, Ingresos mensuales, cada una mostrando valor y cambio respecto al período anterior
+2. Dos gráficos en el centro:
+   - Izquierda: Gráfico de líneas del crecimiento de usuarios en los últimos 7 días
+   - Derecha: Gráfico circular de distribución de planes de suscripción
+3. Abajo: Tabla de registros de operaciones recientes, mostrando fecha, usuario, tipo de operación y detalles
 
-用 Ant Design 的组件来布局，图表可以用 Ant Design Charts
+Usa componentes de Ant Design para el layout, los gráficos pueden usar Ant Design Charts
 ```
 
-<!-- TODO: 替换为仪表盘页面效果截图 -->
-<!-- ![Ant Design 仪表盘页面效果](/zh-cn/stage-2/frontend/modern-component-library/images/antd-dashboard-result.png) -->
+<!-- TODO: Reemplazar con captura de la página de dashboard -->
+<!-- ![Página de dashboard con Ant Design](/zh-cn/stage-2/frontend/modern-component-library/images/antd-dashboard-result.png) -->
 
-> **后台管理的 Vibe Coding 技巧**：后台页面结构相对固定（表格 + 搜索 + 弹窗），非常适合用 AI 批量生成。你可以先让 AI 生成一个"用户管理"页面作为模板，然后说"参考用户管理页面的结构，帮我生成文档管理页面"，AI 会复用相同的布局模式。
+> **Tip de Vibe Coding para paneles de administración**: Las páginas de administración tienen una estructura relativamente fija (tabla + búsqueda + diálogo), ideales para generación en lote con AI. Puedes primero generar una página de "Gestión de usuarios" como plantilla, y luego decir "Basándote en la estructura de la página de gestión de usuarios, genera la página de gestión de documentos". La AI reutilizará el mismo patrón de layout.
 
-## 6. 学会查文档：组件库的"说明书"
+## 6. Aprende a leer la documentación: el "manual de instrucciones" de las bibliotecas
 
-Vibe Coding 中 AI 会帮你写大部分代码，但当 AI 生成的结果不对、或者你想微调某个组件的行为时，**查文档**是最快的解决方式。
+En Vibe Coding, la AI escribirá la mayor parte del código, pero cuando el resultado no sea correcto o quieras ajustar el comportamiento de un componente, **consultar la documentación** es la solución más rápida.
 
-以 Ant Design 为例，它的文档地址是：`https://ant.design/components/overview-cn`
+Tomando Ant Design como ejemplo, su documentación está en: `https://ant.design/components/overview-cn`
 
-查文档的标准流程：
+Flujo estándar para consultar la documentación:
 
-1. **明确需求**：比如"我需要表格支持行选择"
-2. **在文档中搜索**：搜索"Table"进入表格组件页面
-3. **查看示例**：文档中每个组件都有多个在线示例，找到"可选择"示例
-4. **复制代码**：把示例代码复制到你的项目中
-5. **查看 API 表格**：在页面底部找到 `rowSelection` 属性的完整配置项
+1. **Aclarar el requerimiento**: Por ejemplo, "necesito que la tabla soporte selección de filas"
+2. **Buscar en la documentación**: Buscar "Table" para ir a la página del componente
+3. **Ver ejemplos**: Cada componente tiene múltiples ejemplos en línea, encontrar el de "seleccionable"
+4. **Copiar código**: Copiar el código de ejemplo a tu proyecto
+5. **Ver la tabla de API**: Encontrar la configuración completa de `rowSelection` al final de la página
 
-> 你也可以把文档链接直接发给 AI IDE："请参考 https://ant.design/components/table-cn 的 rowSelection API，帮我给用户表格加上批量选择功能"。给 AI 提供文档链接，生成的代码会更准确。
+> También puedes enviar el enlace de documentación directamente a tu AI IDE: "Por favor refiérete a la API rowSelection de https://ant.design/components/table-cn para agregar selección múltiple a la tabla de usuarios". Proporcionar enlaces de documentación a la AI genera código más preciso.
 
-各组件库的文档地址速查：
+Referencia rápida de las documentaciones:
 
-| 组件库 | 文档地址 |
+| Biblioteca | URL de documentación |
 | :--- | :--- |
 | Ant Design | `https://ant.design/components/overview-cn` |
 | shadcn/ui | `https://ui.shadcn.com/docs/components` |
@@ -384,82 +384,82 @@ Vibe Coding 中 AI 会帮你写大部分代码，但当 AI 生成的结果不对
 | Material UI | `https://mui.com/material-ui/all-components/` |
 | Element Plus | `https://element-plus.org/zh-CN/component/overview.html` |
 
-## 7. 小结
+## 7. Resumen
 
-三个实战场景覆盖了最常见的前端开发需求：
+Los tres escenarios prácticos cubren las necesidades más comunes del desarrollo frontend:
 
-| 场景 | 推荐组件库 | 核心特点 |
+| Escenario | Biblioteca recomendada | Característica principal |
 | :--- | :--- | :--- |
-| 落地页 / 展示页 | HeroUI | 默认样式精美，动画流畅，视觉冲击力强 |
-| 产品功能页面 | shadcn/ui | 代码完全可控，深度定制灵活 |
-| 后台管理系统 | Ant Design | 业务组件丰富，表格表单开箱即用 |
+| Landing page / Página showcase | HeroUI | Estilos por defecto elegantes, animaciones fluidas, gran impacto visual |
+| Página de producto funcional | shadcn/ui | Código totalmente controlable, personalización profunda flexible |
+| Panel de administración | Ant Design | Componentes de negocio ricos, tablas y formularios listos para usar |
 
-Vibe Coding 的工作流总结：
+Resumen del flujo de trabajo de Vibe Coding:
 
-1. 根据场景选择合适的组件库
-2. 用 AI IDE 描述你想要的页面结构和交互
-3. AI 生成初版代码，你预览效果
-4. 用自然语言继续迭代调整
-5. 遇到细节问题时查阅组件库文档
+1. Elegir la biblioteca de componentes adecuada según el escenario
+2. Describir la estructura de página e interacciones deseadas al AI IDE
+3. La AI genera la primera versión del código, tú previsualizas el resultado
+4. Seguir iterando y ajustando con lenguaje natural
+5. Consultar la documentación de la biblioteca cuando haya problemas de detalle
 
-### 练习
+### Ejercicio
 
-选择以下任一场景，用 AI IDE + 组件库从零完成：
+Elige uno de los siguientes escenarios y complétalo desde cero con AI IDE + biblioteca de componentes:
 
-1. 用 HeroUI 为你之前做的项目（比如霍格沃茨画像）做一个展示落地页
-2. 用 shadcn/ui 构建一个笔记应用的主界面（侧边栏 + 编辑器）
-3. 用 Ant Design 构建一个简单的内容Panel de administracion（文章列表 + 新建文章表单）
+1. Usar HeroUI para crear una landing page showcase de un proyecto anterior (por ejemplo, los retratos de Hogwarts)
+2. Usar shadcn/ui para construir la interfaz principal de una aplicación de notas (sidebar + editor)
+3. Usar Ant Design para construir un panel de administración de contenido simple (lista de artículos + formulario para crear artículo)
 
 ---
 
-## 附录：更多组件库一览
+## Apéndice: Más bibliotecas de componentes
 
-除了正文介绍的四个核心库，前端生态中还有大量优秀的组件库。下面按框架分类列出，方便你根据项目需求选择。
+Además de las cuatro bibliotecas principales presentadas en el texto, el ecosistema frontend tiene muchas bibliotecas excelentes. Aquí las clasificamos por framework para ayudarte a elegir según las necesidades de tu proyecto.
 
-### Vue 生态
+### Ecosistema Vue
 
-| 组件库 | Stars | 简介 | 适用场景 |
+| Biblioteca | Stars | Descripción | Escenarios |
 | :--- | :--- | :--- | :--- |
-| [Element Plus](https://element-plus.org) | ~27k | 饿了么团队打造的 Vue 3 企业级组件库，国内使用最广泛，中文生态极佳 | 中后台管理系统 |
-| [Vuetify](https://vuetifyjs.com) | ~41k | 最流行的 Vue Material Design 组件库，80+ 组件，文档完善 | Google 设计风格项目 |
-| [Ant Design Vue](https://antdv.com) | ~21k | 基于蚂蚁设计体系的 Vue 3 组件库，设计规范统一 | 企业级中后台 |
-| [Naive UI](https://www.naiveui.com) | ~18k | TypeScript 编写，主题定制性极强，不依赖 CSS 预处理器 | 对设计有独特要求的项目 |
-| [Quasar](https://quasar.dev) | ~27k | 一套代码构建 SPA、SSR、PWA、移动端和桌面端应用 | 跨平台项目 |
-| [Vant](https://vant-ui.github.io/vant) | ~24k | 有赞团队开发的轻量级移动端组件库，覆盖电商常见需求 | 移动端 H5 页面 |
-| [PrimeVue](https://primevue.org) | ~14k | 90+ 组件，支持多种主题（Material、Bootstrap 等） | 需要丰富组件和多主题 |
-| [Arco Design Vue](https://arco.design/vue) | ~3k | 字节跳动出品，组件质量高，内置暗色模式 | 中后台产品 |
-| [TDesign Vue Next](https://tdesign.tencent.com/vue-next) | ~2k | 腾讯出品，设计语言统一，覆盖桌面端常用场景 | 腾讯生态或企业级项目 |
+| [Element Plus](https://element-plus.org) | ~27k | Biblioteca empresarial Vue 3 del equipo de Ele.me, la más usada en China | Paneles de administración |
+| [Vuetify](https://vuetifyjs.com) | ~41k | Biblioteca Vue Material Design más popular, 80+ componentes | Proyectos con estilo Google |
+| [Ant Design Vue](https://antdv.com) | ~21k | Biblioteca Vue 3 basada en el sistema de diseño de Ant | Paneles empresariales |
+| [Naive UI](https://www.naiveui.com) | ~18k | Escrita en TypeScript, personalización de temas extrema | Proyectos con requisitos de diseño únicos |
+| [Quasar](https://quasar.dev) | ~27k | Un código para SPA, SSR, PWA, móvil y escritorio | Proyectos multiplataforma |
+| [Vant](https://vant-ui.github.io/vant) | ~24k | Biblioteca móvil ligera del equipo de Youzan | Páginas H5 móviles |
+| [PrimeVue](https://primevue.org) | ~14k | 90+ componentes, soporta múltiples temas | Necesidad de muchos componentes y temas |
+| [Arco Design Vue](https://arco.design/vue) | ~3k | De ByteDance, alta calidad, modo oscuro integrado | Productos de administración |
+| [TDesign Vue Next](https://tdesign.tencent.com/vue-next) | ~2k | De Tencent, lenguaje de diseño unificado | Ecosistema Tencent o proyectos empresariales |
 
-### React 生态
+### Ecosistema React
 
-| 组件库 | Stars | 简介 | 适用场景 |
+| Biblioteca | Stars | Descripción | Escenarios |
 | :--- | :--- | :--- | :--- |
-| [Material UI (MUI)](https://mui.com) | ~95k | Google Material Design 规范的老牌实现，组件最全面，生态最成熟 | 快速构建企业级应用 |
-| [Ant Design](https://ant.design) | ~94k | 蚂蚁集团出品，内置大量高质量业务组件，中文开发者社区主导地位 | 企业级中后台 |
-| [shadcn/ui](https://ui.shadcn.com) | ~83k | 代码复制到项目中而非 npm 安装，基于 Radix UI + Tailwind CSS，完全可控 | 需要高度定制的项目 |
-| [Chakra UI](https://chakra-ui.com) | ~39k | 以开发体验为核心，API 简洁，内置无障碍访问支持 | 快速原型开发 |
-| [Mantine](https://mantine.dev) | ~28k | 100+ 组件和 50+ hooks，涵盖日期选择器、富文本编辑器等高级组件 | 需要开箱即用的全功能方案 |
-| [Headless UI](https://headlessui.com) | ~27k | Tailwind Labs 官方出品的无样式组件库，同时支持 React 和 Vue | 搭配 Tailwind CSS 使用 |
-| [HeroUI](https://heroui.com) | ~24k | 基于 Tailwind CSS + React Aria，默认样式精美，动画流畅 | 追求视觉品质的项目 |
-| [Radix UI](https://www.radix-ui.com) | ~17k | 无样式底层组件原语库，专注无障碍和组件行为，是 shadcn/ui 的底层基础 | 构建自定义设计系统 |
+| [Material UI (MUI)](https://mui.com) | ~95k | Implementación veterana de Material Design, componentes más completos | Construcción rápida de aplicaciones empresariales |
+| [Ant Design](https://ant.design) | ~94k | De Ant Group, muchos componentes de negocio de alta calidad | Paneles empresariales |
+| [shadcn/ui](https://ui.shadcn.com) | ~83k | Copia código al proyecto en vez de npm install, basada en Radix UI + Tailwind CSS | Proyectos que necesitan alta personalización |
+| [Chakra UI](https://chakra-ui.com) | ~39k | Centrada en la experiencia del desarrollador, API simple, accesibilidad integrada | Prototipado rápido |
+| [Mantine](https://mantine.dev) | ~28k | 100+ componentes y 50+ hooks, incluyendo date picker y rich text editor | Solución full-stack lista para usar |
+| [Headless UI](https://headlessui.com) | ~27k | Biblioteca sin estilos de Tailwind Labs, soporta React y Vue | Uso con Tailwind CSS |
+| [HeroUI](https://heroui.com) | ~24k | Basada en Tailwind CSS + React Aria, estilos por defecto elegantes | Proyectos que buscan calidad visual |
+| [Radix UI](https://www.radix-ui.com) | ~17k | Primitivos de componentes sin estilos, base de shadcn/ui | Construir sistemas de diseño personalizados |
 
-#### shadcn/ui 扩展生态
+#### Ecosistema extendido de shadcn/ui
 
-除了上述通用组件库，shadcn/ui 生态中还涌现了大量基于其理念的扩展库，为特定场景提供差异化选择。这些扩展库同样采用"复制代码到项目"的模式，让开发者拥有完全的源码控制权。
+Además de las bibliotecas generales anteriores, el ecosistema de shadcn/ui ha visto surgir muchas bibliotecas extendidas basadas en su filosofía, ofreciendo opciones diferenciadas para escenarios específicos. Estas bibliotecas también adoptan el modelo de "copiar código al proyecto", dando a los desarrolladores control total sobre el código fuente.
 
-| 组件库 | 简介 | 适用场景 |
+| Biblioteca | Descripción | Escenarios |
 | :--- | :--- | :--- |
-| [Aceternity UI](https://ui.aceternity.com) | 200+ 生产级组件，主打发光卡片、文字渐变、3D 地球等特色视觉组件 | 高质感落地页、SaaS 产品 |
-| [Tailark UI](https://tailark.com) | 营销网站组件块集合，产品展示、客户证言、CTA 按钮等营销高频模块 | 营销落地页、产品官网 |
-| [UI Tripled](https://ui.tripled.work) | 基于 Framer Motion 的动态交互组件，弹窗、导航、卡片动画 | 创意工具、个人作品集 |
-| [Neobrutalism UI](https://neobrutalism.dev) | 新粗野主义风格，粗线条、高对比度、鲜明色彩 | 个性化品牌官网、创意项目 |
-| [REUI](https://reui.io) | 967+ 真实业务场景的组件组合模式 | 企业级后台、复杂表单 |
-| [Cult UI](https://cult-ui.com) | 更细的交互/视觉打磨，数据表格、筛选面板等复合组件 | 高质感商业项目 |
-| [Kibo UI](https://kibo-ui.com) | 高级业务组件，颜色选择器、富文本编辑器、文件上传等 | Panel de administracion、工具类产品 |
-| [Kokonut UI](https://kokonutui.com) | 100+ 组件 + 7+ 完整模板，清新简约风格 | SaaS 官网、博客、电商 |
-| [Commerce UI](https://ui.stackzero.co) | 电商场景专用，商品卡片、购物车、结算表单 | 电商平台 |
-| [shadcnblocks](https://shadcnblocks.com) | 1373 个 UI 块 + 13 套完整模板，资源最全面 | 所有场景 |
-| [Shoogle](https://shoogle.dev) | shadcn/ui 生态聚合检索平台 | 快速查找资源 |
-| [Discover All Shadcn](https://allshadcn.com) | 聚合型资源导航 | 快速查找资源 |
+| [Aceternity UI](https://ui.aceternity.com) | 200+ componentes de nivel producción, destaca en tarjetas brillantes, degradados de texto, globos 3D | Landing pages de alta calidad, productos SaaS |
+| [Tailark UI](https://tailark.com) | Colección de bloques para sitios de marketing, showcase de productos, testimonios y CTA | Landing pages de marketing, sitios de producto |
+| [UI Tripled](https://ui.tripled.work) | Componentes dinámicos basados en Framer Motion, diálogos, navegación, animaciones de tarjetas | Herramientas creativas, portfolios |
+| [Neobrutalism UI](https://neobrutalism.dev) | Estilo neobrutalista, líneas gruesas, alto contraste, colores vivos | Sitios de marca personalizados, proyectos creativos |
+| [REUI](https://reui.io) | 967+ patrones de componentes para escenarios de negocio reales | Paneles empresariales, formularios complejos |
+| [Cult UI](https://cult-ui.com) | Pulido fino de interacción/visual, tablas de datos, paneles de filtros | Proyectos comerciales de alta calidad |
+| [Kibo UI](https://kibo-ui.com) | Componentes de negocio avanzados, selector de colores, rich text editor, subida de archivos | Paneles de administración, herramientas |
+| [Kokonut UI](https://kokonutui.com) | 100+ componentes + 7+ plantillas completas, estilo limpio y minimalista | Sitios SaaS, blogs, e-commerce |
+| [Commerce UI](https://ui.stackzero.co) | Especializada en e-commerce, tarjetas de producto, carrito, formulario de checkout | Plataformas e-commerce |
+| [shadcnblocks](https://shadcnblocks.com) | 1373 bloques de UI + 13 plantillas completas, recursos más comprehensivos | Todos los escenarios |
+| [Shoogle](https://shoogle.dev) | Plataforma de búsqueda y agregación del ecosistema shadcn/ui | Búsqueda rápida de recursos |
+| [Discover All Shadcn](https://allshadcn.com) | Navegador de recursos agregado | Búsqueda rápida de recursos |
 
-> **为什么选择 shadcn/ui 扩展？** 这些扩展继承了 shadcn/ui"代码所有权"的理念，同时为特定场景做了深度定制。Vibe Coding 时代，它们让你能快速找到符合设计需求的组件，跳出主流 UI 库的同质化，做出更具差异化的产品。
+> **¿Por qué elegir extensiones de shadcn/ui?** Estas extensiones heredan la filosofía de "propiedad del código" de shadcn/ui, con personalización profunda para escenarios específicos. En la era del Vibe Coding, te permiten encontrar rápidamente componentes que coincidan con tus necesidades de diseño, salir de la homogeneidad de las bibliotecas UI mainstream y crear productos más diferenciados.

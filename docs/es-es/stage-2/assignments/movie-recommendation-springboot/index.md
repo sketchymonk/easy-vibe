@@ -1,66 +1,66 @@
-# Spring Boot 电影推荐系统开发实战
+# Desarrollo Practico: Sistema de Recomendacion de Peliculas con Spring Boot
 
 ## Descripcion general
 
-Este proyecto practico te requiere trabajar con un PRD real，使用 Spring Boot 完成一个带推荐能力的电影网站。这个项目的核心挑战在于：它不是简单的增删改查，而是需要你思考"用户行为如何影响推荐结果"以及"推荐如何可解释"。
+Este proyecto practico te requiere trabajar con un PRD real para completar un sitio web de peliculas con capacidades de recomendacion usando Spring Boot. El desafio central de este proyecto radica en que no es un simple CRUD, sino que necesitas reflexionar sobre como el comportamiento del usuario afecta los resultados de recomendacion y como hacer que las recomendaciones sean explicables.
 
-Esta es la seccion de practica integral de la Etapa 2。你将第一次接触"内容 + 行为 + 推荐"型产品的开发模式，这种模式在电商、内容平台、个性化 Feed 等场景中非常常见。
+Esta es la seccion de practica integral de la Etapa 2. Por primera vez te enfrentarás al desarrollo de un producto de tipo "contenido + comportamiento + recomendacion", un patron muy comun en comercio electronico, plataformas de contenido y feeds personalizados.
 
 ## Conocimientos previos
 
 Antes de comenzar este proyecto, ya deberias dominar lo siguiente:
 
-- Diseno de paginas frontend y uso de bibliotecas de componentes（[UI 设计](../../frontend/ui-design/)、[现代组件库](../../frontend/modern-component-library/)）
-- Diseno y desarrollo de interfaces backend（[接口代码编写](../../backend/ai-interface-code/)）
-- Fundamentos de bases de datos y Supabase（[从数据库到 Supabase](../../backend/database-supabase/)）
-- Flujo de trabajo de Git y despliegue（[Git 和 GitHub](../../backend/git-workflow/)、[Despliegue Web 应用](../../backend/zeabur-deployment/)）
+- Diseno de paginas frontend y uso de bibliotecas de componentes ([Diseno UI](../../frontend/ui-design/), [Biblioteca de componentes moderna](../../frontend/modern-component-library/))
+- Diseno y desarrollo de interfaces backend ([Escritura de codigo de interfaces](../../backend/ai-interface-code/))
+- Fundamentos de bases de datos y Supabase ([De la base de datos a Supabase](../../backend/database-supabase/))
+- Flujo de trabajo de Git y despliegue ([Git y GitHub](../../backend/git-workflow/), [Despliegue de aplicaciones web](../../backend/zeabur-deployment/))
 
 ## Objetivos de aprendizaje
 
 Despues de completar esta practica, podras:
 
-1. Leer el PRD 并从中提取推荐系统的开发任务清单
+1. Leer un PRD y extraer la lista de tareas de desarrollo para un sistema de recomendacion
 2. Usar Spring Boot para construir un proyecto backend e implementar API RESTful
-3. Disenar el flujo de datos completo de "comportamiento del usuario -> recomendacion"
+3. Disenar el flujo de datos completo de "comportamiento del usuario a recomendacion"
 4. Implementar logica de recomendacion explicable
 5. Completar la integracion de extremo a extremo, entregando un prototipo de producto demostrable
 
 ## Introduccion del proyecto
 
-El producto que vas a construir es一个带推荐能力的电影网站：
+El producto que vas a construir es un sitio web de peliculas con capacidades de recomendacion:
 
-| 功能 | 描述 |
+| Funcionalidad | Descripcion |
 |------|------|
 | **Navegacion y busqueda** | Los usuarios pueden navegar y buscar peliculas |
-| **Calificacion y favoritos** | Los usuarios pueden calificar peliculas y agregar a favoritos |
-| **Recomendacion personalizada** | El sistema proporciona resultados de recomendacion basados en el comportamiento del usuario |
-| **Panel de administracion** | Los administradores mantienen datos de peliculas y ven la efectividad de las recomendaciones |
+| **Calificacion y favoritos** | Los usuarios pueden calificar peliculas y agregarlas a favoritos |
+| **Recomendacion personalizada** | El sistema genera resultados de recomendacion basados en el comportamiento del usuario |
+| **Panel de administracion** | Los administradores mantienen los datos de peliculas y revisan la efectividad de las recomendaciones |
 
-::: tip PRD 入口
-El documento de requisitos de este proyecto esta en GitHub： [Ver PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/es-es/stage-2/assignments/movie-recommendation-springboot/PRD.md)
+::: tip PRD
+El documento de requisitos de este proyecto esta en GitHub: [Ver PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/es-es/stage-2/assignments/movie-recommendation-springboot/PRD.md)
 :::
 
 <div style="margin: 32px 0;">
   <ClientOnly>
     <StepBar :active="0" :items="[
-      { title: 'Analisis de requisitos', description: 'Leer el PRD，明确推荐策略、行为数据和后台范围' },
-      { title: 'Construccion del esqueleto', description: '用 AI 生成列表页、详情页、推荐页和后台页' },
-      { title: 'Desarrollo iterativo', description: '补充推荐逻辑、行为记录和后台管理' },
-      { title: 'Integracion y despliegue', description: 'Verificar de extremo a extremo，Desplegar y preparar la demostracion' }
+      { title: 'Analisis de requisitos', description: 'Leer el PRD, definir la estrategia de recomendacion, datos de comportamiento y alcance del panel' },
+      { title: 'Construccion del esqueleto', description: 'Usar IA para generar las paginas de lista, detalle, recomendacion y panel de administracion' },
+      { title: 'Desarrollo iterativo', description: 'Agregar logica de recomendacion, registro de comportamiento y panel de administracion' },
+      { title: 'Integracion y despliegue', description: 'Verificar de extremo a extremo, desplegar y preparar la demostracion' }
     ]" />
   </ClientOnly>
 </div>
 
-## Primera parte：Analisis de requisitos
+## Primera parte: Analisis de requisitos
 
 ### 1.1 Leer el PRD
 
-打开 PRD 文档，重点回答以下问题：
+Abre el documento PRD y responde las siguientes preguntas clave:
 
-- 推荐策略是什么？第一版是否使用可解释版本（如基于评分相似度）？
-- 用户行为数据要存哪些？（评分、收藏、浏览记录等）
-- 管理员需要看哪些推荐效果指标？
-- 页面清单是否完整？
+- Cual es la estrategia de recomendacion? La primera version debe usar una version explicable (como similitud de calificaciones)?
+- Que datos de comportamiento del usuario deben almacenarse? (calificaciones, favoritos, historial de navegacion, etc.)
+- Que metricas de efectividad de recomendacion necesita ver el administrador?
+- La lista de paginas esta completa?
 
 ::: warning
 Si no tienes respuestas claras a las preguntas anteriores, no comiences a escribir codigo. La comprension inadecuada de los requisitos es la causa mas comun de retrabajo.
@@ -70,67 +70,67 @@ Si no tienes respuestas claras a las preguntas anteriores, no comiences a escrib
 
 ```mermaid
 flowchart TD
-  prd["PRD"] --> web["前端页面"]
-  web --> auth["用户鉴权"]
-  web --> movie["电影列表 / 详情"]
-  web --> behavior["评分 / 收藏"]
-  behavior --> reco["推荐逻辑"]
-  reco --> db["数据库"]
-  admin["后台管理"] --> db
+  prd["PRD"] --> web["Paginas frontend"]
+  web --> auth["Autenticacion de usuario"]
+  web --> movie["Lista / Detalle de peliculas"]
+  web --> behavior["Calificacion / Favoritos"]
+  behavior --> reco["Logica de recomendacion"]
+  reco --> db["Base de datos"]
+  admin["Panel de administracion"] --> db
 ```
 
-## Segunda parte：搭建项目骨架
+## Segunda parte: Construccion del esqueleto del proyecto
 
 ### 2.1 Generar paginas frontend
 
-Referencia de prompts：
+Referencia de prompts:
 
 ```text
-请基于当前 PRD，帮我生成一个 Spring Boot 电影推荐系统的前端骨架。
+Basandote en el PRD actual, ayudame a generar el esqueleto frontend de un sistema de recomendacion de peliculas con Spring Boot.
 
-要求：
-1. 页面包括：首页、电影列表、电影详情、推荐页、个人中心、后台管理
-2. 先只生成页面结构和假数据，不接真实接口
-3. 风格要像真实内容产品，而不是课堂 demo
+Requisitos:
+1. Paginas incluidas: inicio, lista de peliculas, detalle de pelicula, pagina de recomendacion, centro personal, panel de administracion
+2. Primero generar solo la estructura de paginas y datos ficticios, sin conectar interfaces reales
+3. El estilo debe parecerse a un producto de contenido real, no a un demo de clase
 ```
 
 ### 2.2 Verificar la estructura de paginas
 
 Verificar item por item:
 
-- [ ] 电影列表页支持搜索和筛选
-- [ ] 电影详情页包含评分和收藏按钮
-- [ ] 推荐页能展示推荐结果和推荐理由
-- [ ] Panel de administracion能展示电影数据和推荐效果
+- [ ] La pagina de lista de peliculas soporta busqueda y filtrado
+- [ ] La pagina de detalle de pelicula incluye botones de calificacion y favoritos
+- [ ] La pagina de recomendacion puede mostrar resultados y razones de recomendacion
+- [ ] El panel de administracion puede mostrar datos de peliculas y efectividad de recomendacion
 
-## Tercera parte：Desarrollo iterativo
+## Tercera parte: Desarrollo iterativo
 
 ### 3.1 Avanzar por modulos
 
-1. **Spring Boot 项目搭建**：项目结构、数据库配置、基础 CRUD
-2. **电影数据管理**：电影列表、详情、搜索接口
-3. **用户行为**：评分、收藏接口，行为数据写入
-4. **推荐逻辑**：基于用户行为的推荐算法实现
-5. **推荐展示**：推荐结果展示，包含推荐理由
-6. **Panel de administracion**：电影数据维护、推荐效果查看
+1. **Configuracion del proyecto Spring Boot**: Estructura del proyecto, configuracion de base de datos, CRUD basico
+2. **Gestion de datos de peliculas**: Lista de peliculas, detalle, interfaz de busqueda
+3. **Comportamiento del usuario**: Interfaces de calificacion y favoritos, escritura de datos de comportamiento
+4. **Logica de recomendacion**: Implementacion del algoritmo de recomendacion basado en comportamiento del usuario
+5. **Visualizacion de recomendaciones**: Mostrar resultados de recomendacion incluyendo las razones
+6. **Panel de administracion**: Mantenimiento de datos de peliculas, revision de efectividad de recomendacion
 
 ### 3.2 Autoverificacion de modulos
 
 | Item de verificacion | Metodo de verificacion |
 |--------|----------|
-| 基础功能 | 列表、详情、评分、收藏是否闭环 |
-| 推荐联动 | 用户行为是否影响推荐结果 |
-| 推荐可解释性 | 用户能理解为什么被推荐这些电影 |
-| 后台数据 | 管理员能查看电影数据和推荐效果 |
+| Funcionalidad basica | Lista, detalle, calificacion, favoritos forman un ciclo completo |
+| Vinculacion de recomendacion | El comportamiento del usuario afecta los resultados de recomendacion |
+| Explicabilidad de recomendacion | El usuario puede entender por que se le recomiendan estas peliculas |
+| Datos del panel | El administrador puede ver datos de peliculas y efectividad de recomendacion |
 
-## Cuarta parte：联调与上线
+## Cuarta parte: Integracion y despliegue
 
 ### 4.1 Pruebas de extremo a extremo
 
 Verificar al menos los siguientes escenarios:
 
-- 浏览电影 → 评分 → 收藏 → 查看推荐页，确认推荐结果发生变化
-- 管理员登录 → 添加电影 → 查看推荐效果统计
+- Navegar peliculas -> Calificar -> Agregar a favoritos -> Ver pagina de recomendacion, confirmar que los resultados de recomendacion cambian
+- Iniciar sesion como administrador -> Agregar peliculas -> Ver estadisticas de efectividad de recomendacion
 
 ## Entregables
 
@@ -138,25 +138,25 @@ Despues de completar este proyecto, necesitas enviar lo siguiente:
 
 - [ ] Enlace de demostracion en linea accesible
 - [ ] Enlace al repositorio de codigo fuente (incluyendo README)
-- [ ] PRD 文档
-- [ ] Capturas de pantalla de paginas clave（电影列表、电影详情、推荐页、Panel de administracion）
-- [ ] 60 segundos de video de demostracion
+- [ ] Documento PRD
+- [ ] Capturas de pantalla de paginas clave (lista de peliculas, detalle de pelicula, pagina de recomendacion, panel de administracion)
+- [ ] Video de demostracion de 60 segundos
 
 ## Criterios de evaluacion
 
-| 维度 | Requisitos basicos | Requisitos avanzados |
+| Dimension | Requisitos basicos | Requisitos avanzados |
 |------|---------|---------|
-| Alineacion con PRD | 页面、功能、数据结构基本符合 PRD | 能清晰说明设计决策 |
-| Ciclo completo del producto | 浏览 → 评分 → 收藏 → 推荐可跑通 | 评分行为明显影响推荐结果 |
-| 推荐质量 | 推荐结果合理、推荐理由可解释 | 支持多种推荐策略 |
-| Capacidades del backend | 电影数据和推荐效果可查看 | 有推荐准确率等统计指标 |
-| Completitud de ingenieria | 前端、Spring Boot 后端、数据库链路已接通 | 推荐接口有缓存或性能优化 |
+| Alineacion con PRD | Paginas, funcionalidades y estructura de datos basicamente cumplen con el PRD | Puede explicar claramente las decisiones de diseno |
+| Ciclo completo del producto | Navegar -> Calificar -> Agregar a favoritos -> Recomendar funciona completamente | El comportamiento de calificacion afecta significativamente los resultados de recomendacion |
+| Calidad de recomendacion | Resultados de recomendacion razonables, razones de recomendacion explicables | Soporta multiples estrategias de recomendacion |
+| Capacidades del panel | Datos de peliculas y efectividad de recomendacion visibles | Tiene metricas estadisticas como precision de recomendacion |
+| Completitud de ingenieria | Frontend, backend Spring Boot y base de datos conectados | Las interfaces de recomendacion tienen cache u optimizacion de rendimiento |
 
 ## Referencias
 
-- [UI 设计](../../frontend/ui-design/)
-- [使用现代组件库更新你的界面](../../frontend/modern-component-library/)
-- [从数据库到 Supabase](../../backend/database-supabase/)
-- [大模型辅助编写接口代码与接口文档](../../backend/ai-interface-code/)
-- [Git 和 GitHub 工作流](../../backend/git-workflow/)
-- [如何Despliegue Web 应用](../../backend/zeabur-deployment/)
+- [Diseno UI](../../frontend/ui-design/)
+- [Biblioteca de componentes moderna](../../frontend/modern-component-library/)
+- [De la base de datos a Supabase](../../backend/database-supabase/)
+- [Escritura de codigo de interfaces](../../backend/ai-interface-code/)
+- [Flujo de trabajo de Git y GitHub](../../backend/git-workflow/)
+- [Despliegue de aplicaciones web](../../backend/zeabur-deployment/)

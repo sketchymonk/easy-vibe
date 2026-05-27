@@ -1,240 +1,240 @@
-# 如何集成 Stripe 等收费系统
+# Stripe 등 결제 시스템 통합 방법
 
-当你的产品已经有了页面、登录、数据库和基础后端之后，下一个现实问题就是：**怎么收费**。
+제품에 이미 페이지, 로그인, 데이터베이스, 기본 백엔드가 있다면, 다음 현실적인 문제는 **어떻게 수익을 낼 것인가**입니다.
 
-很多人第一次接支付，会把注意力全放在"怎么跳转到付款页"上。但真正决定系统是否稳定的，不是按钮，而是整条收费链路：谁决定价格、谁确认支付成功、谁更新数据库、谁回收权限。
+많은 사람이 처음 결제를 연동할 때 "어떻게 결제 페이지로 이동하나요"에만 집중합니다. 하지만 시스템이 안정적인지를 결정하는 것은 버튼이 아니라 결제 파이프라인 전체입니다. 누가 가격을 결정하고, 누가 결제 성공을 확인하며, 누가 데이터베이스를 업데이트하고, 누가 권한을 관리하는가요.
 
-这篇文章我帮你拆成两部分：
+이 글은 두 부분으로 나뉩니다:
 
-- **前半部分**只讲最实用的基础接入，目标是让你尽快把 Stripe 接进项目。
-- **后半部分**统一放到附录，包含 Webhook 细节、订阅事件、不同国家和地区的支付方案差异。
+- **전반부**에서는 가장 실용적인 기본 연동만 다루며, 목표는 Stripe를 최대한 빨리 프로젝트에 연동하는 것입니다.
+- **후반부**는 부록에 통합하여 Webhook 세부 사항, 구독 이벤트, 국가 및 지역별 결제 방식 차이를 다룹니다.
 
-> 💡 建议先学完这些章节再继续
+> 💡 계속하기 전에 다음 장을 먼저 학습하는 것을 권장합니다
 >
-> - [从数据库到 Supabase](../database-supabase/)
-> - [大模型辅助编写接口代码与接口文档](../ai-interface-code/)
-> - [如何部署 Web 应用](../zeabur-deployment/)
+> - [데이터베이스부터 Supabase까지](../database-supabase/)
+> - [대형 언어 모델로 API 코드 및 문서 작성하기](../ai-interface-code/)
+> - [웹 애플리케이션 배포 방법](../zeabur-deployment/)
 
-# 你将学到
+# 학습 내용
 
-1. 最小可行的支付系统到底长什么样。
-2. 如何用最快的方式把 Stripe 接进你的项目。
-3. 如何写提示词，让 AI 直接帮你加支付系统。
-4. 如果不是做海外 Stripe 项目，不同地区应该优先考虑什么支付方案。
+1. 최소 기능 결제 시스템이 실제로 어떤 모습인가요.
+2. Stripe를 프로젝트에 가장 빠르게 연동하는 방법.
+3. 프롬프트를 작성하여 AI가 직접 결제 시스템을 추가하도록 하는 방법.
+4. 해외 Stripe 프로젝트가 아닌 경우, 지역별로 우선적으로 고려해야 할 결제 방식.
 
 ---
 
-# 第一部分：基础上手
+# 제1부: 기본 시작
 
-## 1. 先记住 3 个原则
+## 1. 먼저 3가지 원칙을 기억하세요
 
-如果你只记住三件事，就记住下面这三条：
+딱 세 가지만 기억한다면 다음을 기억하세요:
 
-1. **价格必须由后端决定**，不能相信前端传来的金额。
-2. **真正让权限生效的是 Webhook**，不是 `success` 页面。
-3. **你自己的数据库必须保存支付状态**，不能只依赖 Stripe 后台。
+1. **가격은 반드시 백엔드에서 결정**해야 하며, 프론트엔드에서 전달하는 금액을 신뢰해서는 안 됩니다.
+2. **권한을 실제로 활성화하는 것은 Webhook**이며, `success` 페이지가 아닙니다.
+3. **자체 데이터베이스에 결제 상태를 반드시 저장**해야 하며, Stripe 대시보드에만 의존해서는 안 됩니다.
 
-这三条是支付系统最核心的边界。只要边界没错，后面换 Stripe、PayPal、支付宝、微信支付，本质上都只是"接口换了，架构不变"。
+이 세 가지는 결제 시스템의 가장 핵심적인 경계입니다. 경계만 정확하다면, 나중에 Stripe, PayPal, Alipay, WeChat Pay로 바꾸더라도 본질적으로 "인터페이스만 바뀌고 아키텍처는 동일"합니다.
 
-## 2. 如果不在后端处理，而是前端直接连 Stripe，会怎么样？
+## 2. 백엔드에서 처리하지 않고 프론트엔드에서 직접 Stripe에 연결하면 어떻게 되나요?
 
-这是很多人第一次做支付时最自然的想法：
+결제를 처음 구현할 때 가장 자연스러운 생각입니다:
 
-- 页面上已经有"购买"按钮了
-- 那我能不能让前端自己去连 Stripe
-- 这样是不是就不用做后端了
+- 페이지에 이미 "구매" 버튼이 있습니다
+- 프론트엔드에서 직접 Stripe에 연결할 수 있을까요
+- 그러면 백엔드를 만들 필요가 없지 않을까요
 
-如果你只是做一个假的演示页面，这样想当然没问题。  
-但如果你是真的要收钱，**这条路通常会把事情做坏**。
+단순한 데모 페이지를 만드는 거라면 물론 괜찮습니다.
+하지만 실제로 돈을 받아야 한다면, **이 방식은 보통 문제를 일으킵니다**.
 
-最常见的问题有这几个：
+가장 흔한 문제는 다음과 같습니다:
 
-1. **价格容易被改**
-   浏览器里的请求，是用户自己电脑上发出去的。别人是可以改请求内容的。
-2. **敏感信息容易暴露**
-   真正重要的密钥、价格逻辑、会员开通逻辑，本来就不该放在前端。
-3. **你没法可靠确认"这笔钱到底算不算成功"**
-   用户跳到成功页，不代表你的数据库已经同步对了。
-4. **数据库状态会乱**
-   用户可能说"我明明已经付钱了"，但你自己的系统里根本没记上。
+1. **가격이 쉽게 변경됩니다**
+   브라우저의 요청은 사용자 컴퓨터에서 전송되므로, 요청 내용을 수정할 수 있습니다.
+2. **민감한 정보가 노출되기 쉽습니다**
+   중요한 비밀키, 가격 로직, 멤버십 활성화 로직은 원래 프론트엔드에 두면 안 됩니다.
+3. **"이 결제가 정말 성공했는지"를 안정적으로 확인할 수 없습니다**
+   사용자가 성공 페이지로 이동했다고 해서 데이터베이스가 올바르게 동기화된 것은 아닙니다.
+4. **데이터베이스 상태가 꼬입니다**
+   사용자는 "분명히 결제했는데"라고 할 수 있지만, 시스템에는 기록이 없을 수 있습니다.
 
-所以更安全的分工应该是：
+따라서 더 안전한 역할 분담은 다음과 같습니다:
 
-- 前端负责：展示按钮、发起购买、跳转页面
-- 后端负责：决定价格、创建支付会话、接收 Webhook、更新数据库
+- 프론트엔드: 버튼 표시, 구매 시작, 페이지 이동
+- 백엔드: 가격 결정, 결제 세션 생성, Webhook 수신, 데이터베이스 업데이트
 
-::: info 这一段你可以直接记成一句话
-**前端可以负责跳转，后端必须负责定价和确认。**
+::: info 이 부분은 한 문장으로 요약할 수 있습니다
+**프론트엔드는 이동을 담당하고, 백엔드는 가격 책정과 확인을 담당합니다.**
 
-只要是真收钱，就不要把"最终价格决定权"和"支付成功后的开通逻辑"放在前端。
+실제로 돈을 받는다면, "최종 가격 결정권"과 "결제 성공 후 활성화 로직"을 프론트엔드에 두지 마세요.
 :::
 
-## 3. 什么时候适合先用 Stripe
+## 3. 언제 Stripe를 먼저 사용하는 것이 적절한가요
 
-如果你做的是下面这些场景，Stripe 往往是最顺手的起点：
+다음과 같은 시나리오라면 Stripe가 가장 편한 시작점입니다:
 
-- 面向海外用户的 SaaS
-- 订阅制会员产品
-- 数字产品、模板、AI 积分包
-- 想先快速验证商业化，而不是一开始就处理太多本地支付细节
+- 해외 사용자를 대상으로 하는 SaaS
+- 구독제 멤버십 제품
+- 디지털 제품, 템플릿, AI 크레딧 팩
+- 로컬 결제 세부 사항을 너무 많이 처리하기보다는 먼저 수익화를 빠르게 검증하고 싶은 경우
 
-如果你的主要用户在中国大陆，那通常不会把 Stripe 当第一选择，这个我放到附录里统一讲。
+주요 사용자가 중국 대륙에 있다면 보통 Stripe를 첫 번째 선택으로 하지 않습니다. 이 부분은 부록에서 통합하여 설명합니다.
 
-## 4. 最小可行支付链路
+## 4. 최소 기능 결제 파이프라인
 
-先看最小版本。只要这条链路能跑通，你的支付系统就有了骨架。
+먼저 최소 버전을 살펴보겠습니다. 이 파이프라인만 작동하면 결제 시스템의 뼈대가 갖춰집니다.
 
 ```mermaid
 flowchart LR
-  user["用户"]
-  frontend["前端页面"]
-  backend["你的后端"]
+  user["사용자"]
+  frontend["프론트엔드"]
+  backend["백엔드"]
   checkout["Stripe Checkout"]
   webhook["Stripe Webhook"]
-  db["Supabase / 业务数据库"]
+  db["Supabase / 비즈니스 데이터베이스"]
 
-  user -->|"点击购买"| frontend
-  frontend -->|"请求创建支付会话"| backend
-  backend -->|"按后端价格创建 Session"| checkout
-  frontend -->|"跳转到支付页"| checkout
-  checkout -->|"支付完成后发送事件"| webhook
-  webhook -->|"校验签名并更新状态"| backend
-  backend -->|"写入 orders / subscriptions"| db
-  db -->|"前端刷新后读取最新状态"| frontend
+  user -->|"구매 클릭"| frontend
+  frontend -->|"결제 세션 생성 요청"| backend
+  backend -->|"백엔드 가격으로 Session 생성"| checkout
+  frontend -->|"결제 페이지로 이동"| checkout
+  checkout -->|"결제 완료 후 이벤트 전송"| webhook
+  webhook -->|"서명 확인 후 상태 업데이트"| backend
+  backend -->|"orders / subscriptions에 기록"| db
+  db -->|"프론트엔드 새로고침 후 최신 상태 조회"| frontend
 ```
 
-把它翻译成人话就是：
+이것을 알기 쉽게 풀면:
 
-1. 用户点按钮。
-2. 前端找后端要支付链接。
-3. 后端用 Stripe 密钥创建支付会话。
-4. 用户去 Stripe 页面付款。
-5. Stripe 把"付款真的成功了"这件事通过 Webhook 通知你。
-6. 你的后端再去更新数据库。
+1. 사용자가 버튼을 클릭합니다.
+2. 프론트엔드가 백엔드에 결제 링크를 요청합니다.
+3. 백엔드가 Stripe 비밀키로 결제 세션을 생성합니다.
+4. 사용자가 Stripe 페이지에서 결제합니다.
+5. Stripe가 "결제가 정말로 성공했습니다"라는 것을 Webhook으로 알려줍니다.
+6. 백엔드가 데이터베이스를 업데이트합니다.
 
-## 5. 发起付款的标准时序图
+## 5. 결제 시작 표준 시퀀스 다이어그램
 
-如果你习惯看更规范的系统图，可以直接看这张时序图：
+더 체계적인 시스템 다이어그램에 익숙하다면 이 시퀀스 다이어그램을 참고하세요:
 
 ```mermaid
 sequenceDiagram
   autonumber
-  actor User as 用户
-  participant Frontend as 前端页面
-  participant Backend as 后端 API
+  actor User as 사용자
+  participant Frontend as 프론트엔드
+  participant Backend as 백엔드 API
   participant Stripe as Stripe Checkout
 
-  User->>Frontend: 点击"升级"或"购买"
+  User->>Frontend: "업그레이드" 또는 "구매" 클릭
   Frontend->>Backend: POST /api/billing/create-checkout-session
-  Note right of Frontend: 前端传 plan / userId / email\n不传最终收费金额
-  Backend->>Backend: 校验套餐并映射 priceId
-  Backend->>Stripe: 创建 Checkout Session
-  Stripe-->>Backend: 返回 session.url
-  Backend-->>Frontend: 返回支付链接
-  Frontend-->>User: 跳转到 Stripe 支付页
-  User->>Stripe: 完成付款
+  Note right of Frontend: 프론트엔드는 plan / userId / email 전달\n최종 결제 금액은 전달하지 않음
+  Backend->>Backend: 플랜 검증 및 priceId 매핑
+  Backend->>Stripe: Checkout Session 생성
+  Stripe-->>Backend: session.url 반환
+  Backend-->>Frontend: 결제 링크 반환
+  Frontend-->>User: Stripe 결제 페이지로 이동
+  User->>Stripe: 결제 완료
 ```
 
-## 6. 快速开始
+## 6. 빠른 시작
 
-如果你想最快把它接进项目，照着下面这 5 步做就够了。
+Stripe를 프로젝트에 가장 빠르게 연동하려면 다음 5단계를 따르면 됩니다.
 
-### 6.1 第一步：在 Stripe 后台创建商品和价格
+### 6.1 1단계: Stripe 대시보드에서 상품과 가격 생성
 
-这一步的目的，不是"先随便配点东西"，而是先把 **你到底在卖什么、打算怎么收费** 这件事在 Stripe 里定义清楚。
+이 단계의 목적은 "일단 아무거나 설정"하는 것이 아니라, **무엇을 팔고, 어떻게 요금을 받을지**를 Stripe에 명확하게 정의하는 것입니다.
 
-在 Stripe 的模型里：
+Stripe의 모델에서:
 
-- **Product** 表示"你卖的是什么"，比如 `Pro 会员`
-- **Price** 表示"这个东西卖多少钱、按什么周期卖"，比如 `月付 9.9 美元`、`年付 99 美元`
+- **Product**는 "무엇을 파는가"를 나타내며, 예를 들어 `Pro 멤버십`
+- **Price**는 "얼마에, 어떤 주기로 파는가"를 나타내며, 예를 들어 `월 9.9달러`, `연 99달러`
 
-为什么要先做这一步？  
-因为后面当你的后端创建 Checkout Session 时，并不是直接传一个金额给 Stripe，而是要传一个已经存在的 `price_id`。Stripe 再根据这个 `price_id` 去生成真正的支付页、金额、币种和订阅周期。
+왜 이 단계를 먼저 해야 할까요?
+나중에 백엔드에서 Checkout Session을 생성할 때, Stripe에 금액을 직접 전달하는 것이 아니라 이미 존재하는 `price_id`를 전달해야 하기 때문입니다. Stripe는 이 `price_id`를 바탕으로 실제 결제 페이지, 금액, 통화, 구독 주기를 생성합니다.
 
-如果你跳过这一步，后面的"创建支付链接"其实就没法做。
+이 단계를 건너뛰면 나중에 "결제 링크 생성"을 할 수 없습니다.
 
-::: info 为什么这里要先停一下
-很多新手看到 `Product`、`Price` 这两个词会有点烦，觉得像是在学 Stripe 的内部术语。
+::: info 왜 여기서 잠시 멈춰야 할까요
+초보자는 `Product`, `Price`라는 단어를 보면 Stripe 내부 용어를 배워야 하나고 귀찮게 느낄 수 있습니다.
 
-但实际上，这一步是在做一件很朴素的事：
-- 把"卖什么"定义清楚
-- 把"卖多少钱"定义清楚
-- 让后端之后能拿一个稳定的 `price_id` 去创建支付链接
+하지만 실제로 이 단계는 아주 단순한 일을 하는 것입니다:
+- "무엇을 파는가"를 명확히 정의하기
+- "얼마에 파는가"를 명확히 정의하기
+- 백엔드가 나중에 안정적인 `price_id`로 결제 링크를 생성할 수 있게 하기
 
-只要把这层想明白，后面的 Checkout Session 就不会觉得抽象。
+이 부분을 이해하면 Checkout Session도 추상적으로 느껴지지 않습니다.
 :::
 
-对于一个最小可行的订阅系统，你至少先建这两个层级：
+최소 기능 구독 시스템의 경우, 최소한 다음 두 가지 수준을 먼저 만들어야 합니다:
 
-- 一个 `Product`
-- 一个或多个 `Price`
+- 하나의 `Product`
+- 하나 이상의 `Price`
 
-你可以直接打开这些页面：
+다음 페이지를 직접 열 수 있습니다:
 
-- Stripe Dashboard 登录页：[Dashboard Login](https://dashboard.stripe.com/login)
-- Stripe 商品与价格管理文档：[Manage products and prices](https://docs.stripe.com/products-prices/manage-prices)
-- Stripe Checkout 快速开始文档：[Build a Stripe-hosted checkout page](https://docs.stripe.com/checkout/quickstart?lang=node)
-- Stripe Dashboard 商品页：[Product catalog](https://dashboard.stripe.com/test/products)
+- Stripe Dashboard 로그인: [Dashboard Login](https://dashboard.stripe.com/login)
+- Stripe 상품 및 가격 관리 문서: [Manage products and prices](https://docs.stripe.com/products-prices/manage-prices)
+- Stripe Checkout 빠른 시작 문서: [Build a Stripe-hosted checkout page](https://docs.stripe.com/checkout/quickstart?lang=node)
+- Stripe Dashboard 상품 페이지: [Product catalog](https://dashboard.stripe.com/test/products)
 
-推荐你先在 **Test mode（测试模式）** 下操作，不要一开始就在正式环境里建。
+먼저 **Test mode(테스트 모드)**에서 작업하는 것을 권장하며, 처음부터 실제 환경에서 만들지 마세요.
 
-一个最常见的最小配置是：
+가장 흔한 최소 구성은:
 
 - `Product`: `Pro Plan`
 - `Price 1`: `pro_monthly`
 - `Price 2`: `pro_yearly`
 
-你在后台操作时，可以按这个顺序理解：
+대시보드에서 작업할 때 다음 순서로 이해하면 됩니다:
 
-1. 先创建一个商品 `Pro Plan`
-2. 再在这个商品下面挂两个价格
-3. 月付和年付其实是同一个商品的两种收费方式
+1. 먼저 상품 `Pro Plan`을 생성합니다
+2. 그 상품 아래에 두 개의 가격을 추가합니다
+3. 월간 결제와 연간 결제는 사실 같은 상품의 두 가지 요금 방식입니다
 
-完成后，你至少要记下这些信息：
+완료 후 최소한 다음 정보를 기록해야 합니다:
 
-- 月付价格的 `price_id`
-- 年付价格的 `price_id`
-- 你自己的套餐名，例如 `pro_monthly`、`pro_yearly`
+- 월간 결제 가격의 `price_id`
+- 연간 결제 가격의 `price_id`
+- 자체 플랜 이름, 예: `pro_monthly`, `pro_yearly`
 
-如果你是第一次进 Stripe 后台，建议你把这一步理解成：
+Stripe 대시보드에 처음 들어가는 거라면, 이 단계를 다음과 같이 이해하는 것을 권장합니다:
 
-- `Product` 决定支付页里卖的是什么
-- `Price` 决定支付页里收多少钱
-- 后端之后真正会用到的，主要是 `price_id`
+- `Product`는 결제 페이지에서 무엇을 파는지 결정합니다
+- `Price`는 결제 페이지에서 얼마를 받는지 결정합니다
+- 백엔드가 실제로 사용할 것은 주로 `price_id`입니다
 
-::: info 真正要记下来的值
-这一页里最重要的不是商品名称，而是 `price_id`。
+::: info 실제로 기록해야 할 값
+이 페이지에서 가장 중요한 것은 상품 이름이 아니라 `price_id`입니다.
 
-后面无论是让 AI 帮你接后端，还是你自己排查问题，真正会频繁用到的，通常都是：
+나중에 AI가 백엔드를 연동하거나 직접 문제를 해결할 때, 실제로 자주 사용하는 것은 보통 다음과 같습니다:
 - `STRIPE_PRICE_PRO_MONTHLY`
 - `STRIPE_PRICE_PRO_YEARLY`
-- 它们背后对应的两个 `price_id`
+- 이에 해당하는 두 개의 `price_id`
 :::
 
-如果你想让 AI 先带你把后台配置做完，可以直接用这个 prompt：
+AI가 먼저 대시보드 설정을 안내하게 하려면 다음 프롬프트를 사용할 수 있습니다:
 
 ```text
-我现在是第一次用 Stripe，你先不要改代码，先带我在 Stripe 后台把最基本的付费配置做好。
+저는 Stripe를 처음 사용합니다. 코드를 먼저 수정하지 말고, Stripe 대시보드에서 가장 기본적인 유료 설정을 완료하도록 안내해 주세요.
 
-请基于这些官方文档给我一步一步的操作说明：
+다음 공식 문서를 기반으로 단계별 조작 설명을 제공해 주세요:
 - https://docs.stripe.com/products-prices/manage-prices
 - https://docs.stripe.com/checkout/quickstart?lang=node
 
-我的情况是：
-- 我想做一个最简单的会员付费
-- 只有两个套餐：月付和年付
-- 我现在还不懂 Product、Price 这些词
+제 상황은:
+- 가장 간단한 멤버십 결제를 만들고 싶습니다
+- 두 개의 플랜만 있습니다: 월간 결제와 연간 결제
+- Product, Price 같은 용어를 아직 이해하지 못합니다
 
-请你：
-1. 先用最简单的话告诉我 Product 和 Price 分别是什么。
-2. 再按"先打开哪个页面 -> 点哪里 -> 填什么"的顺序教我操作。
-3. 最后提醒我，做完以后我需要从后台复制哪些内容给后端使用。
-4. 如果我容易走错，请顺便提醒我应该一直在测试模式里操作。
+다음을 해주세요:
+1. 먼저 Product와 Price가 각각 무엇인지 가장 간단한 말로 설명해 주세요.
+2. "어떤 페이지를 먼저 열고 -> 어디를 클릭하고 -> 무엇을 입력하는지" 순서로 조작 방법을 알려주세요.
+3. 완료 후 백엔드에서 사용하기 위해 대시보드에서 복사해야 할 내용을 알려주세요.
+4. 실수하기 쉬운 부분이 있다면 항상 테스트 모드에서 작업해야 한다는 점도 함께 알려주세요.
 ```
 
-### 6.2 第二步：准备环境变量
+### 6.2 2단계: 환경 변수 준비
 
-你通常至少需要准备这些环境变量：
+일반적으로 최소한 다음 환경 변수를 준비해야 합니다:
 
 - `STRIPE_SECRET_KEY`
 - `STRIPE_WEBHOOK_SECRET`
@@ -244,293 +244,293 @@ sequenceDiagram
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
 
-你可以直接打开这些页面：
+다음 페이지를 직접 열 수 있습니다:
 
-- Stripe API Keys 文档：[API keys](https://docs.stripe.com/keys)
-- Stripe Dashboard API Keys 页面：[API Keys](https://dashboard.stripe.com/test/apikeys)
-- Stripe Webhooks 文档：[Receive Stripe events in your webhook endpoint](https://docs.stripe.com/webhooks)
-- Stripe Dashboard Webhooks 页面：[Workbench Webhooks](https://dashboard.stripe.com/test/workbench/webhooks)
+- Stripe API Keys 문서: [API keys](https://docs.stripe.com/keys)
+- Stripe Dashboard API Keys 페이지: [API Keys](https://dashboard.stripe.com/test/apikeys)
+- Stripe Webhooks 문서: [Receive Stripe events in your webhook endpoint](https://docs.stripe.com/webhooks)
+- Stripe Dashboard Webhooks 페이지: [Workbench Webhooks](https://dashboard.stripe.com/test/workbench/webhooks)
 
-> ⚠️ `STRIPE_SECRET_KEY` 和 `SUPABASE_SERVICE_ROLE_KEY` 都只能放在后端。
+> ⚠️ `STRIPE_SECRET_KEY`와 `SUPABASE_SERVICE_ROLE_KEY`는 반드시 백엔드에만 배치해야 합니다.
 
-::: info 环境变量这一步的目的
-这一步不是为了"先把 `.env` 填满"，而是为了把支付系统里最敏感的几样东西放到后端保管：
+::: info 환경 변수 단계의 목적
+이 단계는 "`.env`를 채우는 것"이 아니라, 결제 시스템에서 가장 민감한 몇 가지를 백엔드에 보관하기 위한 것입니다:
 
-- Stripe 的后端密钥
-- Webhook 验签密钥
-- 你自己的价格映射
+- Stripe 백엔드 비밀키
+- Webhook 서명 확인 비밀키
+- 자체 가격 매핑
 
-简单理解：  
-前端只负责发起购买，真正的秘密和定价逻辑都应该留在服务端。
+간단히 이해하면:
+프론트엔드는 구매 시작만 담당하고, 진짜 비밀과 가격 책정 로직은 서버 측에 남겨두어야 합니다.
 :::
 
-这一步也可以直接让 AI 帮你整理：
+이 단계도 AI가 정리하도록 할 수 있습니다:
 
 ```text
-请你先看看我这个项目现在是怎么放环境变量的，然后帮我把 Stripe 需要的环境变量整理出来。
+이 프로젝트가 현재 환경 변수를 어떻게 관리하는지 먼저 확인하고, Stripe에 필요한 환경 변수를 정리해 주세요.
 
-请参考这些文档：
+다음 문서를 참고해 주세요:
 - https://docs.stripe.com/keys
 - https://docs.stripe.com/webhooks
 
-我的情况是：
-- 我是零基础
-- 我分不清哪些变量应该放前端，哪些应该放后端
-- 我也不确定当前项目应该改 `.env`、`.env.local` 还是别的文件
+제 상황은:
+- 완전 초보입니다
+- 어떤 변수를 프론트엔드에 두고 어떤 것을 백엔드에 둬야 하는지 구분하지 못합니다
+- 현재 프로젝트에서 `.env`, `.env.local` 또는 다른 파일을 수정해야 하는지도 확실하지 않습니다
 
-请你：
-1. 先搜索当前项目里环境变量通常写在哪。
-2. 帮我列出 Stripe 接入最少需要哪些变量。
-3. 用最简单的话告诉我每个变量是干什么的。
-4. 告诉我每个变量应该去哪一个 Stripe 页面复制。
-5. 如果项目里有示例环境变量文件，请直接帮我补上变量名。
+다음을 해주세요:
+1. 먼저 현재 프로젝트에서 환경 변수가 보통 어디에 작성되는지 검색해 주세요.
+2. Stripe 연동에 최소한 필요한 변수를 나열해 주세요.
+3. 각 변수가 무엇을 하는지 가장 간단한 말로 설명해 주세요.
+4. 각 변수를 어느 Stripe 페이지에서 복사해야 하는지 알려주세요.
+5. 프로젝트에 예시 환경 변수 파일이 있다면 변수 이름을 직접 추가해 주세요.
 ```
 
-### 6.3 第三步：后端创建 Checkout Session
+### 6.3 3단계: 백엔드에서 Checkout Session 생성
 
-这一步你不用自己写接口，直接让 AI 参考官方文档帮你实现。
+이 단계에서는 직접 인터페이스를 작성할 필요 없이, AI가 공식 문서를 참고하여 구현하도록 하세요.
 
-先把这些文档给它：
+먼저 다음 문서를 AI에게 제공하세요:
 
-- Stripe Checkout 快速开始：[Build a Stripe-hosted checkout page](https://docs.stripe.com/checkout/quickstart?lang=node)
-- Checkout Sessions API：[Create a Checkout Session](https://docs.stripe.com/api/checkout/sessions/create)
-- 订阅说明：[Subscriptions](https://docs.stripe.com/payments/subscriptions)
+- Stripe Checkout 빠른 시작: [Build a Stripe-hosted checkout page](https://docs.stripe.com/checkout/quickstart?lang=node)
+- Checkout Sessions API: [Create a Checkout Session](https://docs.stripe.com/api/checkout/sessions/create)
+- 구독 설명: [Subscriptions](https://docs.stripe.com/payments/subscriptions)
 
-然后直接贴这个 prompt：
+그리고 다음 프롬프트를 직접 붙여넣으세요:
 
 ```text
-请你先看看我当前项目的后端代码是怎么组织的，然后帮我把 Stripe 支付接进去。
+현재 프로젝트의 백엔드 코드가 어떻게 구성되어 있는지 먼저 확인하고, Stripe 결제를 연동해 주세요.
 
-请参考这些官方文档：
+다음 공식 문서를 참고해 주세요:
 - https://docs.stripe.com/checkout/quickstart?lang=node
 - https://docs.stripe.com/api/checkout/sessions/create
 - https://docs.stripe.com/payments/subscriptions
 
-我的目标很简单：
-- 用户点购买按钮后，能跳到 Stripe 的付款页面
-- 套餐只有月付和年付两种
-- 不要让我自己决定代码该放在哪，你先看项目再帮我放到合适的位置
+제 목표는 간단합니다:
+- 사용자가 구매 버튼을 클릭하면 Stripe 결제 페이지로 이동해야 합니다
+- 플랜은 월간 결제와 연간 결제 두 가지만 있습니다
+- 코드를 어디에 배치해야 할지 직접 결정하게 하지 말고, 먼저 프로젝트를 확인한 후 적절한 위치에 배치해 주세요
 
-请你：
-1. 先搜索项目，弄清楚后端入口文件、路由文件、环境变量写法分别在哪里。
-2. 再参考官方文档，帮我把"创建 Stripe 支付链接"这一步接进去。
-3. 不要让我自己传金额，价格请用后端环境变量来决定。
-4. 做完后告诉我你改了哪些文件。
-5. 最后告诉我，我还需要去 Stripe 后台补哪些配置。
+다음을 해주세요:
+1. 먼저 프로젝트를 검색하여 백엔드 진입 파일, 라우팅 파일, 환경 변수 작성 방식이 각각 어디에 있는지 파악해 주세요.
+2. 공식 문서를 참고하여 "Stripe 결제 링크 생성" 단계를 연동해 주세요.
+3. 금액을 직접 전달하지 말고, 백엔드 환경 변수로 가격을 결정해 주세요.
+4. 완료 후 어떤 파일을 수정했는지 알려주세요.
+5. 마지막으로 Stripe 대시보드에서 추가로 설정해야 할 사항이 있는지 알려주세요.
 ```
 
-### 6.4 第四步：前端跳转到支付页
+### 6.4 4단계: 프론트엔드에서 결제 페이지로 이동
 
-这一步的目标非常简单：让定价页按钮调用你的后端接口，再跳转到 Stripe Checkout。
+이 단계의 목표는 매우 간단합니다: 가격 페이지의 버튼이 백엔드 인터페이스를 호출한 다음 Stripe Checkout으로 이동하도록 합니다.
 
-参考文档：
+참고 문서:
 
-- Stripe Checkout 集成说明：[Build an integration with Checkout](https://docs.stripe.com/payments/checkout/build-integration)
+- Stripe Checkout 통합 설명: [Build an integration with Checkout](https://docs.stripe.com/payments/checkout/build-integration)
 
-给 AI 的 prompt：
+AI에게 주는 프롬프트:
 
 ```text
-帮我把项目里的"购买"按钮接上 Stripe。
+프로젝트의 "구매" 버튼에 Stripe를 연결해 주세요.
 
-要求：
-- 不动现有页面，只改按钮点击后的逻辑
-- 点击后调用后端接口获取支付链接，然后跳转到 Stripe
-- 如果出错，给用户一个简单提示（比如"支付暂时不可用，请稍后再试"）
+요구사항:
+- 기존 페이지는 그대로 두고, 버튼 클릭 후 로직만 수정합니다
+- 클릭 후 백엔드 인터페이스를 호출하여 결제 링크를 가져온 다음 Stripe로 이동합니다
+- 오류 발생 시 사용자에게 간단한 알림 표시 (예: "결제를 일시적으로 사용할 수 없습니다. 잠시 후 다시 시도해 주세요")
 
-参考文档：https://docs.stripe.com/payments/checkout/build-integration
+참고 문서: https://docs.stripe.com/payments/checkout/build-integration
 ```
 
-### 6.5 第五步：Webhook 更新数据库状态
+### 6.5 5단계: Webhook으로 데이터베이스 상태 업데이트
 
-这是最关键的一步。
+이것이 가장 중요한 단계입니다.
 
-::: info 为什么这一步最关键
-很多人会以为"用户付完款并且跳转到了 success 页面"就算完成了。
+::: info 왜 이 단계가 가장 중요한가요
+많은 사람이 "사용자가 결제를 완료하고 success 페이지로 이동했다"고 생각하면 완료된 것으로 간주합니다.
 
-不是。
+아닙니다.
 
-对你的系统来说，真正重要的是：  
-**Stripe 有没有正式把事件打到你的 Webhook，而你的后端有没有把数据库状态更新成功。**
+시스템에 있어 정말 중요한 것은:
+**Stripe가 Webhook으로 이벤트를 정상적으로 전달했는지, 그리고 백엔드가 데이터베이스 상태 업데이트에 성공했는지**입니다.
 :::
 
-你也可以让 AI 按 Stripe 官方 Webhook 文档直接实现，不要自己手写。
+AI가 Stripe 공식 Webhook 문서를 참고하여 직접 구현하도록 할 수도 있습니다. 직접 작성하지 마세요.
 
-参考文档：
+참고 문서:
 
-- Stripe Webhooks：[Receive Stripe events in your webhook endpoint](https://docs.stripe.com/webhooks)
-- Stripe CLI：[Stripe CLI](https://docs.stripe.com/stripe-cli)
-- Stripe CLI 用法：[Use the Stripe CLI](https://docs.stripe.com/stripe-cli/use-cli)
+- Stripe Webhooks: [Receive Stripe events in your webhook endpoint](https://docs.stripe.com/webhooks)
+- Stripe CLI: [Stripe CLI](https://docs.stripe.com/stripe-cli)
+- Stripe CLI 사용법: [Use the Stripe CLI](https://docs.stripe.com/stripe-cli/use-cli)
 
-给 AI 的 prompt：
+AI에게 주는 프롬프트:
 
 ```text
-请继续帮我把 Stripe 的"付款成功后自动生效"这一步接好。
+Stripe의 "결제 성공 후 자동 활성화" 단계를 계속 연동해 주세요.
 
-请参考这些官方文档：
+다음 공식 문서를 참고해 주세요:
 - https://docs.stripe.com/webhooks
 - https://docs.stripe.com/stripe-cli
 - https://docs.stripe.com/stripe-cli/use-cli
 
-我的目标是：
-- 用户付完钱后，不只是跳转到成功页面
-- 而是真的把我数据库里的会员状态改成已开通
+제 목표는:
+- 사용자가 결제한 후 단순히 성공 페이지로 이동하는 것뿐만 아니라
+- 실제로 데이터베이스의 멤버십 상태를 활성화로 변경하는 것입니다
 
-请你：
-1. 先搜索当前项目里数据库相关代码和用户状态是怎么存的。
-2. 再帮我加 Stripe webhook。
-3. 支付成功后，把对应用户改成 active，或者更新成项目里现在已经在用的会员状态字段。
-4. 如果项目里已经有订阅表、订单表、用户表，请优先沿用现有结构。
-5. 做完后告诉我你改了哪些文件。
-6. 顺便告诉我本地怎么测试这一步有没有真的生效。
+다음을 해주세요:
+1. 먼저 현재 프로젝트에서 데이터베이스 관련 코드와 사용자 상태가 어떻게 저장되는지 검색해 주세요.
+2. Stripe webhook을 추가해 주세요.
+3. 결제 성공 후 해당 사용자를 active로 변경하거나, 프로젝트에서 현재 사용 중인 멤버십 상태 필드를 업데이트해 주세요.
+4. 프로젝트에 이미 구독 테이블, 주문 테이블, 사용자 테이블이 있다면 기존 구조를 우선 사용해 주세요.
+5. 완료 후 어떤 파일을 수정했는지 알려주세요.
+6. 로컬에서 이 단계가 실제로 작동하는지 테스트하는 방법도 알려주세요.
 ```
 
-## 7. 让 AI 帮你快速接入的提示词
+## 7. AI가 빠르게 연동하도록 돕는 프롬프트
 
-如果你用的是 Codex、Claude Code、Trae、Cursor 一类工具，可以直接把下面这个提示词贴给它，让它在你的项目里做支付接入。
+Codex, Claude Code, Trae, Cursor 같은 도구를 사용 중이라면, 다음 프롬프트를 직접 붙여넣어 프로젝트에 결제를 연동하도록 할 수 있습니다.
 
 ```text
-请你帮我把当前项目接上 Stripe 支付，我希望做一个最简单能跑起来的会员收费功能。
+현재 프로젝트에 Stripe 결제를 연동해 주세요. 가장 간단하게 실행할 수 있는 멤버십 결제 기능을 만들고 싶습니다.
 
-我的要求：
-1. 我是零基础，请你先自己看项目，再决定代码应该改哪里。
-2. 不要让我自己判断目录结构、路由结构、数据库结构。
-3. 我只想先做最简单版本：月付和年付两个套餐。
-4. 用户点击购买后，能跳到 Stripe 付款页面。
-5. 付款成功后，我数据库里的会员状态能变成已开通。
-6. 不要一开始加太多复杂功能，比如优惠券、升级降级、复杂发票。
+제 요구사항:
+1. 저는 완전 초보입니다. 먼저 프로젝트를 확인한 후 코드를 어디에 수정해야 할지 결정해 주세요.
+2. 디렉토리 구조, 라우팅 구조, 데이터베이스 구조를 직접 판단하게 하지 마세요.
+3. 가장 간단한 버전만 먼저 만들고 싶습니다: 월간 결제와 연간 결제 두 가지 플랜.
+4. 사용자가 구매 버튼을 클릭하면 Stripe 결제 페이지로 이동해야 합니다.
+5. 결제 성공 후 데이터베이스의 멤버십 상태가 활성화로 변경되어야 합니다.
+6. 쿠폰, 업그레이드/다운그레이드, 복잡한 청구서 등 너무 많은 복잡한 기능은 처음에 추가하지 마세요.
 
-输出要求：
-1. 先给我一个改动计划。
-2. 然后直接修改代码。
-3. 最后告诉我怎么一步一步本地测试。
-4. 如果有哪个步骤还需要我去 Stripe 后台操作，请直接把链接和要点告诉我。
+출력 요구사항:
+1. 먼저 수정 계획을 제시해 주세요.
+2. 그런 다음 코드를 직접 수정해 주세요.
+3. 마지막으로 로컬에서 단계별로 테스트하는 방법을 알려주세요.
+4. Stripe 대시보드에서 추가로 조작해야 하는 단계가 있다면 링크와 요점을 직접 알려주세요.
 ```
 
-如果你希望 AI 更贴近你的项目，还可以在开头补上：
+AI가 프로젝트에 더 맞게 작업하도록 하려면, 처음에 다음을 추가할 수 있습니다:
 
-- 你的前端框架
-- 你的后端目录结构
-- 你的数据库表名
-- 你现在的用户系统是 Supabase Auth 还是自建 Auth
+- 프론트엔드 프레임워크
+- 백엔드 디렉토리 구조
+- 데이터베이스 테이블 이름
+- 현재 사용자 시스템이 Supabase Auth인지 자체 구축 Auth인지
 
-## 7.1 本地联调也尽量交给 AI
+## 7.1 로컬 연동 테스트도 AI에게 맡기기
 
-如果你希望连本地联调都让 AI 帮你串起来，可以直接用下面这段：
+로컬 연동 테스트까지 AI가 전체를 연결해 주길 원한다면, 다음 프롬프트를 사용할 수 있습니다:
 
 ```text
-请继续帮我把 Stripe 支付真正跑通，我想一步一步照着做，不想自己猜。
+Stripe 결제를 실제로 실행할 수 있도록 도와주세요. 단계별로 따라 하고 싶고, 혼자 추측하고 싶지 않습니다.
 
-请参考官方文档：
+다음 공식 문서를 참고해 주세요:
 - https://docs.stripe.com/webhooks
 - https://docs.stripe.com/stripe-cli
 - https://docs.stripe.com/stripe-cli/use-cli
 
-我的目标：
-1. 告诉我先打开哪些 Stripe 页面。
-2. 告诉我如何拿到 STRIPE_WEBHOOK_SECRET。
-3. 告诉我如何使用 stripe login 和 stripe listen。
-4. 告诉我怎样验证 checkout.session.completed 已经成功打到本地 webhook。
-5. 如果当前项目需要先启动前端和后端，也请顺带告诉我具体命令。
-6. 不要只讲原理，请按实际操作步骤输出。
-7. 如果我某一步做错了，也请告诉我最常见的报错会长什么样。
+제 목표:
+1. 먼저 어떤 Stripe 페이지를 열어야 하는지 알려주세요.
+2. STRIPE_WEBHOOK_SECRET을 어떻게 얻는지 알려주세요.
+3. stripe login과 stripe listen을 어떻게 사용하는지 알려주세요.
+4. checkout.session.completed가 로컬 webhook에 성공적으로 전달되었는지 확인하는 방법을 알려주세요.
+5. 현재 프로젝트에서 프론트엔드와 백엔드를 먼저 시작해야 한다면 구체적인 명령어도 함께 알려주세요.
+6. 원리만 설명하지 말고 실제 조작 단계별로 출력해 주세요.
+7. 특정 단계에서 실수한 경우 가장 흔한 오류가 어떻게 보이는지도 알려주세요.
 ```
 
-## 8. 最容易踩坑的 4 件事
+## 8. 가장 많이 하는 실수 4가지
 
-1. **把 `success` 页面当成支付成功**
-   真正决定状态的是 Webhook，不是前端跳转。
-2. **让前端传金额**
-   这会带来严重的价格篡改风险。
-3. **Webhook 路由被 `express.json()` 提前处理**
-   Stripe 验签需要原始请求体。
-4. **没有做幂等处理**
-   Webhook 可能重试，如果你每次都重复加会员或积分，就会出事故。
+1. **`success` 페이지를 결제 성공으로 간주하기**
+   상태를 실제로 결정하는 것은 Webhook이며, 프론트엔드 이동이 아닙니다.
+2. **프론트엔드에서 금액 전달하기**
+   심각한 가격 변조 위험이 발생합니다.
+3. **Webhook 라우트가 `express.json()`에 의해 먼저 처리됨**
+   Stripe 서명 확인에는 원본 요청 본문이 필요합니다.
+4. **멱등성 처리를 하지 않음**
+   Webhook이 재시도될 수 있으며, 매번 멤버십이나 크레딧을 반복해서 추가하면 문제가 발생합니다.
 
-## 9. 一句话选型建议
+## 9. 한 줄 선택 가이드
 
-如果你现在只是想先把收费跑起来：
+지금 당장 결제를 실행하고 싶다면:
 
-| 你的主要用户 | 最先尝试的方案 |
+| 주요 사용자 | 가장 먼저 시도할 방식 |
 | :--- | :--- |
-| 海外 SaaS / 国际用户 | Stripe |
-| 中国大陆用户 | 支付宝 / 微信支付 |
-| 香港或跨境团队 | Stripe + 本地钱包 / FPS 聚合方案 |
+| 해외 SaaS / 글로벌 사용자 | Stripe |
+| 중국 대륙 사용자 | Alipay / WeChat Pay |
+| 홍콩 또는 크로스보더 팀 | Stripe + 로컬 지갑 / FPS 통합 방안 |
 
-后面的具体区别，我统一放到附录。
+구체적인 차이는 부록에서 통합하여 설명합니다.
 
-::: info 最简单的选型思路
-不要一开始就想"我要把全球支付方式一次全接完"。
+::: info 가장 간단한 선택 사고방식
+처음부터 "전 세계 결제 방식을 한 번에 모두 연동해야지"라고 생각하지 마세요.
 
-更实际的顺序通常是：
-- 先按主要用户所在地区选一条主支付链路
-- 先把最小可行支付跑通
-- 再根据真实用户来源补第二、第三种支付方式
+더 현실적인 순서는 보통 다음과 같습니다:
+- 먼저 주요 사용자가 있는 지역에 따라 주 결제 파이프라인을 선택합니다
+- 최소 기능 결제를 먼저 실행합니다
+- 실제 사용자 출처에 따라 두 번째, 세 번째 결제 방식을 추가합니다
 :::
 
-## 10. 小结
+## 10. 요약
 
-到这里，你已经掌握了最基础但最重要的一条收费链路：
+여기까지 기본적이지만 가장 중요한 결제 파이프라인을 마스터했습니다:
 
-1. 前端发起购买。
-2. 后端创建 Checkout Session。
-3. 用户在 Stripe 页面支付。
-4. Stripe 通过 Webhook 通知后端。
-5. 后端更新数据库。
-6. 前端刷新后显示新的会员或订单状态。
+1. 프론트엔드가 구매를 시작합니다.
+2. 백엔드가 Checkout Session을 생성합니다.
+3. 사용자가 Stripe 페이지에서 결제합니다.
+4. Stripe가 Webhook으로 백엔드에 알립니다.
+5. 백엔드가 데이터베이스를 업데이트합니다.
+6. 프론트엔드가 새로고침 후 새로운 멤버십 또는 주문 상태를 표시합니다.
 
-如果你只想快速把支付接进项目，前面的内容已经够用了。下面的附录你可以在真正遇到问题时再回来看。
+결제를 프로젝트에 빠르게 연동하고 싶다면 앞의 내용으로 충분합니다. 아래 부록은 실제로 문제가 발생했을 때 다시 참조하면 됩니다.
 
 ---
 
-# 附录
+# 부록
 
-## 附录 A：Stripe 里最常见的几个对象
+## 부록 A: Stripe에서 가장 흔히 보는 객체
 
-第一次看 Stripe 文档，最容易被这些对象名绕晕。你其实只需要先理解下面几个：
+Stripe 문서를 처음 보면 이 객체 이름들 때문에 헷갈리기 쉽습니다. 실제로는 다음 몇 가지만 먼저 이해하면 됩니다:
 
-| 对象 | 作用 | 你可以把它理解成什么 |
+| 객체 | 역할 | 이해하기 쉬운 비유 |
 | :--- | :--- | :--- |
-| `Product` | 描述卖的是什么 | 商品或会员套餐 |
-| `Price` | 描述卖多少钱、周期怎么收费 | 月付、年付、买断 |
-| `Checkout Session` | Stripe 托管的支付流程 | 付款页 |
-| `Subscription` | 周期订阅关系 | 自动续费会员 |
-| `Customer` | 付款用户 | Stripe 中的客户档案 |
-| `Webhook` | 异步通知 | Stripe 告诉你"这笔款怎么样了" |
+| `Product` | 무엇을 파는지 설명 | 상품 또는 멤버십 플랜 |
+| `Price` | 얼마에, 어떤 주기로 파는지 설명 | 월간 결제, 연간 결제, 단건 구매 |
+| `Checkout Session` | Stripe가 호스팅하는 결제 흐름 | 결제 페이지 |
+| `Subscription` | 정기 구독 관계 | 자동 갱신 멤버십 |
+| `Customer` | 결제 사용자 | Stripe의 고객 프로필 |
+| `Webhook` | 비동기 알림 | Stripe가 "이 결제가 어떻게 되었는지" 알려줌 |
 
-## 附录 B：为什么 `success` 页面不等于支付成功
+## 부록 B: `success` 페이지가 결제 성공과 같지 않은 이유
 
-很多人以为"用户付完钱，跳到了 success 页面"就算支付成功了。这是最容易踩的坑。
+많은 사람이 "사용자가 결제를 완료하고 success 페이지로 이동했다"고 하면 결제가 성공한 것으로 생각합니다. 이것이 가장 많이 하는 실수입니다.
 
-### 先讲一个真实场景
+### 실제 시나리오 하나
 
-假设你做了一个会员网站：
-1. 用户点击"购买会员"
-2. 跳转到 Stripe 付款页面
-3. 用户输入信用卡，点击付款
-4. 页面跳转到你的 `success.html`
-5. 你在 success 页面写代码："既然到了这页，就给用户开通会员"
+멤버십 웹사이트를 만들었다고 가정해 보겠습니다:
+1. 사용자가 "멤버십 구매"를 클릭합니다
+2. Stripe 결제 페이지로 이동합니다
+3. 사용자가 신용카드를 입력하고 결제를 클릭합니다
+4. 페이지가 `success.html`로 이동합니다
+5. success 페이지에 코드를 작성합니다: "이 페이지에 도달했으니 사용자에게 멤버십을 활성화합니다"
 
-**问题在哪？**
+**문제는 어디에 있을까요?**
 
-用户可能根本没付钱，或者付到一半关页面了，也能直接访问 `success.html`。
+사용자가 결제를 하지 않았거나, 결제 도중에 페이지를 닫았어도 `success.html`에 직접 접근할 수 있습니다.
 
-### 两条完全不同的路径
+### 완전히 다른 두 가지 경로
 
 ```mermaid
 flowchart TB
-  pay["用户在 Stripe 完成支付"]
+  pay["사용자가 Stripe에서 결제 완료"]
 
-  subgraph unreliable["❌ 不可靠路径：只看 success 页面"]
-    success["浏览器跳到 success 页面"]
-    fake["前端代码认为已开通"]
-    risk["风险：关页 / 断网 / 伪造 URL / 根本没付钱"]
+  subgraph unreliable["❌ 신뢰할 수 없는 경로: success 페이지만 확인"]
+    success["브라우저가 success 페이지로 이동"]
+    fake["프론트엔드 코드가 활성화된 것으로 간주"]
+    risk["위험: 페이지 닫기 / 네트워크 끊김 / URL 위조 / 결제하지 않음"]
     success --> fake --> risk
   end
 
-  subgraph reliable["✅ 可靠路径：以后端 Webhook 为准"]
-    event["Stripe 服务器发送 Webhook"]
-    verify["后端校验签名"]
-    active["数据库正式更新为已付费"]
+  subgraph reliable["✅ 신뢰할 수 있는 경로: 백엔드 Webhook 기준"]
+    event["Stripe 서버가 Webhook 전송"]
+    verify["백엔드 서명 확인"]
+    active["데이터베이스가 결제 완료로 공식 업데이트"]
     event --> verify --> active
   end
 
@@ -538,370 +538,370 @@ flowchart TB
   pay --> event
 ```
 
-**关键区别：**
+**핵심 차이:**
 
-| | success 页面跳转 | Webhook 通知 |
+| | success 페이지 이동 | Webhook 알림 |
 | :--- | :--- | :--- |
-| 谁发起的 | 用户的浏览器 | Stripe 的服务器 |
-| 能伪造吗 | 能，直接访问 URL 就行 | 不能，有签名验证 |
-| 一定代表付款成功吗 | 不一定 | 一定 |
-| 你的系统怎么知道 | 前端代码猜的 | Stripe 正式通知的 |
+| 누가 시작하는가 | 사용자의 브라우저 | Stripe의 서버 |
+| 위조 가능 여부 | 가능, URL에 직접 접속하면 됨 | 불가능, 서명 확인이 있음 |
+| 반드시 결제 성공을 의미하는가 | 아니오 | 예 |
+| 시스템이 어떻게 아는가 | 프론트엔드 코드가 추측한 것 | Stripe의 공식 알림 |
 
-### 完整流程应该是怎样的
+### 올바른 전체 흐름
 
 ```mermaid
 sequenceDiagram
   autonumber
-  actor User as 用户
-  participant Frontend as 你的网页
+  actor User as 사용자
+  participant Frontend as 웹사이트
   participant Stripe as Stripe
-  participant Webhook as 你的后端接口
-  participant DB as 数据库
+  participant Webhook as 백엔드 인터페이스
+  participant DB as 데이터베이스
 
-  User->>Stripe: 在 Stripe 页面完成付款
-  Note over Stripe: 钱真的到了 Stripe 账户
+  User->>Stripe: Stripe 페이지에서 결제 완료
+  Note over Stripe: 돈이 실제로 Stripe 계정에 도착함
 
-  Stripe-->>Frontend: 浏览器跳转到 success 页面
-  Note over Frontend: ⚠️ 这步只是跳转<br/>不代表系统已确认
+  Stripe-->>Frontend: 브라우저가 success 페이지로 이동
+  Note over Frontend: ⚠️ 이 단계는 단순한 이동일 뿐<br/>시스템이 확인한 것을 의미하지 않음
 
-  Stripe->>Webhook: 发送 Webhook 通知<br/>"checkout.session.completed"
-  Note over Webhook: ✅ 这才是正式通知
+  Stripe->>Webhook: Webhook 알림 전송<br/>"checkout.session.completed"
+  Note over Webhook: ✅ 이것이 공식 알림입니다
 
-  Webhook->>Webhook: 校验签名<br/>（确保是 Stripe 发的，不是黑客）
+  Webhook->>Webhook: 서명 확인<br/>(Stripe가 보낸 것이 맞는지, 해커가 아닌지 확인)
 
-  Webhook->>DB: 更新用户状态为"已付费"
-  DB-->>Webhook: 保存成功
-  Webhook-->>Stripe: 返回 200 OK
+  Webhook->>DB: 사용자 상태를 "결제 완료"로 업데이트
+  DB-->>Webhook: 저장 성공
+  Webhook-->>Stripe: 200 OK 반환
 
-  Frontend->>DB: 用户刷新页面，查询状态
-  DB-->>Frontend: 返回"已付费"
-  Note over Frontend: 这时候才显示会员功能
+  Frontend->>DB: 사용자가 페이지를 새로고침하고 상태 조회
+  DB-->>Frontend: "결제 완료" 반환
+  Note over Frontend: 이때 멤버십 기능이 표시됨
 ```
 
-### 每个环节的卡点
+### 각 단계별 핵심 포인트
 
-**第 1 步：用户在 Stripe 付款**
+**1단계: 사용자가 Stripe에서 결제**
 
-这是唯一确定"钱真的付了"的时刻：
-- 用户输入信用卡信息，点击确认
-- 银行从用户卡里扣款
-- Stripe 确认收到这笔钱
+이것이 "돈이 실제로 지불되었는지"를 확인할 수 있는 유일한 순간입니다:
+- 사용자가 신용카드 정보를 입력하고 확인을 클릭합니다
+- 은행이 사용자의 카드에서 결제합니다
+- Stripe가 이 금액을 수령했음을 확인합니다
 
-**第 2 步：浏览器跳转到 success 页面（问题最大）**
+**2단계: 브라우저가 success 페이지로 이동 (가장 문제가 되는 부분)**
 
-这一步完全不可靠，因为：
-- 用户可以直接在浏览器输入 `yoursite.com/success`，根本没付钱也能访问
-- 用户付到一半关页面了，但之前复制了 success 链接，之后直接打开
-- 网络问题导致跳转失败，但钱已经扣了（用户付了钱却没看到成功页面）
-- 用户点返回键，又付了一次钱，但两次都跳转到同一个 success 页面
+이 단계는 완전히 신뢰할 수 없습니다. 왜냐하면:
+- 사용자가 브라우저에서 직접 `yoursite.com/success`를 입력하면 결제 없이도 접근할 수 있습니다
+- 사용자가 결제 도중에 페이지를 닫았어도, 이전에 success 링크를 복사했다면 나중에 직접 열 수 있습니다
+- 네트워크 문제로 이동이 실패했어도, 돈은 이미 결제되었습니다 (사용자가 돈을 지불했는데 성공 페이지를 보지 못함)
+- 사용자가 뒤로 가기 버튼을 눌러 다시 결제하면, 두 번 모두 같은 success 페이지로 이동합니다
 
-**第 3 步：Stripe 发送 Webhook**
+**3단계: Stripe가 Webhook 전송**
 
-这是 Stripe 主动通知你的服务器"这笔款到账了"：
-- 只有 Stripe 的服务器能发起这个请求
-- 请求里带有签名，你的后端可以验证是不是真的 Stripe 发的
-- 即使 success 页面没打开、用户断网了，Webhook 也会发送
+이것은 Stripe가 서버에 "이 결제가 입금되었습니다"라고 적극적으로 알리는 것입니다:
+- Stripe 서버만이 이 요청을 시작할 수 있습니다
+- 요청에 서명이 포함되어 있어, 백엔드에서 Stripe가 보낸 것인지 확인할 수 있습니다
+- success 페이지가 열리지 않았거나 사용자가 네트워크에 연결되어 있지 않아도, Webhook은 전송됩니다
 
-**第 4 步：后端校验签名**
+**4단계: 백엔드 서명 확인**
 
-为什么要校验？防止黑客伪造通知。
+왜 확인해야 할까요? 해커의 위조 알림을 방지하기 위해서입니다.
 
-假设没有校验，黑客可以直接给你的服务器发一个假通知："用户 A 付了 1000 元"。你的系统就会给黑客开通会员。
+확인이 없다면, 해커가 서버에 가짜 알림을 보낼 수 있습니다: "사용자 A가 1000달러를 결제했습니다". 시스템이 해커에게 멤버십을 활성화하게 됩니다.
 
-校验的过程：
-- Stripe 用你们约定的密钥对通知内容生成签名
-- 你的后端用同样的密钥验证签名是否匹配
-- 匹配 = 100% 是 Stripe 发的，不匹配 = 直接拒绝
+확인 과정:
+- Stripe가 당사가 합의한 비밀키로 알림 내용의 서명을 생성합니다
+- 백엔드가 같은 비밀키로 서명이 일치하는지 확인합니다
+- 일치 = 100% Stripe가 보낸 것, 불일치 = 즉시 거부
 
-**第 5 步：更新数据库**
+**5단계: 데이터베이스 업데이트**
 
-只有校验通过后，才更新数据库：
-- 把用户状态从"待付款"改成"已付费"
-- 记录订单号、金额、付款时间
-- 开通对应的会员权限
+확인이 통과된 후에만 데이터베이스를 업데이트합니다:
+- 사용자 상태를 "결제 대기"에서 "결제 완료"로 변경합니다
+- 주문 번호, 금액, 결제 시간을 기록합니다
+- 해당 멤버십 권한을 활성화합니다
 
-**第 6 步：前端查询状态**
+**6단계: 프론트엔드 상태 조회**
 
-success 页面不要自己判断"到了这页就是成功了"。正确的做法：
-- 页面加载时，向后端发送请求："这个用户付费了吗？"
-- 后端查数据库，返回真实状态
-- 根据返回结果显示"开通成功"或"等待确认"
+success 페이지에서 "이 페이지에 도달했으니 성공이다"라고 스스로 판단하지 마세요. 올바른 방법:
+- 페이지 로딩 시 백엔드에 요청을 보냅니다: "이 사용자가 결제했나요?"
+- 백엔드가 데이터베이스를 조회하여 실제 상태를 반환합니다
+- 반환 결과에 따라 "활성화 성공" 또는 "확인 대기 중"을 표시합니다
 
-### 一个常见的错误做法
+### 흔히 하는 잘못된 방법
 
 ```javascript
-// 错误：在 success 页面直接开通
+// 잘못됨: success 페이지에서 직접 활성화
 // success.html
 if (window.location.pathname === '/success') {
-  // 危险！任何人都能访问 /success
-  activateMembership();
+  // 위험! 누구나 /success에 접근할 수 있습니다
+  activateMembership()
 }
 ```
 
 ```javascript
-// 正确：每次刷新都查后端
+// 올바름: 매번 새로고침할 때마다 백엔드 조회
 // success.html
 async function checkStatus() {
-  const response = await fetch('/api/user/status');
-  const data = await response.json();
-  
+  const response = await fetch('/api/user/status')
+  const data = await response.json()
+
   if (data.paymentStatus === 'paid') {
-    showMemberFeatures();
+    showMemberFeatures()
   } else {
-    showPendingMessage();
+    showPendingMessage()
   }
 }
 ```
 
-### 总结一句话
+### 한 문장 요약
 
-**success 页面只是"浏览器跳转成功"，Webhook 才是"Stripe 正式确认收款"。**
+**success 페이지는 "브라우저 이동 성공"일 뿐이며, Webhook이 "Stripe의 공식 결제 확인"입니다.**
 
-你的系统必须以 Webhook 为准，不能相信前端的跳转。
+시스템은 반드시 Webhook을 기준으로 해야 하며, 프론트엔드의 이동을 신뢰해서는 안 됩니다.
 
-## 附录 C：订阅系统最值得监听的事件
+## 부록 C: 구독 시스템에서 가장 주시해야 할 이벤트
 
-| 事件 | 含义 | 你通常要做什么 |
+| 이벤트 | 의미 | 일반적으로 해야 할 작업 |
 | :--- | :--- | :--- |
-| `checkout.session.completed` | 首次开通成功 | 创建本地订阅记录 |
-| `invoice.paid` | 自动续费成功 | 延长有效期 |
-| `invoice.payment_failed` | 自动扣费失败 | 标记风险状态并提醒用户 |
-| `customer.subscription.deleted` | 订阅取消 | 回收权限或标记到期后失效 |
+| `checkout.session.completed` | 최초 가입 성공 | 로컬 구독 기록 생성 |
+| `invoice.paid` | 자동 갱신 성공 | 유효기간 연장 |
+| `invoice.payment_failed` | 자동 결제 실패 | 위험 상태 표시 및 사용자 알림 |
+| `customer.subscription.deleted` | 구독 취소 | 권한 회수 또는 만료 후 비활성화 표시 |
 
-### 订阅状态图
+### 구독 상태 다이어그램
 
 ```mermaid
 stateDiagram-v2
-  [*] --> NotStarted: 用户未购买
+  [*] --> NotStarted: 사용자 미구매
   NotStarted --> Active: checkout.session.completed
   Active --> Active: invoice.paid
   Active --> PastDue: invoice.payment_failed
-  PastDue --> Active: 用户补款成功
+  PastDue --> Active: 사용자 결제 보완 성공
   Active --> Canceled: customer.subscription.deleted
-  PastDue --> Canceled: 到期未恢复
+  PastDue --> Canceled: 기간 만료 후 미복구
   Canceled --> [*]
 
-  state "未开通" as NotStarted
-  state "会员有效" as Active
-  state "扣费失败 / 待恢复" as PastDue
-  state "已取消 / 到期回收" as Canceled
+  state "미가입" as NotStarted
+  state "멤버십 유효" as Active
+  state "결제 실패 / 복구 대기" as PastDue
+  state "취소됨 / 만료 후 회수" as Canceled
 ```
 
-### 续费 / 失败 / 取消时序图
+### 갱신 / 실패 / 취소 시퀀스 다이어그램
 
 ```mermaid
 sequenceDiagram
   autonumber
   participant Stripe as Stripe
-  participant Webhook as 你的 Webhook 接口
-  participant DB as 订阅表 / 订单表
-  participant App as 你的应用
-  actor User as 用户
+  participant Webhook as Webhook 인터페이스
+  participant DB as 구독 테이블 / 주문 테이블
+  participant App as 애플리케이션
+  actor User as 사용자
 
   rect rgb(235, 248, 255)
     Stripe->>Webhook: invoice.paid
-    Webhook->>DB: 延长 current_period_end
-    DB-->>Webhook: 更新成功
+    Webhook->>DB: current_period_end 연장
+    DB-->>Webhook: 업데이트 성공
     Webhook-->>Stripe: 200 OK
-    App-->>User: 继续保持会员有效
+    App-->>User: 멤버십 유효 상태 유지
   end
 
   rect rgb(255, 247, 237)
     Stripe->>Webhook: invoice.payment_failed
-    Webhook->>DB: 标记 past_due
-    DB-->>Webhook: 更新成功
+    Webhook->>DB: past_due 표시
+    DB-->>Webhook: 업데이트 성공
     Webhook-->>Stripe: 200 OK
-    App-->>User: 提醒更新支付方式
+    App-->>User: 결제 방법 업데이트 알림
   end
 
   rect rgb(254, 242, 242)
     Stripe->>Webhook: customer.subscription.deleted
-    Webhook->>DB: 标记 canceled
-    DB-->>Webhook: 更新成功
+    Webhook->>DB: canceled 표시
+    DB-->>Webhook: 업데이트 성공
     Webhook-->>Stripe: 200 OK
-    App-->>User: 停止高级权限
+    App-->>User: 프리미엄 권한 중지
   end
 ```
 
-## 附录 D：其他支付方案怎么选
+## 부록 D: 다른 결제 방식 선택 방법
 
-### 1. 中国大陆
+### 1. 중국 대륙
 
-主要用户在大陆的话，首选还是 **[支付宝](https://open.alipay.com/)** 和 **[微信支付](https://pay.wechatpay.cn/)**。
+주요 사용자가 대륙에 있다면,首选은 역시 **[Alipay](https://open.alipay.com/)**와 **[WeChat Pay](https://pay.wechatpay.cn/)**입니다.
 
-**业务模式：**
+**비즈니스 모델:**
 
-两者都是"支付网关"模式。你需要：
-- 申请商户资质（营业执照、对公账户）
-- 用户付的钱直接到你的商户账户
-- 你自己负责税务、退款、对账
+둘 다 "결제 게이트웨이" 모델입니다. 필요한 것:
+- 사업자 자격 신청 (사업자등록증, 법인 계좌)
+- 사용자가 결제한 돈은 바로 사업자 계정에 입금됩니다
+- 세금, 환불, 정산은 직접 책임집니다
 
-**技术模式：**
+**기술 모델:**
 
-两者都是"后端下单 + 前端调起 + 后端通知"的模型，跟 Stripe 思路一样。
+둘 다 "백엔드 주문 생성 + 프론트엔드 호출 + 백엔드 알림" 모델로, Stripe와 같은 접근 방식입니다.
 
-**支付宝接入流程：**
-1. 在支付宝开放平台创建应用
-2. 配置公私钥和回调地址
-3. 后端调用统一下单接口，生成支付链接或二维码
-4. 用户扫码或跳转付款
-5. 支付宝异步通知你的后端，更新订单状态
+**Alipay 연동 흐름:**
+1. Alipay 오픈 플랫폼에서 애플리케이션 생성
+2. 공개키/개인키 및 콜백 주소 설정
+3. 백엔드에서 통합 주문 생성 인터페이스를 호출하여 결제 링크 또는 QR 코드 생성
+4. 사용자가 스캔하거나 이동하여 결제
+5. Alipay가 백엔드에 비동기 알림을 보내 주문 상태 업데이트
 
-**微信支付接入流程：**
-- JSAPI 支付：适合公众号、小程序，用户在微信内直接付款
-- Native 支付：PC 端生成二维码，用户扫码付款
-- H5 支付：手机浏览器内拉起微信 App 付款
+**WeChat Pay 연동 흐름:**
+- JSAPI 결제: 공식 계정, 미니 프로그램에 적합. 사용자가 WeChat 내에서 직접 결제
+- Native 결제: PC에서 QR 코드를 생성하고, 사용자가 스캔하여 결제
+- H5 결제: 모바일 브라우저에서 WeChat 앱을 호출하여 결제
 
-流程：后端下单 → 拿到 `prepay_id` 或 `code_url` → 前端调起支付 → 后端接收通知确认成功
+흐름: 백엔드 주문 생성 -> `prepay_id` 또는 `code_url` 획득 -> 프론트엔드에서 결제 호출 -> 백엔드에서 알림 수신 후 성공 확인
 
-**参考链接：**
-- 支付宝开放平台：https://open.alipay.com/
-- 微信支付商户文档：https://pay.wechatpay.cn/doc/v3/merchant/
+**참고 링크:**
+- Alipay 오픈 플랫폼: https://open.alipay.com/
+- WeChat Pay 사업자 문서: https://pay.wechatpay.cn/doc/v3/merchant/
 
-### 2. 香港
+### 2. 홍콩
 
-香港市场比较混合，常见组合：
+홍콩 시장은 비교적 혼합되어 있으며, 일반적인 조합은:
 
-- 银行卡：Visa / Mastercard
-- FPS（转数快）：香港本地即时转账
-- AlipayHK / WeChat Pay HK：香港版支付宝和微信
+- 신용카드: Visa / Mastercard
+- FPS( Faster Payment System): 홍콩 로컬 즉시 이체
+- AlipayHK / WeChat Pay HK: 홍콩 버전 Alipay와 WeChat
 
-**推荐组合：**
-- 用 **[Stripe](https://stripe.com/hk)** 覆盖国际卡和订阅
-- 用 **[Airwallex](https://www.airwallex.com/)** 或 **[Adyen](https://www.adyen.com/)** 补本地钱包和 FPS
+**추천 조합:**
+- **[Stripe](https://stripe.com/hk)**로 국제 카드와 구독을 커버
+- **[Airwallex](https://www.airwallex.com/)** 또는 **[Adyen](https://www.adyen.com/)**로 로컬 지갑과 FPS를 보완
 
-### 3. 海外 / 国际 SaaS
+### 3. 해외 / 글로벌 SaaS
 
 #### [Stripe](https://stripe.com/)
 
-**业务模式：** 支付网关
+**비즈니스 모델:** 결제 게이트웨이
 
-- 你需要自己申请商户资质（部分国家 Stripe 可以帮你搞定）
-- 用户付的钱到你的 Stripe 账户，再结算到你的银行账户
-- 你自己负责税务申报
+- 사업자 자격을 직접 신청해야 합니다 (일부 국가에서는 Stripe가 대신 처리 가능)
+- 사용자가 결제한 돈은 Stripe 계정에 들어오고, 다시 은행 계좌로 정산됩니다
+- 세금 신고는 직접 책임집니다
 
-**技术模式：**
+**기술 모델:**
 
-- API 体验最好，文档清晰
-- 支持 Checkout（托管页面）、Elements（自定义表单）、Payment Links（无代码）
-- Webhook 通知支付状态
-- 支持订阅、发票、多币种
+- API 경험이 가장 좋고, 문서가 명확합니다
+- Checkout(호스팅 페이지), Elements(맞춤형 폼), Payment Links(노코드) 지원
+- Webhook으로 결제 상태 알림
+- 구독, 청구서, 다중 통화 지원
 
-**适合谁：** 海外 SaaS、独立开发者、需要灵活定制的团队
+**누구에게 적합한가요:** 해외 SaaS, 인디 개발자, 유연한 맞춤이 필요한 팀
 
-**参考链接：** https://docs.stripe.com/
+**참고 링크:** https://docs.stripe.com/
 
 #### [PayPal](https://www.paypal.com/)
 
-**业务模式：** 支付网关
+**비즈니스 모델:** 결제 게이트웨이
 
-- 用户付的钱到你的 PayPal 账户，再提现到银行
-- 你自己负责税务
+- 사용자가 결제한 돈은 PayPal 계정에 들어오고, 다시 은행으로 인출합니다
+- 세금은 직접 책임집니다
 
-**技术模式：**
+**기술 모델:**
 
-- 一次性支付：前端放按钮，后端创建/确认订单
-- 订阅制：先建 Product 和 Plan，再用 SDK 拉起
-- 同样需要后端和 Webhook，不要只看前端回调
+- 단건 결제: 프론트엔드에 버튼을 배치하고, 백엔드에서 주문 생성/확인
+- 구독제: 먼저 Product와 Plan을 만들고, SDK로 호출
+- 마찬가지로 백엔드와 Webhook이 필요하며, 프론트엔드 콜백만 보지 마세요
 
-**适合谁：** 需要补充渠道的海外业务，用户习惯用 PayPal 付款
+**누구에게 적합한가요:** 채널을 보완해야 하는 해외 비즈니스, PayPal로 결제하는 습관이 있는 사용자
 
-**参考链接：** https://developer.paypal.com/docs/
+**참고 링크:** https://developer.paypal.com/docs/
 
 #### [Paddle](https://www.paddle.com/)
 
-**业务模式：** Merchant of Record (MoR)
+**비즈니스 모델:** Merchant of Record (MoR)
 
-- Paddle 是"记录商家"，法律上由 Paddle 向用户收款
-- Paddle 帮你处理全球税务、VAT、退款、合规
-- 用户付的钱到 Paddle，Paddle 扣除税费和手续费后结算给你
-- 你不需要在每个国家注册公司或处理税务
+- Paddle은 "기록 판매자"이며, 법적으로 Paddle이 사용자에게 결제를 요청합니다
+- Paddle이 글로벌 세금, VAT, 환불, 규정 준수를 처리합니다
+- 사용자가 결제한 돈은 Paddle에 들어오고, Paddle이 세금과 수수료를 공제한 후 정산합니다
+- 각 국가에서 회사를 등록하거나 세금을 처리할 필요가 없습니다
 
-**技术模式：**
+**기술 모델:**
 
-- Paddle.js：前端嵌入托管结账页
-- 后端 API：创建 transaction，交给 checkout 处理
-- Webhook 同步订阅状态
+- Paddle.js: 프론트엔드에 호스팅 결제 페이지 삽입
+- 백엔드 API: transaction을 생성하고 checkout에 처리를 맡김
+- Webhook으로 구독 상태 동기화
 
-**适合谁：** 不想处理全球税务的 SaaS 团队，尤其是 B2B SaaS
+**누구에게 적합한가요:** 글로벌 세금을 처리하고 싶지 않은 SaaS 팀, 특히 B2B SaaS
 
-**参考链接：** https://developer.paddle.com/
+**참고 링크:** https://developer.paddle.com/
 
 #### [Lemon Squeezy](https://www.lemonsqueezy.com/)
 
-**业务模式：** Merchant of Record (MoR)
+**비즈니스 모델:** Merchant of Record (MoR)
 
-- 和 Paddle 类似，Lemon Squeezy 是"记录商家"
-- 帮你处理全球税务、VAT、合规
-- 2024 年被 Stripe 收购，但独立运营
+- Paddle과 유사하게, Lemon Squeezy는 "기록 판매자"입니다
+- 글로벌 세금, VAT, 규정 준수를 처리합니다
+- 2024년에 Stripe에 인수되었지만 독립적으로 운영됩니다
 
-**技术模式：**
+**기술 모델:**
 
-- Hosted Checkout：最简单，直接生成付款链接
-- Checkout Overlay：浮层嵌入你的页面
-- 后端 API：创建 checkout，灵活控制
+- Hosted Checkout: 가장 간단하며, 결제 링크를 직접 생성
+- Checkout Overlay: 레이어를 페이지에 삽입
+- 백엔드 API: checkout을 생성하고 유연하게 제어
 
-**适合谁：** 独立开发者、数字产品、软件授权
+**누구에게 적합한가요:** 인디 개발자, 디지털 제품, 소프트웨어 라이선스
 
-**参考链接：** https://docs.lemonsqueezy.com/
+**참고 링크:** https://docs.lemonsqueezy.com/
 
-### 4. 企业级方案
+### 4. 엔터프라이즈급 방안
 
-#### [Airwallex（空中云汇）](https://www.airwallex.com/)
+#### [Airwallex](https://www.airwallex.com/)
 
-**业务模式：** 支付网关 + 全球账户
+**비즈니스 모델:** 결제 게이트웨이 + 글로벌 계정
 
-- 提供全球收款账户（类似虚拟银行账户）
-- 支持多币种收款、换汇、付款
-- 你自己负责税务
+- 글로벌 수금 계정 제공 (가상 은행 계정과 유사)
+- 다중 통화 수금, 환전, 송금 지원
+- 세금은 직접 책임집니다
 
-**技术模式：**
+**기술 모델:**
 
-- Payment Links：几乎不用代码，生成付款链接
-- Hosted Payment Page：托管页面
-- Drop-in / Embedded / Native API：深度接入，自定义程度高
-- 支持 Alipay HK、FPS、WeChat Pay 等本地支付方式
+- Payment Links: 거의 코드 없이 결제 링크 생성
+- Hosted Payment Page: 호스팅 페이지
+- Drop-in / Embedded / Native API: 심층 연동, 맞춤 정도가 높음
+- Alipay HK, FPS, WeChat Pay 등 로컬 결제 방식 지원
 
-**适合谁：** 香港团队、跨境业务、需要多币种账户的公司
+**누구에게 적합한가요:** 홍콩 팀, 크로스보더 비즈니스, 다중 통화 계정이 필요한 기업
 
-**参考链接：** https://www.airwallex.com/docs/
+**참고 링크:** https://www.airwallex.com/docs/
 
 #### [Adyen](https://www.adyen.com/)
 
-**业务模式：** 支付网关
+**비즈니스 모델:** 결제 게이트웨이
 
-- 企业级支付平台，年处理交易额万亿欧元
-- 支持线上、线下、移动端全渠道
-- 你自己负责税务
+- 엔터프라이즈급 결제 플랫폼, 연간 처리 거래액 수조 유로
+- 온라인, 오프라인, 모바일 등 모든 채널 지원
+- 세금은 직접 책임집니다
 
-**技术模式：**
+**기술 모델:**
 
-- Pay by Link：最简单，生成付款链接
-- Drop-in / Components：标准线上接入
-- 后台可启用 Alipay、Alipay HK、PayMe 等本地支付方式
+- Pay by Link: 가장 간단하며, 결제 링크를 생성
+- Drop-in / Components: 표준 온라인 연동
+- 대시보드에서 Alipay, Alipay HK, PayMe 등 로컬 결제 방식을 활성화할 수 있습니다
 
-**适合谁：** 大型企业、需要全渠道支付的公司
+**누구에게 적합한가요:** 대기업, 모든 채널의 결제가 필요한 기업
 
-**参考链接：** https://docs.adyen.com/
+**참고 링크:** https://docs.adyen.com/
 
-### 5. 方案对比
+### 5. 방안 비교
 
-| 方案 | 业务模式 | 税务处理 | 适合谁 |
+| 방안 | 비즈니스 모델 | 세금 처리 | 적합 대상 |
 | :--- | :--- | :--- | :--- |
-| Stripe | 支付网关 | 自己处理 | 海外 SaaS、开发者 |
-| PayPal | 支付网关 | 自己处理 | 海外补充渠道 |
-| Paddle | MoR | Paddle 代处理 | B2B SaaS、不想管税务 |
-| Lemon Squeezy | MoR | LS 代处理 | 独立开发者、数字产品 |
-| Adyen | 支付网关 | 自己处理 | 大型企业 |
-| Airwallex | 支付网关 + 账户 | 自己处理 | 跨境业务、香港团队 |
-| 支付宝/微信 | 支付网关 | 自己处理 | 大陆用户 |
+| Stripe | 결제 게이트웨이 | 직접 처리 | 해외 SaaS, 개발자 |
+| PayPal | 결제 게이트웨이 | 직접 처리 | 해외 보완 채널 |
+| Paddle | MoR | Paddle이 대행 처리 | B2B SaaS, 세금 관리 부담 감소 |
+| Lemon Squeezy | MoR | LS가 대행 처리 | 인디 개발자, 디지털 제품 |
+| Adyen | 결제 게이트웨이 | 직접 처리 | 대기업 |
+| Airwallex | 결제 게이트웨이 + 계정 | 직접 처리 | 크로스보더 비즈니스, 홍콩 팀 |
+| Alipay/WeChat | 결제 게이트웨이 | 직접 처리 | 중국 대륙 사용자 |
 
-### 6. 按地区选方案
+### 6. 지역별 방안 선택
 
-| 你的市场 | 推荐方案 |
+| 시장 | 추천 방안 |
 | :--- | :--- |
-| 中国大陆 | 支付宝 / 微信支付 |
-| 香港 | Stripe + Airwallex / Adyen |
-| 海外 SaaS | Stripe（自己管税务）或 Paddle（MoR 代管） |
-| 海外数字产品 | Stripe / Lemon Squeezy / Paddle |
-| 多地区企业级 | Adyen / Airwallex / Stripe 组合 |
+| 중국 대륙 | Alipay / WeChat Pay |
+| 홍콩 | Stripe + Airwallex / Adyen |
+| 해외 SaaS | Stripe(직접 세금 관리) 또는 Paddle(MoR 대행) |
+| 해외 디지털 제품 | Stripe / Lemon Squeezy / Paddle |
+| 다중 지역 엔터프라이즈급 | Adyen / Airwallex / Stripe 조합 |

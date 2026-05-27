@@ -1,152 +1,152 @@
-# CLI AI 编程工具
+# CLI AI 프로그래밍 도구
 
-在本教程中，我们将介绍直接在命令行中运行的 AI 编程 Agent。它们和之前学过的 Trae、Cursor 中的 Agent 不同，CLI AI 编程工具只能在终端中使用。与集成在 AI IDE 里的 Agent 相比，它们通常具有更长的上下文窗口、更快的工具调用速度，并且可以兼容更多种类的大模型。在最新的 AI Vibe Coding 实战中，我们往往会优先使用 CLI AI 编程工具，而不是 IDE 内置的编码 Agent。
+이 튜토리얼에서는 명령행에서 직접 실행되는 AI 프로그래밍 Agent에 대해 소개합니다. 이전에 배운 Trae, Cursor의 Agent와는 달리, CLI AI 프로그래밍 도구는 터미널에서만 사용할 수 있습니다. AI IDE에 내장된 Agent에 비해 일반적으로 더 긴 컨텍스트 윈도우, 더 빠른 도구 호출 속도를 갖추고 있으며, 더 다양한 대형 모델과 호환됩니다. 최신 AI Vibe Coding 실전에서는 IDE 내장 코딩 Agent보다 CLI AI 프로그래밍 도구를 우선적으로 사용하는 경우가 많습니다.
 
-## 从 CLI 说起
+## CLI부터 이야기해 보기
 
-还记得我们之前介绍过的 CLI 吗？CLI 指的是通过终端或命令提示符，用纯文本命令来操作软件应用，而不是依赖图形界面（GUI——你可以简单理解为电脑或手机上带按钮、可以点击操作的界面，不需要输入命令）。
+이전에 소개한 CLI가 기억나시나요? CLI는 터미널이나 명령 프롬프트를 통해 순수 텍스트 명령으로 소프트웨어 애플리케이션을 조작하는 것을 의미하며, 그래픽 인터페이스(GUI -- 버튼이 있어 클릭으로 조작하는 화면으로, 명령어 입력이 필요 없는 컴퓨터나 스마트폰 화면이라고 간단히 이해하시면 됩니다)에 의존하지 않습니다.
 
-> 在 Windows 上，常见的终端有“命令提示符（cmd）”和 “PowerShell”。你可以在电脑的运行/搜索框中输入 “cmd” 或 “powershell” 来启动这些命令行程序。
+> Windows에서는 "명령 프롬프트(cmd)"와 "PowerShell"이 일반적인 터미널입니다. 컴퓨터의 실행/검색창에 "cmd" 또는 "powershell"을 입력하여 이 명령행 프로그램을 시작할 수 있습니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image1.png)![](/zh-cn/stage-2/backend/modern-cli/images/image2.png)
+![](images/image1.png)![](images/image2.png)
 
-CLI 天生适合文本命令操作，在一小部分极客（追求极致的编程爱好者）群体中，CLI 甚至比 GUI 更受欢迎——他们希望所有操作都通过键盘完成，觉得动鼠标反而会拖慢自己的编码效率。
+CLI는 텍스트 명령 조작에 태생적으로 적합합니다. 일부 극소수의 얼리어답터(극한의 프로그래밍 애호가) 그룹에서 CLI는 GUI보다 더 인기가 있습니다. 이들은 모든 조작을 키보드로 완료하기를 원하며, 마우스를 사용하는 것이 오히려 코딩 효율을 떨어뜨린다고 생각합니다.
 
-在工业界，CLI 往往也是最常见的接口形式，因为 GUI 需要操作系统额外绘制界面、管理窗口，对计算机资源的要求更高；而 CLI 只需要把收到的命令传给系统执行即可。因此，在连接大规模服务器集群时，我们通常只通过 CLI 进行交互。
+산업계에서도 CLI가 가장 일반적인 인터페이스 형태인 경우가 많습니다. GUI는 운영 체제가 추가로 인터페이스를 그리고 창을 관리해야 하므로 컴퓨터 리소스 요구사항이 더 높지만, CLI는 받은 명령을 시스템에 전달하여 실행하기만 하면 됩니다. 따라서 대규모 서버 클러스터에 연결할 때는 보통 CLI를 통해서만 상호 작용합니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image3.png)
+![](images/image3.png)
 
-对于许多没有 CLI 经验的同学来说，可能会觉得 CLI 操作很复杂、命令太多，甚至担心“一不小心就把电脑搞坏”。不用担心。还记得我们在前面教程里，经常让 Trae 帮忙完成各种基础操作吗？这里也可以完全照搬这个思路——我们可以让 CLI 编程工具帮我们执行所有 CLI 操作：让它帮你进入指定文件夹、搜索和处理文件、运行或复制开源项目等。整个过程都可以通过和 CLI AI 编程工具的对话来完成。
+CLI 경험이 없는 분들은 CLI 조작이 복잡하고 명령어가 너무 많다고 느끼거나, "실수로 컴퓨터를 망가뜨릴까 봐" 걱정할 수 있습니다. 걱정하지 않으셔도 됩니다. 이전 튜토리얼에서 자주 Trae에게 다양한 기본 조작을 도와달라고 했던 것이 기억나시나요? 여기서도 완전히 동일한 접근 방식을 사용할 수 있습니다. CLI 프로그래밍 도구가 모든 CLI 조작을 대신 실행해 주도록 할 수 있습니다. 지정된 폴더로 이동하고, 파일을 검색 및 처리하고, 오픈소스 프로젝트를 실행하거나 복사하는 등의 작업을 CLI AI 프로그래밍 도구와의 대화를 통해 완료할 수 있습니다.
 
-## 和 AI IDE 有什么不同
+## AI IDE와의 차이점
 
-我们可以把 CLI AI 编程工具类比成之前学过的 z.ai 和 Trae。某种意义上，CLI AI 编程工具可以看成是一种特殊的 z.ai：它们同样只需要一个简单的对话入口，就会自动为你执行所有需要的操作（只是有时你需要手动打开浏览器查看最终效果）。而如果类比 AI IDE，那么 CLI AI 编程工具可以被看作是 IDE 中的 Agent 模块——也就是侧边那块对话区域。
+CLI AI 프로그래밍 도구를 이전에 배운 z.ai와 Trae에 비유할 수 있습니다. 어떤 의미에서 CLI AI 프로그래밍 도구는 특별한 형태의 z.ai라고 볼 수 있습니다. 마찬가지로 간단한 대화 입구만 있으면 필요한 모든 조작을 자동으로 실행해 줍니다(다만 때로는 브라우저를 직접 열어 최종 결과를 확인해야 할 수 있습니다). AI IDE에 비유하자면, CLI AI 프로그래밍 도구는 IDE의 Agent 모듈, 즉 사이드바의 대화 영역으로 볼 수 있습니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image4.png)![](/zh-cn/stage-2/backend/modern-cli/images/image5.png)
+![](images/image4.png)![](images/image5.png)
 
-不过，由于不同 AI IDE 对 Agent 的实现方式不同，能力差异也很大，AI 编程效果经常不稳定，因此 CLI AI 编程工具通常由大型科技公司直接开发，例如 Claude 背后的 Anthropic、ChatGPT 背后的 OpenAI 等。
+하지만 각 AI IDE의 Agent 구현 방식이 다르고 능력 차이도 크기 때문에 AI 프로그래밍 효과가 불안정한 경우가 많습니다. 반면 CLI AI 프로그래밍 도구는 대형 기술 기업에서 직접 개발하는 경우가 많습니다. 예를 들어 Claude를 만든 Anthropic, ChatGPT를 만든 OpenAI 등입니다.
 
-相比其他 AI 编程 Agent，直接使用这些大厂产品往往是较优的实践，尤其是 Claude Code 本身就是为 Anthropic 内部研发团队服务的工具，从一开始就围绕“满足工程师真实需求”来设计。
+다른 AI 프로그래밍 Agent에 비해 이러한 대형 기업 제품을 직접 사용하는 것이 보통 더 나은 실천 방법입니다. 특히 Claude Code 자체가 Anthropic 내부 연구개발 팀을 위해 서비스하는 도구로, 처음부터 "엔지니어의 실제 요구사항 충족"을 중심으로 설계되었습니다.
 
-为了更直观地对比，我们可以简单看看 Claude Code 和某款 AI IDE Agent 的差异（这里以 Cursor 为例）：
+더 직관적으로 비교하기 위해 Claude Code와 한 AI IDE Agent의 차이를 간단히 살펴보겠습니다(여기서는 Cursor를 예시로 사용합니다).
 
-| 功能特性          | Claude Code   | Cursor          | 更优者      |
+| 기능 특징 | Claude Code | Cursor | 우수한 쪽 |
 | ----------------- | ------------- | --------------- | ----------- |
-| 自动任务执行      | ✅ 非常强     | ❌ 能力有限     | Claude Code |
-| IDE 集成          | ❌ 仅命令行   | ✅ 原生 VS Code | Cursor      |
-| 实时代码补全      | ❌ 无         | ✅ 体验极佳     | Cursor      |
-| 多文件操作        | ✅ 非常强     | ⚠️ 还不错       | Claude Code |
-| GitHub 一体化操作 | ✅ 可直接提交 | ⚠️ 需要手动操作 | Claude Code |
-| 学习成本          | ⚠️ 中等       | ✅ 上手简单     | Cursor      |
-| 上下文长度        | ✅ 非常长     | ⚠️ 较好         | Claude Code |
-| 调试辅助          | ✅ 自动化     | ⚠️ 较多需手动   | Claude Code |
+| 자동 작업 실행 | ✅ 매우 강력 | ❌ 능력 제한적 | Claude Code |
+| IDE 통합 | ❌ 명령행만 | ✅ 네이티브 VS Code | Cursor |
+| 실시간 코드 완성 | ❌ 없음 | ✅ 훌륭한 경험 | Cursor |
+| 다중 파일 조작 | ✅ 매우 강력 | ⚠️ 괜찮음 | Claude Code |
+| GitHub 일체형 작업 | ✅ 직접 커밋 가능 | ⚠️ 수동 작업 필요 | Claude Code |
+| 학습 비용 | ⚠️ 보통 | ✅ 쉬운 시작 | Cursor |
+| 컨텍스트 길이 | ✅ 매우 긺 | ⚠️ 양호 | Claude Code |
+| 디버깅 보조 | ✅ 자동화 | ⚠️ 많은 수동 작업 필요 | Claude Code |
 
-表格来源：<https://northflank.com/blog/claude-code-vs-cursor-comparison>
+표 출처: <https://northflank.com/blog/claude-code-vs-cursor-comparison>
 
-简单说，CLI AI 编程工具通常可以：
+간단히 말해, CLI AI 프로그래밍 도구는 보통 다음을 지원합니다.
 
-- 支持更长时间的连续对话（甚至可以帮你“工作一整天”）。
-- 提供更长的上下文窗口（不再频繁需要你说“继续”）。
-- 响应速度更快（可以接入更多自定义模型 API）。
+- 더 긴 시간의 연속 대화 지원(심지어 "하루 종일 작업"을 도와줄 수도 있음)
+- 더 긴 컨텍스트 윈도우 제공(더 이상 자주 "계속해 줘"라고 말할 필요 없음)
+- 더 빠른 응답 속도(더 많은 커스텀 모델 API에 접속 가능)
 
-在编码相关操作上，它们通常比大部分 IDE 内置 Agent 更聪明、更稳定。
+코딩 관련 조작에서는 대부분의 IDE 내장 Agent보다 더 똑똑하고 안정적입니다.
 
-## 常见的 CLI AI 编程工具
+## 대표적인 CLI AI 프로그래밍 도구
 
-目前虽然有很多开源实现，但在实践中我们只推荐两大类型的 CLI AI 编程工具，作为“首选组合”。你可以根据自己的习惯任选其一，强烈建议都试一试，再选出最适合你的那一个。
+현재 다양한 오픈소스 구현이 있지만, 실전에서는 두 가지 유형의 CLI AI 프로그래밍 도구만 "첫 번째 선택 조합"으로 권장합니다. 자신의 습관에 따라 하나를 선택하시되, 모두 사용해 보고 가장 적합한 것을 고르는 것을 강력히 권장합니다.
 
-- Codex 使用 GPT-5，在整体能力上更强；
-- Claude Code 通过 GLM 4.6 转发 API，整体体验接近 Claude 4，但价格更便宜。
-- OpenCode 可以随意切换并搭配模型, 提供免费模型, 可以更好的控制成本。
+- Codex는 GPT-5를 사용하여 전체적인 능력이 더 뛰어남
+- Claude Code는 GLM 4.6을 통해 API를 전달하여 전체적인 경험이 Claude 4에 가깝지만 가격이 더 저렴함
+- OpenCode는 모델을 자유롭게 전환 및 조합할 수 있고, 무료 모델을 제공하여 비용을 더 잘 제어할 수 있음
 
-不过，哪一个在实际项目中更好用，只能通过亲自测试来判断。掌握多种 AI 编程工具始终是有益的：熟练以后，你可以在不同场景下灵活切换 Claude Code、Codex 或 Trae。如果尝试多次后发现某个工具效果一般，可以直接换一个工具或模型继续试验。
+하지만 어떤 것이 실제 프로젝트에서 더 나은지는 직접 테스트해 봐야만 알 수 있습니다. 다양한 AI 프로그래밍 도구에 능숙해지는 것은 항상 유익합니다. 능숙해지면 Claude Code, Codex, Trae를 서로 다른 시나리오에서 유연하게 전환할 수 있습니다. 어떤 도구의 효과가 일반적이라면 다른 도구나 모델로 바꾸어 계속 실험해 보면 됩니다.
 
-同时，由于模型版本更新非常迅速，建议你优先选择在“性价比（效果 / 成本）”上表现最好的方案。
+또한 모델 버전 업데이트가 매우 빠르므로, "가성비(효과 / 비용)" 측면에서 가장 좋은 성능을 보이는 방안을 우선적으로 선택하는 것이 좋습니다.
 
 ### Claude Code
 
-Claude Code 是由 Anthropic 基于 Claude 大模型能力开发的一款 AI 编程工具。它的主要交互场景在终端，同时也支持作为 VS Code 插件来使用。类似于 AI IDE 中的 Agent，它可以深度理解开发者的代码仓库，并通过自然语言指令完成端到端的开发任务——包括代码编辑、修复 Bug、执行和修复测试、管理 Git 工作流（例如解决合并冲突、创建 PR）、复杂代码讲解、执行终端命令等。
+Claude Code는 Anthropic이 Claude 대형 모델 능력을 기반으로 개발한 AI 프로그래밍 도구입니다. 주요 상호 작용 환경은 터미널이며, VS Code 플러그인으로도 사용할 수 있습니다. AI IDE의 Agent와 유사하게 개발자의 코드 저장소를 깊이 이해하고, 자연어 명령으로 엔드투엔드 개발 작업을 완료할 수 있습니다. 코드 편집, 버그 수정, 테스트 실행 및 복구, Git 워크플로우 관리(예: 병합 충돌 해결, PR 생성), 복잡한 코드 설명, 터미널 명령 실행 등이 포함됩니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image6.png)
+![](images/image6.png)
 
-Claude Code 的优势主要体现在：极长的上下文窗口（可以处理完整文件甚至小型项目）、可以主动澄清模糊需求、自动规划和分配执行任务，以及对整个代码库内容的深度理解和解释能力。与普通 IDE Agent 相比，它更适合“沉浸式 vibe coding” 的开发流程。
+Claude Code의 장점은 주로 다음과 같습니다: 매우 긴 컨텍스트 윈도우(전체 파일이나 소규모 프로젝트 처리 가능), 모호한 요구사항을 능동적으로 명확히 하는 능력, 자동으로 작업을 계획하고 할당하는 능력, 전체 코드베이스 내용에 대한 깊은 이해와 설명 능력 등입니다. 일반적인 IDE Agent에 비해 "몰입형 Vibe Coding" 개발 프로세스에 더 적합합니다.
 
-在实际使用中，你可以通过对话指令，让它帮你创建新项目、执行 CLI 操作（例如整理文件夹、批量重命名文件、部署开源项目等）、配置开发环境（例如安装和调试 Python 环境）。如果觉得某段代码难以理解、某个目录结构不清晰，也可以直接让 Claude Code 生成结构化的分析文档，或者对特定内容进行分步骤讲解。
+실제 사용에서는 대화 명령을 통해 새 프로젝트를 생성하고, CLI 조작을 실행(예: 폴더 정리, 파일 일괄 이름 변경, 오픈소스 프로젝트 배포 등)하고, 개발 환경을 설정(예: Python 환경 설치 및 디버깅)하도록 할 수 있습니다. 특정 코드가 이해하기 어렵거나 디렉토리 구조가 명확하지 않은 경우, Claude Code에게 구조화된 분석 문서를 생성하거나 특정 내용을 단계별로 설명해 달라고 직접 요청할 수도 있습니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image7.png)![](/zh-cn/stage-2/backend/modern-cli/images/image8.png)
+![](images/image7.png)![](images/image8.png)
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image9.png)![](/zh-cn/stage-2/backend/modern-cli/images/image10.png)
+![](images/image9.png)![](images/image10.png)
 
-如果你想系统地学习 Claude Code，可以参考 Andrew Ng 与 Anthropic 联合推出的课程：  
+Claude Code를 체계적으로 학습하고 싶다면 Andrew Ng과 Anthropic이 공동으로 출시한 강의를 참고하세요:
 <https://www.bilibili.com/video/BV176t2zSEpr>
 
-接下来，我们将学习如何使用 Claude Code。由于直接使用官方 Claude Code 的成本往往非常高（如下图所示），我们会转而使用兼容 Claude Code 协议、但基于其他大模型的 API 平台。
+이제 Claude Code 사용 방법을 배워보겠습니다. 공식 Claude Code를 직접 사용하면 비용이 매우 높은 경우가 많으므로(아래 이미지 참조), Claude Code 프로토콜과 호환되지만 다른 대형 모델 기반의 API 플랫폼을 사용하겠습니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image11.png)
+![](images/image11.png)
 
-你需要学习下面几种不同方案（最好都尝试一遍），最后选择最适合你的那一种作为主要实践路径。
+다음 몇 가지 다른 방식을 학습해야 합니다(모두 사용해 보는 것이 좋습니다). 마지막에 가장 적합한 것을 선택하여 주요 실천 경로로 삼으세요.
 
-第一种方式是直接使用“兼容 Anthropic 接口”的 API。随着 Claude Code 的流行，越来越多的大模型服务商开始支持 Anthropic 风格的调用方式。常见的服务商包括 GLM、Kimi、DeepSeek 和 Siliconflow 等，它们都提供了兼容的 API 接口。关于具体配置，我们会在后文细讲。
+첫 번째 방식은 "Anthropic 인터페이스 호환" API를 직접 사용하는 것입니다. Claude Code가 유행하면서 점점 더 많은 대형 모델 서비스 제공업체가 Anthropic 스타일의 호출 방식을 지원하기 시작했습니다. 일반적인 서비스 제공업체로는 GLM, Kimi, DeepSeek, Siliconflow 등이 있으며, 모두 호환되는 API 인터페이스를 제공합니다. 구체적인 설정은 후문에서 자세히 설명하겠습니다.
 
-需要注意的是，Claude Code 通常会消耗大量 token，如果你担心 API 调用产生过高费用，可以考虑购买 GLM 的月度套餐（大约 20 元/月）来控制成本。如果你想先感受一下实际花费，也可以先充值 10 元做小规模试验。
+주의할 점은 Claude Code가 일반적으로 많은 token을 소모한다는 것입니다. API 호출로 인한 과도한 비용 발생이 우려된다면, GLM의 월간 정액제(약 20위안/월)를 구매하여 비용을 통제하는 것을 고려해 볼 수 있습니다. 실제 지출을 먼저 확인해 보고 싶다면 10위안을 충전하여 소규모 테스트를 진행할 수도 있습니다.
 
-另一种方式是使用 “Claude Code Route” 项目。它是一个开源工具，不仅支持所有常见的 API 调用接口，还允许你针对不同场景精细配置要使用的模型，并且支持对接本地部署的大模型。但由于这一方案的配置相对复杂，建议你先从第一种方案入手。
+다른 방식은 "Claude Code Route" 프로젝트를 사용하는 것입니다. 이것은 오픈소스 도구로, 모든 일반적인 API 호출 인터페이스를 지원할 뿐만 아니라, 시나리오별로 사용할 모델을 세밀하게 설정할 수 있으며, 로컬에 배포된 대형 모델과의 연결도 지원합니다. 하지만 이 방식의 설정이 비교적 복잡하므로, 먼저 첫 번째 방식부터 시작하는 것을 권장합니다.
 
-#### 使用智谱 GLM 作为后端（推荐）
+#### 지푸 GLM을 백엔드로 사용하기(추천)
 
-GLM（General Language Model）是智谱 AI 自主研发的一系列大型语言模型。GLM-4.6 是当前 GLM 系列的最新版本，其核心亮点是在代码能力上的优异表现（在公开基准和真实任务中对标 Claude Sonnet 4，在国内处于第一梯队）。
+GLM(General Language Model)은 지푸 AI(Zhipu AI)가 자체 개발한 대형 언어 모델 시리즈입니다. GLM-4.6은 현재 GLM 시리즈의 최신 버전으로, 핵심 하이라이트는 코드 능력에서의 우수한 성능입니다(공개 벤치마크와 실제 작업에서 Claude Sonnet 4와 대등하며, 중국 내에서 1티어에 위치).
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image12.png)
+![](images/image12.png)
 
-它还将上下文窗口扩展到 200K，可以更加从容地处理长文本和大体量代码，同时加强了推理与工具调用能力，在性能和成本之间取得了不错的平衡。
+또한 컨텍스트 윈도우를 200K로 확장하여 장문과 대규모 코드를 더 여유 있게 처리할 수 있으며, 추론 및 도구 호출 능력도 강화되어 성능과 비용 사이에서 좋은 균형을 이루고 있습니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image13.png)
+![](images/image13.png)
 
-在接入 GLM 之前，我们需要先安装 Claude Code。
+GLM에 연결하기 전에 먼저 Claude Code를 설치해야 합니다.
 
-如果你觉得命令行安装步骤麻烦，或者中途出现错误，可以直接让 Trae 的 Agent 帮你完成安装。
+명령행 설치 단계가 번거롭거나 중간에 오류가 발생하면, Trae의 Agent에게 설치를 도와달라고 직접 요청할 수 있습니다.
 
 ```python
-# 安装 Claude Code
+# Claude Code 설치
 npm install -g @anthropic-ai/claude-code
 
-# 进入你的项目
+# 프로젝트 디렉토리로 이동
 cd your-awesome-project
 
-# 启动 Claude Code
+# Claude Code 시작
 claude
 
-# 按 Ctrl+C 退出 Claude
+# Ctrl+C로 Claude 종료
 ```
 
-接下来，我们需要修改 Claude Code 的默认 API 请求地址，使其支持 GLM 的 API 服务。你可以直接复制下面的内容，让 Trae 帮你创建对应的环境变量；也可以选择把它们永久写入系统环境变量（如果出现问题，同样可以让 Agent 帮忙修改）。
+다음으로, Claude Code의 기본 API 요청 주소를 수정하여 GLM의 API 서비스를 지원하도록 해야 합니다. 아래 내용을 복사하여 Trae가 해당 환경 변수를 생성하도록 할 수 있습니다. 또는 시스템 환경 변수에 영구적으로 기록할 수도 있습니다(문제가 발생하면 Agent에게 수정을 도와달라고 하면 됩니다).
 
-首先，你需要先获取 GLM 的 API Key，并用你自己觉得最方便的方式保存好。
+먼저 GLM의 API Key를 받아 자신이 가장 편한 방식으로 안전하게 보관하세요.
 
-国内版地址：<https://bigmodel.cn/usercenter/proj-mgmt/apikeys>  
-国际版地址：<https://z.ai/manage-apikey/apikey-list>
+중국 내 버전 주소: <https://bigmodel.cn/usercenter/proj-mgmt/apikeys>
+글로벌 버전 주소: <https://z.ai/manage-apikey/apikey-list>
 
-如果你使用的是 **国内版 GLM**，请使用以下变量配置：
+**중국 내 버전 GLM**을 사용하는 경우 다음 변수 설정을 사용하세요.
 
 ```python
-# 在 Cmd 中运行以下命令
-# 注意将 `your_zhipu_api_key` 替换为你刚刚获取到的 API Key
+# Cmd에서 다음 명령 실행
+# `your_zhipu_api_key`를 방금 받은 API Key로 교체하세요
 setx ANTHROPIC_AUTH_TOKEN your_zhipu_api_key
 setx ANTHROPIC_BASE_URL https://open.bigmodel.cn/api/anthropic
 ```
 
-如果你使用的是 **国际版 GLM**，请使用下面的配置：
+**글로벌 버전 GLM**을 사용하는 경우 다음 설정을 사용하세요.
 
 ```python
-# 在 Cmd 中运行以下命令
-# 同样注意替换掉 `your_zai_api_key`
+# Cmd에서 다음 명령 실행
+# 마찬가지로 `your_zai_api_key`를 교체하세요
 setx ANTHROPIC_AUTH_TOKEN your_zai_api_key
 setx ANTHROPIC_BASE_URL https://api.z.ai/api/anthropic
 ```
 
-你可以直接在 Trae 中输入类似下面的提示词：
+Trae에 다음과 같은 프롬프트를 직접 입력할 수 있습니다.
 
-⚠️ 如果你是通过 Trae 帮你配置“永久环境变量”，那么配置完成后 **必须重启 Trae**，否则它内置终端里的环境变量不会更新，可能导致登录失败或网络连接错误。
+⚠️ Trae를 통해 "영구 환경 변수"를 설정한 경우, 설정 완료 후 **반드시 Trae를 재시작**해야 합니다. 그렇지 않으면 내장 터미널의 환경 변수가 업데이트되지 않아 로그인 실패나 네트워크 연결 오류가 발생할 수 있습니다.
 
 ```python
 Based on my environment variable settings:
@@ -159,68 +159,68 @@ and my key(Replace it with your own key):
 please help me configure and start Claude Code
 ```
 
-你会看到类似下面的过程输出：
+다음과 유사한 과정 출력이 보일 것입니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image14.png)
+![](images/image14.png)
 
-> 💡 什么是环境变量？
+> 💡 환경 변수란 무엇인가요?
 >
-> 环境变量本质上是一组存储在操作系统中的“键值对”配置信息，通常以 “变量名 = 具体值” 的形式存在。只要提前在终端或系统设置中配置好，程序就可以随时读取这些变量来获取相关信息。由于环境变量可以直接在终端中写入，而无需修改代码本身，我们通常会把访问大模型所需的密钥存放在环境变量里，以避免泄露。程序只需要读取对应环境变量，就能完成大模型调用。
+> 환경 변수는 본질적으로 운영 체제에 저장된 "키-값 쌍" 설정 정보로, 보통 "변수명 = 구체적인 값"의 형태로 존재합니다. 터미널이나 시스템 설정에 미리 구성해 두면, 프로그램이 언제든 이 변수를 읽어 관련 정보를 가져올 수 있습니다. 환경 변수는 코드 자체를 수정할 필요 없이 터미널에 직접 기록할 수 있으므로, 대형 모델 접근에 필요한 키를 유출을 방지하기 위해 환경 변수에 보관하는 것이 일반적입니다. 프로그램은 해당 환경 변수를 읽기만 하면 대형 모델 호출을 완료할 수 있습니다.
 >
-> 在 Windows 系统中，环境变量除了用于存储大模型的访问密钥，还常常用来保存命令行工具的“调用路径”。
+> Windows 시스템에서는 환경 변수가 대형 모델 접근 키 저장 외에도, 명령행 도구의 "호출 경로"를 저장하는 데 자주 사용됩니다.
 >
-> 我们知道终端本身也是一个程序。有时我们希望在终端里启动某个外部程序，例如在终端中输入 `claude` 来启动 Claude Code。之所以可以直接输入 `claude` 就运行，是因为终端会读取系统的环境变量，其中的 PATH 变量里包含了 Claude Code 可执行文件所在的目录，所以终端能够找到并执行它（等价于在终端中粘贴那段程序的绝对路径再按回车）。
+> 터미널 자체도 하나의 프로그램입니다. 때로는 터미널에서 특정 외부 프로그램을 시작하고 싶을 수 있습니다. 예를 들어 터미널에 `claude`를 입력하여 Claude Code를 시작하는 경우, `claude`만 입력해도 실행되는 이유는 터미널이 시스템의 환경 변수를 읽고, 그중 PATH 변수에 Claude Code 실행 파일이 있는 디렉토리가 포함되어 있기 때문에 터미널이 이를 찾아 실행할 수 있는 것입니다(터미널에서 해당 프로그램의 절대 경로를 붙여넣고 엔터를 누르는 것과 동일).
 >
-> 一个典型的环境变量可能长这样：`PATH=C:\Windows\system32;C:\Program Files\Python`。这样我们就可以在任何路径下执行系统中的这些程序，例如直接在命令行键入 `python` 启动 Python 解释器。
+> 전형적인 환경 변수는 다음과 같이 보일 수 있습니다: `PATH=C:\Windows\system32;C:\Program Files\Python`. 이렇게 하면 시스템의 이러한 프로그램을 어떤 경로에서든 실행할 수 있습니다. 예를 들어 명령행에 `python`을 직접 입력하여 Python 인터프리터를 시작할 수 있습니다.
 >
-> 如果你想查看系统当前的环境变量，可以在 Windows 搜索中输入“环境变量”，在弹出的“编辑系统环境变量”窗口中就能看到所有变量及其值。有的变量用于存储大模型密钥，有的则用于添加程序目录，方便在任意路径下调用。
+> 현재 시스템의 환경 변수를 확인하려면 Windows 검색에서 "환경 변수"를 입력하고, 팝업되는 "시스템 환경 변수 편집" 창에서 모든 변수와 그 값을 볼 수 있습니다. 일부 변수는 대형 모델 키를 저장하는 데 사용되고, 일부는 임의의 경로에서 프로그램을 호출할 수 있도록 프로그램 디렉토리를 추가하는 데 사용됩니다.
 
-现在，你就可以使用最新的 GLM 来进行 Claude Code 开发了。你可以尝试重新跑一遍之前的项目，或者重新挑战那些 Trae 没有完成好的任务，对比看看体验上的差异。
+이제 최신 GLM을 사용하여 Claude Code 개발을 진행할 수 있습니다. 이전에 진행했던 프로젝트를 다시 실행해 보거나, Trae가 제대로 완료하지 못한 작업을 다시 도전하여 경험의 차이를 비교해 보세요.
 
-🎉 反复“推倒重来”并不是浪费时间——你每重做一遍，技能都会更扎实一分。
+🎉 반복적으로 "다시 시작"하는 것은 시간 낭비가 아닙니다. 다시 할 때마다 기술이 한층 더 탄탄해집니다.
 
-用和 GLM 完全相同的思路，也可以轻松接入其他支持 Anthropic 兼容格式的接口。
+GLM과 완전히 동일한 방식으로 Anthropic 호환 형식을 지원하는 다른 인터페이스도 쉽게 연결할 수 있습니다.
 
-#### 使用 Kimi K2 作为后端（推荐）
+#### Kimi K2를 백엔드로 사용하기(추천)
 
-Kimi K2 是月之暗面（Moonshot AI）推出的新一代大语言模型，在代码理解和生成能力上表现出色。Kimi K2 支持超长上下文窗口（最高可达 200K tokens），能够轻松处理大型代码库和复杂项目。
+Kimi K2는 월의암면(Moonshot AI)이 출시한 차세대 대형 언어 모델로, 코드 이해와 생성 능력에서 뛰어난 성과를 보여줍니다. Kimi K2는 초장문 컨텍스트 윈도우(최대 200K tokens)를 지원하여 대규모 코드베이스와 복잡한 프로젝트를 쉽게 처리할 수 있습니다.
 
-**核心优势：**
+**핵심 장점:**
 
-- **超长上下文**：支持 200K 上下文窗口，可以一次性处理整个项目的代码
-- **代码能力强**：在代码生成、重构和调试方面表现优异
-- **中文理解好**：对中文编程需求的理解更加准确
-- **工具调用稳定**：支持稳定的函数调用和工具使用
+- **초장문 컨텍스트**: 200K 컨텍스트 윈도우를 지원하여 전체 프로젝트의 코드를 한 번에 처리 가능
+- **강력한 코드 능력**: 코드 생성, 리팩토링, 디버깅에서 우수한 성과
+- **중국어 이해 우수**: 중국어 프로그래밍 요구사항에 대한 이해가 더 정확함
+- **안정적인 도구 호출**: 안정적인 함수 호출과 도구 사용 지원
 
-**获取 API Key：**
+**API Key 획득:**
 
-访问 <https://platform.moonshot.cn/console/account> 注册并获取 API Key。
+<https://platform.moonshot.cn/console/account>에 접속하여 가입 후 API Key를 받으세요.
 
-**配置方法：**
+**설정 방법:**
 
-参考文档：<https://platform.moonshot.cn/docs/guide/agent-support>
+참고 문서: <https://platform.moonshot.cn/docs/guide/agent-support>
 
 ```bash
 export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic
 export ANTHROPIC_AUTH_TOKEN=sk-YOURKEY
 ```
 
-#### 使用 Minimax 作为后端（推荐）
+#### Minimax를 백엔드로 사용하기(추천)
 
-Minimax 是稀宇科技（MiniMax）推出的新一代大语言模型，在编程任务上表现优异。Minimax 模型以其出色的推理能力和代码生成质量而闻名，特别适合复杂的编程场景。
+Minimax는 시위과기(MiniMax)가 출시한 차세대 대형 언어 모델로, 프로그래밍 작업에서 우수한 성과를 보여줍니다. Minimax 모델은 뛰어난 추론 능력과 코드 생성 품질로 유명하며, 특히 복잡한 프로그래밍 시나리오에 적합합니다.
 
-**核心优势：**
+**핵심 장점:**
 
-- **推理能力强**：在复杂逻辑推理和代码架构设计方面表现出色
-- **代码质量高**：生成的代码结构清晰、可读性好
-- **多语言支持**：支持多种编程语言的代码生成和转换
-- **响应速度快**：API 响应速度快，适合高频调用场景
+- **강력한 추론 능력**: 복잡한 논리 추론과 코드 아키텍처 설계에서 우수한 성과
+- **높은 코드 품질**: 생성된 코드가 구조가 명확하고 가독성이 좋음
+- **다국어 지원**: 다양한 프로그래밍 언어의 코드 생성 및 변환 지원
+- **빠른 응답 속도**: API 응답 속도가 빨라 고빈도 호출 시나리오에 적합
 
-**获取 API Key：**
+**API Key 획득:**
 
-访问 <https://platform.minimax.io/> 注册并获取 API Key。
+<https://platform.minimax.io/>에 접속하여 가입 후 API Key를 받으세요.
 
-**配置方法：**
+**설정 방법:**
 
 ```bash
 export ANTHROPIC_BASE_URL=https://api.minimax.io/anthropic
@@ -228,22 +228,22 @@ export ANTHROPIC_AUTH_TOKEN=YOUR_MINIMAX_API_KEY
 export ANTHROPIC_MODEL=MiniMax-M2.7
 ```
 
-#### 使用 DeepSeek 作为后端（推荐）
+#### DeepSeek를 백엔드로 사용하기(추천)
 
-DeepSeek 是深度求索推出的开源大语言模型，以其出色的代码能力和高性价比受到开发者欢迎。DeepSeek Coder 专门针对编程任务进行了优化训练。
+DeepSeek는 심도탐색(DeepSeek)이 출시한 오픈소스 대형 언어 모델로, 뛰어난 코드 능력과 높은 가성비로 개발자들에게 인기가 있습니다. DeepSeek Coder는 프로그래밍 작업에 특화되어 최적화 학습되었습니다.
 
-**核心优势：**
+**핵심 장점:**
 
-- **代码能力突出**：在代码生成、代码理解和 Bug 修复方面表现优异
-- **开源可定制**：模型开源，可以根据需求进行微调
-- **性价比高**：API 价格相对较低，适合高频使用
-- **中文支持好**：对中文编程场景理解准确
+- **뛰어난 코드 능력**: 코드 생성, 코드 이해, 버그 수정에서 우수한 성과
+- **오픈소스 커스터마이징**: 모델이 오픈소스이므로 필요에 따라 미세 조정 가능
+- **높은 가성비**: API 가격이 상대적으로 낮아 고빈도 사용에 적합
+- **중국어 지원 우수**: 중국어 프로그래밍 시나리오에 대한 이해가 정확함
 
-**获取 API Key：**
+**API Key 획득:**
 
-访问 <https://platform.deepseek.com/usage> 注册并获取 API Key。
+<https://platform.deepseek.com/usage>에 접속하여 가입 후 API Key를 받으세요.
 
-**配置方法：**
+**설정 방법:**
 
 ```bash
 export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
@@ -254,22 +254,22 @@ export ANTHROPIC_SMALL_FAST_MODEL=deepseek-chat
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 ```
 
-#### 使用火山引擎 Coding Plan 作为后端（推荐）
+#### 바이톈인 Coding Plan을 백엔드로 사용하기(추천)
 
-火山引擎（Volcano Engine）是字节跳动旗下的云服务平台，提供企业级的 AI 模型服务。火山引擎的 Coding Plan 专门为编程场景优化，提供稳定、高效的代码生成能力。
+바이톈인(Volcano Engine)은 바이트댄스(ByteDance)의 클라우드 서비스 플랫폼으로, 기업급 AI 모델 서비스를 제공합니다. 바이톈인의 Coding Plan은 프로그래밍 시나리오에 특화되어 최적화되었으며, 안정적이고 효율적인 코드 생성 능력을 제공합니다.
 
-**核心优势：**
+**핵심 장점:**
 
-- **企业级稳定性**：提供服务等级协议（SLA），保障服务稳定性
-- **代码场景优化**：针对编程任务进行了专门优化
-- **丰富模型选择**：支持多种模型，包括 Doubao-pro、Doubao-lite 等
-- **国内访问快**：国内节点部署，访问速度快
+- **기업급 안정성**: 서비스 수준 협약(SLA)을 제공하여 서비스 안정성 보장
+- **코드 시나리오 최적화**: 프로그래밍 작업에 특화된 최적화
+- **다양한 모델 선택**: Doubao-pro, Doubao-lite 등 다양한 모델 지원
+- **중국 내 빠른 접속**: 중국 내 노드 배포로 빠른 접속 속도
 
-**获取 API Key：**
+**API Key 획득:**
 
-访问 <https://console.volcengine.com/ark/region:ark+cn-beijing/apiKey> 注册并获取 API Key。
+<https://console.volcengine.com/ark/region:ark+cn-beijing/apiKey>에 접속하여 가입 후 API Key를 받으세요.
 
-**配置方法：**
+**설정 방법:**
 
 ```bash
 export ANTHROPIC_BASE_URL=https://ark.volces.com/api/anthropic
@@ -277,128 +277,128 @@ export ANTHROPIC_AUTH_TOKEN=YOUR_VOLCANO_API_KEY
 export ANTHROPIC_MODEL=doubao-pro-32k
 ```
 
-#### 其他兼容 Anthropic 的 API
+#### 기타 Anthropic 호환 API
 
-Siliconflow：
+Siliconflow:
 
 ```bash
 export ANTHROPIC_BASE_URL="https://api.siliconflow.cn/"
-export ANTHROPIC_MODEL="moonshotai/Kimi-K2-Instruct-0905"    # 可以自行修改所需模型
-export ANTHROPIC_API_KEY="YOUR_SILICONCLOUD_API_KEY"    # 请替换 API Key
+export ANTHROPIC_MODEL="moonshotai/Kimi-K2-Instruct-0905"    # 원하는 모델로 수정 가능
+export ANTHROPIC_API_KEY="YOUR_SILICONCLOUD_API_KEY"    # API Key를 교체하세요
 ```
 
-阿里云 DashScope（Aliyuncs）：<https://help.aliyun.com/zh/model-studio/get-api-key>
+알리클라우드 DashScope(Aliyuncs): <https://help.aliyun.com/zh/model-studio/get-api-key>
 
 ```python
 export ANTHROPIC_BASE_URL="https://dashscope.aliyuncs.com/apps/anthropic"
 export ANTHROPIC_API_KEY="YOUR_DASHSCOPE_API_KEY"
 ```
 
-::: details 使用 Claude Code Route 作为后端（进阶用法）
+::: details Claude Code Route를 백엔드로 사용하기(심화 사용법)
 
-上面我们讲解了如何用 GLM 官方 API 替换 Claude Code 的 Anthropic 接口。接下来，我们来看一下 Claude Code Router 这个工具是如何让 Claude Code 适配更多模型 API 的。
+위에서 GLM 공식 API로 Claude Code의 Anthropic 인터페이스를 교체하는 방법을 설명했습니다. 다음으로 Claude Code Router 도구가 Claude Code를 더 많은 모델 API에 어떻게 적응시키는지 살펴보겠습니다.
 
-[Claude Code Router](https://github.com/musistudio/claude-code-router) 是一款专门为 Claude Code 设计的智能路由增强工具。它的核心作用，是帮助用户按需将 AI 请求分发到不同平台上的模型，并可以高度自定义。它支持接入几十个平台，包括 OpenRouter、DeepSeek、Ollama、Gemini 等，也可以按场景将任务路由到特定模型，比如 GLM-4.5、Kimi-K2、Qwen3-Coder 等。举例来说，你可以将后台任务自动交给本地 Ollama，以节省成本；将长文本 / 长代码任务交给 Gemini-2.5-Pro；把代码讲解交给 DeepSeek。
+[Claude Code Router](https://github.com/musistudio/claude-code-router)는 Claude Code를 위해 특별히 설계된 스마트 라우팅 강화 도구입니다. 핵심 역할은 사용자의 요구에 따라 AI 요청을 서로 다른 플랫폼의 모델에 분배하는 것이며, 고도로 커스터마이징할 수 있습니다. OpenRouter, DeepSeek, Ollama, Gemini 등 수십 개의 플랫폼 연결을 지원하며, 시나리오별로 작업을 특정 모델에 라우팅할 수도 있습니다. 예를 들어 GLM-4.5, Kimi-K2, Qwen3-Coder 등이 있습니다. 예를 들어, 백그라운드 작업을 자동으로 로컬 Ollama에 넘겨 비용을 절감하고, 장문/장코드 작업은 Gemini-2.5-Pro에 넘기며, 코드 설명은 DeepSeek에 넘길 수 있습니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image16.png)
+![](images/image16.png)
 
-该工具还提供了方便的 UI/CLI 配置管理能力，并通过"转换器（converter）"适配不同平台的 API 格式。它支持 GitHub Actions 等自动化集成以及自定义扩展，解决了"单一模型无法覆盖所有场景"以及"频繁切换平台很麻烦"的问题，帮助用户更灵活、低成本地利用 AI 工具。
+이 도구는 편리한 UI/CLI 설정 관리 기능도 제공하며, "변환기(converter)"를 통해 서로 다른 플랫폼의 API 형식에 적응합니다. GitHub Actions 등의 자동화 통합 및 커스텀 확장을 지원하여, "단일 모델로 모든 시나리오를 커버할 수 없는" 문제와 "플랫폼을 자주 전환하는 번거로움"을 해결하여 사용자가 더 유연하고 저렴하게 AI 도구를 활용할 수 있도록 도와줍니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image17.png)
+![](images/image17.png)
 
-下面我们简单介绍如何安装 Claude Code Router。大致需要以下步骤（同样可以让 Trae 帮你执行），以准备好相关环境：
+다음으로 Claude Code Router 설치 방법을 간단히 소개하겠습니다. 대략 다음 단계가 필요합니다(마찬가지로 Trae에게 실행을 도와달라고 할 수 있습니다).
 
 ```markdown
 npm install -g @anthropic-ai/claude-code
 npm install -g @musistudio/claude-code-router
 ```
 
-安装完成后，你需要确认本地可以使用 `ccr` 命令。如果看到类似下面的输出，说明安装成功：
+설치 완료 후 로컬에서 `ccr` 명령을 사용할 수 있는지 확인합니다. 다음과 유사한 출력이 보이면 설치 성공입니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image18.png)
+![](images/image18.png)
 
-接下来，有两种方式来初始化和配置模型：
+다음으로 모델을 초기화하고 설정하는 두 가지 방법이 있습니다.
 
-- 使用 CCR 自带的 UI，在浏览器中打开它提供的配置页面进行操作；
-- 直接修改 CCR 的默认配置文件（本质上 UI 也是在修改配置文件，只是提供了更直观的界面）。
+- CCR에 내장된 UI를 사용하여 브라우저에서 제공하는 설정 페이지를 열어 조작
+- CCR의 기본 설정 파일을 직접 수정(UI도 근본적으로 설정 파일을 수정하는 것이며, 더 직관적인 인터페이스를 제공할 뿐)
 
-如果选择使用 CCR UI，你会看到类似下面的界面：
+CCR UI를 선택하면 다음과 유사한 인터페이스가 보입니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image19.png)
+![](images/image19.png)
 
-此时点击 "Add Provider" 按钮，就会看到如下界面。你需要：
+이때 "Add Provider" 버튼을 클릭하면 다음 인터페이스가 나타납니다. 다음을 수행해야 합니다.
 
-1. 在 Name 中输入模型提供商的名字；
-2. 在 API Full URL 中填写该提供商的 OpenAI 兼容接口地址；
-3. 在 API Key 中填写对应平台的 API Key；
-4. 在 Models 区域中填写模型名称，点击 "Add Model" 添加；
-5. 最后点击 "Save" 保存配置。
+1. Name에 모델 제공업체의 이름 입력
+2. API Full URL에 해당 제공업체의 OpenAI 호환 인터페이스 주소 입력
+3. API Key에 해당 플랫폼의 API Key 입력
+4. Models 영역에 모델 이름을 입력하고 "Add Model" 클릭하여 추가
+5. 마지막으로 "Save" 클릭하여 설정 저장
 
-（界面往下滚动还有很多高级选项，但目前你可以先忽略它们。）
+(인터페이스를 아래로 스크롤하면 고급 옵션이 더 많지만, 현재는 무시해도 됩니다.)
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image20.png)
+![](images/image20.png)
 
-下面是 DeepSeek 与 Kimi 的配置示例：
+다음은 DeepSeek와 Kimi의 설정 예시입니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image21.png)
+![](images/image21.png)
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image22.png)
+![](images/image22.png)
 
-保存模型配置后，还需要在右侧 Router 区域中指定默认模型（Default）。点击对应的下拉选择，将其设置为 `kimi`（推荐），然后在右上角点击 `Save and Restart`。
+모델 설정을 저장한 후 우측 Router 영역에서 기본 모델(Default)을 지정해야 합니다. 해당 드롭다운에서 `kimi`를 선택(추천)한 후, 우측 상단의 `Save and Restart`를 클릭합니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image23.png)
+![](images/image23.png)
 
-之后，只需在终端中输入 `ccr code`，即可通过 Claude Code Router 启动 Claude Code 的编码工作流。
+이후 터미널에서 `ccr code`를 입력하면 Claude Code Router를 통해 Claude Code의 코딩 워크플로우를 시작할 수 있습니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image24.png)
+![](images/image24.png)
 
 :::
 
-#### Claude Code 的进阶用法
+#### Claude Code의 심화 사용법
 
-很多人最开始使用 Claude Code 时，只把它当成普通对话工具来用。但实际上，它内置了很多丰富的能力，能够让你使用起来更高效、灵活。下面是一些常见命令和用法示例：
+많은 분들이 처음 Claude Code를 사용할 때 일반적인 대화 도구로만 사용합니다. 하지만 실제로는 다양한 풍부한 기능이 내장되어 있어, 더 효율적이고 유연하게 사용할 수 있습니다. 다음은 일반적인 명령과 사용 예시입니다.
 
-参考文档：
+참고 문서:
 
-<https://docs.claude.com/en/docs/claude-code/cli-reference>  
+<https://docs.claude.com/en/docs/claude-code/cli-reference>
 <https://docs.claude.com/en/docs/claude-code/slash-commands>
 
-| 命令              | 作用                                      | 示例                                     |
+| 명령어 | 기능 | 예시 |
 | ----------------- | ----------------------------------------- | ---------------------------------------- |
-| claude            | 启动交互模式                              | `claude`                                 |
-| claude "query"    | 执行一次性任务并输出结果                  | `claude "explain this project"`          |
-| claude -p "query" | 执行一次性问题并在结束后自动退出          | `claude -p "explain this function xxxx"` |
-| claude -c         | 继续最近的一次会话                        | `claude -c`                              |
-| claude -r         | 恢复上一段会话                            | `claude -r`                              |
-| /resume           | 在当前聊天中切换回上一段会话              | `claude -c`、`/resume`                   |
-| /plugin           | 管理插件，可安装提交与审查类扩展能力     | `/plugin`                                |
-| /init             | 用 CLAUDE.md 初始化项目说明               | `/init`                                  |
-| /clear            | 清空当前会话上下文，防止信息过载          | `/clear`                                 |
-| /compact          | 压缩会话历史，减少上下文 token 占用       | `/compact`                               |
-| /cost             | 查看当前消费情况                          | `/cost`                                  |
-| /model            | 切换使用的模型（用兼容 API 时一般可忽略） | `/model`                                 |
-| /memory           | 管理 CLAUDE.md 记忆文件                   |                                          |
-| /help             | 显示可用命令列表                          | `/help`                                  |
-| exit or Ctrl+C    | 退出 Claude Code                          | `exit` 或 `Ctrl+C`                       |
-| /agents           | 高级功能，后文会说明                      |                                          |
-| /mcp              | 高级功能，后文会说明                      |                                          |
+| claude | 대화형 모드 시작 | `claude` |
+| claude "query" | 일회성 작업 실행 후 결과 출력 | `claude "explain this project"` |
+| claude -p "query" | 일회성 질문 실행 후 자동 종료 | `claude -p "explain this function xxxx"` |
+| claude -c | 가장 최근 세션 이어서 진행 | `claude -c` |
+| claude -r | 이전 세션 복원 | `claude -r` |
+| /resume | 현재 대화에서 이전 세션으로 전환 | `claude -c`, `/resume` |
+| /plugin | 플러그인 관리, 커밋 및 리뷰 확장 기능 설치 가능 | `/plugin` |
+| /init | CLAUDE.md로 프로젝트 설명 초기화 | `/init` |
+| /clear | 현재 세션 컨텍스트 비우기, 정보 과부하 방지 | `/clear` |
+| /compact | 세션 기록 압축, 컨텍스트 token 점유 감소 | `/compact` |
+| /cost | 현재 사용료 확인 | `/cost` |
+| /model | 사용 중인 모델 전환(호환 API 사용 시 보통 무시 가능) | `/model` |
+| /memory | CLAUDE.md 메모리 파일 관리 | |
+| /help | 사용 가능한 명령 목록 표시 | `/help` |
+| exit or Ctrl+C | Claude Code 종료 | `exit` 또는 `Ctrl+C` |
+| /agents | 고급 기능, 후문에서 설명 | |
+| /mcp | 고급 기능, 후문에서 설명 | |
 
 **CLAUDE.md**
 
-参考： <https://www.anthropic.com/engineering/claude-code-best-practices>
+참고: <https://www.anthropic.com/engineering/claude-code-best-practices>
 
-`CLAUDE.md` 是 Claude 在开始对话时会自动读取并加入上下文的特殊文件。因此，它非常适合用来记录：
+`CLAUDE.md`는 Claude가 대화를 시작할 때 자동으로 읽어 컨텍스트에 추가하는 특수 파일입니다. 따라서 다음을 기록하는 데 매우 적합합니다.
 
-- 常用 bash 命令
-- 核心文件和工具函数
-- 代码风格约定
-- 测试方式说明
-- 仓库协作规范（例如分支命名、是用 merge 还是 rebase 等）
-- 开发环境配置说明（例如是否使用 pyenv、推荐哪种编译器等）
-- 项目中需要特别注意的行为或坑点
-- 任何你希望 Claude “记住”的信息
+- 자주 사용하는 bash 명령어
+- 핵심 파일과 유틸리티 함수
+- 코드 스타일 규칙
+- 테스트 방법 설명
+- 저장소 협업 규칙(예: 브랜치 이름, merge vs rebase 등)
+- 개발 환경 설정 설명(예: pyenv 사용 여부, 권장 컴파일러 등)
+- 프로젝트에서 특별히 주의해야 할 사항이나 함정
+- Claude가 "기억"해 주길 바라는 모든 정보
 
-`CLAUDE.md` 本身没有强制格式要求，只要简洁、便于人类阅读即可。例如：
+`CLAUDE.md` 자체에는 강제 형식이 없으며, 간결하고 사람이 읽기 쉽기만 하면 됩니다. 예를 들면 다음과 같습니다.
 
 ```
 # Bash commands
@@ -410,69 +410,69 @@ npm install -g @musistudio/claude-code-router
 - Destructure imports when possible (eg. import { foo } from 'bar')
 
 # Workflow
-- Be sure to typecheck when you’re done making a series of code changes
+- Be sure to typecheck when you're done making a series of code changes
 - Prefer running single tests, and not the whole test suite, for performance
 ```
 
-#### Claude Code 的内部原理
+#### Claude Code의 내부 원리
 
-参考： <https://github.com/shareAI-lab/analysis_claude_code>
+참고: <https://github.com/shareAI-lab/analysis_claude_code>
 
-如果你好奇为什么 Claude Code 在很多场景下比 Trae 或 Cursor 等 Agent 编程工具更好用，我们可以简单看一下它的内部工作机制。
+Claude Code가 왜 많은 시나리오에서 Trae나 Cursor 같은 Agent 프로그래밍 도구보다 더 나은지 궁금하다면, 내부 작동 방식을 간단히 살펴볼 수 있습니다.
 
-其他 CLI AI 编程工具的整体实现方式也大体类似。
+다른 CLI AI 프로그래밍 도구도 전체적인 구현 방식이 대체로 유사합니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image25.png)
+![](images/image25.png)
 
-Claude Code 会把编程任务拆解成一个持续的“感知—思考—行动—验证”循环，并在其中调用不同工具完成任务。它模仿人类开发者的工作流：不断“写代码 → 运行 → 看结果 → 再改进”。系统内部通过一个主任务循环不断执行步骤，在每一轮循环中，Claude 都可以调用不同工具——例如读写文件、执行命令、搜索代码等——再根据工具返回的真实结果决定下一步行动。
+Claude Code는 프로그래밍 작업을 지속적인 "인식-사고-행동-검증" 루프로 분해하고, 그 안에서 다양한 도구를 호출하여 작업을 완료합니다. 인간 개발자의 워크플로우를 모방하여 끊임없이 "코드 작성 -> 실행 -> 결과 확인 -> 개선"을 반복합니다. 시스템 내부에서는 메인 작업 루프가 지속적으로 단계를 실행하며, 각 루프에서 Claude는 다양한 도구(예: 파일 읽기/쓰기, 명령 실행, 코드 검색 등)를 호출하고, 도구가 반환한 실제 결과를 바탕으로 다음 행동을 결정합니다.
 
-其中有几个关键特性值得注意：
+몇 가지 주요 특징에 주목할 만합니다.
 
-- **流式处理（Stream Processing）**：Claude 可以一边思考一边输出结果，而不是必须等所有代码写完再执行。
-- **智能压缩（Intelligent Compression）**：长对话容易导致上下文过长，Claude 通过将历史压缩成关键信息来减少“遗忘”的概率，并通过区分长短期记忆保证高效运行。
-- **并发控制（Concurrency Control）**：内部并行设计可以让多个任务同时进行，互不干扰。
-- **子 Agent 管理（Sub-agent Management）**：实际工作中并不只相当于一个“角色”处理所有事情，你可以管理多个子 Agent 协作处理代码，每个 Agent 负责不同任务，比如专门负责测试、专门负责写文档等。
+- **스트리밍 처리(Stream Processing)**: Claude는 모든 코드를 다 작성한 후에 실행하는 것이 아니라, 생각하면서 동시에 결과를 출력할 수 있습니다.
+- **지능형 압축(Intelligent Compression)**: 긴 대화는 컨텍스트가 너무 길어지기 쉬운데, Claude는 기록을 핵심 정보로 압축하여 "망각" 확률을 줄이고, 단기/장기 기억을 구분하여 효율적인 실행을 보장합니다.
+- **동시성 제어(Concurrency Control)**: 내부 병렬 설계로 여러 작업을 동시에 진행할 수 있으며, 서로 간섭하지 않습니다.
+- **서브 Agent 관리(Sub-agent Management)**: 실제 작업에서는 단 하나의 "역할"이 모든 일을 처리하는 것이 아니며, 여러 서브 Agent가 협력하여 코드를 처리할 수 있습니다. 각 Agent는 서로 다른 작업(예: 테스트 전담, 문서 작성 전담 등)을 담당합니다.
 
 ### Codex
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image26.png)
+![](images/image26.png)
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image27.png)
+![](images/image27.png)
 
-和 Claude Code 类似，Codex 是由 OpenAI 开发的一款 AI 协作编程工具，你可以把它理解成 “OpenAI 版的 Claude Code”。它最大的优势是对 GPT-5 的高效适配。
+Claude Code와 유사하게, Codex는 OpenAI가 개발한 AI 협업 프로그래밍 도구로, "OpenAI 버전의 Claude Code"로 이해하면 됩니다. 가장 큰 장점은 GPT-5에 대한 효율적인 적응입니다.
 
-从实际体验来看，GPT-5 目前响应速度更快、犯错率更低（在多轮复杂任务中正确完成的概率更高）。它的一个缺点是解释往往偏“学术”和“技术”，有时显得过于严谨、信息量很大，对初学者来说可能略微难懂。
+실제 체험으로 볼 때, GPT-5는 현재 응답 속도가 더 빠르고 오류 발생률이 더 낮습니다(다중 라운드 복잡 작업에서 정확하게 완료할 확률이 더 높음). 한 가지 단점은 설명이 "학술적"이고 "기술적"인 경향이 있어, 때로는 너무 엄격하고 정보량이 많아 초보자에게는 약간 이해하기 어려울 수 있다는 것입니다.
 
-你可以通过下面的命令安装 Codex：
+다음 명령으로 Codex를 설치할 수 있습니다.
 
 ```
 npm i -g @openai/codex
 ```
 
-#### 使用 OpenAI 官方 API 作为后端
+#### OpenAI 공식 API를 백엔드로 사용하기
 
-如果直接使用 OpenAI 官方的 Codex 入口，配置会非常简单：当你已经开通 OpenAI 订阅或申请到了相应 API 配额之后，只需要在命令行中输入 `codex` 启动程序，并按提示完成登录即可。
+OpenAI 공식 Codex 입구를 직접 사용하면 설정이 매우 간단합니다. 이미 OpenAI 구독을 개통했거나 해당 API 할당량을 신청한 경우, 명령행에서 `codex`를 입력하여 프로그램을 시작하고 안내에 따라 로그인을 완료하기만 하면 됩니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image28.png)
+![](images/image28.png)
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image29.png)
+![](images/image29.png)
 
-#### 使用转发 OpenAI API 的方式作为后端
+#### 전달 OpenAI API 방식을 백엔드로 사용하기
 
-由于官方 OPENAI API 可能存在价格较高、网络要求严格等问题，为了避免这些限制，我们也可以通过其他 API 网关服务来转发调用。
+공식 OpenAI API는 가격이 높거나 네트워크 요구사항이 엄격한 등의 문제가 있을 수 있습니다. 이러한 제한을 피하기 위해 다른 API 게이트웨이 서비스를 통해 전달 호출할 수도 있습니다.
 
-在这种方式下，我们只需要在第三方转发平台上购买对应的 Codex API 配额，就能获得接近原生 OpenAI Codex 的使用体验。
+이 방식에서는 서드파티 전달 플랫폼에서 해당 Codex API 할당량을 구매하기만 하면, 네이티브 OpenAI Codex에 가까운 사용 경험을 얻을 수 있습니다.
 
-参考： <https://open-dev.feishu.cn/wiki/PAqUwWG4IiuwTvkQ2sGcaQuPnXc>  
-充值地址： <https://api.zyai.online/account/topup/recharge>
+참고: <https://open-dev.feishu.cn/wiki/PAqUwWG4IiuwTvkQ2sGcaQuPnXc>
+충전 주소: <https://api.zyai.online/account/topup/recharge>
 
-需要注意的是，在拿到 token 配额后，我们还需要在本地配置好 API Key。
+주의할 점은 token 할당량을 받은 후, 로컬에서 API Key를 설정해야 한다는 것입니다.
 
-在密钥分组设置中，要注意选择专门用于 Codex 的那一项。
+키 그룹 설정에서 Codex 전용 항목을 선택해야 합니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image30.png)
+![](images/image30.png)
 
-接下来，我们需要把获取到的 Key 填入下面的提示词中，并把整段提示词交给 Trae，让它帮你完成整个配置过程：
+다음으로, 받은 Key를 아래 프롬프트에 입력한 후, 전체 프롬프트를 Trae에 넘겨 전체 설정 과정을 완료하도록 합니다.
 
 ````bash
 My API key is: [Paste your obtained sk-xxxxx key here]
@@ -519,21 +519,21 @@ Whether the environment variable was set successfully
 I can use the command `codex --profile myrelay` to run it
 ````
 
-配置完成后，你就可以通过 `codex --profile myrelay` 启动使用转发 API 的 Codex 了。之后的使用方式与 Claude Code 类似：只需要在对话框中随时输入你的想法和需求即可。
+설정이 완료되면 `codex --profile myrelay`를 통해 전달 API를 사용하는 Codex를 시작할 수 있습니다. 이후 사용 방식은 Claude Code와 유사합니다. 대화상자에 언제든지 자신의 아이디어와 요구사항을 입력하면 됩니다.
 
 ### OpenCode
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image32.png)
+![](images/image32.png)
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image33.png)
+![](images/image33.png)
 
-OpenCode 是一款面向开发者的开源 AI Coding Agent 平台，定位类似于 “多模型版的 Claude Code”。它以 Terminal 为核心交互入口，同时也支持编辑器集成（如 VS Code、Neovim 等），能够深度接入本地代码仓库，并通过自然语言完成从代码理解到工程执行的一整套开发流程。
+OpenCode는 개발자를 위한 오픈소스 AI Coding Agent 플랫폼으로, "다중 모델 버전의 Claude Code"와 같은 포지셔닝입니다. Terminal을 핵심 상호 작용 입구로 사용하며, 에디터 통합(예: VS Code, Neovim 등)도 지원하여 로컬 코드 저장소에 깊이 접근하고, 자연어를 통해 코드 이해부터 엔지니어링 실행까지의 전체 개발 프로세스를 완료할 수 있습니다.
 
-它不是绑定单一模型的 AI 编程工具，而是一个可自由切换 GPT、Claude、Gemini 乃至本地模型的开放式 AI Coding Agent 平台。就连 OpenAI 官方也持 OpenCode 接入 Codex / OpenAI 订阅。
+이것은 단일 모델에 종속되는 AI 프로그래밍 도구가 아니라, GPT, Claude, Gemini 및 로컬 모델까지 자유롭게 전환할 수 있는 개방형 AI Coding Agent 플랫폼입니다. OpenAI 공식도 OpenCode를 통한 Codex/OpenAI 구독 접속을 지원합니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image34.png)
+![](images/image34.png)
 
-你可以通过下面的命令安装 OpenCode:
+다음 명령으로 OpenCode를 설치할 수 있습니다.
 
 ```bash
 # Linux / Unix
@@ -543,97 +543,213 @@ curl -fsSL https://opencode.ai/install | bash
 npm i -g opencode-ai
 ```
 
-#### 使用 OpenCode 中的免费模型
+#### OpenCode의 무료 모델 사용하기
 
-在 OpenCode 中不定期会提供免费模型可以进行使用, 配置也非常简单。你可以在你需要使用 OpenCode 的位置在命令行输入 `opencode` 启动 Opencode 程序进入聊天面板。输入 `/models`命令搜索 free 关键词就可以看到带有 free 字眼的免费模型
+OpenCode에서는 불특정하게 무료 모델이 제공되며, 설정도 매우 간단합니다. OpenCode를 사용할 위치의 명령행에서 `opencode`를 입력하여 OpenCode 프로그램을 시작한 후 채팅 패널에 진입합니다. `/models` 명령을 입력하고 free 키워드를 검색하면 free 표시가 있는 무료 모델을 볼 수 있습니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image35.png)
+![](images/image35.png)
 
-在一般情况下免费模型完成编码任务会比付费 / 订阅模型要慢一些，这通常取决于模型线路是否阻塞, 是否编码高峰期以及模型本身的能力。
+일반적으로 무료 모델은 유료/구독 모델에 비해 코딩 작업 완료 속도가 느립니다. 이는 보통 모델 라인의 혼잡 여부, 코딩 피크 시간대인지, 그리고 모델 자체의 능력에 따라 다릅니다.
 
-#### 使用第三方模型来作为 OpenCode 的主编码模型
+#### 서드파티 모델을 OpenCode의 메인 코딩 모델로 사용하기
 
-这是 OpenCode 的核心优势, 它可以在使用同样的 MCP, Skills, 上下文的情况下允许你自由切换模型来完成不同的编码任务。下文以 OpenAI 官方的 GPT-5.3 Codex 为例，接入 OpenCode 作为主编码模型。
+이것이 OpenCode의 핵심 장점입니다. 동일한 MCP, Skills, 컨텍스트를 사용하면서도 자유롭게 모델을 전환하여 다양한 코딩 작업을 완료할 수 있습니다. 아래에서는 OpenAI 공식의 GPT-5.3 Codex를 예시로, OpenCode에 메인 코딩 모델로 연결하는 방법을 설명합니다.
 
-在 OpenCode 的聊天窗口中输入 `/connect` 命令选中第一条最相关指令按下 enter 键，就可以进行选择第三方模型提供商的认证授权。
+OpenCode의 채팅 창에서 `/connect` 명령을 입력한 후, 첫 번째로 가장 관련성이 높은 명령을 선택하고 Enter를 누르면 서드파티 모델 제공업체의 인증 권한을 선택할 수 있습니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image36.png)
+![](images/image36.png)
 
-这里以选择 OpenAI 为例,进行回车选择认证方式。
+여기서는 OpenAI를 예시로 들어, Enter를 눌러 인증 방식을 선택합니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image37.png)
+![](images/image37.png)
 
-选哪种都可以,只是认证方式不同。这里选择第一种进行浏览器登录。
+어느 것을 선택해도 되며, 인증 방식만 다를 뿐입니다. 여기서는 첫 번째 방식인 브라우저 로그인을 선택합니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image38.png)
+![](images/image38.png)
 
-复制此链接到浏览器上进行正常的 OpenAI 登录操作，浏览器上出现 Authorization Successful 后 OpenCode 客户端会自动跳转至选择 OpenAI 的模型界面。
+이 링크를 복사하여 브라우저에서 정상적인 OpenAI 로그인 작업을 수행합니다. 브라우저에 Authorization Successful이 표시되면 OpenCode 클라이언트가 자동으로 OpenAI 모델 선택 인터페이스로 전환됩니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image39.png)
+![](images/image39.png)
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image40.png)
+![](images/image40.png)
 
-#### 安装 Oh My OpenAgent 插件
+#### Oh My OpenAgent 플러그인 설치
 
-OpenCode 的强大之处还在于他有非常活跃的社区生态，你可以在 Github 上搜索出非常多与 OpenCode 相关的插件。如果说 OpenCode 是一款可以任意切换模型的 AI 协作工具的话，那么 Oh-My-OpenAgent 就是一款运行在 OpenCode 之上的 "多 Agent AI 编程指挥系统"。它可以将一个复杂任务拆给多个子任务分给不同的模型进行各司其职的工作。
+OpenCode의 강력함은 매우 활발한 커뮤니티 생태계에도 있습니다. GitHub에서 OpenCode와 관련된 매우 많은 플러그인을 검색할 수 있습니다. OpenCode가 모델을 자유롭게 전환할 수 있는 AI 협업 도구라면, Oh-My-OpenAgent는 OpenCode 위에서 실행되는 "다중 Agent AI 프로그래밍 지휘 시스템"입니다. 하나의 복잡한 작업을 여러 서브 작업으로 나누어 다양한 모델에 분배하여 각자의 역할을 수행하게 합니다.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image41.png)
+![](images/image41.png)
 
-你可以将以下话术复制之后粘贴给上文在 OpenCode 中配置好的模型进行安装 OpenCode。
+다음 내용을 복사하여 앞서 OpenCode에 설정한 모델에 붙여넣어 OpenCode에 Oh-My-OpenAgent를 설치할 수 있습니다.
 
 ```text
 Install and configure oh-my-openagent by following the instructions here:
 https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/refs/heads/dev/docs/guide/installation.md
 ```
 
-以下是 Oh-My-OpenAgent 的特性以及功能说明。
+다음은 Oh-My-OpenAgent의 특징과 기능 설명입니다.
 
-| 特性 | 功能说明 |
+| 특징 | 기능 설명 |
 | :-------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **自律军团 (Discipline Agents)** | Sisyphus 负责调度 Hephaestus、Oracle、Librarian 和 Explore。一支完整的 AI 开发团队并行工作。 |
-| **Team Mode** (v4.0, 选择性启用) | 领导 Agent + 最多 8 个并行成员，实时 tmux 可视化，专用 `team_*` 工具家族。驱动 `hyperplan`(5 个敌对评论者) 和 `security-research`(3 个猎手 + 2 个 PoC 工程师)。[文档 →](docs/guide/team-mode.md) |
-| **`ultrawork` / `ulw`** | 一键触发，所有智能体出动。任务完成前绝不罢休。 |
-| **[IntentGate 意图门](https://factory.ai/news/terminal-bench)** | 真正行动前，先分析用户的真实意图。彻底告别被字面意思误导的 AI 废话。 |
-| **基于哈希的编辑工具** | 每次修改都通过 `LINE#ID` 内容哈希验证、0% 错误修改。灵感来自 [oh-my-pi](https://github.com/can1357/oh-my-pi)。[The Harness Problem →](https://blog.can.ac/2026/02/12/the-harness-problem/) |
-| **LSP + AST-Grep** | 工作区级别的重命名、构建前诊断、基于 AST 的重写。为 Agent 提供 IDE 级别的精度。 |
-| **后台智能体** | 同时发射 5+ 个专家并行工作。保持上下文干净，随时获取成果。 |
-| **内置 MCP** | Exa（网络搜索）、Context7（官方文档）、Grep.app（GitHub 源码搜索）。默认开启。 |
-| **Ralph Loop / `/ulw-loop`** | 自我引用闭环。达不到 100% 完成度绝不停止。 |
-| **Todo 强制执行** | Agent 想要摸鱼？系统直接揪着领子拽回来。你的任务，必须完成。 |
-| **注释审查员** | 剔除带有浓烈 AI 味的冗余注释。写出的代码就像老练的高级工程师写的。 |
-| **Tmux 集成** | 完整的交互式终端支持。跑 REPL、用调试器、用 TUI 工具，全都在实时会话中完成。 |
-| **Claude Code 兼容** | 你现有的 Hooks、命令、技能、MCP 和插件？全都能无缝迁移过来。 |
-| **技能内嵌 MCP** | 技能自带其所需的 MCP 服务器。按需开启，不会撑爆你的上下文窗口。 |
-| **Prometheus 规划师** | 动手写代码前，先通过访谈模式做好战略规划。 |
-| **`/init-deep`** | 在整个项目目录层级中自动生成 `AGENTS.md`。不仅省 Token，还能大幅提升 Agent 理解力。 |
+| **자율 군단 (Discipline Agents)** | Sisyphus가 Hephaestus, Oracle, Librarian, Explore를 총괄합니다. 완전한 AI 개발팀이 병렬로 작업합니다. |
+| **Team Mode** (v4.0, 선택적 활성화) | 리더 Agent + 최대 8개의 병렬 멤버, 실시간 tmux 시각화, 전용 `team_*` 도구 제품군. `hyperplan`(5명의 적대적 리뷰어) 및 `security-research`(3명의 헌터 + 2명의 PoC 엔지니어) 구동. [문서 ->](docs/guide/team-mode.md) |
+| **`ultrawork` / `ulw`** | 원클릭 트리거, 모든 Agent 출동. 작업 완료 전까지 결코 멈추지 않습니다. |
+| **[IntentGate 의도 게이트](https://factory.ai/news/terminal-bench)** | 실제 행동 전에 사용자의 진짜 의도를 먼저 분석합니다. 글자 그대로의 의미로 오해받는 AI 불필요한 말과 완전히 작별. |
+| **해시 기반 편집 도구** | 모든 수정이 `LINE#ID` 콘텐츠 해시로 검증되어, 0%의 오류 수정. [oh-my-pi](https://github.com/can1357/oh-my-pi)에서 영감. [The Harness Problem ->](https://blog.can.ac/2026/02/12/the-harness-problem/) |
+| **LSP + AST-Grep** | 워크스페이스 수준의 이름 변경, 빌드 전 진단, AST 기반 재작성. Agent에게 IDE 수준의 정밀도를 제공. |
+| **백그라운드 Agent** | 5개 이상의 전문가가 동시에 병렬 작업. 컨텍스트를 깔끔하게 유지하면서 언제든 성과 확인 가능. |
+| **내장 MCP** | Exa(웹 검색), Context7(공식 문서), Grep.app(GitHub 소스코드 검색). 기본 활성화. |
+| **Ralph Loop / `/ulw-loop`** | 자기 참조 폐루프. 100% 완성도에 도달할 때까지 결코 멈추지 않음. |
+| **Todo 강제 실행** | Agent가 게으름을 피우려고 해요? 시스템이 바로 목덜미를 잡아 끌어옵니다. 당신의 작업은 반드시 완료되어야 합니다. |
+| **주석 심사관** | 진한 AI 느낌의 불필요한 주석을 제거합니다. 작성된 코드가 마치 노련한 시니어 엔지니어가 쓴 것처럼 보입니다. |
+| **Tmux 통합** | 완전한 인터랙티브 터미널 지원. REPL 실행, 디버거 사용, TUI 도구 사용, 모두 실시간 세션에서 완료. |
+| **Claude Code 호환** | 기존 Hooks, 명령, Skills, MCP 및 플러그인? 모두 원활하게 마이그레이션 가능. |
+| **Skills 내장 MCP** | Skills가 필요한 MCP 서버를 자체적으로 포함. 필요할 때만 활성화하여 컨텍스트 윈도우를 과부하시키지 않음. |
+| **Prometheus 플래너** | 코드를 작성하기 전에 인터뷰 모드를 통해 먼저 전략적 계획 수립. |
+| **`/init-deep`** | 전체 프로젝트 디렉토리 계층에 `AGENTS.md`를 자동 생성. Token 절약뿐만 아니라 Agent 이해력도 대폭 향상. |
 
-Sisyphus (claude-opus-4-7 / kimi-k2.6 / glm-5.1) 是你的主指挥官。他负责制定计划、分配任务给专家团队，并以极其激进的并行策略推动任务直至完成。他从不半途而废。
+Sisyphus (claude-opus-4-7 / kimi-k2.6 / glm-5.1)는 당신의 메인 지휘관입니다. 계획을 수립하고 전문가 팀에 작업을 할당하며, 매우 공격적인 병렬 전략으로 작업이 완료될 때까지 밀어붙입니다. 결코 중도에 포기하지 않습니다.
 
-Hephaestus (gpt-5.5) 是你的自主深度工作者。你只需要给他目标，不要给他具体做法。他会自动探索代码库模式，从头到尾独立执行任务，绝不会中途要你当保姆。名副其实的正牌工匠。
+Hephaestus (gpt-5.5)는 당신의 자율 심층 작업자입니다. 목표만 주면 되고, 구체적인 방법은 알려줄 필요 없습니다. 코드베이스 패턴을 자동으로 탐색하고, 처음부터 끝까지 독립적으로 작업을 실행하며, 중간에 도움을 요청하지 않습니다. 명실상부한 장인입니다.
 
-Prometheus (claude-opus-4-7 / kimi-k2.6 / glm-5.1) 是你的战略规划师。他通过访谈模式，在动一行代码之前，先通过提问确定范围并构建详尽的执行计划。
+Prometheus (claude-opus-4-7 / kimi-k2.6 / glm-5.1)는 당신의 전략 플래너입니다. 인터뷰 모드를 통해 한 줄의 코드를 작성하기 전에 먼저 질문으로 범위를 확정하고 상세한 실행 계획을 구축합니다.
 
-了解完这些, 你就可以使用装好 Oh-My-OpenAgent 插件之后的 OpenCode 来完成编码任务了。
+이것들을 이해한 후, Oh-My-OpenAgent 플러그인이 설치된 OpenCode를 사용하여 코딩 작업을 완료할 수 있습니다.
 
-## CLI AI 编程工具的更多用法
+#### 모델 및 API 설정(심화)
 
-### 用 AI 写需求文档：学会“具体化需求”
+`/connect`로 채팅 인터페이스에서 빠르게 모델에 연결할 수 있지만, 더 세밀한 제어가 필요한 경우(예: 작업별로 다른 모델 지정, 여러 API Provider를 백업으로 설정) OpenCode의 설정 파일인 `opencode.json`을 직접 편집할 수 있습니다.
 
-对于大语言模型来说，抽象需求需要被“具体化”。比如：“我很饿”是一个抽象需求，我们需要把它变成：“我肚子有点饿，可能需要吃一个红豆面包，再配一杯豆浆。”——这才是一种可以被执行的、具体的需求。
+이 파일은 `~/.config/opencode/opencode.json`(Windows 경로: `C:\Users\사용자이름\.config\opencode\opencode.json`)에 위치하며, OpenCode를 처음 시작할 때 자동 생성됩니다.
 
-但把抽象需求变具体，其实是一个很花精力的过程。如果我们没有见过足够多的案例，很难快速联想到该如何把抽象问题拆解成细致的模块。这种时候，最好的办法就是让 AI 帮你完成“具体化”这一步。  
-比如，我想开发一个“每日计划”应用，最朴素的想法可能是：
+다음은 바이렌 플랫폼(알리클라우드)의 Qwen 모델을 연결하는 설정 예시입니다.
+
+```json
+{
+  "model": "bailian-coding-plan/qwen3.5-plus",
+  "small_model": "bailian-coding-plan/qwen3.5-plus",
+  "provider": {
+    "bailian-coding-plan": {
+      "options": {
+        "apiKey": "sk-나의API키"
+      }
+    }
+  }
+}
+```
+
+> 💡 `model` 필드의 형식은 `제공업체/모델이름`입니다. 해당 플랫폼에 가입하여 API Key를 받은 후, 위의 `apiKey` 값을 교체하세요.
+
+여러 모델을 동시에 설정하려면 설정에서 다양한 작업 카테고리를 지정할 수 있습니다.
+
+```json
+{
+  "model": "bailian-coding-plan/qwen3.5-plus",
+  "categories": {
+    "visual-engineering": {
+      "model": "bailian-coding-plan/qwen3.5-plus",
+      "description": "프론트엔드, UI/UX, 디자인, 스타일"
+    },
+    "ultrabrain": {
+      "model": "bailian-coding-plan/qwen3-coder-next",
+      "description": "복잡한 로직, 알고리즘, 아키텍처 결정"
+    },
+    "quick": {
+      "model": "opencode-go/minimax-m2.5",
+      "description": "간단한 수정, 오타 수정"
+    }
+  }
+}
+```
+
+이렇게 하면 OpenCode가 작업 유형에 따라 자동으로 가장 적합한 모델을 선택합니다. 간단한 수정에는 빠른 모델로 비용을 절약하고, 복잡한 아키텍처 문제에는 더 강력한 모델로 품질을 보장합니다.
+
+#### MCP 서버로 OpenCode 확장하기
+
+MCP(Model Context Protocol)는 AI 프로그래밍 도구가 외부 도구를 호출할 수 있게 하는 개방형 프로토콜입니다. 예를 들어 브라우저 조작, 웹 검색, 이미지 분석 등을 할 수 있습니다. OpenCode는 MCP를 네이티브로 지원하며, 설정 방식은 Claude Code와 유사합니다.
+
+`opencode.json`의 `mcp` 필드에 서버 설정을 추가합니다.
+
+```json
+{
+  "mcp": {
+    "chrome-devtools": {
+      "type": "local",
+      "command": ["npx", "-y", "chrome-devtools-mcp@latest"]
+    },
+    "zai-mcp-server": {
+      "type": "local",
+      "command": ["npx", "-y", "@z_ai/mcp-server"]
+    }
+  }
+}
+```
+
+설정 완료 후 OpenCode를 재시작하면, AI가 대화에서 이러한 도구를 자동으로 호출할 수 있습니다. 예를 들어 브라우저를 열어 스크린샷을 찍고, UI 디자인 이미지를 분석하고, 웹페이지 정보를 검색하는 등의 작업을 할 수 있습니다.
+
+> 🎯 **실용적인 시나리오**: AI가 웹페이지의 레이아웃 문제를 분석해야 할 때, chrome-devtools MCP를 설정하고 "이 페이지를 열어서 버튼 위치가 잘못된 이유를 확인해 줘"라고 말하면, AI가 자동으로 브라우저를 열고, 스크린샷을 찍고, 분석하여 수정 제안을 제공합니다.
+
+#### 일상 사용 팁과 자주 묻는 질문
+
+**AGENTS.md로 AI 행동 지정하기**
+
+프로젝트 루트 디렉토리에 `AGENTS.md` 파일을 생성하면 OpenCode에게 프로젝트 규칙과 선호사항을 알려줄 수 있습니다. AI는 매번 시작할 때 이 파일을 자동으로 읽습니다.
+
+```markdown
+## 프로젝트 규칙
+- TypeScript strict mode 사용
+- API 응답은 JSON Schema 준수
+- 에러 처리는 커스텀 Error 서브클래스 사용
+
+## 개발 프로세스
+1. 수정 전 기존 코드 먼저 이해
+2. 작은 단위로 커밋, 매번 하나의 논리 단위
+3. 완료 후 npm test 실행하여 검증
+
+## 금지 사항
+- any 타입 사용 금지
+- 테스트 파일 삭제 금지
+```
+
+**병렬로 코드베이스 탐색하기**
+
+프로젝트에 익숙하지 않은 경우, OpenCode가 여러 측면을 동시에 검색하도록 할 수 있습니다.
+
+> 다음 몇 가지를 동시에 해줘:
+> 1. 프로젝트에서 HTTP 요청을 처리하는 모든 곳 검색
+> 2. 데이터베이스 관련 코드 찾기
+> 3. 프로젝트의 디렉토리 구조와 각 모듈의 역할 나열
+
+OpenCode가 이러한 탐색 작업을 병렬로 실행하여, 한 번에 완전한 코드베이스 맵을 제공합니다.
+
+**자주 묻는 질문**
+
+| 문제 | 해결 방법 |
+|------|---------|
+| `opencode` 명령을 찾을 수 없음 | npm 전역 디렉토리가 PATH에 없음. 터미널에서 `[Environment]::SetEnvironmentVariable("Path", "$env:Path;$env:USERPROFILE\AppData\Roaming\npm", "User")` 실행 후 터미널 재시작 |
+| AI 응답이 매우 느림 | 간단한 작업은 quick 카테고리 사용(빠른 모델로 자동 라우팅). 대화 기록이 너무 길면 새 세션 시작 |
+| API 호출 실패 | API Key가 올바른지, 모델 이름 철자가 정확한지(provider/model-name 형식), 계정 잔액이 충분한지 확인 |
+| Skills가 작동하지 않음 | SKILL.md 파일 형식이 올바른지(YAML frontmatter 필요), description 필드가 트리거 조건을 정확하게 설명하는지 확인 |
+| 대화 컨텍스트가 너무 긺 | 새 세션을 시작하거나, AGENTS.md에 핵심 규칙을 정의하여 새 세션에서도 상속되도록 설정 |
+
+## CLI AI 프로그래밍 도구의 더 많은 활용법
+
+### AI로 요구사항 문서 작성하기: "구체화" 배우기
+
+대형 언어 모델에게는 추상적인 요구사항을 "구체화"하는 것이 필요합니다. 예를 들어 "배가 고파요"는 추상적인 요구사항이며, "배가 약간 고픈데, 팥빵 하나와 두유 한 잔이 필요할 것 같아요."로 바꿔야 합니다. 이것이 실행 가능한 구체적인 요구사항입니다.
+
+하지만 추상적인 요구사항을 구체적으로 만드는 것은 꽤 에너지가 많이 드는 과정입니다. 충분한 사례를 접하지 못하면 추상적인 문제를 세부적인 모듈로 어떻게 분해해야 할지 빠르게 떠올리기 어렵습니다. 이럴 때 가장 좋은 방법은 AI에게 "구체화" 단계를 도와달라고 하는 것입니다.
+예를 들어, "매일 계획" 애플리케이션을 개발하고 싶다면, 가장 소박한 생각은 다음과 같을 수 있습니다.
 
 `Please help me write a daily planning app where I can write my plans each day and get reminders.`
 
-AI 确实可以在这个需求基础上直接拆分任务，然后一步步完成，但中间容易出错或理解偏差。为了降低风险，我们可以让 AI 帮我们先扩写需求：
+AI는 이 요구사항을 기반으로 직접 작업을 분해한 후 단계별로 완료할 수 있지만, 중간에 오류나 이해 편차가 발생하기 쉽습니다. 위험을 줄이기 위해 AI가 먼저 요구사항을 확장하도록 할 수 있습니다.
 
 `Based on my needs, please elaborate and provide a more detailed Product Requirement Document for reference. My idea is: Please help me write a daily planner app that supports daily plan-writing and provides reminders .`
 
-这时，AI 可能会给出类似下面这样完整的 PRD：
+그러면 AI는 다음과 같은 완전한 PRD를 제공할 수 있습니다.
 
 ```
-Product Requirements Document (PRD): “Today’s Plan” App
+Product Requirements Document (PRD): "Today's Plan" App
 Document Version: 1.0
 Creation Date: October 27, 2023
 Author: (Your Name/Product Manager)
@@ -642,7 +758,7 @@ Author: (Your Name/Product Manager)
 1.1 Product Name
 Today's Plan
 1.2 Product Vision
-“Today’s Plan” is a minimalist and highly efficient daily planning and reminder tool, dedicated to helping users eliminate procrastination and forgetfulness, plan every day clearly, and ensure tasks are carried out through an intelligent reminder system—ultimately enabling users to gain a stronger sense of control and achievement over their time.
+"Today's Plan" is a minimalist and highly efficient daily planning and reminder tool, dedicated to helping users eliminate procrastination and forgetfulness, plan every day clearly, and ensure tasks are carried out through an intelligent reminder system—ultimately enabling users to gain a stronger sense of control and achievement over their time.
 1.3 Target Users (User Personas)
 We mainly serve three types of users:
 Students (Xiao Ming):
@@ -659,9 +775,9 @@ Pain Points: Easily procrastinate, lack external supervision; start the day with
 Needs: Need a tool to help build a daily fixed routine (Morning Routine) and review daily achievements for positive feedback.
 
 2. User Stories
-As a user, I want to quickly create today’s plan list so I have an overview of all my tasks for the day.
+As a user, I want to quickly create today's plan list so I have an overview of all my tasks for the day.
 As a user, I want to set specific start and end times for each task so I can create a visual timeline.
-As a user, I want to receive push notification reminders before a task starts so I won’t miss any important arrangements.
+As a user, I want to receive push notification reminders before a task starts so I won't miss any important arrangements.
 As a user, I want to customize the reminder time (such as 5, 15, or 60 minutes in advance) so reminders better fit my habits.
 As a user, I want to easily mark completed tasks so I can feel accomplished and clearly see my progress.
 As a user, I want to see a summary of my completed plans at the end of each day for reviewing and self-motivation.
@@ -672,19 +788,19 @@ As a user, I want to view plans and achievements from previous days to review my
 Core Features (MVP - Minimum Viable Product)
 Module 1: Plan Management
 3.1.1 Daily Plan Homepage
-Interface: “Today” as the core view, current date shown at the top.
-View: Timeline list, clearly showing tasks scheduled from morning to evening. Tasks without a time can be listed in the top or bottom “To-do List” section.
+Interface: "Today" as the core view, current date shown at the top.
+View: Timeline list, clearly showing tasks scheduled from morning to evening. Tasks without a time can be listed in the top or bottom "To-do List" section.
 Interactions:
-Click the “+” button in the bottom right to quickly create a new task.
+Click the "+" button in the bottom right to quickly create a new task.
 Pull down to refresh the page.
-Swipe left/right to view yesterday’s and tomorrow’s plans.
+Swipe left/right to view yesterday's and tomorrow's plans.
 3.1.2 Create/Edit Task
-Entry: Click “+” on the homepage or a time slot in the list.
+Entry: Click "+" on the homepage or a time slot in the list.
 Fields:
-Task title (required): Briefly describe the task, e.g., “10 AM Weekly Product Meeting.”
+Task title (required): Briefly describe the task, e.g., "10 AM Weekly Product Meeting."
 Task time (optional):
-Set “start time” and “end time.”
-Provide “all-day” option for unspecified time tasks.
+Set "start time" and "end time."
+Provide "all-day" option for unspecified time tasks.
 Default time picker should be quick and convenient.
 Reminder setting (required, with default value): See Module 2.
 Notes (optional): Add further descriptions, links, or location info.
@@ -692,30 +808,30 @@ Actions: Save, cancel, delete task.
 3.1.3 Task Interaction
 Mark as complete: Checkbox before each task; checking adds a strikethrough and gray background, indicating completion. Can unmark if needed.
 Edit task: Click the task itself to enter edit page.
-Delete task: Swipe left on a task to reveal “Delete” button.
+Delete task: Swipe left on a task to reveal "Delete" button.
 Module 2: Smart Reminder System
 3.2.1 Reminder Trigger
-Mechanism: Based on task’s set “start time” and the user’s “reminder lead time,” send a push notification from device.
+Mechanism: Based on task's set "start time" and the user's "reminder lead time," send a push notification from device.
 Offline Support: Locally scheduled reminders must trigger even if user is offline.
 3.2.2 Reminder Content & Format
-Notification title: App name “Today’s Plan.”
-Body: “Reminder: [Task Title] will start at [Start Time].” E.g., “Reminder: Product Meeting will start at 10:00.”
+Notification title: App name "Today's Plan."
+Body: "Reminder: [Task Title] will start at [Start Time]." E.g., "Reminder: Product Meeting will start at 10:00."
 Sound: Use system default or offer several simple, effective tones.
 3.2.3 Reminder Settings
 Global Settings (in Settings page):
-User can set a default reminder time, e.g., “15 minutes before task starts.” New tasks adopt this by default.
+User can set a default reminder time, e.g., "15 minutes before task starts." New tasks adopt this by default.
 Single Task Settings (in create/edit page):
 Users can override global settings for important tasks, choosing specific reminder times like "on time," "5 minutes early," "30 minutes early," or "1 hour early."
-Provide “no reminder” option.
+Provide "no reminder" option.
 Subsequent Features (V1.1, V2.0)
 3.3 Daily Review & Statistics
-Push a summary notification at a set time every night (e.g., 22:00): “How was your day? Take a look at your achievements!”
+Push a summary notification at a set time every night (e.g., 22:00): "How was your day? Take a look at your achievements!"
 Generate a simple daily report card: shows total planned tasks, completed tasks, completion rate, plus an encouraging message.
 3.4 History Review
 Calendar view to click on any past day and check its plans and completion status. Days with high completion rates marked with a special color.
 3.5 Templates
-Allow users to save a successful daily plan as a template, e.g., “Efficient Workday,” “Relaxing Weekend.”
-When creating tomorrow’s plan, one-click import a template, modify slightly to save time.
+Allow users to save a successful daily plan as a template, e.g., "Efficient Workday," "Relaxing Weekend."
+When creating tomorrow's plan, one-click import a template, modify slightly to save time.
 3.6 Themes & Personalization
 Offer dark mode.
 Allow changing several primary color themes.
@@ -728,7 +844,7 @@ Resource Use: Low battery and memory consumption in background; do not over-cons
 Minimal & intuitive: UI must be minimal, primary functions accessible within 3 clicks. No tutorial needed for new users.
 Error tolerance: Offer undo (e.g. brief undo after mistakenly deleting a task).
 4.3 Reliability
-Reliable reminders: Reminder function is the product’s lifeline; must guarantee 99.99% timely and accurate delivery.
+Reliable reminders: Reminder function is the product's lifeline; must guarantee 99.99% timely and accurate delivery.
 Data loss-free: User plans must be reliably stored locally. Future versions can support cloud sync to prevent data loss on device change.
 4.4 Compatibility
 Platform: Support major iOS and Android versions (latest 3-4 releases).
@@ -737,65 +853,65 @@ Screen: Layout must fit various phone screen sizes.
 5. Roadmap
 V1.0 (MVP):
 Goal: Validate core value—planning & reminders.
-Features: Complete all “Core Features” described above (Plan management, smart reminders).
+Features: Complete all "Core Features" described above (Plan management, smart reminders).
 V1.1 (Quick Optimization):
 Goal: Improve retention and achievement.
-Features: Add “Daily Review & Statistics,” “History Review.”
+Features: Add "Daily Review & Statistics," "History Review."
 V2.0 (Enhanced Experience):
 Goal: Increase efficiency and personalization.
-Features: Add “Templates,” “Themes & Personalization,” and start developing “Cloud Sync.”
+Features: Add "Templates," "Themes & Personalization," and start developing "Cloud Sync."
 ```
 
-对比我们最开始那句“帮我写一个每天可以记计划并提醒的应用”，现在这份文档已经详细得多了。你可以根据自己的真实需求，对其中的内容进行增删修改；对于某些你不确定的模块，也可以继续让 AI 提供更多备选方案，你再挑选、合并成最终版本。
+처음에 "매일 계획을 쓰고 알림을 받을 수 있는 앱을 만들어 줘"라고 했던 것에 비하면, 이 문서는 훨씬 더 상세해졌습니다. 자신의 실제 요구사항에 따라 내용을 추가하거나 삭제할 수 있습니다. 불확실한 모듈에 대해서는 AI에게 더 많은 대안을 제시해 달라고 계속 요청한 후, 선택하고 병합하여 최종 버전을 만들 수 있습니다.
 
-通过这种方式，我们可以很轻松地把抽象想法变成具体描述。对 AI 开发来说，“具体”就是生产力：需求越具体，越容易得到结构稳定、质量较高的项目。你可以尝试用这种方式重做一下之前的某个小项目，对比一下效果差异。
+이러한 방식을 통해 추상적인 아이디어를 구체적인 설명으로 쉽게 변환할 수 있습니다. AI 개발에서 "구체적"이라는 것은 곧 생산성입니다. 요구사항이 구체적일수록 구조가 안정적이고 품질이 높은 프로젝트를 얻기 쉽습니다. 이 방식으로 이전에 진행했던 작은 프로젝트를 다시 시도하여 효과의 차이를 비교해 보세요.
 
-如果你觉得这类“需求提示词”太长，非常自然的做法，是把它单独写进一个 markdown 文档中，作为你的“需求文档 / 开发文档 / PRD”。之后每次让 AI 写项目时，只需要让它“参考这份文档”，而不是每次都重打一遍长提示。你也可以在迭代中不断完善这份文档，让后续项目直接受益。
+이런 "요구사항 프롬프트"가 너무 길다고 생각된다면, 매우 자연스러운 방법은 이를 별도의 markdown 문서로 작성하여 "요구사항 문서/개발 문서/PRD"로 사용하는 것입니다. 이후 AI에게 프로젝트를 작성하게 할 때마다 "이 문서를 참고해 줘"라고만 하면 되며, 매번 긴 프롬프트를 다시 입력할 필요가 없습니다. 반복 과정에서 이 문서를 계속 개선하여 후속 프로젝트에도 직접 활용할 수 있습니다.
 
-下面是一些其他常见的使用场景：
+다음은 기타 일반적인 사용 시나리오입니다.
 
-### 管理文件夹
+### 폴더 관리
 
-我们可以尝试用 CLI AI 编程工具来管理当前文件夹中的各种文件。比如，你有一堆杂乱无章的文件，需要整理归类，就可以对 Claude Code 或 Codex 说：
+CLI AI 프로그래밍 도구를 사용하여 현재 폴더의 다양한 파일을 관리해 볼 수 있습니다. 예를 들어, 정리되지 않은 파일이 많이 있고 분류 정리가 필요한 경우, Claude Code나 Codex에게 다음과 같이 말할 수 있습니다.
 
 `Please help me organize the contents of the current folder. I want to group files with the same content together & I want to group files from the same time period together. Please help me handle this.`
 
-### 开发新项目
+### 새 프로젝트 개발
 
-这和我们之前在 z.ai、Trae 中的用法几乎完全一样——我们也可以直接用 CLI AI 编程工具来从零开发新项目。当然，最好提前准备好一份需求文档。
+이것은 이전에 z.ai, Trae에서 사용한 방식과 거의 완전히 동일합니다. CLI AI 프로그래밍 도구를 사용하여 처음부터 새 프로젝트를 개발할 수도 있습니다. 물론, 미리 요구사항 문서를 준비해 두는 것이 가장 좋습니다.
 
-需求文档越细致，最终效果越好。你可以根据不断变化的想法，对文档做多轮优化；文档越完善，代码实现就越稳定、越成熟。
+요구사항 문서가 상세할수록 최종 효과가 더 좋습니다. 계속 변화하는 아이디어에 따라 문서를 여러 라운드에 걸쳐 최적화할 수 있습니다. 문서가 완성도가 높을수록 코드 구현도 더 안정적이고 성숙해집니다.
 
-### 部署开源项目（例如 Dify）
+### 오픈소스 프로젝트 배포(예: Dify)
 
-对于刚接触计算机的同学来说，从 GitHub 上部署一个开源项目往往很有难度。但我们完全可以把这件事交给 Claude Code，就像我们在 Dify 教程中做的那样：
+컴퓨터를 처음 접하는 분들에게는 GitHub에서 오픈소스 프로젝트를 배포하는 것이 꽤 어려울 수 있습니다. 하지만 이 작업을 Claude Code에 맡길 수 있습니다. Dify 튜토리얼에서 했던 것처럼요.
 
 <https://github.com/langgenius/dify>
 
-如果我想在本地跑起自己的 Dify，只需要把这个链接扔给 Claude Code，然后输入：
+로컬에서 자신만의 Dify를 실행하고 싶다면, 이 링크를 Claude Code에 전달한 후 다음을 입력하기만 하면 됩니다.
 
 `I want to deploy this GitHub project ``https://github.com/langgenius/dify`` . Please help me clone the project and run it.`
 
-收到你的请求后，Claude Code 会自动完成一系列操作，包括从 GitHub 拉取代码、配置运行环境、启动项目等。如果中间某一步出错或项目启动状态不正常，你再根据提示进行少量人工处理即可。除了 Dify，你也可以用 Claude Code 帮你部署大部分常见的 GitHub 开源项目——你只需要一个对话框，再加上喝一杯咖啡的时间 ☕️。
+요청을 받은 Claude Code는 GitHub에서 코드를 가져오고, 실행 환경을 설정하고, 프로젝트를 시작하는 등 일련의 작업을 자동으로 완료합니다. 중간에 특정 단계에서 오류가 발생하거나 프로젝트 시작 상태가 비정상인 경우, 안내에 따라 약간의 수동 처리만 하면 됩니다. Dify뿐만 아니라 Claude Code를 사용하여 대부분의 일반적인 GitHub 오픈소스 프로젝트를 배포할 수 있습니다. 대화 상자 하나와 커피 한 잔의 시간만 있으면 됩니다 ☕️.
 
-![](/zh-cn/stage-2/backend/modern-cli/images/image31.png)
+![](images/image31.png)
 
-### 讲解代码与撰写文档
+### 코드 설명 및 문서 작성
 
-对于一些复杂项目，或者 AI 自动生成的大型项目，你可能会觉得代码太长、逻辑太多，很难看懂。这时就可以让 CLI AI 编程工具帮你“读代码”。你可以这样提问：
+일부 복잡한 프로젝트나 AI가 자동으로 생성한 대규모 프로젝트의 경우, 코드가 너무 길고 로직이 너무 많아 이해하기 어려울 수 있습니다. 이럴 때 CLI AI 프로그래밍 도구에게 "코드를 읽어달라고" 요청할 수 있습니다. 다음과 같이 질문할 수 있습니다.
 
-- 请帮我解释这个项目：如何运行、如何使用、后续如何修改和继续开发？
-- 请帮我说明这个项目的整体流程：程序是怎样运行的？用户在界面中可以做哪些操作？
-- 请帮我为这个项目写一份完整的文档，包括开发文档和运行文档等。
-- 请基于我当前文件夹里的所有内容，写一份详细说明，并保存到指定的 markdown 文档中。
+- 이 프로젝트를 설명해 주세요: 어떻게 실행하는지, 어떻게 사용하는지, 앞으로 어떻게 수정하고 계속 개발하는지?
+- 이 프로젝트의 전체 흐름을 설명해 주세요: 프로그램은 어떻게 실행되나요? 사용자가 인터페이스에서 어떤 작업을 할 수 있나요?
+- 이 프로젝트의 완전한 문서를 작성해 주세요. 개발 문서와 실행 문서 등을 포함하여.
+- 현재 폴더의 모든 콘텐츠를 기반으로 상세한 설명을 작성하여 지정된 markdown 문서에 저장해 주세요.
 
-### 更多玩法
+### 더 많은 활용법
 
-当然，CLI AI 编程工具能做的远不止上面这些。不要只把它当作“写代码工具”，而是把它看作一个具有独立行动能力的智能 Agent。你可以让它帮你：
+물론 CLI AI 프로그래밍 도구가 할 수 있는 것은 위에서 소개한 것보다 훨씬 더 많습니다. 이를 단순히 "코드 작성 도구"로만 생각하지 말고, 독립적인 행동 능력을 가진 스마트 Agent로 보세요. 다음과 같은 작업을 도와달라고 할 수 있습니다.
 
-- 管理和整理本地文件；
-- 写日记、写总结；
-- 分析和修复系统错误；
-- 执行各种重复性命令行任务等。
+- 로컬 파일 관리 및 정리
+- 일기 작성, 요약 작성
+- 시스템 오류 분석 및 복구
+- 다양한 반복적인 명령행 작업 실행
 
-也许在不久的将来，它会变成你电脑上最重要、也最懂你的 AI 伙伴。
+아마도 머지않은 미래에, 이것은 당신 컴퓨터에서 가장 중요하고, 당신을 가장 잘 이해하는 AI 파트너가 될 것입니다.

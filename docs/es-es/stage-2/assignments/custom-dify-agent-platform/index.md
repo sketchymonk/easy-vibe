@@ -1,19 +1,19 @@
-# 类 Dify 智能体平台开发实战
+# Desarrollo Practico: Plataforma de Agentes Inteligentes tipo Dify
 
 ## Descripcion general
 
-Este proyecto practico te requiere trabajar con un PRD real，completar desde cero un模仿 Dify 核心体验的智能体平台。你将构建Consola de usuario、Panel de administracion和平台后端，实现智能体管理、对话、日志和知识库等核心功能。
+Este proyecto practico te requiere trabajar con un PRD real para completar desde cero una plataforma de agentes inteligentes que replica la experiencia central de Dify. Construiras una consola de usuario, un panel de administracion y un backend de plataforma, implementando funcionalidades principales como gestion de agentes, conversacion, logs y base de conocimientos.
 
-Esta es la seccion de practica integral de la Etapa 2。与前面的单页面或单功能项目不同，这个项目要求你构建一个有"平台感"的 AI 产品——包含多角色、多模块、数据持久化和模型调用链路。
+Esta es la seccion de practica integral de la Etapa 2. A diferencia de los proyectos anteriores de pagina unica o funcion unica, este proyecto te exige construir un producto de IA con "sensacion de plataforma", que incluye multiples roles, multiples modulos, persistencia de datos y un pipeline de llamadas a modelos.
 
 ## Conocimientos previos
 
 Antes de comenzar este proyecto, ya deberias dominar lo siguiente:
 
-- Diseno de paginas frontend y uso de bibliotecas de componentes（[UI 设计](../../frontend/ui-design/)、[现代组件库](../../frontend/modern-component-library/)）
-- Diseno y desarrollo de interfaces backend（[接口代码编写](../../backend/ai-interface-code/)）
-- Fundamentos de bases de datos y Supabase（[从数据库到 Supabase](../../backend/database-supabase/)）
-- Flujo de trabajo de Git y despliegue（[Git 和 GitHub](../../backend/git-workflow/)、[Despliegue Web 应用](../../backend/zeabur-deployment/)）
+- Diseno de paginas frontend y uso de bibliotecas de componentes ([Diseno UI](../../frontend/ui-design/), [Biblioteca de componentes moderna](../../frontend/modern-component-library/))
+- Diseno y desarrollo de interfaces backend ([Escritura de codigo de interfaces](../../backend/ai-interface-code/))
+- Fundamentos de bases de datos y Supabase ([De la base de datos a Supabase](../../backend/database-supabase/))
+- Flujo de trabajo de Git y despliegue ([Git y GitHub](../../backend/git-workflow/), [Despliegue de aplicaciones web](../../backend/zeabur-deployment/))
 
 ## Objetivos de aprendizaje
 
@@ -23,44 +23,44 @@ Despues de completar esta practica, podras:
 2. Disenar la arquitectura de paginas y el modelo de datos de una plataforma de agentes
 3. Implementar el ciclo completo de creacion de agentes, conversacion y registro de logs
 4. Usar IA para asistir en el desarrollo de productos tipo plataforma
-5. Completar la integracion de extremo a extremo, entregando un prototipo de plataforma IA demostrable
+5. Completar la integracion de extremo a extremo, entregando un prototipo de plataforma de IA demostrable
 
 ## Introduccion del proyecto
 
-El producto que vas a construir es一个类 Dify 智能体平台，包含两个Subsistema：
+El producto que vas a construir es una plataforma de agentes inteligentes tipo Dify, que incluye dos subsistemas:
 
 | Subsistema | Responsabilidad |
 |--------|------|
-| **Consola de usuario** | Crear agentes, configurar Prompt, iniciar conversaciones, ver registros, gestionar base de conocimientos |
+| **Consola de usuario** | Crear agentes, configurar Prompt, iniciar conversaciones, ver logs, gestionar base de conocimientos |
 | **Panel de administracion** | Ver datos de usuarios, uso de recursos de la plataforma, estadisticas de llamadas |
 
-后端necesita soportar las siguientes capacidades centrales：Gestion de agentes, gestion de sesiones, almacenamiento de mensajes, llamadas a modelos, registro de llamadas, integracion de base de conocimientos。
+El backend necesita soportar las siguientes capacidades principales: gestion de agentes, gestion de sesiones, almacenamiento de mensajes, llamadas a modelos, registro de logs de llamadas e integracion de base de conocimientos.
 
-::: tip PRD 入口
-El documento de requisitos de este proyecto esta en GitHub： [Ver PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/es-es/stage-2/assignments/custom-dify-agent-platform/PRD.md)
+::: tip PRD
+El documento de requisitos de este proyecto esta en GitHub: [Ver PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/es-es/stage-2/assignments/custom-dify-agent-platform/PRD.md)
 :::
 
 <div style="margin: 32px 0;">
   <ClientOnly>
     <StepBar :active="0" :items="[
-      { title: 'Analisis de requisitos', description: 'Leer el PRD，明确页面、能力边界、鉴权、数据模型' },
-      { title: 'Construccion del esqueleto', description: '用 AI 生成Consola de usuario和Panel de administracion骨架' },
-      { title: 'Desarrollo iterativo', description: '逐模块补充智能体、对话、日志、知识库' },
-      { title: 'Integracion y despliegue', description: 'Verificar de extremo a extremo，Desplegar y preparar la demostracion' }
+      { title: 'Analisis de requisitos', description: 'Leer el PRD, definir paginas, limites de capacidades, autenticacion y modelo de datos' },
+      { title: 'Construccion del esqueleto', description: 'Usar IA para generar los esqueletos de la consola de usuario y el panel de administracion' },
+      { title: 'Desarrollo iterativo', description: 'Agregar agentes, conversacion, logs y base de conocimientos modulo por modulo' },
+      { title: 'Integracion y despliegue', description: 'Verificar de extremo a extremo, desplegar y preparar la demostracion' }
     ]" />
   </ClientOnly>
 </div>
 
-## Primera parte：Analisis de requisitos
+## Primera parte: Analisis de requisitos
 
 ### 1.1 Leer el PRD
 
-打开 PRD 文档，重点回答以下问题：
+Abre el documento PRD y responde las siguientes preguntas clave:
 
-- 智能体、会话、日志、知识库哪些要进 MVP？
-- 页面和路由清单是否拍板？
-- 模型调用和日志记录的边界是什么？
-- 多租户和复杂工作流是否先不做？
+- Que elementos deben incluirse en el MVP: agentes, sesiones, logs, base de conocimientos?
+- La lista de paginas y rutas esta definida?
+- Cual es el alcance de las llamadas a modelos y el registro de logs?
+- Multi-tenencia y flujos de trabajo complejos deben excluirse en la primera version?
 
 ::: warning
 Si no tienes respuestas claras a las preguntas anteriores, no comiences a escribir codigo. La comprension inadecuada de los requisitos es la causa mas comun de retrabajo.
@@ -74,93 +74,93 @@ Segun el PRD, organiza la arquitectura general del sistema:
 flowchart TD
   prd["PRD"] --> app["Consola de usuario"]
   prd --> admin["Panel de administracion"]
-  app --> auth["鉴权"]
-  app --> agent["智能体配置"]
-  app --> chat["会话对话"]
-  chat --> llm["模型调用"]
-  chat --> db["数据库"]
-  app --> kb["知识库接入"]
-  admin --> logs["调用日志与平台概览"]
+  app --> auth["Autenticacion"]
+  app --> agent["Configuracion del agente"]
+  app --> chat["Sesion de conversacion"]
+  chat --> llm["Llamada al modelo"]
+  chat --> db["Base de datos"]
+  app --> kb["Integracion de base de conocimientos"]
+  admin --> logs["Logs de llamadas y resumen de plataforma"]
   logs --> db
 ```
 
-## Segunda parte：搭建项目骨架
+## Segunda parte: Construccion del esqueleto del proyecto
 
 ### 2.1 Generar paginas frontend
 
-Referencia de prompts：
+Referencia de prompts:
 
 ```text
-请基于当前 PRD，帮我生成一个类 Dify 智能体平台的前端骨架。
+Basandote en el PRD actual, ayudame a generar el esqueleto frontend de una plataforma de agentes inteligentes tipo Dify.
 
-要求：
-1. 用户侧包括：登录、智能体列表、智能体配置、对话页、日志页、知识库页
-2. 后台侧包括：后台首页、用户概览、资源使用概览
-3. 先只生成页面结构和假数据，不接真实接口
-4. 风格要像现代 AI 平台
+Requisitos:
+1. El lado del usuario incluye: inicio de sesion, lista de agentes, configuracion del agente, pagina de conversacion, pagina de logs, pagina de base de conocimientos
+2. El lado del administrador incluye: pagina principal del panel, resumen de usuarios, resumen de uso de recursos
+3. Primero generar solo la estructura de paginas y datos ficticios, sin conectar interfaces reales
+4. El estilo debe parecerse a una plataforma de IA moderna
 ```
 
 ### 2.2 Verificar la estructura de paginas
 
 Verificar item por item:
 
-- [ ] Consola de usuario和Panel de administracion入口是否分开
-- [ ] 智能体列表、配置、对话、日志、知识库页面是否完整
-- [ ] Panel de administracion首页、用户概览页面是否可访问
-- [ ] 假数据展示了基本的 UI 状态
+- [ ] Los puntos de entrada de la consola de usuario y el panel de administracion estan separados
+- [ ] Las paginas de lista de agentes, configuracion, conversacion, logs y base de conocimientos estan completas
+- [ ] La pagina principal del panel de administracion y el resumen de usuarios son accesibles
+- [ ] Los datos ficticios muestran estados basicos de la interfaz
 
-## Tercera parte：Desarrollo iterativo
+## Tercera parte: Desarrollo iterativo
 
 ### 3.1 Avanzar por modulos
 
-在骨架的基础上，按以下顺序逐模块补充功能：
+Sobre la base del esqueleto, agrega funcionalidades modulo por modulo en el siguiente orden:
 
-1. **鉴权**：注册、登录、角色区分
-2. **智能体管理**：创建、编辑、删除、Prompt 配置
-3. **对话功能**：会话创建、消息收发、模型调用
-4. **日志记录**：耗时、token 用量、错误记录
-5. **知识库接入**（加分项）：文档上传、检索、结果注入
-6. **Panel de administracion**：用户数据、资源使用、调用统计
+1. **Autenticacion**: Registro, inicio de sesion, diferenciacion de roles
+2. **Gestion de agentes**: Crear, editar, eliminar, configuracion de Prompt
+3. **Funcionalidad de conversacion**: Creacion de sesiones, envio y recepcion de mensajes, llamadas a modelos
+4. **Registro de logs**: Tiempo de respuesta, uso de tokens, registro de errores
+5. **Integracion de base de conocimientos** (punto extra): Carga de documentos, busqueda, inyeccion de resultados
+6. **Panel de administracion**: Datos de usuarios, uso de recursos, estadisticas de llamadas
 
-每完成一个模块，使用下表进行自检：
+Despues de completar cada modulo, usa la siguiente tabla para autoverificacion:
 
 | Item de verificacion | Metodo de verificacion |
 |--------|----------|
-| 页面一致性 | 页面数量、功能是否符合 PRD |
-| 接口闭环 | agents、chat、logs、knowledge 接口是否完整 |
-| Aislamiento de permisos | 用户是否只能管理自己的 agent 和会话 |
-| Consistencia de datos | messages、logs、documents 数据是否对得上 |
-| Demostrabilidad | 是否能演示"创建 agent → 对话 → 查看日志"完整链路 |
+| Consistencia de paginas | El numero de paginas y funcionalidades coincide con el PRD |
+| Cierre de interfaces | Las interfaces de agents, chat, logs y knowledge estan completas |
+| Aislamiento de permisos | Los usuarios solo pueden gestionar sus propios agentes y sesiones |
+| Consistencia de datos | Los datos de messages, logs y documents coinciden |
+| Demostrabilidad | Se puede demostrar el ciclo completo "crear agente -> conversar -> ver logs" |
 
-### 3.2 知识库接入（加分项）
+### 3.2 Integracion de base de conocimientos (punto extra)
 
-如果你想增加知识库能力，可以给每个智能体增加一个"知识库开关"：
+Si deseas agregar capacidades de base de conocimientos, puedes anadir un "interruptor de base de conocimientos" para cada agente:
 
-- 开启后先检索知识片段，再和用户问题一起发送给模型
-- 关闭后按普通对话模式响应
+- Cuando esta activado, primero busca fragmentos de conocimiento y luego los envia junto con la pregunta del usuario al modelo
+- Cuando esta desactivado, responde en modo de conversacion normal
 
-第一版不必追求复杂 RAG，只要有"检索结果可见、调用链路可解释"即可。
+La primera version no necesita implementar RAG complejo; basta con que los resultados de busqueda sean visibles y el pipeline de llamadas sea explicable.
 
-## Cuarta parte：联调与上线
+## Cuarta parte: Integracion y despliegue
 
 ### 4.1 Pruebas de extremo a extremo
 
 Verificar al menos los siguientes escenarios:
 
-- 注册 → 创建智能体 → 配置 Prompt → 发起对话 → 查看日志
-- 管理员登录 → 查看用户数据 → 查看调用统计
+- Registrarse -> Crear agente -> Configurar Prompt -> Iniciar conversacion -> Ver logs
+- Iniciar sesion como administrador -> Ver datos de usuarios -> Ver estadisticas de llamadas
 
 Verificacion antes del despliegue:
 
-- [ ] 所有核心接口都做了登录校验
-- [ ] 智能体归属权限检查通过
-- [ ] 会话记录、日志记录真实落库
-- [ ] 模型 Key 使用环境变量，不硬编码
-- [ ] 错误提示可在前端看到，不只打控制台
+- [ ] Todas las interfaces principales tienen verificacion de inicio de sesion
+- [ ] La verificacion de pertenencia del agente ha pasado
+- [ ] Los registros de sesiones y logs se almacenan realmente en la base de datos
+- [ ] La clave del modelo usa variables de entorno, sin hardcoding
+- [ ] Los mensajes de error son visibles en el frontend, no solo en la consola
 
 ### 4.2 Despliegue
 
-Desplegar el proyecto en un entorno publico. Tutorial de despliegue de referencia:[Git 和 GitHub 工作流](../../backend/git-workflow/)、[如何Despliegue Web 应用](../../backend/zeabur-deployment/)。
+Desplegar el proyecto en un entorno publico. Tutorial de despliegue de referencia: [Flujo de trabajo de Git y GitHub](../../backend/git-workflow/), [Despliegue de aplicaciones web](../../backend/zeabur-deployment/).
 
 ## Entregables
 
@@ -168,43 +168,43 @@ Despues de completar este proyecto, necesitas enviar lo siguiente:
 
 - [ ] Enlace de demostracion en linea accesible
 - [ ] Enlace al repositorio de codigo fuente (incluyendo README)
-- [ ] PRD 文档
-- [ ] Capturas de pantalla de paginas clave（智能体管理页、对话页、日志页、后台首页）
-- [ ] 60 segundos de video de demostracion（覆盖创建智能体 → 对话 → 查看日志）
+- [ ] Documento PRD
+- [ ] Capturas de pantalla de paginas clave (gestion de agentes, pagina de conversacion, pagina de logs, pagina principal del panel)
+- [ ] Video de demostracion de 60 segundos (cubriendo crear agente -> conversar -> ver logs)
 
-README 至少包含：Introduccion del proyecto、架构说明、技术栈、本地启动步骤、环境变量清单、接口说明。
+El README debe incluir al menos: introduccion del proyecto, descripcion de arquitectura, stack tecnologico, pasos de inicio local, lista de variables de entorno y descripcion de interfaces.
 
 ## Criterios de evaluacion
 
-| 维度 | Requisitos basicos | Requisitos avanzados |
+| Dimension | Requisitos basicos | Requisitos avanzados |
 |------|---------|---------|
-| 平台完整度 | agents / chat / logs 三页可用 | 有清晰导航与统一设计语言 |
-| Ciclo completo del negocio | 可创建智能体并真实对话 | 支持多智能体切换与历史会话 |
-| 数据与追踪 | 消息与调用日志可查询 | 有 token / 耗时统计看板 |
-| 权限安全 | 仅登录用户可访问核心接口 | 资源归属校验完善 |
-| Entrega de ingenieria | 可Despliegue、可演示、README 清晰 | 接入知识库并可解释检索结果 |
+| Completitud de plataforma | Las tres paginas de agents/chat/logs son funcionales | Tiene navegacion clara y lenguaje de diseno unificado |
+| Ciclo completo del negocio | Se pueden crear agentes y tener conversaciones reales | Soporta cambio entre multiples agentes e historial de sesiones |
+| Datos y seguimiento | Los mensajes y logs de llamadas son consultables | Tiene un dashboard de estadisticas de tokens y tiempo de respuesta |
+| Seguridad de permisos | Solo usuarios autenticados pueden acceder a las interfaces principales | La verificacion de pertenencia de recursos es robusta |
+| Entrega de ingenieria | Desplegable, demostrable, README claro | Integra base de conocimientos y puede explicar resultados de busqueda |
 
 ## Verificacion antes de enviar
 
 <el-card shadow="hover" style="margin: 20px 0; border-radius: 12px;">
   <template #header>
-    <div style="font-weight: bold; font-size: 16px;">提交前最后看一眼</div>
+    <div style="font-weight: bold; font-size: 16px;">Revision final antes de enviar</div>
   </template>
 
   <ul style="list-style-type: none; padding-left: 0;">
-    <li><label><input type="checkbox" disabled /> 登录后可访问智能体管理、对话、日志页面</label></li>
-    <li><label><input type="checkbox" disabled /> 至少可以创建 1 个智能体并成功对话</label></li>
-    <li><label><input type="checkbox" disabled /> 每轮问答都能在数据库查到记录</label></li>
-    <li><label><input type="checkbox" disabled /> 调用失败时前端可见错误信息且日志已记录</label></li>
+    <li><label><input type="checkbox" disabled /> Despues de iniciar sesion se puede acceder a las paginas de gestion de agentes, conversacion y logs</label></li>
+    <li><label><input type="checkbox" disabled /> Se puede crear al menos 1 agente y conversar exitosamente</label></li>
+    <li><label><input type="checkbox" disabled /> Cada ronda de preguntas y respuestas tiene registros en la base de datos</label></li>
+    <li><label><input type="checkbox" disabled /> Cuando una llamada falla, el error es visible en el frontend y se registra en los logs</label></li>
     <li><label><input type="checkbox" disabled /> El proyecto esta desplegado, README y video de demostracion completos</label></li>
   </ul>
 </el-card>
 
 ## Referencias
 
-- [UI 设计](../../frontend/ui-design/)
-- [使用现代组件库更新你的界面](../../frontend/modern-component-library/)
-- [从数据库到 Supabase](../../backend/database-supabase/)
-- [大模型辅助编写接口代码与接口文档](../../backend/ai-interface-code/)
-- [Git 和 GitHub 工作流](../../backend/git-workflow/)
-- [如何Despliegue Web 应用](../../backend/zeabur-deployment/)
+- [Diseno UI](../../frontend/ui-design/)
+- [Biblioteca de componentes moderna](../../frontend/modern-component-library/)
+- [De la base de datos a Supabase](../../backend/database-supabase/)
+- [Escritura de codigo de interfaces](../../backend/ai-interface-code/)
+- [Flujo de trabajo de Git y GitHub](../../backend/git-workflow/)
+- [Despliegue de aplicaciones web](../../backend/zeabur-deployment/)

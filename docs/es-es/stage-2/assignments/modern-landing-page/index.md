@@ -1,68 +1,68 @@
-# 现代 AI 生图 SaaS 开发实战
+# Desarrollo Practico: SaaS de Generacion de Imagenes con IA Moderna
 
 ## Descripcion general
 
-Este proyecto practico te requiere trabajar con un PRD real（产品需求文档），completar desde cero un参考 Midjourney 体验的 AI 生图 SaaS 产品。你将完整经历Analisis de requisitos、项目拆解、Desarrollo iterativo、Integracion y despliegue的全过程。
+Este proyecto practico te requiere trabajar con un PRD real (documento de requisitos del producto) para completar desde cero un producto SaaS de generacion de imagenes con IA que toma como referencia la experiencia de Midjourney. Experimentaras el proceso completo de analisis de requisitos, descomposicion del proyecto, desarrollo iterativo e integracion y despliegue.
 
-Esta es la seccion de practica integral de la Etapa 2。在前面几章中，你已经分别学习了前端页面设计、后端接口开发、数据库操作、Integracion de pagos等单项技能——这个项目要求你把它们全部串起来，交付一个可运行的产品原型。
+Esta es la seccion de practica integral de la Etapa 2. En los capitulos anteriores, ya has aprendido por separado habilidades individuales como diseno de paginas frontend, desarrollo de interfaces backend, operaciones de base de datos e integracion de pagos. Este proyecto te exige conectar todas estas habilidades para entregar un prototipo de producto funcional.
 
 ## Conocimientos previos
 
 Antes de comenzar este proyecto, ya deberias dominar lo siguiente:
 
-- Diseno de paginas frontend y uso de bibliotecas de componentes（[UI 设计](../../frontend/ui-design/)、[现代组件库](../../frontend/modern-component-library/)）
-- Diseno y desarrollo de interfaces backend（[接口代码编写](../../backend/ai-interface-code/)）
-- Fundamentos de bases de datos y Supabase（[从数据库到 Supabase](../../backend/database-supabase/)）
-- Integracion de pagos（[Stripe 收费系统](../../backend/stripe-payment/)）
-- Flujo de trabajo de Git y despliegue（[Git 和 GitHub](../../backend/git-workflow/)、[Despliegue Web 应用](../../backend/zeabur-deployment/)）
+- Diseno de paginas frontend y uso de bibliotecas de componentes ([Diseno UI](../../frontend/ui-design/), [Biblioteca de componentes moderna](../../frontend/modern-component-library/))
+- Diseno y desarrollo de interfaces backend ([Escritura de codigo de interfaces](../../backend/ai-interface-code/))
+- Fundamentos de bases de datos y Supabase ([De la base de datos a Supabase](../../backend/database-supabase/))
+- Integracion de pagos ([Sistema de pagos Stripe](../../backend/stripe-payment/))
+- Flujo de trabajo de Git y despliegue ([Git y GitHub](../../backend/git-workflow/), [Despliegue de aplicaciones web](../../backend/zeabur-deployment/))
 
 ## Objetivos de aprendizaje
 
 Despues de completar esta practica, podras:
 
 1. Leer y comprender un PRD real, extrayendo una lista de tareas de desarrollo
-2. Dividir modulos basandose en el PRD, formulando un plan de avance paso a paso
+2. Dividir modulos basandote en el PRD, formulando un plan de avance paso a paso
 3. Usar IA para asistir en la construccion del esqueleto frontend y el desarrollo de interfaces backend
 4. Verificar y optimizar iterativamente cada modulo
 5. Completar la integracion de extremo a extremo, llevando el proyecto de "funcional" a "entregable"
 
 ## Introduccion del proyecto
 
-El producto que vas a construir es一个现代 AI 生图 SaaS 平台，包含三个Subsistema：
+El producto que vas a construir es una plataforma SaaS moderna de generacion de imagenes con IA, que incluye tres subsistemas:
 
 | Subsistema | Responsabilidad |
 |--------|------|
 | **Sitio web publico** | Introduccion del producto, precios, FAQ, conversion de registro |
-| **Espacio de trabajo del usuario** | Prompt 输入、图片生成、图库、积分、套餐、社区互动 |
+| **Espacio de trabajo del usuario** | Entrada de Prompt, generacion de imagenes, galeria, creditos, planes, interaccion comunitaria |
 | **Panel de administracion** | Gestion de usuarios, gestion de tareas, gestion de pagos, moderacion de contenido, metricas SaaS, monitoreo del sistema |
 
-后端necesita soportar las siguientes capacidades centrales：用户鉴权、图片生成任务、OSS 对象存储、积分与套餐支付、图片社交互动、运营数据监控。
+El backend necesita soportar las siguientes capacidades principales: autenticacion de usuarios, tareas de generacion de imagenes, almacenamiento de objetos OSS, creditos y pagos de planes, interaccion social de imagenes y monitoreo de datos operativos.
 
-::: tip PRD 入口
-El documento de requisitos de este proyecto esta en GitHub： [Ver PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/es-es/stage-2/assignments/modern-landing-page/PRD.md)
+::: tip PRD
+El documento de requisitos de este proyecto esta en GitHub: [Ver PRD](https://github.com/datawhalechina/easy-vibe/blob/main/docs/es-es/stage-2/assignments/modern-landing-page/PRD.md)
 :::
 
 <div style="margin: 32px 0;">
   <ClientOnly>
     <StepBar :active="0" :items="[
-      { title: 'Analisis de requisitos', description: 'Leer el PRD，提取页面、模块、数据模型和边界' },
-      { title: 'Construccion del esqueleto', description: '用 AI 生成三套前端骨架（www / app / admin）' },
-      { title: 'Desarrollo iterativo', description: '逐模块补充接口、权限、支付、监控' },
-      { title: 'Integracion y despliegue', description: 'Verificar de extremo a extremo，Desplegar y preparar la demostracion' }
+      { title: 'Analisis de requisitos', description: 'Leer el PRD, extraer paginas, modulos, modelo de datos y limites' },
+      { title: 'Construccion del esqueleto', description: 'Usar IA para generar tres esqueletos frontend (www / app / admin)' },
+      { title: 'Desarrollo iterativo', description: 'Agregar interfaces, permisos, pagos y monitoreo modulo por modulo' },
+      { title: 'Integracion y despliegue', description: 'Verificar de extremo a extremo, desplegar y preparar la demostracion' }
     ]" />
   </ClientOnly>
 </div>
 
-## Primera parte：Analisis de requisitos
+## Primera parte: Analisis de requisitos
 
 ### 1.1 Leer el PRD
 
-打开 PRD 文档，重点回答以下问题：
+Abre el documento PRD y responde las siguientes preguntas clave:
 
-- 系统有几个入口？各自覆盖哪些页面？
-- 每个页面的核心功能是什么？
-- 后端包含哪些模块和数据库表？
-- MVP 范围是什么？第一版哪些做，哪些不做？
+- Cuantos puntos de entrada tiene el sistema? Que paginas cubre cada uno?
+- Cual es la funcionalidad principal de cada pagina?
+- Que modulos y tablas de base de datos incluye el backend?
+- Cual es el alcance del MVP? Que se incluye y que se excluye en la primera version?
 
 ::: warning
 Si no tienes respuestas claras a las preguntas anteriores, no comiences a escribir codigo. La comprension inadecuada de los requisitos es la causa mas comun de retrabajo.
@@ -70,110 +70,110 @@ Si no tienes respuestas claras a las preguntas anteriores, no comiences a escrib
 
 ### 1.2 Confirmar la arquitectura del sistema
 
-根据 PRD 中的描述，梳理出系统的整体架构：
+Segun la descripcion del PRD, organiza la arquitectura general del sistema:
 
 ```mermaid
 flowchart TD
   prd["PRD"] --> web["Sitio web publico"]
   prd --> app["Espacio de trabajo del usuario"]
   prd --> admin["Panel de administracion"]
-  app --> auth["鉴权"]
-  app --> gen["图片生成任务"]
-  gen --> oss["OSS 对象存储"]
-  gen --> db["数据库"]
-  billing["支付与套餐"] --> db
-  social["分享 / 点赞 / 评论 / 转发"] --> db
-  admin --> analytics["SaaS 指标看板"]
-  admin --> observability["API / DB / Provider 监控"]
+  app --> auth["Autenticacion"]
+  app --> gen["Tarea de generacion de imagenes"]
+  gen --> oss["Almacenamiento de objetos OSS"]
+  gen --> db["Base de datos"]
+  billing["Planes y pagos"] --> db
+  social["Compartir / Me gusta / Comentar / Repost"] --> db
+  admin --> analytics["Dashboard de metricas SaaS"]
+  admin --> observability["Monitoreo de API / DB / Provider"]
 ```
 
-建议你用自己的话把架构图画一遍，确认你对系统的理解是完整的。
+Se recomienda dibujar el diagrama de arquitectura con tus propias palabras para confirmar que tu comprension del sistema es completa.
 
-## Segunda parte：搭建项目骨架
+## Segunda parte: Construccion del esqueleto del proyecto
 
 ### 2.1 Generar paginas frontend
 
-使用 AI 先生成所有页面的基本结构和假数据。这一步的目标是搭出信息架构和路由，不需要接真实接口。
+Usa IA para generar primero la estructura basica y los datos ficticios de todas las paginas. El objetivo de este paso es construir la arquitectura de informacion y las rutas, sin necesidad de conectar interfaces reales.
 
-Referencia de prompts：
+Referencia de prompts:
 
 ```text
-请基于当前 PRD，帮我生成一个现代 AI 生图 SaaS 的前端骨架。
+Basandote en el PRD actual, ayudame a generar el esqueleto frontend de un SaaS moderno de generacion de imagenes con IA.
 
-要求：
-1. 分成三个入口：www、app、admin
-2. 官网包括：首页、定价、FAQ
-3. app 包括：登录、注册、生成工作台、图库、套餐、积分、社区、作品详情、个人中心
-4. admin 包括：后台首页、用户管理、任务管理、内容管理、套餐管理、支付订单、运营配置、SaaS 指标、系统监控
-5. 先只生成页面结构和假数据，不接真实接口
-6. 风格参考 Midjourney，简洁、现代、带产品感
+Requisitos:
+1. Dividido en tres puntos de entrada: www, app, admin
+2. El sitio web incluye: inicio, precios, FAQ
+3. La app incluye: inicio de sesion, registro, espacio de trabajo de generacion, galeria, planes, creditos, comunidad, detalle de obras, centro personal
+4. El panel incluye: pagina principal, gestion de usuarios, gestion de tareas, gestion de contenido, gestion de planes, ordenes de pago, configuracion operativa, metricas SaaS, monitoreo del sistema
+5. Primero generar solo la estructura de paginas y datos ficticios, sin conectar interfaces reales
+6. Estilo referenciado en Midjourney: simple, moderno y con sensacion de producto
 ```
 
 ### 2.2 Verificar la estructura de paginas
 
-骨架生成后，Verificar item por item:
+Despues de generar el esqueleto, verificar item por item:
 
-- [ ] 三个入口的路由是否独立（`/`、`/app`、`/admin`）
-- [ ] 页面数量是否与 PRD 一致
-- [ ] 每个页面是否可以正常访问和导航
-- [ ] 假数据是否展示了基本的 UI 状态（列表、空状态、表单等）
+- [ ] Las rutas de los tres puntos de entrada son independientes (`/`, `/app`, `/admin`)
+- [ ] El numero de paginas coincide con el PRD
+- [ ] Cada pagina es accesible y navegable
+- [ ] Los datos ficticios muestran estados basicos de la interfaz (listas, estados vacios, formularios, etc.)
 
-## Tercera parte：Desarrollo iterativo
+## Tercera parte: Desarrollo iterativo
 
 ### 3.1 Avanzar por modulos
 
-在骨架的基础上，按以下顺序逐模块补充功能：
+Sobre la base del esqueleto, agrega funcionalidades modulo por modulo en el siguiente orden:
 
-1. **鉴权**：注册、登录、角色区分
-2. **数据库**：数据表创建、读写接口
-3. **核心业务**：图片生成任务、结果存储
-4. **OSS 存储**：图片上传与访问
-5. **支付**：套餐、积分、Stripe 集成
-6. **社交互动**：分享、点赞、评论
-7. **后台管理**：用户管理、任务管理、内容审核
-8. **数据监控**：SaaS 指标看板、系统监控
+1. **Autenticacion**: Registro, inicio de sesion, diferenciacion de roles
+2. **Base de datos**: Creacion de tablas, interfaces de lectura y escritura
+3. **Negocio principal**: Tareas de generacion de imagenes, almacenamiento de resultados
+4. **Almacenamiento OSS**: Carga y acceso de imagenes
+5. **Pagos**: Planes, creditos, integracion con Stripe
+6. **Interaccion social**: Compartir, me gusta, comentarios
+7. **Panel de administracion**: Gestion de usuarios, gestion de tareas, moderacion de contenido
+8. **Monitoreo de datos**: Dashboard de metricas SaaS, monitoreo del sistema
 
-每完成一个模块，使用下表进行自检：
+Despues de completar cada modulo, usa la siguiente tabla para autoverificacion:
 
 | Item de verificacion | Metodo de verificacion |
 |--------|----------|
-| 页面一致性 | 页面数量、入口、功能是否符合 PRD |
-| 接口正确性 | 请求参数、返回结构、状态处理是否合理 |
-| Aislamiento de permisos | 普通用户和管理员是否互相隔离 |
-| Consistencia de datos | 数据库、OSS、支付、积分是否对得上 |
-| Demostrabilidad | 是否能给别人完整演示一条业务链路 |
+| Consistencia de paginas | El numero de paginas, puntos de entrada y funcionalidades coinciden con el PRD |
+| Correccion de interfaces | Los parametros de solicitud, estructura de respuesta y manejo de estados son razonables |
+| Aislamiento de permisos | Los usuarios normales y administradores estan mutuamente aislados |
+| Consistencia de datos | Base de datos, OSS, pagos y creditos coinciden |
+| Demostrabilidad | Se puede demostrar un flujo de negocio completo a otra persona |
 
 ::: tip
-Si encuentras que el contenido generado por IA se desvia del PRD, no vuelvas a hacer toda la pagina, simplemente pidele que modifique los modulos especificos.
+Si encuentras que el contenido generado por IA se desvia del PRD, no vuelvas a hacer toda la pagina desde cero; simplemente pidele que modifique los modulos especificos.
 :::
 
-### 3.2 角色与分工
+### 3.2 Roles y responsabilidades
 
-在迭代过程中，你需要同时扮演三个角色：
+Durante la iteracion, necesitas asumir tres roles simultaneamente:
 
-- **产品经理**：确认每个模块的功能是否符合 PRD
-- **技术负责人**：确认实现方案是否合理
-- **测试工程师**：确认功能是否跑得通
+- **Gerente de producto**: Confirmar que la funcionalidad de cada modulo cumple con el PRD
+- **Lider tecnico**: Confirmar que la solucion de implementacion es razonable
+- **Ingeniero de pruebas**: Confirmar que la funcionalidad funciona correctamente
 
-## Cuarta parte：联调与上线
+## Cuarta parte: Integracion y despliegue
 
 ### 4.1 Pruebas de extremo a extremo
 
-最后阶段的重点不是补新页面，而是把完整业务链路跑通。Verificar al menos los siguientes escenarios:
+El enfoque de la etapa final no es agregar nuevas paginas, sino hacer que el flujo de negocio completo funcione. Verificar al menos los siguientes escenarios:
 
-- 注册 → 购买积分 → 生成图片 → 查看历史 → 分享互动
-- 管理员登录 → 查看用户数据 → 查看任务统计 → 查看系统监控
+- Registrarse -> Comprar creditos -> Generar imagen -> Ver historial -> Compartir e interactuar
+- Iniciar sesion como administrador -> Ver datos de usuarios -> Ver estadisticas de tareas -> Ver monitoreo del sistema
 
 ### 4.2 Despliegue
 
-将项目Despliegue到公网环境，确保：
+Desplegar el proyecto en un entorno publico, asegurando:
 
-- 环境变量配置完整
-- 登录回调地址正确
-- 支付回调地址正确
-- 页面无缺失的 loading、空状态、错误提示
+- Las variables de entorno estan completamente configuradas
+- La URL de callback de inicio de sesion es correcta
+- La URL de callback de pago es correcta
+- Las paginas no carecen de estados de loading, estados vacios ni mensajes de error
 
-Despliegue教程参考：[Git 和 GitHub 工作流](../../backend/git-workflow/)、[如何Despliegue Web 应用](../../backend/zeabur-deployment/)。
+Tutorial de despliegue de referencia: [Flujo de trabajo de Git y GitHub](../../backend/git-workflow/), [Despliegue de aplicaciones web](../../backend/zeabur-deployment/).
 
 ## Entregables
 
@@ -181,31 +181,31 @@ Despues de completar este proyecto, necesitas enviar lo siguiente:
 
 - [ ] Enlace de demostracion en linea accesible
 - [ ] Enlace al repositorio de codigo fuente (incluyendo README)
-- [ ] PRD 文档
-- [ ] Capturas de pantalla de paginas clave（官网首页、生图工作台、图库、套餐页、后台首页）
-- [ ] 60 segundos de video de demostracion（覆盖注册 → 生成 → 查看 → 后台管理）
+- [ ] Documento PRD
+- [ ] Capturas de pantalla de paginas clave (inicio del sitio web, espacio de trabajo de generacion, galeria, pagina de planes, pagina principal del panel)
+- [ ] Video de demostracion de 60 segundos (cubriendo registro -> generacion -> visualizacion -> panel de administracion)
 
-README 至少包含：Introduccion del proyecto、核心页面说明、技术栈、本地启动步骤、环境变量清单。
+El README debe incluir al menos: introduccion del proyecto, descripcion de paginas principales, stack tecnologico, pasos de inicio local y lista de variables de entorno.
 
 ## Criterios de evaluacion
 
-| 维度 | Requisitos basicos | Requisitos avanzados |
+| Dimension | Requisitos basicos | Requisitos avanzados |
 |------|---------|---------|
-| Alineacion con PRD | 页面、功能、数据结构基本符合 PRD | 能清晰说明每个设计决策与 PRD 的对应关系 |
-| Ciclo completo del producto | 注册 → 购买积分 → 生成图片 → 查看历史 → 分享互动可跑通 | 支付状态、积分余额、生成次数数据一致 |
-| Capacidades del backend | 用户、任务、支付、内容管理可查看 | SaaS 指标看板和系统监控页完整可用 |
-| Completitud de ingenieria | 前端、后端、数据库、OSS、支付链路已接通 | 有错误处理、空状态、loading 状态 |
-| Calidad de entrega | 可Despliegue、可运行 | README 清楚、演示视频结构完整 |
+| Alineacion con PRD | Paginas, funcionalidades y estructura de datos basicamente cumplen con el PRD | Puede explicar claramente la correspondencia entre cada decision de diseno y el PRD |
+| Ciclo completo del producto | Registrarse -> Comprar creditos -> Generar imagen -> Ver historial -> Compartir e interactuar funciona completamente | Los estados de pago, saldo de creditos y numero de generaciones son consistentes |
+| Capacidades del panel | Gestion de usuarios, tareas, pagos y contenido son consultables | El dashboard de metricas SaaS y la pagina de monitoreo del sistema son funcionales |
+| Completitud de ingenieria | Frontend, backend, base de datos, OSS y pipeline de pagos conectados | Tiene manejo de errores, estados vacios y estados de loading |
+| Calidad de entrega | Desplegable y ejecutable | README claro, video de demostracion con estructura completa |
 
 ## Referencias
 
-- [UI 设计](../../frontend/ui-design/)
-- [参考 UI 设计规范设计页面和按钮](../../frontend/multi-product-ui/)
-- [用 LLM 和 Skills 让界面变好看](../../frontend/llm-skills-beautiful/)
-- [从设计原型到项目代码](../../frontend/design-to-code/)
-- [使用现代组件库更新你的界面](../../frontend/modern-component-library/)
-- [从数据库到 Supabase](../../backend/database-supabase/)
-- [大模型辅助编写接口代码与接口文档](../../backend/ai-interface-code/)
-- [Git 和 GitHub 工作流](../../backend/git-workflow/)
-- [如何Despliegue Web 应用](../../backend/zeabur-deployment/)
-- [如何集成 Stripe 等收费系统](../../backend/stripe-payment/)
+- [Diseno UI](../../frontend/ui-design/)
+- [Diseno de paginas y botones con especificaciones UI](../../frontend/multi-product-ui/)
+- [Mejorar la apariencia de la interfaz con LLM y Skills](../../frontend/llm-skills-beautiful/)
+- [De prototipo de diseno a codigo del proyecto](../../frontend/design-to-code/)
+- [Biblioteca de componentes moderna](../../frontend/modern-component-library/)
+- [De la base de datos a Supabase](../../backend/database-supabase/)
+- [Escritura de codigo de interfaces](../../backend/ai-interface-code/)
+- [Flujo de trabajo de Git y GitHub](../../backend/git-workflow/)
+- [Despliegue de aplicaciones web](../../backend/zeabur-deployment/)
+- [Sistema de pagos Stripe](../../backend/stripe-payment/)
