@@ -1167,3 +1167,577 @@ ch.on('presence', { event: 'sync' }, ()
   setOnline(flat);
 });
 ```
+
+4. Escuchar la union y salida de usuarios individuales
+
+Ademas del evento sync, podemos escuchar los eventos join y leave para responder de forma inmediata cuando un nuevo usuario entra o sale, por ejemplo mostrando una notificacion de "User has joined".
+
+```
+ch.on('presence', { event: 'join' }, ({ 
+key, newPresences }) => {
+  console.log('User joined:', key, 
+  newPresences);
+});
+
+ch.on('presence', { event: 'leave' }, ({ 
+key, leftPresences }) => {
+  console.log('User left:', key, 
+  leftPresences);
+});
+```
+
+Con estos pasos, hemos construido un sistema de presencia en linea completo y funcional. Supabase gestiona automaticamente los casos de desconexion inesperada del usuario (como cerrar el navegador o perder la conexion a internet) y activa el evento leave en el momento adecuado, garantizando la precision de la lista de usuarios en linea.
+
+Una vez que Presence nos permite saber "quien esta presente", Broadcast permite que estos usuarios mantengan una "conversacion", pero el contenido de la conversacion se almacena de forma efimera. Un ejemplo tipico es el seguimiento de cursores en tiempo real. Si cada movimiento del raton implicara una lectura o escritura en la base de datos, causaria un enorme desperdicio de rendimiento y latencia. Broadcast resuelve este problema a la perfeccion: permite que los mensajes se transmitan directamente entre los clientes a traves de WebSocket, sin pasar por la base de datos.
+
+El modo de funcionamiento de Broadcast depende principalmente de dos metodos fundamentales: channel.send() para enviar y channel.on() para recibir.
+
+1. Emisor: difundir la posicion de mi cursor
+
+Agregamos un listener al evento mousemove. Cuando el raton se mueve, construimos un payload que contiene el ID del usuario, las coordenadas y el color, y lo transmitimos a traves de channel.send() con el nombre de evento 'cursor'.
+
+```typescript
+const handleMouseMove = (e) => {
+  const payload = {
+    id: anonymousUser.id,
+    x: e.clientX,
+    y: e.clientY,
+    name: anonymousUser.name,
+    color: anonymousUser.color
+  };
+
+  channelRef.current?.send({
+    type: 'broadcast',
+    event: 'cursor',
+    payload
+  });
+};
+
+document.addEventListener('mousemove', handleMouseMove);
+```
+
+2. Receptor: escuchar y renderizar los cursores de otros
+
+Dentro del mismo canal, todos los clientes utilizan channel.on() para escuchar mensajes de tipo broadcast cuyo event sea 'cursor'. Una vez que se recibe un mensaje coincidente, se activa la funcion de callback. Extraemos los datos del emisor desde el payload y los usamos para actualizar el estado local online, renderizando asi en pantalla la posicion de los cursores de otros usuarios en tiempo real.
+
+```typescript
+ch.on('broadcast', { event: 'cursor' }, ({ payload }) => {
+  setOnline((prev) => ({
+    ...prev,
+    [payload.id]: {
+      ...(prev[payload.id] || {}),
+      x: payload.x,
+      y: payload.y
+    }
+  }));
+});
+```
+
+De esta manera, Presence y Broadcast trabajan en conjunto: Presence mantiene la lista de usuarios en linea, mientras que Broadcast se encarga de transmitir estados temporales como las posiciones de los cursores entre esos usuarios, logrando finalmente una rica funcionalidad de interaccion en tiempo real con un costo reducido.
+
+## 5.4 Storage
+
+Ademas de los datos estructurados como la informacion de usuarios y pedidos, que se pueden definir de forma regular, una aplicacion completa generalmente necesita gestionar una gran cantidad de archivos no estructurados, por ejemplo, avatares de usuarios, imagenes de productos o documentos de pedidos subidos por los usuarios. La caracteristica de estos archivos es que sus tamanos varian mucho y su cantidad puede ser enorme (por ejemplo, las imagenes de productos en una plataforma de comercio electronico pueden llegar a decenas de miles o incluso cientos de miles). Si se almacenan directamente en el servidor de la aplicacion, aumentarian significativamente la carga de almacenamiento del servidor y podrian ralentizar la lectura y escritura de datos, afectando el rendimiento general de la aplicacion.
+
+En el desarrollo real, estos archivos no estructurados se gestionan de manera uniforme mediante un "servicio de almacenamiento de objetos". OSS, Amazon S3 y otros pertenecen a este tipo de servicios; son "herramientas de almacenamiento especializadas" disenadas especificamente para el almacenamiento masivo de archivos, capaces de gestionar eficientemente las necesidades de almacenamiento, copia de seguridad y lectura rapida de archivos. Cuando obtenemos estos archivos en nuestra aplicacion, no los recuperamos directamente del "almacen subyacente" del servicio de almacenamiento de objetos, sino a traves de URLs: cada archivo almacenado en el almacenamiento de objetos recibe una URL unica (similar a una direccion como "[https://xxx.oss.com/avatar/user123.jpg](https://xxx.oss.com/avatar/user123.jpg)", que se puede entender simplemente como un "sitio web" que contiene solo una imagen). Esta URL es como la "direccion de acceso exclusiva" del archivo; la pagina frontend solo necesita usarla para descargar o cargar directamente el avatar o la imagen del producto, sin depender del servidor de la aplicacion como intermediario, mejorando la velocidad de carga de archivos y reduciendo la carga del servidor.
+
+El proyecto `project-burger-shop-storage-uploads-4` demuestra a traves de una funcionalidad de carga de avatares de usuario como utilizar Supabase Storage para construir un sistema moderno de carga de archivos, permitiendo a los desarrolladores comprender de forma intuitiva el flujo completo desde la carga de archivos no estructurados hasta su acceso via URL. Ademas, este proyecto utiliza la libreria `Uppy` para proporcionar una excelente interfaz de carga de archivos, combinada con el plugin `Tus` para implementar cargas reanudables, apuntando el endpoint de carga de Uppy al API estandar de Supabase (`<supabaseUrl>/storage/v1/upload/resumable`) para su funcionamiento. Puedes referirte a un enfoque similar para implementar tus propios componentes de carga.
+
+![](images/image55.png)
+
+![](images/image56.png)
+
+### 5.4.1. Storage Bucket
+
+La unidad basica de Supabase Storage es el Bucket (storage bucket). Puedes imaginarlo como una carpeta en el sistema operativo de tu computadora. Cada Bucket puede tener sus propias politicas de seguridad y configuracion independientes.
+
+Todos los archivos dentro de Storage son accesibles directamente a traves de una URL publica, pero esto no significa que cualquiera pueda subir o modificar archivos libremente. Los permisos de acceso especificos se controlan mediante politicas mas granulares. Al igual que la base de datos, los permisos de Storage tambien se gestionan mediante Row Level Security (RLS). Las politicas SQL se escriben sobre las tablas especiales storage.objects y storage.buckets, permitiendo definir con precision quien puede leer (SELECT), subir (INSERT), actualizar (UPDATE) o eliminar (DELETE) archivos.
+
+Por ejemplo, podemos crear una politica que solo permita a los usuarios subir archivos a una carpeta con su propio user_id, y que solo permita subir archivos de tipo imagen:
+
+```
+CREATE POLICY "Allow authenticated 
+uploads to avatars bucket"
+ON storage.objects FOR INSERT
+TO authenticated
+WITH CHECK (
+  bucket_id = 'avatars' AND
+  auth.uid() = (storage.foldername(name))
+  [1]::uuid AND
+  (storage.extension(name) IN ('png', 
+  'jpg', 'jpeg'))
+);
+
+CREATE POLICY "Allow public read access 
+to avatars"
+ON storage.objects FOR SELECT
+USING ( bucket_id = 'avatars' );
+```
+
+### 5.4.2 Obtener la URL accesible del archivo
+
+Este proyecto requiere que crees manualmente un bucket publico llamado avatars; todos los archivos se subiran y almacenaran en ese bucket. Una vez que el archivo se ha subido con exito, solo obtenemos su ruta de almacenamiento en Storage, por ejemplo public/avatar1.png. Esto es simplemente una cadena de texto almacenada en la base de datos; para que el navegador pueda renderizar esta imagen, necesitamos convertirla en una URL HTTP accesible.
+
+Supabase ofrece dos estrategias fundamentalmente diferentes para obtener esta URL, que difieren en cuanto a seguridad, persistencia y control de costos.
+
+#### 1. Public URL - Enlace permanente
+
+Esta es la forma mas directa. Si tu archivo se encuentra en un **Public Bucket**, puedes obtener un enlace publico fijo y permanente.
+
+```typescript
+const { data } = supabase.storage
+  .from('avatars')
+  .getPublicUrl('public/avatar1.png');
+const publicUrl = data.publicUrl;
+```
+
+Este tipo de enlace tiene dos caracteristicas principales: primera, es simple y directo, con una estructura de URL fija que facilita su concatenacion y gestion en la practica, reduciendo la barrera tecnica de uso; segunda, favorece el almacenamiento en cache, ya que al ser un enlace permanente, puede ser almacenado eficientemente en cache por CDN (Content Delivery Network) y navegadores, mejorando significativamente la velocidad de acceso a los recursos y optimizando la experiencia del usuario. Gracias a estas caracteristicas, es adecuado para escenarios de recursos publicos en el sentido mas estricto, como logos de sitios web, imagenes de catalogos de productos o imagenes de articulos de blog.
+
+Sin embargo, en entornos de produccion, este tipo de enlaces presenta un riesgo significativo de robo de ancho de banda (Hotlinking). Dado que los enlaces son permanentemente publicos, personas externas pueden facilmente incrustar los enlaces de tus imagenes en sus propios sitios web de alto trafico, lo que provoca que tu ancho de banda sea utilizado de forma no autorizada. Este comportamiento genera grandes costos de trafico innecesarios en tu proyecto de Supabase, y el trafico consumido no esta sirviendo a tu propia aplicacion, lo cual es un tipico desperdicio de costos que requiere atencion y prevencion en entornos de produccion; por lo tanto, necesitamos recurrir a las Signed URLs temporales para exponer recursos externos.
+
+#### 2. Signed URL - Enlace de autorizacion temporal
+
+Para resolver los problemas de seguridad y costos de las Public URLs, Supabase ofrece la posibilidad de generar Signed URLs temporales. Esta es la mejor practica recomendada para la mayoria de las aplicaciones en produccion, como por ejemplo: aplicaciones de generacion de texto a imagen que generan enlaces de visualizacion con tiempo limitado para los usuarios, plataformas de comercio electronico que solo permiten a los usuarios que han realizado un pedido obtener una direccion temporal de descarga de facturas, o plataformas de contenido de pago que proporcionan a los suscriptores enlaces de reproduccion de cursos de corta duracion, previniendo tanto el uso no autorizado de archivos como el robo de ancho de banda, con una adaptabilidad muy alta.
+
+```typescript
+const { data, error } = await supabase.storage
+  .from('avatars')
+  .createSignedUrl('private/user-invoice.pdf', 3600); // El enlace es valido por 3600 segundos (1 hora)
+const signedUrl = data?.signedUrl;
+```
+
+Las Signed URLs temporales tienen tres ventajas fundamentales: seguridad controlada significa que los enlaces llevan una marca de seguridad y tienen un periodo de validez, por lo que expiran y dejan de funcionar; la vinculacion de permisos es simple: solo quien puede ver el archivo puede generar el enlace, e incluso si el archivo esta en un almacenamiento privado (Private Bucket), con este enlace se puede abrir normalmente; y prevencion del robo de ancho de banda, ya que los enlaces son temporales y al copiarlos a otro lugar caducan rapidamente, evitando el uso malicioso del trafico. Gracias a estas ventajas, archivos que requieren gestion de permisos como avatares de usuarios, fotos privadas, contenido de pago y facturas de pedidos pueden utilizarlas.
+
+Desde la perspectiva de la seguridad y el control de costos, se recomienda adquirir el habito de priorizar las Signed URLs temporales. Solo cuando un recurso necesita claramente ser permanente y publicamente accesible sin restricciones (como el logo publico de una aplicacion o imagenes de promocion de eventos publicos) se debe considerar el uso de Public URLs. De este modo se pueden satisfacer las necesidades especificas del negocio mientras se minimizan los riesgos y costos innecesarios.
+
+## 5.5 Edge Functions
+
+Edge Function es una de las formas mas destacadas dentro del ecosistema Serverless, proporcionando un soporte ligero y eficiente para la ejecucion de funciones en escenarios "sin backend propio".
+
+Que es Serverless? Serverless no significa que realmente no haya servidores, sino que los desarrolladores no necesitan preocuparse por la compra, mantenimiento, configuracion y escalado de servidores. Solo necesitas escribir el codigo de negocio (funciones), y el proveedor de servicios en la nube asignara automaticamente los recursos para ejecutar tu codigo cuando se active un evento especifico, cobrando solo por el tiempo real de ejecucion.
+
+Cuando tu aplicacion necesita ejecutar logica que no puede o no debe completarse en el cliente (navegador), por ejemplo, interactuar con APIs de terceros que requieren claves privadas, ejecutar tareas computacionalmente intensivas o hacer cumplir reglas de negocio complejas, las Edge Functions son la solucion. Las Supabase Edge Functions estan basadas en Deno y TypeScript, y se despliegan en nodos perifericos (edge nodes) a nivel mundial, fisicamente cerca de tus usuarios, proporcionando asi una latencia de ejecucion extremadamente baja.
+
+Actualmente, los principales proveedores de nube ofrecen sus propios servicios de Edge Function, entre los mas comunes se encuentran:
+
+- AWS Lambda@Edge: servicio de funciones perifericas basado en AWS Lambda, que puede integrarse con CloudFront CDN y soporta lenguajes como Node.js y Python;
+- Cloudflare Workers: funciones perifericas de Cloudflare, desplegadas en mas de 275 nodos perifericos a nivel mundial, soportan JavaScript/TypeScript, con "latencia de milisegundos" como ventaja principal;
+- Vercel Edge Functions: funciones perifericas adaptadas a proyectos frontend de Vercel, profundamente integradas con Next.js, soportan TypeScript, y se centran en la "conexion sin interrupciones entre el frontend y la logica periferica";
+
+Volviendo a Supabase, cuando tu aplicacion necesita ejecutar logica que "no puede completarse en el cliente (navegador)", como llamar a una API de terceros con una clave privada (por ejemplo, la interfaz de un LLM), procesar tareas computacionalmente intensivas (como compresion de imagenes) o hacer cumplir la validacion de permisos (como reglas de acceso a archivos), las Supabase Edge Functions entran en accion. Estan construidas sobre Deno runtime y TypeScript, desplegadas en nodos perifericos a nivel mundial, y pueden lograr una latencia de ejecucion extremadamente baja gracias a la "proximidad fisica al usuario", siendo la herramienta principal para escribir logica del lado del servidor personalizada y confiable.
+
+El proyecto `Project5-Supabase-Demos/apps/project-burger-shop-edge-function-5` muestra el flujo de aplicacion mas simple de las Edge Functions a traves de una funcionalidad de对话 en streaming en tiempo real con un Large Language Model (LLM).
+
+![](images/image57.png)
+
+### 5.5.1 Analisis del caso LLM Chat
+
+Supongamos que quieres integrar un chatbot similar a ChatGPT en tu aplicacion. Necesitas llamar a la API de OpenAI desde el lado del servidor, pero esto requiere una API Key privada. Esta Key **nunca debe exponerse en el codigo frontend**, de lo contrario cualquiera podria robarla revisando el codigo fuente de la pagina web y generar costos elevados. Aqui es precisamente donde Edge Function resulta util. Crearemos una funcion llamada llm-chat que actuara como un **proxy seguro** entre el frontend y la API de OpenAI.
+
+Consulta el codigo en `project-burger-shop-edge-function-5/scripts/llm-chat.ts` para ver como funciona:
+
+```typescript
+// scripts/llm-chat.ts
+import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { OpenAI } from "npm:openai";
+
+const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
+
+Deno.serve(async (req) => {
+  try {
+    const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+    const { prompt } = await req.json();
+
+    const stream = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: prompt }],
+      stream: true,
+    });
+
+    return new Response(stream.toReadableStream(), {
+      headers: { "Content-Type": "text/event-stream" },
+    });
+  } catch (err) {
+  }
+});
+```
+
+En este caso, en cuanto a la seguridad de la clave, OPENAI_API_KEY se almacena de forma segura como variable de entorno en los servidores de Supabase. El codigo frontend local no tiene acceso a la clave, garantizando asi su seguridad de manera efectiva.
+
+### 5.5.2 Crear y desplegar una funcion
+
+Supabase ofrece una interfaz muy amigable que te permite completar el despliegue sin necesidad de tocar la linea de comandos.
+
+1. **Acceder al panel de Edge Functions**:
+2. Inicia sesion en el Dashboard de tu proyecto Supabase.
+3. En la barra de navegacion izquierda, haz clic en el icono que parece codigo para acceder a "Edge Functions".
+4. **Crear una nueva funcion**:
+5. Haz clic en el boton "Create a new function".
+   ![](images/image58.png)
+6. Asigna un nombre a la funcion, por ejemplo `llm-chat`.
+7. **Pegar el codigo**:
+   ![](images/image59.png)
+8. En el editor en linea que aparece, **elimina todo el codigo de marcador de posicion predeterminado**.
+9. Abre tu archivo local `llm-chat.ts` y **copia todo su contenido**.
+10. **Pega** el codigo copiado en el editor en linea de Supabase.
+11. **Configurar** **variables de entorno** **(Secrets)**:
+    1. En la barra lateral encuentra Secrets.
+       ![](images/image60.png)
+    2. Name: ingresa `OPENAI_API_KEY`.
+    3. Value: pega tu propia OpenAI API Key.
+    4. Haz clic en "Save". El Secret configurado aqui se almacenara encriptado y se inyectara de forma segura en el entorno de ejecucion de tu funcion.
+
+Si necesitas actualizar la funcion, recuerda ejecutar Deploy updates en la seccion de Edge Functions. Supabase construira y desplegara la funcion en la nube por ti. En unos minutos, tu funcion estara accesible en linea.
+
+Mas alla de funcionar como un proxy seguro para modelos de lenguaje, los casos de uso de las Edge Functions van mucho mas alla. En realidad, cualquier tarea que requiera procesamiento de logica del lado del servidor, ya sea una simple llamada a una API, validacion de datos o calculos mas complejos, puede implementarse a traves de Edge Functions. Te proporciona un backend ligero y escalable sin necesidad de gestionar ninguna infraestructura de servidores.
+
+Si deseas explorar mas posibilidades, puedes consultar otros ejemplos en el proyecto. Por ejemplo:
+
+- Generacion de imagenes (txt2img.ts): esta funcion muestra como utilizar Edge Function para llamar a una API de terceros de texto a imagen (Text-to-Image) (como Stability AI, Midjourney, etc.) para generar imagenes dinamicamente. Este es un escenario tipico computacionalmente intensivo o que requiere llamadas seguras a servicios externos. Al igual que en el caso de llm-chat, la clave API se almacena de forma segura en el backend de Supabase, y el frontend solo se encarga de enviar la descripcion de texto y luego recibir y mostrar la imagen generada; todo el proceso es seguro y eficiente.
+- Envio de correos electronicos (send-email.ts): enviar correos de bienvenida, notificaciones de transacciones o correos de restablecimiento de contrasena es un requisito comun en las aplicaciones. El ejemplo send-email.ts demuestra como integrar un servicio de correo electronico (como Resend, SendGrid) a traves de Edge Function. No necesitas exponer la API Key del servicio de correo en el codigo del cliente; solo necesitas crear una funcion y dejar que el frontend active el envio del correo llamando a esta funcion.
+
+## 5.6 Clerk Login
+
+Clerk es una herramienta de desarrollo profesional enfocada en la autenticacion de identidad y la gestion de usuarios. Sus capacidades principales cubren todo el flujo de autenticacion: registro de usuarios, inicio de sesion, seguridad de cuentas con MFA, control de permisos y gestion de sesiones. Ayuda a los desarrolladores a construir rapidamente un sistema de usuarios seguro, flexible y conforme a los estandares de aplicaciones modernas, sin necesidad de desarrollar desde cero una logica de identidad compleja.
+
+Esta seccion presentara como configurar el servicio Clerk desde cero e integrarlo con Supabase. Puedes experimentar el flujo completo en el proyecto `project-burger-shop-auth-advanced-clerk-7`.
+
+![](images/image61.png)
+
+### 5.6.1 Crear una aplicacion Clerk y obtener las claves
+
+Antes de usar este proyecto, necesitas tener una cuenta de Clerk y crear una aplicacion.
+
+1. Registro y creacion:
+   1. Visita [dashboard.clerk.com](https://dashboard.clerk.com/) y registrate para obtener una cuenta.
+   2. Haz clic en "Create application".
+      ![](images/image62.png)
+   3. Ingresa el nombre de la aplicacion (por ejemplo "Burger Shop").
+   4. En "How will your users sign in?", selecciona por defecto Email, Google y GitHub.
+   5. Haz clic en Create application.
+2. Obtener las API Keys:
+   1. Despues de crearla con exito, seras redirigido a la pagina de API Keys.
+      ![](images/image63.png)
+   2. Encuentra la Publishable key (que comienza con `pk_`) y la Secret key (que comienza con `sk_`).
+      ![](images/image64.png)
+   3. Copialas en tu archivo `.env.local` (consulta el archivo `.env.example` de este proyecto):
+
+      ```bash
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+      CLERK_SECRET_KEY=sk_test_...
+      ```
+
+### 5.6.2 Configurar la integracion nativa entre Supabase y Clerk
+
+Antes de continuar, necesitamos integrar la relacion entre Supabase y Clerk, para facilitar la redireccion de autenticacion durante el inicio de sesion y controlar los permisos de acceso a bases de datos especificas. Supabase y Clerk ofrecen una capacidad de integracion oficial nativa que permite conectar rapidamente la autenticacion de ambas plataformas sin necesidad de configurar manualmente una logica de adaptacion compleja, simplificando enormemente el desarrollo de funciones como el inicio de sesion de usuarios y la validacion de permisos:
+
+1. Activar la integracion oficial con Supabase en Clerk
+   1. Inicia sesion en [Clerk Dashboard](https://dashboard.clerk.com/).
+   2. En el menu de navegacion izquierdo, ve a Integrations.
+   3. Encuentra y haz clic en Supabase en la lista.
+   4. Activa el interruptor Enable Supabase (o haz clic en Activate integration).
+   5. Paso clave: despues de activar con exito, la pagina mostrara tu Clerk Domain (el formato suele ser `https://<your-id>.clerk.accounts.dev` o tu dominio personalizado). Copia esta direccion de dominio, la necesitaras en el siguiente paso.
+2. Agregar Clerk como proveedor en Supabase
+   1. Inicia sesion en [Supabase Dashboard](https://supabase.com/dashboard) y entra en tu proyecto.
+   2. En el menu de navegacion izquierdo, ve a Authentication > Sign In / Up (o haz clic directamente en Providers).
+   3. Haz clic en el boton Add provider y selecciona Clerk de la lista desplegable.
+   4. En el campo Clerk Domain que aparece, pega la direccion de dominio que copiaste de Clerk.
+   5. Haz clic en Save para guardar la configuracion.
+
+### 5.6.3 Sincronizar datos de usuarios a Supabase a traves de Webhooks
+
+La integracion por si sola solo satisface la necesidad de verificar permisos, pero no sincroniza automaticamente la informacion de los usuarios ya registrados en Clerk hacia Supabase. Para facilitar la gestion, necesitamos mantener una copia de seguridad de los usuarios en la tabla `public.users` de Supabase, para poder realizar consultas asociadas o analisis de datos. Podemos implementar esta funcionalidad a traves de Clerk Webhooks; el proceso completo es el siguiente:
+
+1. **Clerk envia una notificacion**: cuando un usuario se registra o actualiza su perfil en Clerk, este envia una solicitud POST a la URL del Webhook que hemos configurado.
+2. **Supabase recibe y escribe**: la Edge Function recibe la solicitud, verifica la firma (para garantizar la seguridad) y luego actualiza los datos del usuario en la tabla de la base de datos de Supabase.
+
+Antes de comenzar, necesitamos configurar las tablas de datos necesarias para la sincronizacion:
+
+```sql
+-- File: init.sql
+
+-- 1. Create `users` table for synced Clerk users
+-- This table will store user data pushed from Clerk Webhooks.
+CREATE TABLE public.users (
+  id TEXT NOT NULL PRIMARY KEY, -- Corresponds to Clerk User ID
+  email TEXT,
+  first_name TEXT,
+  last_name TEXT,
+  image_url TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 2. Enable Row Level Security (RLS) on the table
+-- This is an important security measure to ensure users cannot access any data by default.
+ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
+
+-- 3. Create RLS policies
+-- Policy 1: Allow authenticated users to read their own user info.
+-- `auth.jwt()->>'sub'` extracts the user ID from the JWT provided by Clerk.
+CREATE POLICY "Authenticated users can view their own user record"
+ON public.users FOR SELECT
+TO authenticated
+USING ( (SELECT auth.jwt()->>'sub') = id );
+
+-- Policy 2: Allow users to update their own info.
+CREATE POLICY "Authenticated users can update their own user record"
+ON public.users FOR UPDATE
+TO authenticated
+USING ( (SELECT auth.jwt()->>'sub') = id );
+```
+
+Y habilitar la Edge Function correspondiente en Supabase:
+
+```JavaScript
+// File path: supabase/functions/clerk-webhooks/index.ts
+
+import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
+import { Webhook } from 'npm:svix'
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+
+// Get Clerk Webhook signing secret from environment variables
+const CLERK_WEBHOOK_SECRET = Deno.env.get('CLERK_WEBHOOK_SECRET')
+
+if (!CLERK_WEBHOOK_SECRET) {
+  throw new Error('CLERK_WEBHOOK_SECRET is not set in environment variables')
+}
+const supabaseAdmin = createClient(
+  Deno.env.get('SUPABASE_URL')!,
+  Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+)
+
+serve(async (req) => {
+  try {
+    // 1. Get Svix signature info from request headers
+    const headers = Object.fromEntries(req.headers)
+    const svix_id = headers['svix-id']
+    const svix_timestamp = headers['svix-timestamp']
+    const svix_signature = headers['svix-signature']
+
+    if (!svix_id || !svix_timestamp || !svix_signature) {
+      return new Response('Missing Svix headers', { status: 400 })
+    }
+
+    const payload = await req.json()
+    const body = JSON.stringify(payload)
+
+    // 2. Verify Webhook signature validity using the secret
+    const wh = new Webhook(CLERK_WEBHOOK_SECRET)
+    const evt = wh.verify(body, {
+      'svix-id': svix_id,
+      'svix-timestamp': svix_timestamp,
+      'svix-signature': svix_signature,
+    })
+
+    const { id } = evt.data
+    const eventType = evt.type
+    console.log(`Received webhook event: ${eventType} for user: ${id}`)
+
+    // 3. Execute database operations based on event type
+    switch (eventType) {
+      case 'user.created': {
+        const { id, first_name, last_name, image_url, email_addresses } = evt.data
+        const { error } = await supabaseAdmin.from('users').insert({
+          id,
+          first_name,
+          last_name,
+          image_url,
+          email: email_addresses[0]?.email_address,
+        })
+        if (error) throw error
+        console.log(`User ${id} created in Supabase.`)
+        break
+      }
+
+      case 'user.updated': {
+        const { id, first_name, last_name, image_url, email_addresses } = evt.data
+        const { error } = await supabaseAdmin
+          .from('users')
+          .update({
+            first_name,
+            last_name,
+            image_url,
+            email: email_addresses[0]?.email_address,
+            updated_at: new Date().toISOString(), // Update timestamp
+          })
+          .eq('id', id)
+        if (error) throw error
+        console.log(`User ${id} updated in Supabase.`)
+        break
+      }
+
+      case 'user.deleted': {
+        // For delete events, ID might be at the top level
+        const deletedId = id
+        if (!deletedId) {
+          return new Response('Deleted user ID not found', { status: 400 })
+        }
+        const { error } = await supabaseAdmin.from('users').delete().eq('id', deletedId)
+        if (error) throw error
+        console.log(`User ${deletedId} deleted from Supabase.`)
+        break
+      }
+    }
+
+    return new Response('Webhook processed successfully', { status: 200 })
+  } catch (err) {
+    console.error('Error processing webhook:', err.message)
+    return new Response(`Webhook Error: ${err.message}`, { status: 400 })
+  }
+})
+```
+
+Despues de inicializar las tablas de datos y funciones de Supabase, tambien necesitas habilitar el soporte de Webhooks en Clerk:
+
+- En Clerk Dashboard -> **Webhooks**, agrega un Endpoint e ingresa la URL de tu Supabase Edge Function.
+- Selecciona los eventos `user.created`, `user.updated`, `user.deleted`, etc.
+
+![](images/image65.png)
+
+Una vez configurado con exito, podras ver diferentes mensajes de solicitud en Message Attempts; haz clic en ellos para ver los resultados detallados de los parametros de respuesta. Si el webhook tiene problemas al solicitar la Edge Function, podras encontrar rapidamente la razon detallada en los valores devueltos. Te recomendamos comparar simultaneamente la informacion de los registros de solicitudes de Clerk y Supabase para analizar si la configuracion de cada funcion es correcta.
+
+### 5.6.4 Soporte de inicio de sesion con terceros en Clerk
+
+Antes de profundizar en como Clerk soporta el inicio de sesion con terceros, aclaremos dos conceptos fundamentales: entorno de desarrollo y entorno de produccion. Estos son las dos etapas clave desde el "desarrollo y pruebas" hasta el "lanzamiento en produccion" de un software, y sus posiciones, usos y requisitos de seguridad son completamente diferentes:
+
+- Entorno de desarrollo: el entorno utilizado por los desarrolladores en sus servidores locales o de prueba, exclusivamente para desarrollo de funcionalidades, depuracion y verificacion interna (como un servicio local en localhost:3000), no esta abierto al publico.
+- Entorno de produccion: el entorno publico orientado a usuarios reales despues del lanzamiento oficial de la aplicacion (como plataformas desplegadas en Vercel, Alibaba Cloud, etc., en https://my-app.com).
+
+Clerk distingue entre estos dos entornos para el inicio de sesion social, equilibrando esencialmente la "eficiencia de desarrollo" con la "seguridad de produccion": en la fase de desarrollo se busca reducir configuraciones redundantes para validar funcionalidades rapidamente, mientras que en produccion se necesitan credenciales exclusivas para garantizar la seguridad de los datos, cumpliendo simultaneamente con las reglas de plataformas OAuth de terceros como Google y GitHub (las aplicaciones en produccion deben vincular dominios y credenciales exclusivos, no se permite el uso de recursos compartidos). A continuacion se detallan las diferencias de configuracion del inicio de sesion social de Clerk en ambos entornos:
+
+1. **Verificacion rapida en entorno de desarrollo**
+
+En el entorno de desarrollo, Clerk ya tiene preconfiguradas credenciales OAuth compartidas y URIs de redireccion predeterminadas, sin necesidad de ir a GitHub/Google para solicitar credenciales exclusivas. Los pasos son los siguientes:
+
+- Inicia sesion en Clerk Dashboard y ve a la pagina SSO connections en la barra de navegacion izquierda.
+- Haz clic en Add connection y selecciona For all users.
+- En el menu desplegable Choose provider, selecciona GitHub o Google segun tus necesidades.
+- Haz clic directamente en Add connection; Clerk completara automaticamente la vinculacion con las credenciales compartidas.
+
+  Despues de la configuracion, inicia la aplicacion localmente (por ejemplo, `localhost:3000`) y haz clic en "Sign in with GitHub/Google"; Clerk proxysara automaticamente la solicitud de inicio de sesion, verificando rapidamente que la funcionalidad funciona correctamente.
+
+2. **Configuracion de credenciales personalizadas en entorno de produccion**
+
+(Nota: si encuentras alguna inconsistencia con lo esperado, se recomienda leer la documentacion oficial para probar los metodos mas recientes.)
+
+Despues de desplegar la aplicacion (por ejemplo, en Vercel, Alibaba Cloud) y cambiar a la Clerk Production Instance, las credenciales compartidas dejan de funcionar, y es necesario configurar credenciales OAuth personalizadas para GitHub/Google (se recomienda tener abierto tanto el Clerk Dashboard como la pagina de la plataforma de terceros para facilitar la operacion simultanea):
+
+- Operaciones previas generales (consola de Clerk):
+  - Ve a la pagina SSO connections de Clerk, haz clic en Add connection y selecciona For all users.
+  - Selecciona la plataforma objetivo (GitHub/Google), asegurandote de activar Enable for sign-up and sign-in y Use custom credentials.
+  - Copia la Authorization Callback URL (para GitHub) o Authorized Redirect URI (para Google) que aparece en la pagina, guardalas en un lugar seguro y no cierres la pagina/ventana actual.
+- 2.1 Configuracion de la plataforma GitHub:
+  - Inicia sesion en GitHub y ve a Developer Settings (ruta: avatar -> Settings -> Developer settings -> OAuth Apps).
+  - Haz clic en New OAuth app y completa la informacion: `Application name` (nombre de la aplicacion), `Homepage URL` (dominio de produccion, como `https://my-app.com`), `Authorization Callback URL` (pega la direccion copiada de Clerk).
+  - Haz clic en Register application, luego en Generate a new client secret, y guarda el Client ID y Client Secret generados (el Secret solo se muestra una vez).
+  - Vuelve a la ventana emergente de Clerk, pega el Client ID y Client Secret, y haz clic en Add connection para completar la configuracion (si cerraste la ventana, puedes encontrar la conexion de GitHub en SSO connections y completar los datos en la seccion "Use custom credentials").
+- 2.2 Configuracion de la plataforma Google:
+  - Inicia sesion en Google Cloud Console, selecciona un proyecto existente o crea uno nuevo (como "My App Production").
+  - Haz clic en el menu superior izquierdo -> APIs & Services -> Credentials, luego en Create Credentials -> OAuth client ID (para la primera configuracion necesitas completar la configuracion del OAuth consent screen, seleccionando "External" y llenando la informacion de la aplicacion).
+  - Selecciona Application type como Web application y configura:
+    1. `Authorized JavaScript origins`: agrega el dominio de produccion (como `https://my-app.com`, `https://www.my-app.com`); para verificacion local puedes agregar `http://localhost:numero_de_puerto`.
+    2. `Authorized Redirect URIs`: pega la direccion copiada de Clerk.
+  - Haz clic en Create, guarda el Client ID y Client Secret de la ventana emergente, vuelve a la ventana de Clerk para pegarlos y haz clic en Add connection.
+  - Notas importantes:
+    1. Prohibido el inicio de sesion WebView: Google OAuth no soporta el inicio de sesion en navegadores integrados en aplicaciones; consulta la [documentacion oficial de Google](https://support.google.com/cloud/answer/7657789) para ajustar esto.
+    2. Cambiar el estado de publicacion: el estado "Testing" predeterminado solo soporta 100 usuarios de prueba; necesitas cambiar el "Publishing status" a In production en el OAuth consent screen (requiere aprobacion de Google).
+    3. Bloquear subdirecciones de correo: Clerk bloquea por defecto los correos de Google que contienen `+`/`=`/`#` (como `user+alias@example.com`); puedes activar o desactivar Block email subaddresses en la pagina de detalles de la conexion de Google (se recomienda activarlo para mejorar la seguridad).
+    4. Soporte para Google One Tap: una vez completada la configuracion, puedes integrar el componente `<GoogleOneTap />` de Clerk para implementar un "inicio de sesion con un clic"; consulta la [documentacion de componentes de Clerk](https://clerk.com/docs/components/social-connections/google-one-tap).
+
+3. Probar la conexion de inicio de sesion con terceros
+
+Despues de completar la configuracion, verifica la funcionalidad a traves del Account Portal integrado de Clerk:
+
+- Ve al Clerk Dashboard y accede a la pagina Account Portal en la barra de navegacion izquierda.
+- En el modulo "Sign-in", a la derecha, haz clic en el boton "visitar pagina de inicio de sesion" para ir a la pagina de inicio de sesion del entorno correspondiente:
+  - Entorno de desarrollo: `https://tu-dominio.accounts.dev/sign-in` (como `https://my-app.accounts.dev/sign-in`).
+  - Entorno de produccion: `https://accounts.tu-dominio.com/sign-in` (como `https://accounts.my-app.com/sign-in`).
+- Haz clic en "Sign in with GitHub/Google" e inicia sesion con la cuenta de la plataforma correspondiente; si se redirige correctamente y vuelve a la aplicacion, significa que la conexion esta configurada correctamente.
+
+# 6. De Supabase a mas componentes de desarrollo backend (Avanzado)
+
+En las secciones anteriores, nos hemos centrado principalmente en la perspectiva de Supabase para ver que problemas puede resolver "una plataforma backend integral centrada en Postgres": autenticacion, base de datos, almacenamiento de archivos, comunicacion en tiempo real y funciones perifericas, todos integrados en una misma consola, listos para usar y con una experiencia unificada, ideal para arranques rapidos y proyectos medianos y pequenos.
+
+Pero desde una perspectiva mas a largo plazo y mas orientada a la ingenieria, **cada una de las capacidades que ofrece Supabase (Auth / Storage / Edge Functions / Realtime / Database) tiene alternativas profesionales correspondientes en la industria**, incluyendo tanto plataformas BaaS similares como servicios en la nube y componentes de codigo abierto mas especializados. Como desarrolladores ambiciosos y equipos emergentes, conocer estas opciones alternativas tiene varios beneficios:
+
+- Determinar si el proyecto actual es suficiente "usando solo Supabase" o si alguna area necesita un servicio especializado mas profesional, economico o facil de cumplir con normativas;
+- Cuando el proyecto crece o los requisitos se vuelven mas complejos, si se puede reemplazar un modulo de Supabase (por ejemplo, cambiando a una plataforma de Auth especializada o almacenamiento de objetos) en lugar de quedar bloqueado por la plataforma desde el principio;
+- Ampliar la vision de seleccion tecnica; incluso si no se cambia inmediatamente, poder tener una idea general de "si no uso la funcion X de Supabase, cuales son mis opciones habituales".
+
+Esta seccion presentara las alternativas principales en el mercado para las capacidades que cubre Supabase, por ejemplo: autenticacion (Auth), almacenamiento de archivos (Storage), funciones perifericas (Edge Functions), comunicacion en tiempo real (Realtime) y hosting de bases de datos. Compararemos brevemente sus diferencias en caracteristicas funcionales, limites gratuitos/precios, facilidad de uso y popularidad en la comunidad, para que tengas una comprension mas completa del arsenal de herramientas de componentes backend.
+
+## Plataformas BaaS similares
+
+Antes de comenzar, podemos revisar las plataformas BaaS similares; si sientes que Supabase no se ajusta bien a tus necesidades, puedes elegir diferentes alternativas segun tus requisitos.
+
+| Plataforma/Servicio | Tipo | Limite gratuito/Precios | Caracteristicas / Escenarios de uso |
+| ------------------------ | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Firebase (Google) | BaaS completamente gestionado (Auth + Firestore + Storage + Functions + Hosting) | Spark: limite gratuito ligero; Blaze: pago por uso (Firestore/Storage/Functions se facturan por separado) | La mas madura en la industria, buena documentacion, inicio rapido, fuerte capacidad en tiempo real. Adecuada para productos medianos y pequenos, equipos de movil/frontend. Desventajas: facturacion compleja, fuerte vinculacion, limitaciones de consultas (especialmente Firestore). |
+| Supabase | BaaS de codigo abierto (Postgres + Auth + Storage + Edge Functions + Realtime) | Gratuito: 500MB DB, 1GB Storage, llamadas limitadas a funciones sin servidor; Pro: facturacion por instancia | La version SQL mas similar a Firebase; interfaz excelente, experiencia moderna, auto-hospedable. Adecuada para aplicaciones que necesitan SQL robusto, BI y capacidades transaccionales. Desventajas: costos mas altos para alta concurrencia o funciones complejas. |
+| Appwrite Cloud | BaaS integral de codigo abierto (DB + Auth + Storage + Functions + Realtime) | Gratuito: DB/Storage/FaaS basicos incluidos; de pago por nivel de recursos | Experiencia moderna, API unificada, auto-hospedable; adecuado para iteracion rapida de aplicaciones amigables para desarrolladores. Desventajas: ecosistema menos maduro que Firebase/Supabase; rendimiento en aplicaciones grandes necesita pruebas. |
+| Nhost | Postgres + GraphQL + Auth + Storage + Functions | Gratuito: 1GB DB, 1GB Storage, llamadas limitadas a funciones | Similar a "Supabase + Hasura"; GraphQL nativo; adecuado para equipos frontend y proyectos React/Next.js. Desventajas: ecosistema pequeno, costos aumentan con el uso. |
+| AWS Amplify | Backend integral de AWS (Cognito + AppSync + DynamoDB + Storage + Functions + Hosting) | Gratuito: limite de Hosting + Cognito 10k MAU + limite parcial de funciones | Completo y exhaustivo, adecuado para equipos con base en AWS; confiabilidad de nivel empresarial. Desventajas: el mas dificil de aprender, servicios fragmentados; alto costo de mantenimiento para equipos emergentes. |
+| Xata (crecimiento rapido en los ultimos anos) | Base de datos multimodelo + Auth + Edge Functions | Gratuito: 250k registros, 15GB de ancho de banda | Aunque es mas un "DB + API", proporciona Auth, archivos y logica, pudiendo servir como backend full-stack ligero. Excelente UI/experiencia de desarrollo. Desventajas: menos completo que Firebase/Supabase. |
+| Convex (experiencia de desarrollador extremadamente fuerte) | Base de datos gestionada + Auth + Functions (frontend-first) | Version de desarrollo gratuita; de pago por volumen de solicitudes | Inicio extremadamente simple; no requiere schema; escribir funciones en el frontend es suficiente para usar el backend. Adecuado para MVPs/validacion rapida. Desventajas: alta vinculacion a la plataforma, costos de migracion elevados; no es un BaaS tradicional completo. |
+
+## Autenticacion (Auth)
+
+| Herramienta/Plataforma | Caracteristicas funcionales | Limite gratuito/Precios | Escenarios de uso y pros/contras |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Firebase Authentication | Servicio de autenticacion BaaS de Google, soporta email/contrasena, telefono, inicio de sesion social, anonimo, etc. Spark gratuito soporta hasta 50k MAU. | Spark (gratuito) 50k MAU; Blaze por uso | Integrado con el ecosistema Google, documentacion rica, inicio simple; funcionalidad completa (MFA, funciones de bloqueo, etc.), adecuado para desarrollo rapido. Pero esta vinculado a la plataforma Firebase; expandirse a otros servicios requiere configuracion adicional. |
+| Auth0 (Okta) | Plataforma de autenticacion completamente gestionada, soporta inicio de sesion social, SSO empresarial, autenticacion multifactor, extensiones de reglas y funciones avanzadas. | Plan gratuito 25k MAU, de pago por MAU | Funcionalidad de nivel empresarial completa (RBAC, registros de auditoria, etc.), adecuada para aplicaciones medianas y grandes; interfaz amigable. Desventajas: costos altos cuando el MAU aumenta, version gratuita con funciones limitadas (por ejemplo, no incluye MFA/RBAC). Alta visibilidad en la comunidad, con muchos usuarios. |
+| AWS Cognito | Servicio de identidad nativo de Amazon Cloud, soporta inicio de sesion social y SAML federado. Pool de usuarios con inicio de sesion directo ofrece 10k MAU gratuitos mensuales, el excedente se cobra a 0.0055 USD/MAU. | Gratuito 10k MAU/mes, excedente por uso | Profundamente integrado con el ecosistema AWS (puede integrarse sin problemas con API Gateway, Lambda, etc.), barrera de entrada ligeramente alta, documentacion compleja; limite gratuito limitado, adecuado para equipos acostumbrados a AWS. |
+| Logto | Plataforma de autenticacion de codigo abierto, version auto-hospedada gratuita, plan de servicio en la nube gratuito hasta 50k MAU. Soporta multiples lenguajes, multi-tenant, OAuth/OIDC, etc. | Edicion comunitaria gratuita; Logto Cloud gratuito 50k MAU | Alternativa de codigo abierto a Auth0 de reciente popularidad, ya con mas de 10k Stars en GitHub. Facil de extender, auto-hospedaje reduce costos; desventajas: ecosistema y documentacion relativamente nuevos, tamano de la comunidad inferior a Firebase/Auth0. |
+| Keycloak | Reconocida solucion IAM/SSO de codigo abierto, soporta usuario/contrasena, LDAP, SAML, OAuth2, etc. | Completamente gratuito, requiere auto-hospedaje | Funcionalidad potente y extensible (soporta control de permisos granular), funciones de nivel empresarial ricas; pero la complejidad de despliegue y mantenimiento es alta, con una curva de aprendizaje pronunciada para equipos pequenos. Requiere conocimientos de contenedores y operacion de clusters. |
+
+## Almacenamiento de archivos (Storage)
+
+| Plataforma/Servicio | Tipo | Limite gratuito/Precios | Caracteristicas/Escenarios de uso |
+| ---------------------------------------- | -------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Amazon S3 | Almacenamiento de objetos en la nube (AWS) | AWS Free Tier ofrece 5GB de almacenamiento, 20k solicitudes GET/PUT/mes, excedente por uso | Almacenamiento de objetos estandar de la industria, alta confiabilidad, despliegue en multiples regiones globales. Funcionalidad completa, buena integracion con el ecosistema AWS; precios complejos, los nuevos usuarios necesitan entender las reglas de facturacion. |
+| Google Cloud Storage (Firebase Storage) | Almacenamiento de objetos en la nube (Google) | Firebase Spark ofrece limite gratuito (1GB almacenamiento + limite de trafico), Blaze de pago | Estrechamente integrado con Firebase/Google Cloud, facil de gestionar; soporta aceleracion CDN, reglas de seguridad granulares. |
+| Tencent Cloud COS / Alibaba Cloud OSS | Almacenamiento de objetos en la nube (China) | Pago por uso (cada uno ofrece creditos para nuevos usuarios, como OSS con 40GB gratis el primer ano) | Orientado al mercado chino, almacenamiento de objetos de alto rendimiento y gran escala; integrado con el ecosistema de nube chino, documentacion completa. Alibaba OSS es completo y con aceleracion global; Qiniu KODO se enfoca en procesamiento multimedia con costos mas bajos, adecuado para individuos y equipos pequenos. |
+| MinIO | Almacenamiento compatible con S3 de codigo abierto | Codigo abierto gratuito (auto-hospedado) | Ligero, alto rendimiento, compatible con la API S3, adecuado para construir almacenamiento de objetos en nube privada o local. Documentacion y comunidad activas; requiere mantenimiento propio de la infraestructura. |
+| Cloudinary / Imgix, etc. | Almacenamiento multimedia + CDN | Plan basico gratuito (como Cloudinary con 25GB/mes de ancho de banda gratuito) | Almacenamiento en la nube + CDN optimizado para imagenes/videos, con funciones avanzadas como transcodificacion y compresion en tiempo real. Adecuado para proyectos multimedia, pero la funcionalidad es muy especifica; usarlo como almacenamiento de archivos general tiene un costo mas alto. |
+
+## Edge Functions
+
+| Plataforma/Servicio | Caracteristicas | Limite gratuito/Precios | Escenarios de uso y pros/contras |
+| -------------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Cloudflare Workers | Entorno JavaScript/Wasmtime distribuido globalmente | Plan gratuito: 100k solicitudes/dia; plan estandar $5/mes con 10 millones de solicitudes | Ejecuta en nodos perifericos de Cloudflare con latencia extremadamente baja; adecuado para logica distribuida globalmente, renderizado de recursos estaticos, etc. Cuota gratuita relativamente pequena (equivalente a ~3 millones de solicitudes/mes), inicio simple. Desventajas: limitaciones del runtime (JS/Wasmtime) y herramientas de depuracion limitadas. |
+| Vercel Edge Functions | Integracion sin interrupciones con Next.js/frameworks frontend, soporta JS/TS/Go | Hobby gratuito: 1 millon de llamadas a funciones/mes, 1 millon de solicitudes edge | Profundamente integrado con frameworks frontend, despliegue automatico; adecuado para aplicaciones web modernas. Cuota gratuita generosa, runtime predeterminado de 10s, ampliable a 60s. Desventajas: la version gratuita tiene funciones de colaboracion en equipo limitadas; dependencia de la plataforma Vercel. |
+| Netlify Edge / Functions | Funciones Node.js en la nube + enrutamiento edge (NFT) | Gratuito: 300 tokens/mes (equivalente a ~1M solicitudes/mes); facturacion por creditos | Soporta funciones Node.js, procesamiento de enrutamiento en edge, etc. Cuota gratuita para construccion, funciones y ancho de banda, adecuado para despliegue full-stack frontend. Ventaja: facil de usar, integracion con despliegue Git; desventaja: la cuota gratuita requiere calculo (10k solicitudes = 3 puntos). |
+| AWS Lambda@Edge / CloudFront Functions | Computacion edge sin servidor de AWS | AWS Lambda (1M solicitudes gratuitas/mes + 400k GB-s) + CloudFront desde $0.085/100k llamadas | Integrado con CloudFront, permite ejecutar codigo en el edge. Adecuado para quienes necesitan el ecosistema AWS (como permisos a nivel de nodo o tests A/B). Ventajas: flexible y potente; desventajas: configuracion compleja, latencia ligeramente mayor que Cloudflare/Vercel. |
+
+## Comunicacion en tiempo real (Realtime)
+
+| Plataforma/Servicio | Caracteristicas funcionales | Limite gratuito/Precios | Escenarios de uso y pros/contras |
+| -------------------------------------- | ----------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Firebase Realtime Database / Firestore | Base de datos en tiempo real BaaS de Google; soporta notificacion de cambios en datos | Spark gratuito: 1GB de almacenamiento y limite en Realtime DB; Blaze por uso | Fuerte integracion con el ecosistema Firebase, escucha en tiempo real simple. Ventajas: inicio rapido con lo gratuito; desventajas: tipo de base de datos (JSON/NoSQL), capacidad de consultas complejas debil. |
+| Ably | Plataforma de mensajes en tiempo real y pub/sub, soporta WebSocket, MQTT, etc. | Paquete gratuito: 6,000,000 mensajes/mes | Servicio de mensajes en tiempo real con funcionalidad completa, soporte de alta concurrencia; cuota gratuita de hasta 6 millones de mensajes/mes. Buena comunidad y documentacion, adecuado para distribucion global. |
+| Pusher Channels | Servicio de push de eventos, soporta mecanismo de canales/eventos | Sandbox gratuito: 200k mensajes/dia, 100 conexiones concurrentes | Servicio WebSocket facil de usar, documentacion completa, adecuado para implementar rapidamente funcionalidades de chat y notificaciones. La version gratuita limita la cantidad de mensajes y conexiones; buena escalabilidad en la version de pago. |
+| WebSocket/Socket.IO auto-construido | Construir tu propio servidor (Node.js, Elixir, Go, etc.) | Costo de auto-hospedaje (como gastos de servidor) | Maxima flexibilidad, permite personalizar protocolos y topologia segun las necesidades. Adecuado para equipos con control estricto de costos y madurez tecnica. Desventajas: requiere gestionar disponibilidad, escalabilidad y problemas entre dominios. |
+
+## Base de datos
+
+| Plataforma/Herramienta | Tipo de base de datos | Limite gratuito/Precios | Caracteristicas principales |
+| ---------------------------- | --------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Neon (Serverless PostgreSQL) | Relacional (PostgreSQL) | Plan gratuito: 0.5GB almacenamiento, rama principal permanentemente en linea, 20h de computacion de ramas/mes | Postgres sin servidor nativo de la nube, soporta auto-escalado y ramificaciones (fork para pruebas). Cuota gratuita suficiente para proyectos pequenos, adecuado para flujos de desarrollo modernos. Funcionalidad de ramificacion potente, pero cuota gratuita pequena. |
+| Aiven PostgreSQL | Relacional (PostgreSQL/MySQL) | Plan gratuito: 1GB almacenamiento, 1 vCPU, 1GB memoria | Servicio de base de datos gestionado, soporta migracion multi-region y multi-cloud. Ofrece MySQL, Redis y otros. Cuota gratuita adecuada para desarrollo y proyectos pequenos; version comercial soporta clusters de alta disponibilidad y monitoreo. |
+| CockroachDB Cloud | SQL distribuido (compatible con PostgreSQL) | Plan gratuito: 10GB almacenamiento | Base de datos SQL distribuida similar a Google Spanner, con fragmentacion automatica y escalado. 10GB gratuitos bastante generosos; adecuado para aplicaciones que necesitan escalado horizontal y alta consistencia. Version comercial con SLA alto. |
+| TiDB Cloud | Relacional distribuido (compatible con MySQL) | Plan gratuito: 5GB por nodo, maximo 25GB en total | Version en la nube del TiDB de codigo abierto, compatible con protocolo MySQL, arquitectura distribuida. Cuota gratuita generosa, adecuada para equipos familiarizados con MySQL, rendimiento excelente; desventajas: operacion relativamente compleja (para escenarios grandes). |
+| MongoDB Atlas | Documental (NoSQL MongoDB) | Cluster M0 gratuito: 0.5GB almacenamiento | MongoDB en la nube, modelo de documentos flexible, soporta consultas ricas e indices. Base de datos gratuita de 0.5GB adecuada para pruebas y aplicaciones pequenas; escalado horizontal bajo demanda. Curva de aprendizaje ligeramente mas alta que bases de datos relacionales. |
+| SQLPub | Multibase de datos (MySQL, PostgreSQL, Redis, etc.) | Plan gratuito: 36,000 solicitudes/hora, 30 conexiones concurrentes, 500MB almacenamiento | Plataforma de bases de datos integral, soporta multiples tipos de bases de datos. Version gratuita adecuada para aprendizaje y proyectos pequenos; ventaja: soporte de multiples DB, desventaja: cuota de almacenamiento pequena. |
+
+Las alternativas anteriores tienen cada una sus puntos fuertes: las de codigo abierto son mas flexibles y controlables (Keycloak, MinIO, Socket.IO, Neon, CockroachDB, etc.), mientras que los servicios gestionados en la nube son mas faciles de usar (Firebase, Auth0, Cloudflare, Vercel, Netlify, AWS, Aiven, MongoDB Atlas, etc.). La eleccion debe basarse en los requisitos del proyecto, el stack tecnologico del equipo, el presupuesto y el ecosistema de la comunidad. Para proyectos personales, se recomienda priorizar servicios con cuotas gratuitas generosas y facil integracion (como la serie Firebase, Qiniu Storage, Cloudflare Workers, Neon, CockroachDB, etc.), mientras que para requisitos empresariales o de seguridad especificos, se pueden considerar soluciones mas completas pero mas costosas (Auth0, Alibaba/Tencent Cloud, AWS, TiDB/Aiven, etc.). Puedes seguir experimentando en aplicaciones reales hasta encontrar las herramientas de componentes de desarrollo backend mas adecuadas.
+
+# Resumen
+
+En la leccion de hoy, hemos aprendido sistematicamente los conceptos basicos de las bases de datos, la definicion central de Supabase y los detalles de sus operaciones. Durante la practica posterior, puedes volver a consultar este documento como referencia en cualquier momento, segun los escenarios y necesidades reales de tu proyecto.
+
+Recuerda siempre un principio importante: **Primero completa, luego perfecciona!** No es necesario lograr todo a la primera; podemos acercarnos progresivamente a mejores resultados a traves de iteracion continua. Te deseamos exito en tus futuros proyectos practicos!
+
+# Tareas posteriores a la leccion
+
+1. Desarrolla una aplicacion que incluya un sistema de gestion de usuarios y una base de datos. Idealmente, deberia incorporar mas funcionalidades de Supabase (Realtime / Cloud Storage / Edge Functions).

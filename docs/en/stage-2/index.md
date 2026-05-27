@@ -19,18 +19,13 @@ Master modern frontend development and learn how to use design tools, component 
     description="Master the basic operations of professional UI design tools and the workflow from design to code"
   />
   <NavCard
-    href="/en/stage-2/frontend/ui-design/"
-    title="Frontend 2: Build Your First Modern App - UI Design"
-    description="Learn the UI design foundations for modern applications"
-  />
-  <NavCard
     href="/en/stage-2/frontend/multi-product-ui/"
-    title="Frontend 3: UI Guidelines and Multi-Product Design"
+    title="Frontend 2: UI Guidelines and Multi-Product Design"
     description="Learn mainstream UI design guidelines to improve product design consistency and aesthetics"
   />
   <NavCard
     href="/en/stage-2/frontend/llm-skills-beautiful/"
-    title="Frontend 4: Make Interfaces Beautiful with LLMs and Skills"
+    title="Frontend 3: Make Interfaces Beautiful with LLMs and Skills"
     description="Use prompts and plugins in real projects to make AI generate more polished, distinctive interfaces"
   />
   <NavCard
@@ -40,12 +35,12 @@ Master modern frontend development and learn how to use design tools, component 
   />
   <NavCard
     href="/en/stage-2/frontend/design-to-code/"
-    title="Frontend 6: From Design Prototype to Project Code"
+    title="Frontend 5: From Design Prototype to Project Code"
     description="Learn how to turn design prototypes into frontend code that really runs in the browser"
   />
   <NavCard
     href="/en/stage-2/frontend/modern-component-library/"
-    title="Frontend 7: Upgrade Your UI with Modern Component Libraries"
+    title="Frontend 6: Upgrade Your UI with Modern Component Libraries"
     description="Use component libraries to build professional interfaces faster"
   />
 </NavGrid>
@@ -56,19 +51,19 @@ Master modern frontend development and learn how to use design tools, component 
 Learn API design, database management, and application deployment strategies:
 <NavGrid>
   <NavCard
-    href="/en/stage-2/backend/git-workflow/"
-    title="Backend 1: Learn Git and GitHub"
-    description="Master core version control operations and collaboration workflows with Git"
-  />
-  <NavCard
     href="/en/stage-2/backend/database-supabase/"
-    title="Backend 2: From Database to Supabase"
+    title="Backend 1: From Database to Supabase"
     description="Master relational database basics and learn to use Supabase, a modern BaaS platform"
   />
   <NavCard
     href="/en/stage-2/backend/ai-interface-code/"
-    title="Backend 3: Backend API Design and Development"
+    title="Backend 2: Backend API Design and Development"
     description="Use AI to assist in generating backend interface code and standard API documentation"
+  />
+  <NavCard
+    href="/en/stage-2/backend/git-workflow/"
+    title="Backend 3: Learn Git and GitHub"
+    description="Master core version control operations and collaboration workflows with Git"
   />
   <NavCard
     href="/en/stage-2/backend/zeabur-deployment/"
@@ -90,20 +85,82 @@ Learn API design, database management, and application deployment strategies:
 
 ### Major Projects
 
-Consolidate your full-stack development skills through hands-on projects:
+The previous chapters teach you the "parts." The major projects teach you "how to assemble those parts into a product that runs, demos, and ships."
+
+We recommend completing them in order: **Project 1 → Project 2**:
+
+- **Project 1** walks you through the most common SaaS pipeline: login, generation, database, payments, and admin dashboard.
+- **Project 2** takes you into a more business-system-like scenario: role-based permissions, question banks, exams, submissions, and admin management.
+
+```mermaid
+flowchart LR
+  A["Frontend & Components"] --> B["Database & APIs"]
+  B --> C["Project 1<br/>Copywriting SaaS"]
+  C --> D["Payment / Deploy / Admin"]
+  D --> E["Project 2<br/>Exam System"]
+  E --> F["Full Portfolio"]
+```
+
+If you're not sure which to start with, here's a quick comparison:
+
+| Project | Key Skills | Best For | Deliverable |
+|---------|-----------|----------|-------------|
+| Project 1: Copywriting Website | SaaS page structure, user login, AI generation, Stripe payments, admin dashboard | First-time builders of a complete commercial website | A registerable, generatable, payable, manageable SaaS prototype |
+| Project 2: Exam & Management System | Role permissions, question bank modeling, exam flow, submissions, grading & statistics | Those who want to build a complete "business system" | An exam platform with student and admin portals |
+
+Whichever you choose, prepare at least these 3 deliverables:
+
+- A runnable project repository
+- An accessible demo link
+- A README and a demo video
+
 <NavGrid>
   <NavCard
-    href="/en/stage-2/assignments/fullstack-app/"
-    title="Major Project 1: Your First SaaS Full-Stack App - AI Copywriting Website"
+    href="/en/stage-2/assignments/copywriting-platform-supabase/"
+    title="Project 1: Your First SaaS Full-Stack App - AI Copywriting Website"
     description="Build an AI marketing copy workspace from scratch, including login, generation, billing, and an admin dashboard"
   />
   <NavCard
-    href="/en/stage-2/assignments/modern-frontend-trae/"
-    title="Major Project 2: Online Exam and Management System"
+    href="/en/stage-2/assignments/exam-management-express/"
+    title="Project 2: Online Exam and Management System"
     description="Build an online exam system with automatic question generation, test-taking flows, and admin management"
   />
 </NavGrid>
 
+If you've completed the two main projects above, or want to build your portfolio in your own direction, pick one of these extension projects to dive deeper:
+
+<NavGrid>
+  <NavCard
+    href="/en/stage-2/assignments/modern-landing-page/"
+    title="Extension: Modern AI Image Generation SaaS"
+    description="Build a Midjourney-inspired AI image SaaS with generation workspace, gallery, payments, and admin dashboard"
+  />
+  <NavCard
+    href="/en/stage-2/assignments/custom-dify-agent-platform/"
+    title="Extension: Custom Dify Agent Platform"
+    description="Implement agent management, conversations, logging, and permission control for a minimal viable AI platform"
+  />
+  <NavCard
+    href="/en/stage-2/assignments/travel-planning-agent-platform/"
+    title="Extension: Travel Planning Agent Platform"
+    description="Build an AI travel planning product with structured input, agent orchestration, and plan history management"
+  />
+  <NavCard
+    href="/en/stage-2/assignments/movie-recommendation-springboot/"
+    title="Extension: Spring Boot Movie Recommendation System"
+    description="Build a complete recommendation system with Spring Boot, ratings, favorites, and explainable recommendations"
+  />
+  <NavCard
+    href="/en/stage-2/assignments/simple-grocery-microservices/"
+    title="Extension: Grocery E-Commerce Microservices"
+    description="Practice service decomposition, gateway routing, and inventory-order coordination in a microservices architecture"
+  />
+  <NavCard
+    href="/en/stage-2/assignments/traffic-data-visualization-go/"
+    title="Extension: Go Traffic Data Analysis & Visualization"
+    description="Build a complete data product with ingestion, windowed aggregation, trend dashboards, and alerting"
+  />
+</NavGrid>
 
 ### AI Capabilities Extension
 <NavGrid>

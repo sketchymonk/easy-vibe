@@ -538,10 +538,6 @@ const stage2SidebarEn = [
       },
       {
         text: 'UI Design Specs & Multi-Product Interface',
-        link: '/en/stage-2/frontend/ui-design/'
-      },
-      {
-        text: 'Multi-Product UI Design',
         link: '/en/stage-2/frontend/multi-product-ui/'
       },
       {
@@ -563,16 +559,16 @@ const stage2SidebarEn = [
     collapsed: false,
     items: [
       {
-        text: 'Git & GitHub Workflow',
-        link: '/en/stage-2/backend/git-workflow/'
-      },
-      {
         text: 'Database & Supabase',
         link: '/en/stage-2/backend/database-supabase/'
       },
       {
         text: 'Backend API Design & Development',
         link: '/en/stage-2/backend/ai-interface-code/'
+      },
+      {
+        text: 'Git & GitHub Workflow',
+        link: '/en/stage-2/backend/git-workflow/'
       },
       {
         text: 'Web App Deployment',
@@ -607,12 +603,36 @@ const stage2SidebarEn = [
         link: '/en/stage-2/frontend/hogwarts-portraits/'
       },
       {
-        text: 'Assignment 1: Full-Stack App',
-        link: '/en/stage-2/assignments/fullstack-app/'
+        text: 'AI Marketing Copywriting SaaS',
+        link: '/en/stage-2/assignments/copywriting-platform-supabase/'
       },
       {
-        text: 'Assignment 2: UI Library & Trae',
-        link: '/en/stage-2/assignments/modern-frontend-trae/'
+        text: 'Online Exam & Management System',
+        link: '/en/stage-2/assignments/exam-management-express/'
+      },
+      {
+        text: 'Modern AI Image SaaS',
+        link: '/en/stage-2/assignments/modern-landing-page/'
+      },
+      {
+        text: 'Custom Dify Agent Platform',
+        link: '/en/stage-2/assignments/custom-dify-agent-platform/'
+      },
+      {
+        text: 'Travel Planning Agent Platform',
+        link: '/en/stage-2/assignments/travel-planning-agent-platform/'
+      },
+      {
+        text: 'Spring Boot Movie Recommender',
+        link: '/en/stage-2/assignments/movie-recommendation-springboot/'
+      },
+      {
+        text: 'Grocery Microservices System',
+        link: '/en/stage-2/assignments/simple-grocery-microservices/'
+      },
+      {
+        text: 'Go Traffic Data Platform',
+        link: '/en/stage-2/assignments/traffic-data-visualization-go/'
       }
     ]
   }
