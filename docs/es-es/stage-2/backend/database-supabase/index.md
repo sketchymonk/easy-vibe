@@ -91,7 +91,7 @@ Yendo un paso mas alla, si consideramos datos codificados como vectores (Vector)
 
 En resumen, en el mundo real hay demasiados datos de diferentes formas y propositos que merecen un analisis detallado, y cada tipo de datos podria necesitar una base de datos especializada para su almacenamiento. Para mas detalles, consulta la siguiente imagen — parece que son muchos, verdad?
 
-![](images/image1.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image1.png)
 
 ## 1.2 Por que necesitamos una base de datos
 
@@ -285,23 +285,23 @@ En este contexto, [Supabase](https://supabase.com/) puede considerarse como el r
 
 Despues de comprender claramente el posicionamiento general de Supabase, a continuacion desglosaremos las capacidades centrales que ofrece especificamente, siguiendo la ruta de operacion de la consola de Supabase, asi como las responsabilidades centrales correspondientes a cada capacidad. Presentaremos en detalle cada opcion involucrada en Supabase para ayudarte a comenzar rapidamente con las operaciones basicas.
 
-![](images/image2.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image2.png)
 
 Despues de visitar el sitio web oficial de Supabase e iniciar sesion, haz clic en New project en la pagina principal de la consola para ingresar al proceso de creacion;
 
 Ingresa el contenido principal que necesita ser configurado: Project Name, contrasena de la base de datos; para la region, simplemente selecciona la mas cercana a los usuarios objetivo de tu programa.
 
-![](images/image3.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image3.png)
 
 Despues de crearlo exitosamente, la barra lateral izquierda de la consola mostrara todos los modulos de funciones centrales (Table Editor, SQL Editor, Database, Authentication, etc.), y las operaciones posteriores se desarrollaran en torno a estos modulos.
 
-![](images/image4.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image4.png)
 
 ### Editor de tablas
 
 Table Editor puede considerarse como el editor visual de tablas de datos de Supabase, que te permite ver y modificar directamente los datos de la base de datos como si estuvieras operando Excel, sin necesidad de escribir declaraciones SQL; solo necesitas interactuar con el mouse para modificar el contenido de los datos.
 
-![](images/image5.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image5.png)
 
 Lo que vale la pena destacar es Schema. Schema puede entenderse como un "contenedor de recursos" dentro de la base de datos, utilizado para la gestion agrupada de tablas, vistas, funciones, indices y otros recursos. Sus dos funciones principales son: primero, evitar conflictos de nombres (pueden existir tablas con el mismo nombre bajo diferentes Schemas); segundo, implementar aislamiento de permisos (como permitir solo a usuarios especificos acceder a tablas bajo cierto Schema);
 
@@ -310,13 +310,13 @@ Haz clic en el menu desplegable Schema en la parte superior del editor para camb
 - `public`: el contenedor de recursos publicos predeterminado, donde todas las tablas de negocio creadas por los desarrolladores (como "tabla de articulos", "tabla de comentarios") se almacenan;
 - `auth`: el contenedor exclusivo de autenticacion de usuarios, donde la tabla `users` almacena automaticamente toda la informacion de usuarios registrados (como ID de usuario, correo electronico, hora de inicio de sesion). No se recomienda modificar manualmente las tablas predeterminadas bajo este Schema para evitar afectar la funcionalidad de autenticacion;
 
-![](images/image6.png)![](images/image7.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image6.png)![](/zh-cn/stage-2/backend/database-supabase/images/image7.png)
 
 ### Editor SQL
 
 SQL Editor funciona como el ejecutor de declaraciones SQL de Supabase, permitiendote operar directamente la base de datos mediante codigo. Puedes hacer que un modelo grande genere directamente declaraciones SQL, introducirlas a la derecha y hacer clic en RUN para crear o modificar tablas con las declaraciones, o ver directamente los datos de las tablas filtrados en Results.
 
-![](images/image8.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image8.png)
 
 Despues de ejecutar RUN, puedes encontrar la tabla de datos recien creada en el schema public del Table Editor; ademas, las declaraciones ejecutadas se guardaran en la seccion PRIVATE del panel izquierdo, e incluso puedes hacer clic en el icono del corazon en la parte inferior para guardar como favorita esa consulta o declaracion de creacion.
 
@@ -324,47 +324,47 @@ Despues de ejecutar RUN, puedes encontrar la tabla de datos recien creada en el 
 
 Database es el centro de gestion de bases de datos de Supabase, que permite ver y gestionar visualmente todas las tablas de datos, y entender las relaciones entre diferentes tablas a traves de las lineas de conexion entre ellas (es decir, restricciones de claves foraneas, que representan relaciones de referencia entre datos).
 
-![](images/image9.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image9.png)
 
 Si deseas crear manualmente una nueva tabla, puedes hacerlo directamente en la seccion Tables, explicaremos esto en detalle en tutoriales posteriores.
 
-![](images/image10.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image10.png)
 
 ### Autenticacion de identidad
 
 Authentication gestiona el registro, inicio de sesion y permisos de los usuarios. Los datos del sistema de gestion de usuarios predeterminado se almacenan aqui, proporcionando funcionalidades listas para usar como registro de usuarios, inicio de sesion, restablecimiento de contrasena, verificacion por correo electronico, y soporte para inicio de sesion OAuth de terceros (como WeChat, GitHub, Google, etc.). Todos los datos de usuarios se sincronizan automaticamente con la tabla `auth.users` de la base de datos.
 
-![](images/image11.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image11.png)
 
 Puedes encontrar las diferentes entradas de inicio de sesion de informacion de usuario soportadas por Supabase en la opcion Provider; por defecto se usa Email. Si deseas usar cuentas de GitHub o Google para iniciar sesion, se necesita configuracion adicional de atributos, que explicaremos en detalle en las lecciones siguientes.
 
-![](images/image12.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image12.png)
 
 En Sign In / Providers tambien se incluye el control del comportamiento de registro por correo electronico. Si no deseas que cada registro por correo electronico requiera que el usuario acepte una invitacion antes de convertirse en usuario, puedes desactivar el requisito obligatorio de Confirm email.
 
-![](images/image13.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image13.png)
 
 Si deseas cambiar a otro proveedor de sistema de autenticacion que no sea Supabase, puedes hacer clic en Third Party Auth, por ejemplo, aqui se usa Clerk como proveedor de sistema de terceros.
 
-![](images/image14.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image14.png)
 
 Si te preocupa que el volumen de acceso de usuarios registrados sea excesivo a corto plazo, puedes habilitar las politicas de limitacion de trafico correspondientes en Rate Limits:
 
-![](images/image15.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image15.png)
 
 ### Almacenamiento
 
 Storage es el sistema de almacenamiento de Supabase, compatible con el concepto S3 de Amazon Cloud, que puede usarse para almacenar cualquier tipo de archivo (como imagenes, videos, documentos, audio, etc.), y proporciona gestion de permisos de acceso (publico o privado) y obtencion de enlaces de descarga (enlaces permanentes o temporales). Puedes gestionar convenientemente la carga y descarga de archivos relacionados con los usuarios en tu aplicacion, integrandose sin problemas con el sistema de autenticacion de Supabase para lograr un control de acceso preciso.
 
-![](images/image16.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image16.png)
 
 Explicaremos el uso especifico de storage en el proyecto avanzado de esta leccion.
 
-![](images/image17.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image17.png)
 
 Si deseas usar los protocolos relacionados de S3 para operar, puedes usar directamente la configuracion correspondiente:
 
-![](images/image18.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image18.png)
 
 > Amazon Cloud (servicio en la nube de Amazon, o AWS) es la plataforma de computacion en la nube proporcionada por Amazon (como un gran centro de datos de red, donde puedes alquilar recursos de computo y almacenamiento segun lo necesites). S3 (Simple Storage Service) es el servicio dentro de AWS especificamente disenado para almacenar archivos (similar a un disco de red ilimitado, donde puedes guardar imagenes, videos, respaldos y otros archivos). Es actualmente el servicio de almacenamiento de objetos mas popular y se ha convertido en el estandar de facto de la industria.
 >
@@ -374,15 +374,15 @@ Si deseas usar los protocolos relacionados de S3 para operar, puedes usar direct
 
 Si no quieres desplegar un backend pero deseas usar operaciones de base de datos y funciones, puedes usar Edge Functions para construir capacidades backend centrales sin necesidad de construir tus propios servidores. Son funciones de servidor distribuidas globalmente proporcionadas por Supabase. En terminos simples, te permiten escribir y desplegar codigo backend en la nube sin necesidad de comprar y gestionar tus propios servidores backend. Estas funciones se despliegan en nodos perifericos de la red global, ejecutandose automaticamente en la ubicacion mas cercana a tus usuarios, reduciendo drasticamente la latencia de red y proporcionando una velocidad de respuesta extrema. Puedes crear, editar y desplegar directamente desde el panel de Supabase, haciendo que todo el flujo de desarrollo sea muy conveniente.
 
-![](images/image19.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image19.png)
 
 Un uso central de Edge Functions es actuar como una capa intermedia segura para proteger tu informacion sensible y claves de autenticacion. Llamar directamente a servicios de terceros (como OpenAI, Stripe) desde el codigo frontend expondria tu API Key, conllevando un gran riesgo de seguridad. A traves de Edge Functions, tu aplicacion frontend solo se comunica con tu funcion de Supabase, y todos los secretos se mantienen solo en Supabase.
 
-![](images/image20.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image20.png)
 
 Las funciones de Edge Functions usan las claves expuestas en secrets como variables de entorno, cargandolas a traves de `Deno.env.get` para implementar llamadas a servicios de terceros. De esta manera, las claves sensibles nunca se expondran en el cliente (tu navegador), eliminando completamente el riesgo de ser robadas.
 
-![](images/image21.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image21.png)
 
 Al solicitar una Supabase Edge Function, debes incluir la clave Supabase correspondiente en los encabezados de la solicitud. A continuacion se muestra un ejemplo minimo:
 
@@ -439,15 +439,15 @@ Explicaremos esta seccion en detalle en el aprendizaje basado en proyectos poste
 
 Project Settings es la seccion de configuracion avanzada del proyecto de Supabase, donde puedes implementar la programacion profunda de recursos computacionales y la configuracion precisa de parametros subyacentes de diversas funciones.
 
-![](images/image22.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image22.png)
 
 En la etapa de introduccion, solo necesitamos enfocarnos en los siguientes dos paneles centrales. Uno es Data API, donde podemos obtener la clave "Supabase URL", que es un endpoint RESTful con el formato `https://xxx.supabase.co`, la "direccion de entrada" para todas las operaciones de consulta, insercion, modificacion y eliminacion de datos. El frontend o el servidor necesita usar esta URL para inicializar el cliente de Supabase y establecer la conexion con la base de datos.
 
-![](images/image23.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image23.png)
 
 El otro punto importante es API Keys. Selecciona la pestana "Legacy anon, service_role API keys"; la clave anon public contenida en ella es una credencial de identidad importante para escenarios frontend, con permisos estrictamente limitados por RLS, y solo puede acceder a los datos autorizados para el usuario. La clave service_role es una "clave de alto permiso del servidor", con la capacidad de evadir la seguridad a nivel de fila, y puede ejecutar operaciones masivas de datos, configuraciones a nivel de sistema y otras operaciones sensibles. Esta absolutamente prohibido compartirla publicamente; si se filtra, genera inmediatamente una nueva clave y actualiza la configuracion del servidor.
 
-![](images/image24.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image24.png)
 
 Los demas elementos de configuracion no necesitan ser estudiados en profundidad en la etapa actual; podras explorarlos uno por uno cuando tengas necesidades de uso avanzado en el futuro.
 
@@ -460,15 +460,15 @@ Para crear tablas de datos en Supabase, existen principalmente dos metodos comun
 1. (Recomendado) Usar un modelo de lenguaje grande para generar declaraciones SQL adaptadas a Supabase, pegarlas y ejecutarlas directamente en el **SQL Editor** (el ejecutor de declaraciones SQL presentado anteriormente), de manera eficiente y rapida. Explicaremos este proceso operativo en detalle en la siguiente seccion.
 2. Crear a traves de operaciones visuales: encuentra el modulo Database en la barra lateral izquierda, haz clic para entrar, selecciona Tables en la barra lateral, y haz clic en el boton New Table a la derecha para crear tablas de datos a traves de la interfaz grafica.
 
-![](images/image25.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image25.png)
 
 Cabe senalar que el nombre de la tabla de datos correspondiente y los tipos de datos almacenados se pueden especificar en la seccion Columns a continuacion.
 
-![](images/image26.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image26.png)
 
 Para bases de datos relacionales, una caracteristica importante es la relacion entre tablas. Puedes encontrar `Foreign keys` a continuacion y hacer clic para crear la relacion correspondiente:
 
-![](images/image27.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image27.png)
 
 `Foreign keys` expresa la relacion entre tablas: un campo o conjunto de campos cuyo valor en la tabla actual (tabla hija) hace referencia al valor de la clave primaria en otra tabla (tabla padre).
 
@@ -508,7 +508,7 @@ En este ejemplo, la columna `numero de clase al que pertenece` en la tabla de es
 
 En Supabase, despues de hacer clic para agregar Foreign Key, puedes seleccionar directamente la columna correspondiente de la tabla relacionada.
 
-![](images/image28.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image28.png)
 
 ## 2.3 Introduccion al SQL Editor y operaciones basicas de bases de datos
 
@@ -543,7 +543,7 @@ CREATE TABLE IF NOT EXISTS orders (
 
 Despues de ejecutarse exitosamente, el sistema indicara que el script se ha completado. Podras ver en el Table Editor que la tabla correspondiente ha sido creada:
 
-![](images/image29.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image29.png)
 
 ### **2.3.2 **`INSERT`** - Rellenar datos iniciales**
 
@@ -577,7 +577,7 @@ INSERT INTO orders (user_id, status, amount, details, placed_at, is_paid) VALUES
 
 Despues de ejecutarse exitosamente, los datos iniciales ya se han insertado en la tabla. Puedes ir a la interfaz del Table Editor y actualizar para ver los resultados, o puedes abrir una nueva ventana directamente en la interfaz del SQL Editor y ejecutar la consulta `SELECT * FROM orders;` para ver los resultados:
 
-![](images/image30.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image30.png)
 
 ### **2.3.3 **`SELECT`** - Leer y consultar datos**
 
@@ -606,7 +606,7 @@ SELECT id, details -> 'items' AS item_list FROM orders;
 - **Ejemplo 1:** Devuelve todas las filas y columnas de la tabla `orders`, similar a la salida del paso 2.
 - **Ejemplo 2:** Solo devuelve los pedidos con estado 'pending', y solo las columnas especificadas:
 
-![](images/image31.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image31.png)
 
 - **Ejemplo 3:** Solo devuelve los pedidos ya pagados, mostrando las columnas especificadas:
 
@@ -707,15 +707,15 @@ En Supabase, RLS esta profundamente integrado con el sistema de autenticacion de
 
 La forma de habilitar las politicas RLS es flexible. Puedes configurarlas y habilitarlas directamente en la interfaz de gestion de la base de datos de Supabase haciendo clic en el boton "RLS":
 
-![](images/image32.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image32.png)
 
-![](images/image33.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image33.png)
 
-![](images/image34.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image34.png)
 
 La configuracion manual puede resultar tediosa. Normalmente, al crear las sentencias de la tabla de datos y durante la inicializacion, ya se suelen incluir las politicas RLS correspondientes. Solo necesitamos ejecutar sentencias similares a la siguiente en el SQL Editor para habilitar automaticamente las politicas de seguridad a nivel de fila en la tabla correspondiente.
 
-![](images/image35.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image35.png)
 
 # 3. Primera aplicacion SQL
 
@@ -727,7 +727,7 @@ Para realizar las practicas, primero necesitas obtener el repositorio de codigo 
 
 Si ya has configurado una clave SSH, se recomienda usar la direccion SSH para clonar (git@github.com:THU-SIGS-AIID/Project5-Supabase-Demos.git) para mayor seguridad; si encuentras problemas de red con SSH o HTTPS, puedes hacer clic directamente en "Download ZIP" en la pagina del repositorio, descomprimir el archivo descargado y tendras el codigo completo.
 
-![](images/image36.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image36.png)
 
 Despues de clonar, tambien puedes pedirle a Trae o Claude Code que te ayude a iniciar el proyecto, por ejemplo, indicando directamente en la interfaz del Agent: `Ayudame a iniciar directamente el project 1 de este proyecto`, o copiando la ruta absoluta del proyecto que deseas iniciar y pegandosela al modelo para que lo inicie directamente.
 
@@ -817,9 +817,9 @@ export function maybeCreateBrowserClient(): SupabaseClient | null {
 
 Despues de crear la base de datos y completar la configuracion de conexion con Supabase, podras ver la siguiente interfaz. Puedes intentar agregar, eliminar, consultar y modificar productos, y observar los cambios en las tablas de datos correspondientes en Supabase.
 
-![](images/image37.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image37.png)
 
-![](images/image38.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image38.png)
 
 ### Ejercicios
 
@@ -845,7 +845,7 @@ const { error: err } = await supabaseClient.auth.signUp({
 });
 ```
 
-![](images/image39.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image39.png)
 
 Despues de iniciar sesion exitosamente, Supabase crea automaticamente una sesion (session) para el usuario y adjunta automaticamente la informacion de autenticacion en todas las solicitudes posteriores a la base de datos. Gracias a RLS, cada usuario solo puede ver la informacion de su propia cuenta (articulos comprados, saldo restante en la billetera) segun su informacion de autenticacion, y no puede ver la informacion de la cuenta de otros usuarios. Esto logra el aislamiento de datos despues del inicio de sesion de diferentes usuarios, donde cada persona solo puede ver su propio contenido.
 
@@ -853,15 +853,15 @@ Al igual que en el Proyecto 1, primero necesitas usar `init.sql` para inicializa
 
 Despues de registrar exitosamente una cuenta con correo electronico y confirmar el registro en tu correo, al iniciar sesion entraras a la interfaz de la tienda donde podras ver el siguiente contenido:
 
-![](images/image40.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image40.png)
 
 Sin embargo, al hacer clic en admin en este momento, no podras ver la siguiente interfaz. Necesitas intentar encontrar en las tablas de datos la seccion que controla los permisos de usuario y modificar los permisos a `admin`, para poder ver normalmente el siguiente contenido en la interfaz de administracion:
 
-![](images/image41.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image41.png)
 
 Cabe destacar que actualmente, cada vez que registras un nuevo correo electronico, necesitas confirmar el registro en tu correo electronico antes de poder iniciar sesion; pero este paso no es obligatorio. Puedes encontrar Sign In / Providers en la seccion Authentication de Supabase y hacer clic en Confirm email para desactivar la confirmacion obligatoria por correo electronico.
 
-![](images/image42.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image42.png)
 
 ### Ejercicios
 
@@ -895,7 +895,7 @@ Por supuesto, tambien puedes pedir directamente a la IA que tome como referencia
 
 Siguiendo el SOP mencionado anteriormente, practiquemos con un caso concreto `Project5-Supabase-Demos/apps_snakegame`: agregar un ranking de puntuaciones a un proyecto de juego "Snake" existente, incluyendo inicio de sesion de usuarios y funcionalidades basicas de base de datos.
 
-![](images/image43.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image43.png)
 
 ### 4.2.1 Analizar el proyecto e identificar los requisitos de datos
 
@@ -909,13 +909,13 @@ Primero, de manera similar al flujo estandarizado mencionado anteriormente, pode
 
 En este punto recibiras una respuesta similar a la siguiente:
 
-![](images/image44.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image44.png)
 
 ### 4.2.2 Generar el script `init.sql`
 
 Una vez determinadas las partes necesarias, podemos pedir a la IA que genere el script de inicializacion de base de datos para ejecutar en Supabase: "Por favor, basandote en el analisis anterior, ayudame a generar el script scripts/init.sql en el proyecto para inicializar la base de datos necesaria en Supabase".
 
-![](images/image45.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image45.png)
 
 ### 4.2.3 Modificar el codigo del proyecto
 
@@ -927,9 +927,9 @@ Si descubres que el sistema de inicio de sesion de usuarios implementado por la 
 
 Durante el proceso de modificacion del codigo, si el resultado real no coincide con lo esperado (como datos del ranking que no se muestran, validacion de inicio de sesion que no funciona, etc.), simplemente documenta el fenomeno especifico y reporta la situacion a la IA, y podras acercarte gradualmente al resultado correcto. El criterio de exito para la modificacion es: los usuarios puedan completar exitosamente el registro e inicio de sesion, y despues de iniciar sesion puedan ver normalmente el ranking del juego.
 
-![](images/image46.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image46.png)
 
-![](images/image47.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image47.png)
 
 ### Ejercicios del curso
 
@@ -958,7 +958,7 @@ En los tutoriales anteriores, explicamos como usar directamente el correo electr
 
 Este proyecto (`Project5-Supabase-Demos/apps/project-burger-shop-auth-advanced-supabase-6`) demuestra completamente como implementar estas funcionalidades avanzadas.
 
-![](images/image48.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image48.png)
 
 ### 5.2.1 Flujo OAuth: Como funciona el inicio de sesion de terceros?
 
@@ -972,7 +972,7 @@ El flujo completo se puede descomponer en 5 pasos clave, tomando como ejemplo el
 4. Supabase intercambia un Access Token (Token de Acceso): nuestro backend (alojado por Supabase, sin necesidad de construirlo) usa este codigo de autorizacion para hacer una solicitud a la interfaz oficial de Google y obtener un Access Token que permite acceder a la informacion del usuario (el codigo de autorizacion solo se usa para intercambiar el Token, evitando que el Token se transmita directamente en el frontend).
 5. Creacion de cuenta y establecimiento de sesion: Supabase usa el Access Token para obtener la informacion publica del usuario desde Google (como correo electronico, avatar), y crea automaticamente una cuenta para ese usuario en nuestro proyecto (si es el primer inicio de sesion) o asocia la cuenta existente, generando finalmente una sesion de usuario valida (Session), completando el inicio de sesion.
 
-![](images/image49.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image49.png)
 
 ### 5.2.2 Configurar Google Cloud para obtener Client ID y Secret
 
@@ -993,7 +993,7 @@ Independientemente del metodo de inicio de sesion de terceros, generalmente nece
 13. En "Application type", selecciona "Web application".
 14. Dale un nombre, por ejemplo "Supabase Auth".
 15. En la seccion "Authorized redirect URIs", haz clic en "ADD URI" e ingresa la URL de callback de tu proyecto de Supabase. Puedes encontrar esta URL en el Supabase Dashboard en "Authentication" -> "Providers" -> "Google". Su formato suele ser `https://<tu-ID-de-proyecto>.supabase.co/auth/v1/callback`.
-    ![](images/image50.png)
+    ![](/zh-cn/stage-2/backend/database-supabase/images/image50.png)
 16. Haz clic en "CREATE".
 17. **Obtener Client ID y Client Secret**:
 18. Una vez creados exitosamente, una ventana emergente mostrara tu **Client ID** y **Client Secret**. Asegurate de **copiarlos y guardarlos de forma segura inmediatamente**.
@@ -1015,7 +1015,7 @@ De manera similar, tambien necesitas registrar una aplicacion OAuth en GitHub.
 7. Haz clic en "Register application".
 8. **Obtener Client ID y Client Secret**:
 9. Una vez registrado exitosamente, la pagina mostrara tu **Client ID**.
-   ![](images/image51.png)
+   ![](/zh-cn/stage-2/backend/database-supabase/images/image51.png)
 10. Haz clic en "Generate a new client secret" para generar tu **Client Secret**. Nuevamente, **copialo y guardalo inmediatamente**.
 
 ### 5.2.4 Configurar el Provider en Supabase
@@ -1033,7 +1033,7 @@ Ahora, configuremos las credenciales obtenidas en Supabase.
    2. Pega el **Client ID** y **Client Secret** obtenidos de GitHub en los campos correspondientes.
    3. Haz clic en "Save".
 
-![](images/image52.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image52.png)
 
 En este punto, ya puedes usar cuentas de terceros para iniciar sesion en el sitio web que has construido. Puedes pedir directamente a la IA que tome como referencia el proyecto `Project5-Supabase-Demos/apps/project-burger-shop-auth-advanced-supabase-6` para soportar el sistema de inicio de sesion de usuarios en tu proyecto, integrando con un costo minimo una interfaz de inicio de sesion de usuarios que incluya autenticacion con GitHub y Google.
 
@@ -1050,7 +1050,7 @@ Finalmente, si crees que el correo electronico de restablecimiento de contrasena
 
 Ademas de la funcionalidad de Reset password, tambien podras ver muchas otras funcionalidades avanzadas relacionadas con la gestion de usuarios (como Invite user, etc.). Puedes agregar las funcionalidades correspondientes segun la documentacion de desarrollo de cada una, combinandolas con herramientas de Vibe coding.
 
-![](images/image53.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image53.png)
 
 ## 5.3 Funcionalidad en tiempo real
 
@@ -1058,7 +1058,7 @@ La funcionalidad en tiempo real de Supabase es una de sus caracteristicas mas po
 
 Este proyecto `Project5-Supabase-Demos/apps/project-burger-shop-realtime-orders-3` demuestra, a traves de la construccion de una sala de chat multiusuario en tiempo real y una funcionalidad de compartir la posicion del cursor, las tres capacidades centrales de Supabase Realtime: escucha de cambios en la base de datos (Postgres Changes), Broadcast (Difusion) y Presence (Presencia en linea).
 
-![](images/image54.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image54.png)
 
 Si encuentras que algunas partes del codigo tienen cierta dificultad, puedes pedir directamente a la IA que tome como referencia esa parte de la documentacion para modificar tu programa.
 
@@ -1243,9 +1243,9 @@ En el desarrollo real, estos archivos no estructurados se gestionan de manera un
 
 El proyecto `project-burger-shop-storage-uploads-4` demuestra a traves de una funcionalidad de carga de avatares de usuario como utilizar Supabase Storage para construir un sistema moderno de carga de archivos, permitiendo a los desarrolladores comprender de forma intuitiva el flujo completo desde la carga de archivos no estructurados hasta su acceso via URL. Ademas, este proyecto utiliza la libreria `Uppy` para proporcionar una excelente interfaz de carga de archivos, combinada con el plugin `Tus` para implementar cargas reanudables, apuntando el endpoint de carga de Uppy al API estandar de Supabase (`<supabaseUrl>/storage/v1/upload/resumable`) para su funcionamiento. Puedes referirte a un enfoque similar para implementar tus propios componentes de carga.
 
-![](images/image55.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image55.png)
 
-![](images/image56.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image56.png)
 
 ### 5.4.1. Storage Bucket
 
@@ -1328,7 +1328,7 @@ Volviendo a Supabase, cuando tu aplicacion necesita ejecutar logica que "no pued
 
 El proyecto `Project5-Supabase-Demos/apps/project-burger-shop-edge-function-5` muestra el flujo de aplicacion mas simple de las Edge Functions a traves de una funcionalidad de对话 en streaming en tiempo real con un Large Language Model (LLM).
 
-![](images/image57.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image57.png)
 
 ### 5.5.1 Analisis del caso LLM Chat
 
@@ -1373,16 +1373,16 @@ Supabase ofrece una interfaz muy amigable que te permite completar el despliegue
 3. En la barra de navegacion izquierda, haz clic en el icono que parece codigo para acceder a "Edge Functions".
 4. **Crear una nueva funcion**:
 5. Haz clic en el boton "Create a new function".
-   ![](images/image58.png)
+   ![](/zh-cn/stage-2/backend/database-supabase/images/image58.png)
 6. Asigna un nombre a la funcion, por ejemplo `llm-chat`.
 7. **Pegar el codigo**:
-   ![](images/image59.png)
+   ![](/zh-cn/stage-2/backend/database-supabase/images/image59.png)
 8. En el editor en linea que aparece, **elimina todo el codigo de marcador de posicion predeterminado**.
 9. Abre tu archivo local `llm-chat.ts` y **copia todo su contenido**.
 10. **Pega** el codigo copiado en el editor en linea de Supabase.
 11. **Configurar** **variables de entorno** **(Secrets)**:
     1. En la barra lateral encuentra Secrets.
-       ![](images/image60.png)
+       ![](/zh-cn/stage-2/backend/database-supabase/images/image60.png)
     2. Name: ingresa `OPENAI_API_KEY`.
     3. Value: pega tu propia OpenAI API Key.
     4. Haz clic en "Save". El Secret configurado aqui se almacenara encriptado y se inyectara de forma segura en el entorno de ejecucion de tu funcion.
@@ -1402,7 +1402,7 @@ Clerk es una herramienta de desarrollo profesional enfocada en la autenticacion 
 
 Esta seccion presentara como configurar el servicio Clerk desde cero e integrarlo con Supabase. Puedes experimentar el flujo completo en el proyecto `project-burger-shop-auth-advanced-clerk-7`.
 
-![](images/image61.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image61.png)
 
 ### 5.6.1 Crear una aplicacion Clerk y obtener las claves
 
@@ -1411,15 +1411,15 @@ Antes de usar este proyecto, necesitas tener una cuenta de Clerk y crear una apl
 1. Registro y creacion:
    1. Visita [dashboard.clerk.com](https://dashboard.clerk.com/) y registrate para obtener una cuenta.
    2. Haz clic en "Create application".
-      ![](images/image62.png)
+      ![](/zh-cn/stage-2/backend/database-supabase/images/image62.png)
    3. Ingresa el nombre de la aplicacion (por ejemplo "Burger Shop").
    4. En "How will your users sign in?", selecciona por defecto Email, Google y GitHub.
    5. Haz clic en Create application.
 2. Obtener las API Keys:
    1. Despues de crearla con exito, seras redirigido a la pagina de API Keys.
-      ![](images/image63.png)
+      ![](/zh-cn/stage-2/backend/database-supabase/images/image63.png)
    2. Encuentra la Publishable key (que comienza con `pk_`) y la Secret key (que comienza con `sk_`).
-      ![](images/image64.png)
+      ![](/zh-cn/stage-2/backend/database-supabase/images/image64.png)
    3. Copialas en tu archivo `.env.local` (consulta el archivo `.env.example` de este proyecto):
 
       ```bash
@@ -1593,7 +1593,7 @@ Despues de inicializar las tablas de datos y funciones de Supabase, tambien nece
 - En Clerk Dashboard -> **Webhooks**, agrega un Endpoint e ingresa la URL de tu Supabase Edge Function.
 - Selecciona los eventos `user.created`, `user.updated`, `user.deleted`, etc.
 
-![](images/image65.png)
+![](/zh-cn/stage-2/backend/database-supabase/images/image65.png)
 
 Una vez configurado con exito, podras ver diferentes mensajes de solicitud en Message Attempts; haz clic en ellos para ver los resultados detallados de los parametros de respuesta. Si el webhook tiene problemas al solicitar la Edge Function, podras encontrar rapidamente la razon detallada en los valores devueltos. Te recomendamos comparar simultaneamente la informacion de los registros de solicitudes de Clerk y Supabase para analizar si la configuracion de cada funcion es correcta.
 

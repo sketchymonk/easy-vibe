@@ -45,7 +45,7 @@ Para que la IA evolucione de compañera de chat a empleada digital, necesitamos 
 
 Este es el embrión del agente de IA (AI Agent): una unidad automatizada con objetivos, conocimiento, herramientas y rutas de ejecución.
 
-![](images/image1.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image1.png)
 
 > Nota: Lo que la industria denomina actualmente como versión simple de "agente" se refiere en su mayoría a aplicaciones mejoradas basadas en la combinación de LLM + herramientas + base de conocimiento, no a agentes capaces de planificar autónomamente. Los agentes simples, aunque no poseen verdadera capacidad de razonamiento y planificación a largo plazo, ya son suficientes para soportar una gran cantidad de escenarios de automatización empresarial. Presentaremos en detalle los agentes verdaderamente capaces de planificación y acción autónoma en capítulos posteriores.
 
@@ -61,7 +61,7 @@ En este punto, una solución es: la Generación Aumentada por Recuperación (Ret
 
 La idea básica de RAG es: cuando el usuario formula una pregunta, el sistema primero recupera de la base de conocimiento empresarial varios fragmentos de texto semánticamente más relevantes a la pregunta (por ejemplo, un párrafo del manual del producto, una cláusula del reglamento de RRHH), y luego "inyecta" estos fragmentos como contexto en la entrada del modelo grande, guiándolo para generar una respuesta basada en materiales reales.
 
-![](images/image2.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image2.png)
 
 Fuente de la imagen: [https://www.datacamp.com/blog/what-is-retrieval-augmented-generation-rag](https://www.datacamp.com/blog/what-is-retrieval-augmented-generation-rag)
 
@@ -69,7 +69,7 @@ De esta manera, la respuesta del modelo ya no depende del conocimiento generaliz
 
 En la práctica empresarial, esta tecnología es especialmente importante porque los modelos grandes a menudo producen "alucinaciones". Por ejemplo, si preguntas como CFO o consultor sobre datos específicos de un período, el modelo muy probablemente inventará fechas y eventos. Con la introducción de RAG, la controlabilidad y fiabilidad de las respuestas mejorarán significativamente.
 
-![](images/image3.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image3.png)
 
 Fuente de la imagen: [https://www.databricks.com/glossary/retrieval-augmented-generation-rag](https://www.databricks.com/glossary/retrieval-augmented-generation-rag)
 
@@ -96,7 +96,7 @@ Si se depende únicamente del razonamiento libre de un modelo de lenguaje grande
 
 Esto nos lleva a un paradigma de aplicación de IA más avanzado: el flujo de trabajo de IA (AI Workflow).
 
-![](images/image4.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image4.png)
 
 Un flujo de trabajo se refiere a la descomposición de una tarea compleja en múltiples subpasos ordenados, configurables y de ejecución automática, y a la orquestación de sus relaciones lógicas (como evaluaciones condicionales, bucles o ejecución paralela) mediante métodos visuales o de código. La estandarización de las capacidades de IA mediante SOPs (Procedimientos Operativos Estándar) significa convertir la experiencia de cómo usar la IA para completar una tarea en plantillas reutilizables.
 
@@ -106,7 +106,7 @@ Los usuarios de los flujos de trabajo de IA son muy diversos. Los gerentes de pr
 
 Además, es worth noting que los flujos de trabajo de IA generalmente pueden describirse mediante una Representación Intermedia (Intermediate Representation). Aunque la expresión específica varía entre las diferentes plataformas de flujos de trabajo, la mayoría utiliza archivos estructurados (como JSON, YAML, etc.) para definir tipos de nodos, entradas/salidas y lógica de ejecución, con una estructura similar a la que se muestra en la siguiente imagen:
 
-![](images/image5.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image5.png)
 
 En resumen, si los agentes hacen que la IA pase de saber chatear a saber hacer cosas, los flujos de trabajo hacen que la IA pase de ocasionalmente lograr hacer una cosa a "completar de manera estable, confiable y escalable un tipo de tarea". En las próximas prácticas, también usaremos la plataforma Dify para construir flujos de trabajo de IA completos, experimentando el proceso completo desde la idea hasta la aplicación ejecutable.
 
@@ -139,11 +139,11 @@ Estas tres plataformas soportan la salida del agente de IA construido en forma d
 
 Dify se posiciona como una plataforma de desarrollo y operación de aplicaciones LLM, comprometida con proporcionar gestión del ciclo de vida completo de aplicaciones de IA, desde la concepción, el despliegue hasta la optimización. Su núcleo es una plataforma de bajo código, diseñada para ayudar a desarrolladores e innovadores sin formación técnica a construir rápidamente aplicaciones de IA de nivel productivo.
 
-![](images/image6.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image6.png)
 
 En cuanto a funcionalidades, Dify cubre la orquestación visual de flujos de trabajo, la construcción de agentes, la gestión de bases de conocimiento y el soporte de múltiples modelos. La plataforma permite diseñar flujos de tareas complejas arrastrando nodos y soporta la creación de Agentes basados en intenciones. Su funcionalidad de base de conocimiento destaca, pudiendo procesar documentos en múltiples formatos y realizar búsquedas vectoriales eficientes. Al mismo tiempo, Dify es compatible con múltiples LLMs incluyendo GPT, Claude y numerosos modelos de código abierto, y las aplicaciones construidas pueden publicarse con un clic como APIs estándar para facilitar la integración.
 
-![](images/image7.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image7.png)
 
 En cuanto a la arquitectura técnica, Dify se caracteriza por ser de código abierto y con capacidad de despliegue privado, enfatizando la flexibilidad, la escalabilidad y el cumplimiento empresarial. Los usuarios objetivo incluyen equipos de desarrolladores e innovadores de negocio, con escenarios de aplicación típicos que abarcan bases de conocimiento empresarial y servicio al cliente inteligente, automatización de creación de contenido, asistentes de IA para sectores verticales y plataforma central de IA empresarial.
 
@@ -151,11 +151,11 @@ En cuanto a la arquitectura técnica, Dify se caracteriza por ser de código abi
 
 Coze es una plataforma de desarrollo de agentes de IA lanzada por ByteDance, con la usabilidad extrema como núcleo, permitiendo a usuarios sin experiencia en programación crear, depurar y publicar fácilmente chatbots de IA con funcionalidades ricas.
 
-![](images/image8.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image8.png)
 
 Su núcleo es simplificar la construcción de Bots en una operación tipo bloques de construcción. Los usuarios pueden configurar fácilmente roles y bases de conocimiento a través de la interfaz, y utilizar la rica biblioteca de plugins integrada para añadir al Bot múltiples capacidades externas como noticias, turismo y generación de imágenes. Los Bots creados pueden publicarse rápidamente con un clic en múltiples plataformas como Doubao, Feishu y la cuenta oficial de WeChat.
 
-![](images/image9.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image9.png)
 
 La arquitectura técnica está completamente diseñada para un uso de baja barrera, el backend integra modelos propios de Byte y encapsula procesos complejos, enfatizando la comprensión multimodal y la respuesta en tiempo real. Como plataforma proporcionada principalmente en forma de servicio en la nube, su capacidad de despliegue privado es relativamente limitada. Los escenarios de aplicación típicos incluyen asistentes personales y Bots de entretenimiento, servicio al cliente inteligente y sistemas de preguntas y respuestas, asistentes de educación en línea y validación rápida de prototipos.
 
@@ -165,7 +165,7 @@ n8n es una plataforma de automatización de flujos de trabajo programable y de p
 
 Cuenta con una enorme biblioteca de nodos de integración que soporta cientos de servicios SaaS, bases de datos y protocolos, y adopta un enfoque que combina lo visual con el código: los usuarios pueden arrastrar nodos en un lienzo mientras inyectan código JavaScript o Python para escribir lógica personalizada. n8n es experto en manejar tareas backend de procesamiento intensivo de datos, como sincronización de datos, procesos ETL y orquestación de APIs.
 
-![](images/image10.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image10.png)
 
 Una característica técnica clave es el "código fuente visible" y la "capacidad de auto-alojamiento", los usuarios pueden desplegarlo de forma privada para tener control total sobre los datos y el entorno, lo que lo hace muy atractivo para industrias con altos requisitos de seguridad de datos. Sus usuarios principales son desarrolladores, operaciones técnicas y analistas de datos. La mayor ventaja de n8n radica en poseer un ecosistema comunitario extremadamente poderoso. En la red se encuentran abundantemente videos de n8n compartidos, que proporcionan a los usuarios referencias de aprendizaje y experiencia convenientes; al mismo tiempo, soporta la conexión con numerosas plataformas ecológicas globales como YouTube e Instagram, ayudando a los usuarios a romper fácilmente las barreras de datos y servicios entre plataformas, logrando la automatización de flujos multi-ecosistema.
 
@@ -185,7 +185,7 @@ Ya hemos conocido la información básica de Dify anteriormente. Para informaci�
 
 Dify es una plataforma de código abierto para el desarrollo de aplicaciones LLM. Proporciona una interfaz intuitiva que combina flujos de trabajo de Agent, pipelines de RAG, capacidades de herramientas, gestión de modelos y observabilidad, ayudándote a pasar rápidamente del prototipo al entorno de producción.
 
-![](images/image11.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image11.png)
 
 Puedes usar modelos de lenguaje grande y diversas herramientas con diferentes funcionalidades en Dify para construir "flujos de trabajo". Un flujo de trabajo consiste en conectar automáticamente las operaciones que originalmente necesitabas completar paso a paso manualmente — como recuperación de datos, llamadas a modelos grandes, búsqueda web, filtrado de resultados y formateo — según la lógica de negocio, convirtiéndolas en un proceso automatizado y reutilizable. Sin flujos de trabajo, cada vez tendrías que copiar y pegar el mismo contenido al modelo grande, lo cual es muy ineficiente, propenso a errores y difícil de reutilizar en un negocio real.
 
@@ -200,7 +200,7 @@ Por ejemplo, si eres el propietario de una tienda de comercio electrónico en Am
 5. Nodo condicional: verifica si la respuesta generada por el modelo grande contiene un tiempo de garantía claro (por ejemplo, "1 año", "3 años"), si es así continúa al siguiente paso, si no, responde "Proporcione el modelo del producto".
 6. Nodo de salida (similar a ANSWER): devuelve la respuesta final al usuario y registra automáticamente esta consulta en una tabla.
 
-![](images/image12.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image12.png)
 
 Durante todo el proceso, no necesitas buscar manualmente en la base de conocimiento, ajustar repetidamente las respuestas del modelo o registrar datos por separado; el flujo de trabajo "conecta" estos pasos y los ejecuta automáticamente. Y es muy flexible: por ejemplo, si más adelante quieres añadir una nueva regla "cuando el usuario pregunte sobre el alcance de la garantía, llamar a otra base de conocimiento", solo necesitas añadir un nodo condicional más al flujo de trabajo, sin necesidad de reestructurar todo el sistema.
 
@@ -212,7 +212,7 @@ Este contenido estaba originalmente programado para presentarse en detalle en le
 
 Necesitas consultar este tutorial para aprender el uso básico de la plataforma de despliegue web: [Cómo desplegar aplicaciones web](/es-es/stage-2/backend/zeabur-deployment/)
 
-![](images/image13.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image13.png)
 
 Necesitas aprender cómo desplegar tu propio Dify en Zeabur. Después del despliegue, ingresa al enlace correspondiente, regístrate e inicia sesión, y luego continúa siguiendo el tutorial a continuación.
 
@@ -222,21 +222,21 @@ Ten en cuenta que las operaciones y la interfaz frontend pueden variar ligeramen
 
 Después de acceder a la página principal de Dify [https://cloud.dify.ai/apps](https://cloud.dify.ai/apps) y registrarte e iniciar sesión, selecciona Studio y verás la siguiente interfaz:
 
-![](images/image14.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image14.png)
 
 Encuentra la sección `CREATE APP` en el lado izquierdo y haz clic en `Create from Blank`.
 
-![](images/image15.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image15.png)
 
-![](images/image16.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image16.png)
 
 Encuentra Chatbot en APP Type (si no lo ves al principio, puedes hacer clic en el botón "ver más tipos" y encontrarlo en la lista completa). Después de seleccionar Chatbot, ingresa el nombre y la descripción de la aplicación abajo y finalmente haz clic en crear.
 
-![](images/image17.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image17.png)
 
 Una vez completada la creación, verás una interfaz similar a la siguiente.
 
-![](images/image18.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image18.png)
 
 El área central "INSTRUCTIONS" se refiere a las instrucciones integradas, puedes entenderlo como el prompt por defecto o el prompt del sistema.
 
@@ -246,11 +246,11 @@ A la derecha está la ventana de depuración, donde puedes conversar con el Agen
 
 Puedes ingresar libremente prompts de rol en el área INSTRUCTIONS y observar el efecto de la conversación; también puedes hacer clic en Generate para que el modelo grande genere automáticamente los prompts para ti.
 
-![](images/image19.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image19.png)
 
 Ten en cuenta que en la esquina superior derecha aparecerán opciones de muchos modelos diferentes, lo que significa que puedes hacer clic para cambiar entre diferentes modelos de conversación, comparando sus diferencias en tono, razonamiento lógico, procesamiento de textos largos, etc., para encontrar el modelo que mejor se adapte a tus necesidades.
 
-![](images/image20.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image20.png)
 
 ## 2.3 Soporte para proveedores de modelos personalizados
 
@@ -265,45 +265,45 @@ Los pasos detallados son los siguientes. Primero necesitamos instalar los plugin
    2. https://marketplace.dify.ai/plugins/langgenius/siliconflow
 2. Si has desplegado tu propio Dify, puedes acceder al marketplace de plugins desde la interfaz de configuración del sistema correspondiente
 
-![](images/image21.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image21.png)
 
-![](images/image22.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image22.png)
 
 Después de ingresar al marketplace de plugins, busca el nombre del plugin correspondiente.
 
-![](images/image23.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image23.png)
 
 3. Después de completar la instalación, podemos configurar el soporte para nuevos proveedores de modelos. En la sección de proveedores de modelos en la configuración, podemos ver todos los proveedores de modelos actualmente soportados:
-   ![](images/image24.png)
+   ![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image24.png)
 4. Antes de comenzar a usar, necesitamos completar primero la configuración de los modelos. Para el plugin OpenAI-API-compatible, puedes hacer clic en "Add Model" para añadir y configurar cualquier modelo. Puedes seleccionar en "Model Type" si el modelo es LLM o Embedding, necesitas asegurarte de que el tipo de modelo esté correctamente configurado.
    Necesitas ingresar el nombre específico del modelo, la URL del endpoint del modelo y la API Key para asegurar que el modelo se active. Si inicialmente te parece complicado configurar estos parámetros, puedes saltar directamente a la configuración de la Key de la plataforma SiliconFlow, o instalar plugins de proveedores de terceros como OpenRouter para una configuración sencilla del soporte de modelos. (Asegúrate de que el proveedor tenga saldo disponible)
 
-   ![](images/image25.png)
+   ![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image25.png)
 
    Para el plugin `SiliconFlow`, solo necesitas hacer clic en Setup para configurar la key y luego podrás usar los modelos de Embedding y Rerank para pruebas. Puedes hacer clic en Get your API Key from SiliconFlow para obtener la clave de autenticación.
 
-   ![](images/image26.png)
+   ![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image26.png)
 
 5. Una vez completada la configuración, puedes hacer clic en la lista de modelos para ver cuántos modelos se soportan actualmente. En este punto, toda la configuración de modelos básicos ha sido completada.
-   ![](images/image27.png)
+   ![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image27.png)
 
    Entre ellos se soportan la mayoría de los modelos comunes de Embedding y Rerank:
 
-   ![](images/image28.png)
+   ![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image28.png)
 
    Si en este punto deseas modificar la configuración de los modelos que Dify usa por defecto, también puedes hacer clic en el botón System Model Settings para modificar todos los modelos predeterminados.
 
-   ![](images/image29.png)
+   ![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image29.png)
 
 ## 2.4 Crear la primera base de conocimiento de Dify
 
 Llegado a este punto, ya hemos completado la creación del Agent más simple, pero aún le falta una base de conocimiento. Ahora, haz clic en `Knowledge` en el menú superior para acceder a la página de creación de bases de conocimiento.
 
-![](images/image30.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image30.png)
 
 Luego haz clic en `Create Knowledge` en el lado izquierdo para crear tu primera base de conocimiento.
 
-![](images/image31.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image31.png)
 
 En esta interfaz, puedes subir múltiples tipos de archivos (por ejemplo, pdf, txt, etc.) para construir la base de conocimiento. Puedes subir textos largos o copiar contenido de Wikipedia y guardarlo como un archivo txt para subirlo. En este ejemplo, subiremos un archivo txt de Wikipedia sobre Elon Musk.
 
@@ -313,7 +313,7 @@ Primero, en la configuración **General**, puedes entender esto como el área de
 
 También puedes ajustar la opción **Chunk overlap (superposición de fragmentos)**. Determina si los fragmentos adyacentes conservarán una parte del contenido superpuesto. Una superposición adecuada ayuda a evitar que información importante se divida en fragmentos diferentes y sea difícil de entender.
 
-![](images/image32.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image32.png)
 
 En la configuración hay otra opción llamada **Chunk using Q&A format in English**. Al activarla, el sistema usará un modelo de lenguaje grande para convertir parte del contenido de la base de conocimiento en formato de preguntas y respuestas para su almacenamiento, lo cual puede mejorar significativamente los resultados de recuperación en ciertos escenarios.
 
@@ -325,7 +325,7 @@ Para explicarlo de forma sencilla: la función central del modelo de Embedding e
 
 La elección del modelo de Embedding afectará significativamente los resultados finales de recuperación (como la precisión de coincidencia, la velocidad de respuesta, etc.). Aquí recomendamos usar prioritariamente el modelo de Embedding Qwen 0.6B; también puedes cambiar a las versiones 4B o 8B para comparar intuitivamente las diferencias en los resultados de recuperación con diferentes escalas de parámetros.
 
-![](images/image33.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image33.png)
 
 Aquí también verás otra configuración de modelo llamada **Rerank model**, cuyo valor por defecto es **Jina-rerank-m0**. (Si no eres un estudiante del campus, es posible que en este momento veas un error de modelo Rerank faltante; necesitarás configurar un modelo rerank en la sección de modelos para poder usarlo aquí)
 
@@ -335,33 +335,33 @@ En términos simples: el modelo Rerank sirve para resolver el problema de que la
 
 Lo mismo aplica para los sistemas de recomendación: primero podrían encontrar 500 productos "que podrían gustarte", y luego ordenarlos con el modelo Rerank para que los productos que más probablemente comprarás aparezcan en la parte superior de la lista.
 
-![](images/image34.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image34.png)
 
 Cuando todas las configuraciones estén completadas, haz clic en **Save & Process** y el sistema entrará en la fase de vectorización de la base de conocimiento. En esta fase, el modelo de Embedding convertirá el texto segmentado en representaciones vectoriales.
 
-![](images/image35.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image35.png)
 
 Una vez completado el procesamiento, haz clic en **Go to document** para ver el contenido de la base de conocimiento ya procesado y almacenado.
 
-![](images/image36.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image36.png)
 
 Haz clic directamente en el nombre de la base de conocimiento para ver el contenido específico de cada fragmento.
 
-![](images/image37.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image37.png)
 
 Aquí puedes editar o eliminar con precisión cualquier fragmento de texto que no sea adecuado.
 
-![](images/image38.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image38.png)
 
 En la barra lateral izquierda, selecciona **Retrieval Testing** para realizar una prueba de recuperación en la base de conocimiento y verificar que la búsqueda funciona correctamente. Cada prueba devuelve varios fragmentos con la mayor similitud.
 
-![](images/image39.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image39.png)
 
 Si deseas ver más resultados de fragmentos, haz clic en la configuración de `VECTOR SEARCH`:
 
-![](images/image40.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image40.png)
 
-![](images/image41.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image41.png)
 
 Top K se refiere a la cantidad de los K fragmentos de texto más similares al vector de consulta que se devuelven durante la recuperación vectorial. La configuración actual es 3, lo que significa que se devolverán los 3 fragmentos de texto con mayor similitud.
 
@@ -369,15 +369,15 @@ Score Threshold es un "umbral de puntuación": solo los fragmentos de texto con 
 
 Ahora la base de conocimiento está completamente lista. A continuación, haz clic en "studio" en la barra de menú superior, encuentra el agente que acabas de crear y conéctalo a la base de conocimiento que ya hemos configurado.
 
-![](images/image42.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image42.png)
 
-![](images/image43.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image43.png)
 
 En este punto, en cada ronda de conversación, podrás ver las fuentes de la base de conocimiento que coincidieron en la respuesta. Haz clic en la entrada correspondiente para ver los fragmentos de texto específicos recuperados.
 
-![](images/image44.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image44.png)
 
-![](images/image45.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image45.png)
 
 ## 2.5 Más operaciones comunes de Dify
 
@@ -387,11 +387,11 @@ Después de dominar los conceptos básicos de la construcción de chatbots y bas
 
 ¿Recuerdas la representación intermedia de flujos de trabajo mencionada anteriormente? Dify admite la importación y exportación de flujos de trabajo a través del formato DSL (Domain Specific Language). DSL es un método de descripción estandarizado basado en JSON que puede conservar completamente la estructura de nodos, las relaciones de conexión y los parámetros de configuración del flujo de trabajo. Puedes importar y exportar fácilmente archivos DSL, compartir flujos de trabajo con otras personas, o importar flujos de trabajo de otros como referencia. Específicamente, podemos encontrar fácilmente el botón de importación de flujos de trabajo en la página del área de trabajo:
 
-![](images/image46.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image46.png)
 
 Para la exportación del flujo de trabajo, solo necesitamos hacer clic en la esquina inferior derecha de un bloque de flujo de trabajo individual para encontrar el botón de exportación:
 
-![](images/image47.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image47.png)
 
 Al utilizar archivos DSL, puedes migrar o compartir fácilmente diseños de flujos de trabajo complejos entre diferentes instancias de Dify.
 
@@ -399,7 +399,7 @@ Al utilizar archivos DSL, puedes migrar o compartir fácilmente diseños de fluj
 
 Si sientes que los flujos de trabajo o agentes que has construido son demasiado simples, la plataforma Dify ofrece una amplia variedad de proyectos de ejemplo para ayudarte a comprender rápidamente cómo construir aplicaciones complejas. Estos proyectos de ejemplo cubren múltiples escenarios empresariales. Puedes hacer clic en Explora para ver los flujos de trabajo construidos por otros y aprender de ellos.
 
-![](images/image48.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image48.png)
 
 ## 2.6 Crear la primera aplicación Workflow de Dify
 
@@ -407,9 +407,9 @@ Una vez completada la introducción a la construcción de agentes conversacional
 
 Puedes elegir crear desde cero o directamente desde una plantilla; aquí demostramos cómo crear un flujo de trabajo desde cero:
 
-![](images/image49.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image49.png)
 
-![](images/image50.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image50.png)
 
 Aquí veremos dos opciones: Chatflow y Workflow. ¿Cómo elegir entre ambas? La clave es entender si lo que quieres construir tiene como núcleo una conversación continua o un flujo de tareas.
 
@@ -428,7 +428,7 @@ Si las respuestas a las primeras tres preguntas son "sí", entonces Chatflow es 
 
 Aquí elegimos Chatflow como caso de estudio; haz clic en Chatflow para entrar a la interfaz del área de trabajo:
 
-![](images/image51.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image51.png)
 
 Vamos a presentar brevemente la interfaz del flujo de trabajo. El núcleo de toda la interfaz es el lienzo de edición central, donde construirás la lógica de la aplicación de forma visual. Como se muestra en la figura, un flujo de trabajo básico generalmente comienza con un nodo START (para recibir la entrada), pasa los datos a través de conexiones a un nodo LLM para su procesamiento, y finalmente genera resultados a través de un nodo ANSWER. Cada nodo representa un módulo funcional, y las conexiones determinan el orden de ejecución de las tareas.
 
@@ -444,19 +444,19 @@ Dify proporciona una variedad de nodos. Puedes primero comprender la función b�
 
 Haz clic derecho en el lienzo y selecciona "Add Node" para agregar nodos; también puedes ver todos los nodos disponibles en el panel de nodos a la izquierda:
 
-![](images/image52.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image52.png)
 
 Al mismo tiempo, puedes abrir el panel de selección de herramientas para ver los distintos tipos de herramientas compatibles:
 
-![](images/image53.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image53.png)
 
 A continuación se presenta una breve descripción de algunos nodos y herramientas de uso común. No es necesario dominarlos todos a la vez; se recomienda tener una impresión general y familiarizarse gradualmente durante el uso real, consultando de nuevo cuando sea necesario.
 
 1. Nodos de LLM e inferencia
 
-![](images/image54.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image54.png)
 
-![](images/image55.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image55.png)
 
 Estos nodos son responsables del flujo central en el flujo de trabajo.
 
@@ -468,7 +468,7 @@ Estos nodos son responsables del flujo central en el flujo de trabajo.
 
 2. Nodos de lógica y control de flujo
 
-![](images/image56.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image56.png)
 
 Estos nodos definen la ruta de ejecución y las reglas del flujo de trabajo.
 
@@ -478,7 +478,7 @@ Estos nodos definen la ruta de ejecución y las reglas del flujo de trabajo.
 
 3. Nodos de manipulación de datos e integración
 
-![](images/image57.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image57.png)
 
 - Nodo Code: unidad de procesamiento de código, responsable de ejecutar lógica de código personalizada en el flujo de trabajo, permitiendo implementar necesidades de procesamiento personalizadas como transformación de formato de datos y cálculos complejos. Su configuración se centra en la corrección de la sintaxis del código y la adaptación del entorno de ejecución.
 - Nodo Template: unidad de procesamiento de plantillas, responsable de rellenar datos dinámicos en plantillas predefinidas para generar contenido que cumpla con los requisitos de formato (como textos personalizados, marcos de informes). Su configuración se centra en la redacción de la sintaxis de la plantilla y la configuración de las reglas de mapeo de variables.
@@ -491,7 +491,7 @@ Estos nodos definen la ruta de ejecución y las reglas del flujo de trabajo.
 
 ### 2.6.2 Introducción a las herramientas comunes
 
-![](images/image58.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image58.png)
 
 En Dify, la mayoría de las herramientas se pueden colocar directamente en el lienzo como nodos, conectadas de la misma manera que otros nodos. Siempre que la entrada que proporciones cumpla con las especificaciones de parámetros del nodo (herramienta), podrá ejecutarse normalmente y producir resultados que pueden continuar fluyendo.
 
@@ -556,15 +556,15 @@ A continuación realizaremos la configuración de orquestación del flujo de tra
 
 En este tutorial elegimos crear un Workflow en lugar de un Chatflow. Selecciona User Input:
 
-![](images/image59.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image59.png)
 
 Luego haz clic en el nodo User Input de Start y define una variable de tipo string llamada `user_text` como fuente de entrada de todo el flujo.
 
-![](images/image60.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image60.png)
 
 Después de guardar, haz clic en Test Run en la esquina superior derecha; podrás ver que necesitas especificar la entrada de texto correspondiente para su procesamiento:
 
-![](images/image61.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image61.png)
 
 Luego necesitamos hacer clic en el símbolo + después del nodo de entrada, seleccionar Question Classifier para agregar el nodo, y necesitamos configurar cuatro categorías de etiquetas, proporcionando descripciones y ejemplos claros para cada una.
 
@@ -579,13 +579,13 @@ Además, debes escribir un prompt en ADVANCED SETTING para que el modelo grande 
 Selecciona la etiqueta más adecuada entre buy_food / complain / chitchat / other. Si el usuario se está quejando pero también pidiendo comida, prioriza la evaluación de su emoción central; si el enfoque principal es expresar insatisfacción, debe clasificarse como complain. Si solo es una queja menor pero la intención principal es hacer un pedido, clasifícalo como buy_food. Si es realmente difícil de determinar, usa other como categoría de respaldo.
 ```
 
-![](images/image62.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image62.png)
 
 Una vez completada la configuración, puedes hacer clic en el botón de reproducción en la esquina superior derecha para probar individualmente si el nodo funciona correctamente:
 
-![](images/image63.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image63.png)
 
-![](images/image64.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image64.png)
 
 Desde el resultado de OUTPUT, nuestra clasificación es precisa. Puedes realizar múltiples pruebas con diferentes tipos de entrada para verificar la estabilidad de nuestro clasificador.
 
@@ -611,11 +611,11 @@ Cabe destacar que, después de rellenar los parámetros del prompt SYSTEM en cad
 
 De manera similar, para asegurarte de que todo funcione correctamente, puedes hacer clic en la flecha de reproducción en la esquina superior derecha del nodo para realizar pruebas de conversación específicas y verificar el efecto, por ejemplo diciendo "Quiero tomar un té de perlas" y comprobando si la respuesta cumple con lo esperado.
 
-![](images/image65.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image65.png)
 
 A continuación procesamos los valores de salida de los LLM en paralelo. En el panel de configuración del nodo `Variable Aggregator`, buscamos el área `ASSIGN VARIABLES` (asignar variables), hacemos clic y añadimos secuencialmente las respuestas de los modelos anteriores.
 
-![](images/image66.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image66.png)
 
 Luego necesitamos agregar todas las salidas y finalmente obtener el resultado deseado, que incluye la entrada del usuario, la clasificación y la respuesta. Dado que estamos usando un Workflow y no un Chatflow, no tenemos el nodo Answer para la agregación de resultados; podemos seleccionar otros nodos para implementar indirectamente la agregación y salida de resultados. En este caso seleccionamos el nodo Template, especificando en la sección de variables el resultado de clasificación de intención del usuario, el valor de entrada del usuario y la respuesta final de la agregación de variables, y escribiendo en CODE la plantilla de formato JSON de la respuesta final. Podemos obtener:
 
@@ -631,11 +631,11 @@ Luego necesitamos agregar todas las salidas y finalmente obtener el resultado de
 }
 ```
 
-![](images/image67.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image67.png)
 
 Finalmente, añade el nodo output para completar todas las operaciones:
 
-![](images/image68.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image68.png)
 
 #### Prueba de ejecución del flujo de trabajo
 
@@ -658,7 +658,7 @@ Finalmente, añade el nodo output para completar todas las operaciones:
 
 Después de ejecutar en Test Run, podemos ver el proceso de ejecución del flujo de trabajo. En este punto, la clasificación ha seguido el flujo correcto y ha obtenido el resultado final de output. Con esto, el flujo completo queda concluido.
 
-![](images/image69.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image69.png)
 
 ## 2.7 Ejecutar la primera aplicación Workflow desde plantilla
 
@@ -666,33 +666,33 @@ Finalizado el aprendizaje del flujo de trabajo de clasificación simple, a conti
 
 Después de importar, el primer paso es ejecutarlo directamente; resolvemos los problemas específicos según cada error y su causa. Si encuentras problemas que no puedes resolver, puedes tomar una captura de pantalla y preguntar a un modelo grande.
 
-![](images/image70.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image70.png)
 
 Al entrar por primera vez puede parecer muy complejo, no te preocupes. Haz clic en Preview en la esquina superior derecha para ejecutar el flujo de trabajo hasta que aparezca un error:
 
-![](images/image71.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image71.png)
 
-![](images/image72.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image72.png)
 
 Necesitamos resolver el problema según el nodo con error. Al abrirlo, vemos que falta configurar el API Token de Tavily. La API de búsqueda de Tavily es un motor de búsqueda diseñado específicamente para IA, que proporciona resultados en tiempo real, precisos y basados en hechos. Sigue las indicaciones para operar:
 
-![](images/image73.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image73.png)
 
 Después de procesarlo, el motor de búsqueda puede funcionar normalmente:
 
-![](images/image74.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image74.png)
 
 Después de continuar corrigiendo los problemas causados por las llamadas al modelo, deberías obtener el siguiente resultado: una búsqueda detallada combinada con la comprensión del modelo grande:
 
-![](images/image75.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image75.png)
 
 Al final podemos ver las direcciones de los documentos de referencia correspondientes:
 
-![](images/image76.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image76.png)
 
 Si quieres entender la función de cada paso, el mejor método es registrar la salida de cada paso como una variable y finalmente imprimir los resultados de cada variable intermedia en la salida. Otro método es que puedes encontrar el proceso Process en la parte superior; haz clic en él para ver los detalles de cada paso:
 
-![](images/image77.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image77.png)
 
 ## 2.8 Usar Dify como proveedor de API
 
@@ -706,25 +706,25 @@ Si aún no estás familiarizado con qué es un IDE, puedes leer primero el docum
 
 Si tu entorno de desarrollo local aún no está completamente configurado, no te preocupes. Siempre que confíes en tu asistente de código (ya sea [z.ai](http://z.ai) o Trae), ante cualquier duda o error que encuentres, puedes simplemente pasarle el problema y te dará una solución detallada basada en tu descripción.
 
-![](images/image78.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image78.png)
 
 El área de la derecha se llama ventana de interacción Copilot, o ventana de Agent. Si no la ves, puedes hacer clic en el icono de la barra lateral en la esquina superior derecha para abrirla.
 
-![](images/image79.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image79.png)
 
 Después de abrir la barra lateral, verás la opción `Builder`. Este es el modo Agent. Puedes entender simplemente "Builder" como el "modo de desarrollo" de [z.ai](http://z.ai), que igualmente puede ayudarte a operar el entorno local de tu computadora, instalar dependencias, abrir páginas web, etc.
 
-![](images/image80.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image80.png)
 
 Después de hacer clic en "Builder", verás el modo "Chat" y el modo "Builder with MCP". El modo Chat se usa principalmente para interactuar con la carpeta actual o tener una conversación en lenguaje natural con el modelo grande. (Puedes abrir una carpeta haciendo clic en "File" en la esquina superior izquierda de Trae, y luego editar dentro de esa carpeta. En este caso, todas las operaciones de creación de archivos del Builder se realizarán en esa carpeta.)
 
 El modo Builder with MCP proporciona más herramientas al Agent (por ejemplo, permitir que el modelo grande se conecte a otros software, obtener información del clima, etc.). Puedes entender simplemente que MCP es un conjunto de capacidades que permite al modelo grande llamar más fácilmente a diversas herramientas externas.
 
-![](images/image81.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image81.png)
 
 En el área inferior, también puedes ver una lista desplegable de selección de modelos; puedes hacer clic para cambiar entre diferentes modelos. Aquí puedes elegir Kimi k2 o GLM. Si usas la versión internacional de Trae, también puedes elegir ChatGPT o Claude. Sin embargo, con el rápido desarrollo de los modelos de lenguaje grandes nacionales, las capacidades integrales de modelos como Kimi, Qwen y GLM ya se acercan básicamente a Claude 3.5 o 3.7, siendo completamente suficientes para escenarios de desarrollo cotidianos.
 
-![](images/image82.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image82.png)
 
 Lo anterior es una breve introducción a Trae. A continuación, podemos repasar los pasos realizados en [z.ai](http://z.ai) y reutilizar estas ideas en Trae.
 
@@ -734,25 +734,25 @@ Si queremos construir una aplicación de chat frontend usando la API de Dify, pr
 
 ¿Recuerdas el Agent que creamos antes? Primero haz clic en "Publish" en la esquina superior derecha, luego haz clic en "Publish Update" y finalmente haz clic en "Access API Reference" para entrar a la documentación de la API.
 
-![](images/image83.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image83.png)
 
-![](images/image84.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image84.png)
 
 Después de entrar a la documentación de la API, busca la sección "Send Chat Message", haz clic para entrar y luego encuentra los ejemplos de "Request" y "Response" a la derecha y cópialos.
 
 ¿Por qué es imprescindible copiar estas dos partes? Porque son la "información central" de la API: con la Key, el ejemplo de solicitud y el ejemplo de respuesta, podemos hacer que el modelo grande nos genere el código para llamar al servicio, y extraer los campos necesarios según la estructura de respuesta.
 
-![](images/image85.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image85.png)
 
-![](images/image86.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image86.png)
 
 Después de encontrar los ejemplos de Request y Response necesarios para la conversación, también necesitamos obtener una API Key. En la esquina superior derecha de la documentación, verás opciones relacionadas con "API key".
 
-![](images/image87.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image87.png)
 
 Haz clic en "Create new Secret key" para crear tu propia API Key.
 
-![](images/image88.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image88.png)
 
 Ahora todo está listo. Enviaremos la API Key, el ejemplo de Request y el ejemplo de Response que acabamos de obtener al Trae Builder.
 
@@ -822,25 +822,25 @@ curl -X POST 'http://{DIFY_API_URL}/v1/chat-messages' \
 }
 ```
 
-![](images/image89.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image89.png)
 
 En esta etapa, es posible que descubras que el programa generado no funciona correctamente a la primera; por ejemplo, la conversación puede mostrar errores extraños o no devolver ningún resultado. Cuando esto ocurra, puedes intentar cambiar a otro modelo de lenguaje grande, o copiar el mensaje de error, describir el problema en detalle y enviarlo al modelo para que continúe iterando basándose en la retroalimentación.
 
 En este punto, tu forma de trabajar ya se acerca mucho a un proceso de desarrollo real. En el desarrollo cotidiano, a menudo nos encontramos con diversos problemas al colaborar con modelos de lenguaje grandes; para resolverlos mejor, necesitamos proporcionar más información contextual. Además de proporcionar mensajes de error, también puedes copiar contenido de documentación más completo (por ejemplo, copiar más descripciones de la sección "Send message" en el lado izquierdo de la documentación) y enviarlo junto al modelo, para que dé una solución más completa basándose en más detalles.
 
-![](images/image90.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image90.png)
 
 En este momento el navegador está integrado dentro de Trae. Puedes hacer clic en el icono de la brújula en la parte superior para abrir la página web en un navegador externo a pantalla completa.
 
-![](images/image91.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image91.png)
 
 Si tienes suerte, es posible que en tu primer intento obtengas una página frontend con la que puedas interactuar normalmente.
 
-![](images/image92.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image92.png)
 
 Sin embargo, debido a que los modelos de lenguaje grandes tienen cierta aleatoriedad, a veces todo puede funcionar bien en una sola ronda de conversación pero presentar anomalías en conversaciones de múltiples rondas. Por lo tanto, se recomienda que realices pruebas de conversación de múltiples rondas para asegurarte de que el programa funcione de manera estable también en escenarios de interacción continua.
 
-![](images/image93.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image93.png)
 
 Llegado a este punto, ya has aprendido cómo construir un agente de base de conocimiento simple en Dify y usar Trae en lugar de [z.ai](http://z.ai) para construir un frontend interactivo. De ahora en adelante, Trae se convertirá en nuestra herramienta de desarrollo principal para construir diversos prototipos, reemplazando gradualmente a [z.ai](http://z.ai). Puedes intentar reimplementar el juego de la serpiente anterior con Trae y ver qué experiencia diferente te ofrece. ¡Adelante!
 
@@ -936,19 +936,19 @@ En este desafío de descifrado, necesitas completar las siguientes tareas para q
 - Cuando la contraseña sea incorrecta, ofrece una segunda oportunidad de intento (sin proporcionar una tercera)
 - Cuando el usuario mencione que desea volver a iniciar sesión, proporciona al usuario la oportunidad de ingresar la contraseña nuevamente
 
-![](images/image94.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image94.png)
 
 Entrada y salida de referencia:
 
-![](images/image95.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image95.png)
 
 3. Desafío de descifrado del flujo de trabajo Love loop workflow
 
-![](images/image96.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image96.png)
 
 En este desafío de descifrado, necesitas reparar el problema actual del flujo de trabajo para que la salida final del flujo de trabajo sea similar a la siguiente:
 
-![](images/image97.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image97.png)
 
 Si encuentras problemas que no puedes resolver, toma una captura de pantalla y pregúnta a un modelo grande, o consulta la documentación oficial para obtener el resultado: [https://docs.dify.ai/en/use-dify/getting-started/quick-start](https://docs.dify.ai/en/use-dify/getting-started/quick-start)
 
@@ -974,7 +974,7 @@ Solo si encuentras un problema como el que se muestra en la imagen a continuaci�
 
 A veces es posible que despliegues Dify en tu propio servidor, pero la dirección externa del servidor generalmente es http en lugar de https. Sin embargo, cuando solicitamos un servicio que solo soporta HTTP, puedes ver un mensaje similar a este (activa el modo de depuración F12 del navegador y revisa los puntos con problemas):
 
-![](images/image98.png)
+![](/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/images/image98.png)
 
 La causa de este problema es que por defecto desplegamos Dify en un servidor que solo soporta HTTP y no HTTPS. HTTPS (HyperText Transfer Protocol Secure) añade una capa de cifrado SSL/TLS sobre la base de HTTP (Protocolo de Transferencia de Hipertexto), lo que se puede entender simplemente como "una versión más segura de HTTP".
 

@@ -50,7 +50,7 @@ Los LLM con capacidades visuales tienen la habilidad nativa de convertir imágen
    - Reproducir lo más fielmente posible los colores y tamaños de fuente del diseño
    ```
 
-![](images/image42.png)
+![](/zh-cn/stage-2/frontend/design-to-code/images/image42.png)
 
 4. **Obtener y guardar el código**
    - Pedir al modelo que retorne el código HTML completo
@@ -78,7 +78,7 @@ MasterGo también proporciona una potente función de generación de páginas co
 
 En la barra de herramientas superior de la interfaz de edición de MasterGo, puedes encontrar el botón de herramientas AI:
 
-![](images/image47.png)
+![](/zh-cn/stage-2/frontend/design-to-code/images/image47.png)
 
 #### Flujo de generación
 
@@ -88,15 +88,15 @@ En la barra de herramientas superior de la interfaz de edición de MasterGo, pue
 
 2. **Ver el resultado generado**
 
-![](images/image48.png)
+![](/zh-cn/stage-2/frontend/design-to-code/images/image48.png)
 
-![](images/image49.png)
+![](/zh-cn/stage-2/frontend/design-to-code/images/image49.png)
 
 3. **Obtener el código**
    - Hacer clic en el botón azul "Insertar en lienzo" para editar la página generada directamente
    - O hacer clic en el botón "Código" a la derecha para copiar el contenido del código a local
 
-![](images/image50.png)
+![](/zh-cn/stage-2/frontend/design-to-code/images/image50.png)
 
 ---
 
@@ -126,25 +126,25 @@ Usar la funcionalidad completa de Figma Make requiere permisos de usuario Pro. L
    - Subir la imagen de diseño que quieres reproducir al chat
    - Agregar un prompt describiendo los requerimientos
 
-![](images/image43.png)
+![](/zh-cn/stage-2/frontend/design-to-code/images/image43.png)
 
 3. **Ver el resultado generado**
    - Esperar un momento para ver el resultado renderizado
    - Hacer clic en el botón de reproducción de la esquina superior derecha para vista previa completa
 
-![](images/image44.png)
+![](/zh-cn/stage-2/frontend/design-to-code/images/image44.png)
 
 4. **Ajustes de detalle**
    - Hacer clic en el icono del editor de la esquina superior derecha
    - Volver a la interfaz familiar del Editor de Figma para ajustes detallados
 
-![](images/image45.png)
+![](/zh-cn/stage-2/frontend/design-to-code/images/image45.png)
 
 5. **Exportar código**
    - Una vez satisfecho con los ajustes, seleccionar exportar código
    - Puedes conectarte directamente a GitHub para guardar el código
 
-![](images/image46.png)
+![](/zh-cn/stage-2/frontend/design-to-code/images/image46.png)
 
 ### 3.2 Exportar código con plugins
 
