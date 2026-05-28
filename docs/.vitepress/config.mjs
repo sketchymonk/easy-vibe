@@ -2147,6 +2147,464 @@ const getStage2Sidebar = (locale) => {
   )
 }
 
+const zhCnStage3Sidebar = [
+  {
+    text: 'Claude Code 深入浅出',
+    collapsed: false,
+    items: [
+      {
+        text: 'Claude Code 快速上手核心指南',
+        link: '/zh-cn/stage-3/core-skills/basics/'
+      },
+      {
+        text: 'Claude Code MCP 完全指南',
+        link: '/zh-cn/stage-3/core-skills/mcp/'
+      },
+      {
+        text: 'Claude Code Skills 完全指南',
+        link: '/zh-cn/stage-3/core-skills/skills/'
+      },
+      {
+        text: '如何让 Coding Tools 长时间工作',
+        link: '/zh-cn/stage-3/core-skills/long-running-tasks/'
+      },
+      {
+        text: 'Claude Agent Teams 完全指南',
+        link: '/zh-cn/stage-3/core-skills/agent-teams/'
+      },
+      {
+        text: 'Claude Code Superpowers 工程级开发',
+        link: '/zh-cn/stage-3/core-skills/superpowers/'
+      },
+      {
+        text: 'Claude Code 工作流最佳实践',
+        link: '/zh-cn/stage-3/core-skills/workflow/'
+      },
+      {
+        text: 'Claude Code 手机远程开发',
+        link: '/zh-cn/stage-3/core-skills/mobile-development/'
+      },
+      {
+        text: 'Claude Agent SDK 完全指南',
+        link: '/zh-cn/stage-3/core-skills/claude-agent-sdk/'
+      },
+      {
+        text: '从 Vibe Coding 到 Spec Coding',
+        link: '/zh-cn/stage-3/core-skills/spec-coding/'
+      }
+    ]
+  },
+  {
+    text: '多平台开发',
+    collapsed: false,
+    items: [
+      {
+        text: '如何选择你的应用该开发的平台',
+        link: '/zh-cn/stage-3/cross-platform/choose-platform/'
+      },
+      {
+        text: '如何构建微信小程序',
+        link: '/zh-cn/stage-3/cross-platform/wechat-miniprogram/'
+      },
+      {
+        text: '如何构建微信小程序（包含后端）',
+        link: '/zh-cn/stage-3/cross-platform/wechat-miniprogram-backend/'
+      },
+      {
+        text: '如何构建安卓程序-compose 原生开发',
+        link: '/zh-cn/stage-3/cross-platform/android-app/'
+      },
+      {
+        text: '如何构建 iOS 程序-swiftUI原生开发',
+        link: '/zh-cn/stage-3/cross-platform/ios-app/'
+      },
+      {
+        text: '如何开发 PWA 本地应用',
+        link: '/zh-cn/stage-3/cross-platform/pwa-local-app/'
+      },
+      {
+        text: '如何开发浏览器 AI 助手插件',
+        link: '/zh-cn/stage-3/cross-platform/browser-ai-extension/'
+      },
+      {
+        text: '如何开发跨平台 Electron 桌面程序',
+        link: '/zh-cn/stage-3/cross-platform/electron-voice-to-text/'
+      },
+      {
+        text: '如何快速开发并铸造 NFT',
+        link: '/zh-cn/stage-3/cross-platform/nft-minting/'
+      },
+      {
+        text: '如何开发 VS Code 插件',
+        link: '/zh-cn/stage-3/cross-platform/vscode-extension/'
+      },
+      {
+        text: '如何开发工业级 Qt 桌面应用',
+        link: '/zh-cn/stage-3/cross-platform/qt-industrial-hmi/'
+      },
+      {
+        text: '如何构建属于自己的个人网页与学术博客',
+        link: '/zh-cn/stage-3/personal-brand/personal-website-blog/'
+      }
+    ]
+  },
+  {
+    text: 'AI 能力强化',
+    collapsed: false,
+    items: [
+      {
+        text: '什么是 RAG 以及它如何工作',
+        link: '/zh-cn/stage-3/ai-advanced/rag-introduction/'
+      },
+      {
+        text: '中高级 RAG 与工作流编排 - 以 LangGraph 为例',
+        link: '/zh-cn/stage-3/ai-advanced/langgraph-advanced-rag/'
+      }
+    ]
+  }
+]
+
+const stage3SidebarLabels = {
+  'ja-jp': [
+    {
+      text: 'Claude Code 深入解説',
+      items: [
+        'Claude Code クイックスタートガイド',
+        'MCP と Claude Code 完全ガイド',
+        'Claude Code Skills 完全ガイド',
+        'Coding Tools を長時間稼働させる方法',
+        'Claude Agent Teams 完全ガイド',
+        'Claude Code Superpowers 実践開発',
+        'Claude Code ワークフロー最佳实践',
+        'Claude Code モバイルリモート開発',
+        'Claude Agent SDK 完全ガイド',
+        'Vibe Coding から Spec Coding へ'
+      ]
+    },
+    {
+      text: 'マルチプラットフォーム開発',
+      items: [
+        'アプリ開発プラットフォームの選び方',
+        'WeChat ミニプログラムの構築',
+        'WeChat ミニプログラム（バックエンド付き）',
+        'Android アプリ開発（Jetpack Compose）',
+        'iOS アプリ開発（SwiftUI）',
+        'PWA ローカルアプリの開発',
+        'ブラウザ AI アシスタント拡張機能の開発',
+        'クロスプラットフォーム Electron デスクトップアプリ',
+        'NFT の迅速開発とミント',
+        'VS Code 拡張機能の開発',
+        '産業用 Qt デスクトップアプリの開発',
+        '個人ウェブサイトと学術ブログの構築'
+      ]
+    },
+    {
+      text: 'AI 能力強化',
+      items: [
+        'RAG とは何か、その仕組み',
+        '中級・上級 RAG とワークフロー編成 - LangGraph を例に'
+      ]
+    }
+  ],
+  'zh-tw': [
+    {
+      text: 'Claude Code 深入淺出',
+      items: [
+        'Claude Code 快速上手核心指南',
+        'Claude Code MCP 完全指南',
+        'Claude Code Skills 完全指南',
+        '如何讓 Coding Tools 長時間工作',
+        'Claude Agent Teams 完全指南',
+        'Claude Code Superpowers 工程級開發',
+        'Claude Code 工作流最佳實踐',
+        'Claude Code 手機遠端開發',
+        'Claude Agent SDK 完全指南',
+        '從 Vibe Coding 到 Spec Coding'
+      ]
+    },
+    {
+      text: '多平台開發',
+      items: [
+        '如何選擇應用開發平台',
+        '如何構建微信小程式',
+        '如何構建微信小程式（包含後端）',
+        '如何構建安卓程式 - Compose 原生開發',
+        '如何構建 iOS 程式 - SwiftUI 原生開發',
+        '如何開發 PWA 本地應用',
+        '如何開發瀏覽器 AI 助手插件',
+        '如何開發跨平台 Electron 桌面程式',
+        '如何快速開發並鑄造 NFT',
+        '如何開發 VS Code 插件',
+        '如何開發工業級 Qt 桌面應用',
+        '如何構建個人網頁與學術部落格'
+      ]
+    },
+    {
+      text: 'AI 能力強化',
+      items: [
+        '什麼是 RAG 以及它如何工作',
+        '中高級 RAG 與工作流編排 - 以 LangGraph 為例'
+      ]
+    }
+  ],
+  'ko-kr': [
+    {
+      text: 'Claude Code 심층 가이드',
+      items: [
+        'Claude Code 퀵스타트 핵심 가이드',
+        'MCP와 Claude Code 완전 가이드',
+        'Claude Code Skills 완전 가이드',
+        'Coding Tools를 장시간 작동시키는 방법',
+        'Claude Agent Teams 완전 가이드',
+        'Claude Code Superpowers 엔지니어링 개발',
+        'Claude Code 워크플로우 모범 사례',
+        'Claude Code 모바일 원격 개발',
+        'Claude Agent SDK 완전 가이드',
+        'Vibe Coding에서 Spec Coding으로'
+      ]
+    },
+    {
+      text: '멀티플랫폼 개발',
+      items: [
+        '앱 개발 플랫폼 선택 방법',
+        'WeChat 미니프로그램 구축',
+        'WeChat 미니프로그램 (백엔드 포함)',
+        'Android 앱 개발 (Jetpack Compose)',
+        'iOS 앱 개발 (SwiftUI)',
+        'PWA 로컬 앱 개발',
+        '브라우저 AI 어시스턴트 확장 프로그램 개발',
+        '크로스 플랫폼 Electron 데스크톱 앱',
+        'NFT 빠른 개발 및 민팅',
+        'VS Code 확장 프로그램 개발',
+        '산업용 Qt 데스크톱 앱 개발',
+        '개인 웹사이트 및 학술 블로그 구축'
+      ]
+    },
+    {
+      text: 'AI 역량 강화',
+      items: [
+        'RAG란 무엇이며 어떻게 작동하는가',
+        '중고급 RAG와 워크플로우 오케스트레이션 - LangGraph 예제'
+      ]
+    }
+  ],
+  'es-es': [
+    {
+      text: 'Claude Code en Profundidad',
+      items: [
+        'Guía Core de Inicio Rápido de Claude Code',
+        'Guía Completa de MCP y Claude Code',
+        'Guía Completa de Claude Code Skills',
+        'Cómo hacer que Coding Tools trabajen largas horas',
+        'Guía Completa de Claude Agent Teams',
+        'Claude Code Superpowers para Desarrollo de Producción',
+        'Mejores Prácticas de Flujo de Trabajo con Claude Code',
+        'Desarrollo Remoto Móvil con Claude Code',
+        'Guía Completa de Claude Agent SDK',
+        'De Vibe Coding a Spec Coding'
+      ]
+    },
+    {
+      text: 'Desarrollo Multiplataforma',
+      items: [
+        'Cómo elegir la plataforma para tu aplicación',
+        'Cómo construir un Mini Programa de WeChat',
+        'Cómo construir un Mini Programa de WeChat (con Backend)',
+        'Cómo construir una app Android (Jetpack Compose)',
+        'Cómo construir una app iOS (SwiftUI)',
+        'Cómo desarrollar una aplicación PWA local',
+        'Cómo desarrollar una extensión de navegador AI',
+        'Cómo desarrollar una app de escritorio Electron',
+        'Cómo desarrollar y acuñar NFTs rápidamente',
+        'Cómo desarrollar una extensión de VS Code',
+        'Cómo desarrollar una app Qt industrial',
+        'Cómo construir tu sitio web personal y blog académico'
+      ]
+    },
+    {
+      text: 'IA Avanzada',
+      items: [
+        'Qué es RAG y cómo funciona',
+        'RAG avanzado y orquestación de flujos con LangGraph'
+      ]
+    }
+  ],
+  'fr-fr': [
+    {
+      text: 'Claude Code en Profondeur',
+      items: [
+        'Guide Core de Démarrage Rapide Claude Code',
+        'Guide Complet MCP et Claude Code',
+        'Guide Complet Claude Code Skills',
+        'Comment faire travailler les Coding Tools sur de longues périodes',
+        'Guide Complet Claude Agent Teams',
+        'Claude Code Superpowers pour le Développement Production',
+        'Meilleures Pratiques de Workflow Claude Code',
+        'Développement à Distance sur Mobile avec Claude Code',
+        'Guide Complet Claude Agent SDK',
+        'Du Vibe Coding au Spec Coding'
+      ]
+    },
+    {
+      text: 'Développement Multiplateforme',
+      items: [
+        'Comment choisir la plateforme pour votre application',
+        'Comment construire un Mini Programme WeChat',
+        'Comment construire un Mini Programme WeChat (avec Backend)',
+        'Comment construire une app Android (Jetpack Compose)',
+        'Comment construire une app iOS (SwiftUI)',
+        'Comment développer une application PWA locale',
+        'Comment développer une extension de navigateur AI',
+        'Comment développer une app bureau Electron',
+        'Comment développer et minter des NFTs rapidement',
+        'Comment développer une extension VS Code',
+        'Comment développer une app Qt industrielle',
+        'Comment construire votre site personnel et blog académique'
+      ]
+    },
+    {
+      text: 'IA Avancée',
+      items: [
+        'Qu\'est-ce que le RAG et comment ça fonctionne',
+        'RAG avancé et orchestration de workflows avec LangGraph'
+      ]
+    }
+  ],
+  'de-de': [
+    {
+      text: 'Claude Code Vertieft',
+      items: [
+        'Claude Code Schnellstart-Kernleitfaden',
+        'MCP und Claude Code Vollständiger Leitfaden',
+        'Claude Code Skills Vollständiger Leitfaden',
+        'Wie man Coding Tools über lange Zeiträume arbeiten lässt',
+        'Claude Agent Teams Vollständiger Leitfaden',
+        'Claude Code Superpowers für Produktionsentwicklung',
+        'Claude Code Workflow Best Practices',
+        'Claude Code Mobile Remote-Entwicklung',
+        'Claude Agent SDK Vollständiger Leitfaden',
+        'Vom Vibe Coding zum Spec Coding'
+      ]
+    },
+    {
+      text: 'Plattformübergreifende Entwicklung',
+      items: [
+        'Wie man die richtige Plattform für seine App wählt',
+        'Wie man ein WeChat Mini-Programm erstellt',
+        'Wie man ein WeChat Mini-Programm (mit Backend) erstellt',
+        'Wie man eine Android-App erstellt (Jetpack Compose)',
+        'Wie man eine iOS-App erstellt (SwiftUI)',
+        'Wie man eine lokale PWA-App entwickelt',
+        'Wie man eine Browser-KI-Assistenten-Erweiterung entwickelt',
+        'Wie man eine plattformübergreifende Electron-Desktop-App entwickelt',
+        'Wie man schnell NFTs entwickelt und mintet',
+        'Wie man eine VS Code-Erweiterung entwickelt',
+        'Wie man eine industrielle Qt-Desktop-App entwickelt',
+        'Wie man eine persönliche Website und einen akademischen Blog erstellt'
+      ]
+    },
+    {
+      text: 'KI Fortgeschritten',
+      items: [
+        'Was ist RAG und wie funktioniert es',
+        'Fortgeschrittenes RAG und Workflow-Orchestrierung mit LangGraph'
+      ]
+    }
+  ],
+  'ar-sa': [
+    {
+      text: 'Claude Code بعمق',
+      items: [
+        'دليل البدء السريع لـ Claude Code',
+        'الدليل الشامل لـ MCP و Claude Code',
+        'الدليل الشامل لـ Claude Code Skills',
+        'كيف تجعل أدوات البرمجة تعمل لفترات طويلة',
+        'الدليل الشامل لـ Claude Agent Teams',
+        'Claude Code Superpowers للتطوير على مستوى الإنتاج',
+        'أفضل ممارسات سير عمل Claude Code',
+        'التطوير عن بُعد عبر الهاتف مع Claude Code',
+        'الدليل الشامل لـ Claude Agent SDK',
+        'من Vibe Coding إلى Spec Coding'
+      ]
+    },
+    {
+      text: 'التطوير متعدد المنصات',
+      items: [
+        'كيفية اختيار المنصة المناسبة لتطبيقك',
+        'كيفية بناء برنامج WeChat المصغر',
+        'كيفية بناء برنامج WeChat المصغر (مع خلفية)',
+        'كيفية بناء تطبيق Android (Jetpack Compose)',
+        'كيفية بناء تطبيق iOS (SwiftUI)',
+        'كيفية تطوير تطبيق PWA محلي',
+        'كيفية تطوير إضافة مساعد ذكاء اصطناعي للمتصفح',
+        'كيفية تطوير تطبيق سطح مكتب Electron',
+        'كيفية تطوير وسك NFTs بسرعة',
+        'كيفية تطوير إضافة VS Code',
+        'كيفية تطوير تطبيق Qt صناعي',
+        'كيفية بناء موقعك الشخصي ومدونتك الأكاديمية'
+      ]
+    },
+    {
+      text: 'الذكاء الاصطناعي المتقدم',
+      items: [
+        'ما هو RAG وكيف يعمل',
+        'RAG المتقدم وتنسيق سير العمل مع LangGraph'
+      ]
+    }
+  ],
+  'vi-vn': [
+    {
+      text: 'Claude Code Chuyên Sâu',
+      items: [
+        'Hướng dẫn Khởi động Nhanh Claude Code',
+        'Hướng dẫn Toàn diện MCP và Claude Code',
+        'Hướng dẫn Toàn diện Claude Code Skills',
+        'Cách làm cho Coding Tools hoạt động trong thời gian dài',
+        'Hướng dẫn Toàn diện Claude Agent Teams',
+        'Claude Code Superpowers cho Phát triển Cấp Production',
+        'Thực hành Tốt nhất Workflow Claude Code',
+        'Phát triển Từ xa trên Mobile với Claude Code',
+        'Hướng dẫn Toàn diện Claude Agent SDK',
+        'Từ Vibe Coding đến Spec Coding'
+      ]
+    },
+    {
+      text: 'Phát triển Đa nền tảng',
+      items: [
+        'Cách chọn nền tảng phù hợp cho ứng dụng của bạn',
+        'Cách xây dựng WeChat Mini Program',
+        'Cách xây dựng WeChat Mini Program (có Backend)',
+        'Cách xây dựng ứng dụng Android (Jetpack Compose)',
+        'Cách xây dựng ứng dụng iOS (SwiftUI)',
+        'Cách phát triển ứng dụng PWA cục bộ',
+        'Cách phát triển tiện ích trợ lý AI cho trình duyệt',
+        'Cách phát triển ứng dụng desktop Electron đa nền tảng',
+        'Cách phát triển và đúc NFT nhanh chóng',
+        'Cách phát triển tiện ích mở rộng VS Code',
+        'Cách phát triển ứng dụng desktop Qt công nghiệp',
+        'Cách xây dựng trang web cá nhân và blog học thuật'
+      ]
+    },
+    {
+      text: 'AI Nâng cao',
+      items: [
+        'RAG là gì và cách nó hoạt động',
+        'RAG nâng cao và điều phối workflow với LangGraph'
+      ]
+    }
+  ]
+}
+
+const getStage3Sidebar = (locale) => {
+  if (locale === 'zh-cn') return zhCnStage3Sidebar
+  if (locale === 'en') return stage3SidebarEn
+  return applySidebarLabels(
+    localizeSidebarLinks(stage3SidebarEn, locale),
+    locale,
+    stage3SidebarLabels
+  )
+}
+
 const docFooterLabels = {
   'zh-cn': { prev: '上一页', next: '下一页' },
   en: { prev: 'Previous page', next: 'Next page' },
@@ -2370,122 +2828,7 @@ Sitemap: ${siteUrl}/sitemap.xml
           ],
           '/zh-cn/stage-1/': productManagerSidebar,
           '/zh-cn/stage-2/': zhCnStage2Sidebar,
-          '/zh-cn/stage-3/': [
-            {
-              text: 'Claude Code 深入浅出',
-              collapsed: false,
-              items: [
-                {
-                  text: 'Claude Code 快速上手核心指南',
-                  link: '/zh-cn/stage-3/core-skills/basics/'
-                },
-                {
-                  text: 'Claude Code MCP 完全指南',
-                  link: '/zh-cn/stage-3/core-skills/mcp/'
-                },
-                {
-                  text: 'Claude Code Skills 完全指南',
-                  link: '/zh-cn/stage-3/core-skills/skills/'
-                },
-                {
-                  text: '如何让 Coding Tools 长时间工作',
-                  link: '/zh-cn/stage-3/core-skills/long-running-tasks/'
-                },
-                {
-                  text: 'Claude Agent Teams 完全指南',
-                  link: '/zh-cn/stage-3/core-skills/agent-teams/'
-                },
-                {
-                  text: 'Claude Code Superpowers 工程级开发',
-                  link: '/zh-cn/stage-3/core-skills/superpowers/'
-                },
-                {
-                  text: 'Claude Code 工作流最佳实践',
-                  link: '/zh-cn/stage-3/core-skills/workflow/'
-                },
-                {
-                  text: 'Claude Code 手机远程开发',
-                  link: '/zh-cn/stage-3/core-skills/mobile-development/'
-                },
-                {
-                  text: 'Claude Agent SDK 完全指南',
-                  link: '/zh-cn/stage-3/core-skills/claude-agent-sdk/'
-                },
-                {
-                  text: '从 Vibe Coding 到 Spec Coding',
-                  link: '/zh-cn/stage-3/core-skills/spec-coding/'
-                }
-              ]
-            },
-            {
-              text: '多平台开发',
-              collapsed: false,
-              items: [
-                {
-                  text: '如何选择你的应用该开发的平台',
-                  link: '/zh-cn/stage-3/cross-platform/choose-platform/'
-                },
-                {
-                  text: '如何构建微信小程序',
-                  link: '/zh-cn/stage-3/cross-platform/wechat-miniprogram/'
-                },
-                {
-                  text: '如何构建微信小程序（包含后端）',
-                  link: '/zh-cn/stage-3/cross-platform/wechat-miniprogram-backend/'
-                },
-                {
-                  text: '如何构建安卓程序-compose 原生开发',
-                  link: '/zh-cn/stage-3/cross-platform/android-app/'
-                },
-                {
-                  text: '如何构建 iOS 程序-swiftUI原生开发',
-                  link: '/zh-cn/stage-3/cross-platform/ios-app/'
-                },
-                {
-                  text: '如何开发 PWA 本地应用',
-                  link: '/zh-cn/stage-3/cross-platform/pwa-local-app/'
-                },
-                {
-                  text: '如何开发浏览器 AI 助手插件',
-                  link: '/zh-cn/stage-3/cross-platform/browser-ai-extension/'
-                },
-                {
-                  text: '如何开发跨平台 Electron 桌面程序',
-                  link: '/zh-cn/stage-3/cross-platform/electron-voice-to-text/'
-                },
-                {
-                  text: '如何快速开发并铸造 NFT',
-                  link: '/zh-cn/stage-3/cross-platform/nft-minting/'
-                },
-                {
-                  text: '如何开发 VS Code 插件',
-                  link: '/zh-cn/stage-3/cross-platform/vscode-extension/'
-                },
-                {
-                  text: '如何开发工业级 Qt 桌面应用',
-                  link: '/zh-cn/stage-3/cross-platform/qt-industrial-hmi/'
-                },
-                {
-                  text: '如何构建属于自己的个人网页与学术博客',
-                  link: '/zh-cn/stage-3/personal-brand/personal-website-blog/'
-                }
-              ]
-            },
-            {
-              text: 'AI 能力强化',
-              collapsed: false,
-              items: [
-                {
-                  text: '什么是 RAG 以及它如何工作',
-                  link: '/zh-cn/stage-3/ai-advanced/rag-introduction/'
-                },
-                {
-                  text: '中高级 RAG 与工作流编排 - 以 LangGraph 为例',
-                  link: '/zh-cn/stage-3/ai-advanced/langgraph-advanced-rag/'
-                }
-              ]
-            }
-          ],
+          '/zh-cn/stage-3/': zhCnStage3Sidebar,
           '/zh-cn/guide/': [
             {
               text: '课程指南',
@@ -3157,8 +3500,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: '上級開発',
-            link: '/zh-cn/stage-3/core-skills/basics/',
-            activeMatch: '/zh-cn/stage-3/'
+            link: '/ja-jp/stage-3/',
+            activeMatch: '/ja-jp/stage-3/'
           },
           {
             text: '付録',
@@ -3168,7 +3511,8 @@ Sitemap: ${siteUrl}/sitemap.xml
         ],
         sidebar: {
           '/ja-jp/stage-1/': getStage1Sidebar('ja-jp'),
-          '/ja-jp/stage-2/': getStage2Sidebar('ja-jp')
+          '/ja-jp/stage-2/': getStage2Sidebar('ja-jp'),
+          '/ja-jp/stage-3/': getStage3Sidebar('ja-jp')
         }
       }
     },
@@ -3211,8 +3555,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: '高級開發',
-            link: '/zh-cn/stage-3/core-skills/basics/',
-            activeMatch: '/zh-cn/stage-3/'
+            link: '/zh-tw/stage-3/',
+            activeMatch: '/zh-tw/stage-3/'
           },
           {
             text: '附錄',
@@ -3222,7 +3566,8 @@ Sitemap: ${siteUrl}/sitemap.xml
         ],
         sidebar: {
           '/zh-tw/stage-1/': getStage1Sidebar('zh-tw'),
-          '/zh-tw/stage-2/': getStage2Sidebar('zh-tw')
+          '/zh-tw/stage-2/': getStage2Sidebar('zh-tw'),
+          '/zh-tw/stage-3/': getStage3Sidebar('zh-tw')
         }
       }
     },
@@ -3276,7 +3621,8 @@ Sitemap: ${siteUrl}/sitemap.xml
         ],
         sidebar: {
           '/ko-kr/stage-1/': productManagerSidebarKo,
-          '/ko-kr/stage-2/': getStage2Sidebar('ko-kr')
+          '/ko-kr/stage-2/': getStage2Sidebar('ko-kr'),
+          '/ko-kr/stage-3/': getStage3Sidebar('ko-kr')
         }
       }
     },
@@ -3319,8 +3665,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: 'Desarrollo Avanzado',
-            link: '/zh-cn/stage-3/core-skills/basics/',
-            activeMatch: '/zh-cn/stage-3/'
+            link: '/es-es/stage-3/',
+            activeMatch: '/es-es/stage-3/'
           },
           {
             text: 'Apéndice',
@@ -3330,7 +3676,8 @@ Sitemap: ${siteUrl}/sitemap.xml
         ],
         sidebar: {
           '/es-es/stage-1/': getStage1Sidebar('es-es'),
-          '/es-es/stage-2/': getStage2Sidebar('es-es')
+          '/es-es/stage-2/': getStage2Sidebar('es-es'),
+          '/es-es/stage-3/': getStage3Sidebar('es-es')
         }
       }
     },
@@ -3373,8 +3720,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: 'Développement Avancé',
-            link: '/zh-cn/stage-3/core-skills/basics/',
-            activeMatch: '/zh-cn/stage-3/'
+            link: '/fr-fr/stage-3/',
+            activeMatch: '/fr-fr/stage-3/'
           },
           {
             text: 'Annexe',
@@ -3384,7 +3731,8 @@ Sitemap: ${siteUrl}/sitemap.xml
         ],
         sidebar: {
           '/fr-fr/stage-1/': getStage1Sidebar('fr-fr'),
-          '/fr-fr/stage-2/': getStage2Sidebar('fr-fr')
+          '/fr-fr/stage-2/': getStage2Sidebar('fr-fr'),
+          '/fr-fr/stage-3/': getStage3Sidebar('fr-fr')
         }
       }
     },
@@ -3427,8 +3775,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: 'Fortgeschrittene Entwicklung',
-            link: '/zh-cn/stage-3/core-skills/basics/',
-            activeMatch: '/zh-cn/stage-3/'
+            link: '/de-de/stage-3/',
+            activeMatch: '/de-de/stage-3/'
           },
           {
             text: 'Anhang',
@@ -3438,7 +3786,8 @@ Sitemap: ${siteUrl}/sitemap.xml
         ],
         sidebar: {
           '/de-de/stage-1/': getStage1Sidebar('de-de'),
-          '/de-de/stage-2/': getStage2Sidebar('de-de')
+          '/de-de/stage-2/': getStage2Sidebar('de-de'),
+          '/de-de/stage-3/': getStage3Sidebar('de-de')
         }
       }
     },
@@ -3481,8 +3830,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: 'تطوير متقدم',
-            link: '/zh-cn/stage-3/core-skills/basics/',
-            activeMatch: '/zh-cn/stage-3/'
+            link: '/ar-sa/stage-3/',
+            activeMatch: '/ar-sa/stage-3/'
           },
           {
             text: 'ملحق',
@@ -3492,7 +3841,8 @@ Sitemap: ${siteUrl}/sitemap.xml
         ],
         sidebar: {
           '/ar-sa/stage-1/': getStage1Sidebar('ar-sa'),
-          '/ar-sa/stage-2/': getStage2Sidebar('ar-sa')
+          '/ar-sa/stage-2/': getStage2Sidebar('ar-sa'),
+          '/ar-sa/stage-3/': getStage3Sidebar('ar-sa')
         }
       }
     },
@@ -3536,8 +3886,8 @@ Sitemap: ${siteUrl}/sitemap.xml
           },
           {
             text: 'Phát triển Nâng cao',
-            link: '/zh-cn/stage-3/core-skills/basics/',
-            activeMatch: '/zh-cn/stage-3/'
+            link: '/vi-vn/stage-3/',
+            activeMatch: '/vi-vn/stage-3/'
           },
           {
             text: 'Phụ lục',
@@ -3547,7 +3897,8 @@ Sitemap: ${siteUrl}/sitemap.xml
         ],
         sidebar: {
           '/vi-vn/stage-1/': getStage1Sidebar('vi-vn'),
-          '/vi-vn/stage-2/': getStage2Sidebar('vi-vn')
+          '/vi-vn/stage-2/': getStage2Sidebar('vi-vn'),
+          '/vi-vn/stage-3/': getStage3Sidebar('vi-vn')
         }
       }
     }
