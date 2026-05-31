@@ -1,3 +1,0 @@
-# Xây dựng Mini Program WeChat (có Backend)
-
-> Chương này đang được viết. Hãy chờ đợi...

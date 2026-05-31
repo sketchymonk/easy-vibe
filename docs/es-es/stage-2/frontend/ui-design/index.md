@@ -1,3 +1,0 @@
-# Construye tu primera aplicacion moderna - Diseno de UI
-
-> Este capitulo esta en proceso de redaccion, estad atentos...

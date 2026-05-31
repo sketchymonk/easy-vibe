@@ -1,3 +1,0 @@
-# RAG Avanzado y Orquestación de Flujos de Trabajo - Ejemplo con LangGraph
-
-> Este capítulo se encuentra en proceso de redacción. Manténgase atento...

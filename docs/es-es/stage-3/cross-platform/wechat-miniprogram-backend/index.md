@@ -1,3 +1,0 @@
-# Desarrollo Multiplataforma - Mini Programa de WeChat con Backend
-
-> Este capítulo se encuentra en proceso de redacción. Manténgase atento...
